@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE base SYSTEM "http://www.4d.com/dtd/2007/base.dtd" >
+<base name="ExportImport" uuid="50F1C25817B04B69BC8B5E3E1B081CE8" collation_locale="en">
+	<schema name="DEFAULT_SCHEMA"/>
+	<table name="Table_1" uuid="CB616CA563154DEEB650CD138CC743C9" id="1">
+		<field name="ID" uuid="B17E7E3046BD45DBAAA34E800489C7E9" type="4" unique="true" autosequence="true" not_null="true" id="1"/>
+		<field name="Field_2" uuid="7B72630DCE054805B56C4FF65FD46EC0" type="10" never_null="true" id="2"/>
+		<field name="Field_3" uuid="0AE58206AE8D4DD9BEDE63A3E4F5A2C8" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="Field_4" uuid="95EBCEBE7F8D4B6AA436CDB258B325D5" type="8" never_null="true" id="4"/>
+		<field name="Field_5" uuid="83C3BFC82D7D4EC587788CF20C67640B" type="9" never_null="true" id="5"/>
+		<field name="Field_6" uuid="B731F54039034991A197687AB6EDBA82" type="1" never_null="true" id="6"/>
+		<field name="Field_7" uuid="53CF90DC79994998A6FA16CD9D575BBA" type="3" never_null="true" id="7"/>
+		<field name="Field_8" uuid="979D8BC271194DDBAF70F340CDAB37EE" type="4" never_null="true" id="8"/>
+		<field name="Field_9" uuid="E2BD7B54D2F842209E63EC409DAA86F7" type="6" never_null="true" id="9"/>
+		<field name="Field_10" uuid="D4F8DE5CE54648A9B68A133A7909EA4F" type="18" never_null="true" id="10"/>
+		<field name="Field_11" uuid="E29642D97CA9481788057A98A50A31B9" type="12" never_null="true" id="11"/>
+		<field name="Field_12" uuid="6D8F8A7C69224B26893BC37FACE8F151" type="21" blob_switch_size="2147483647" never_null="true" id="12"/>
+		<primary_key field_name="ID" field_uuid="B17E7E3046BD45DBAAA34E800489C7E9"/>
+		<table_extra output_form="Output">
+			<editor_table_info displayable_fields_count="14">
+				<color red="255" green="255" blue="255" alpha="0"/>
+				<coordinates left="40" top="40" width="183.49011230469" height="342.69802856445"/>
+			</editor_table_info>
+		</table_extra>
+	</table>
+	<table name="Table_2" uuid="2060CDF3341046508AACC86E412C633A" id="2">
+		<field name="ID" uuid="2D009D5B5A3A4C78824546317647FF5C" type="4" unique="true" autosequence="true" not_null="true" id="1"/>
+		<field name="Field_2" uuid="00C3EAF56C9F4D98B746E9B689505FE1" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="Field_3" uuid="F2FAE13818AA40E5BC4D6EFA93C40F1E" type="10" limiting_length="255" never_null="true" id="3"/>
+		<field name="Field_4" uuid="2E31896F0558407AA85475B68F79CC15" type="10" limiting_length="255" never_null="true" id="4"/>
+		<field name="Field_5" uuid="0C8DFAD5457743E99A3D1F6FC63248EC" type="10" never_null="true" id="5"/>
+		<primary_key field_name="ID" field_uuid="2D009D5B5A3A4C78824546317647FF5C"/>
+		<table_extra output_form="Output">
+			<editor_table_info displayable_fields_count="6">
+				<color red="255" green="255" blue="255" alpha="0"/>
+				<coordinates left="296.607421875" top="39.769454956055" width="120" height="167.33203125"/>
+			</editor_table_info>
+		</table_extra>
+	</table>
+	<index kind="regular" unique_keys="true" uuid="4B6C3AA75F90452CAFC5433D62EA8FA8" type="7">
+		<field_ref uuid="2D009D5B5A3A4C78824546317647FF5C" name="ID">
+			<table_ref uuid="2060CDF3341046508AACC86E412C633A" name="Table_2"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="91D05EDE62964B58A7E701CED13133B7" type="7">
+		<field_ref uuid="B17E7E3046BD45DBAAA34E800489C7E9" name="ID">
+			<table_ref uuid="CB616CA563154DEEB650CD138CC743C9" name="Table_1"/>
+		</field_ref>
+	</index>
+	<base_extra __stringCompHash="icu:68.1.0" __keywordBuildingHash="icu:68.1.0">
+		<journal_file journal_file_enabled="true"/>
+	</base_extra>
+</base>
