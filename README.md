@@ -12,6 +12,9 @@ var $export_folder_platformPath : Text
 $export_folder_platformPath:=Export_AllTables(4)
 SHOW ON DISK($export_folder_platformPath)
 ```
+The export will create two subfolders in a new folder that is created beside the datafile.
+- "XML" will contain an xml file for each table that has records. There will be only one XML file of it is less than 250MB. Additional segments will be created if the exports XML exceed 250MB with each file be 250MB or less.
+- "MD5" this folder contains a file per exported table. The file name includes a hash of the file's contents. Each file contains a list of hashed record blocks (sorted by the table's primary key). Each block has a hash.
 
 #### Code to import exported table data using 4 background processes
 ```4d
@@ -19,3 +22,7 @@ var $export_folder_platformPath : Text
 $export_folder_platformPath:=Import_AllTables(4)
 SHOW ON DISK($export_folder_platformPath)
 ```
+The import will create an additional subfolder in the folder that the import was pointed to.
+- "MD5 - after import" this folder contains a file per exported table. The file name includes a hash of the file's contents. Each file contains a list of hashed record blocks (sorted by the table's primary key). Each block has a hash.
+
+The two MD5 folders can be compared. If there are differences then the imported data doesn't match the datafile before the export.
