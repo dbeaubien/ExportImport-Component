@@ -1,6 +1,17 @@
 //%attributes = {}
-
+Progress QUIT(0)
 Log_OpenDisplayWindow
+
+
+var $options : Object
+$options:=New object:C1471
+$options.num_processes:=3
+$options.fields_to_ignore:=New collection:C1472(->[Table_2:2]Field_3:3)
+//$options.tables_to_scan:=New collection(Table(->[Table_2]))  // null or empty means all tables
+
+Export_PreCheck_FindBadChars($options)
+Export_PreCheck_RemoveBadChars($options)
+Export_PreCheck_FindBadChars($options)
 
 If (False:C215)  // ## Create test data
 	var $i : Integer
@@ -43,7 +54,10 @@ If (False:C215)  // ## Export all tables
 	SHOW ON DISK:C922($export_folder_platformPath)
 End if 
 
-If (True:C214)  // ## Import exported data
+If (False:C215)  // ## Import exported data
+	TRUNCATE TABLE:C1051([Table_1:1])
+	TRUNCATE TABLE:C1051([Table_2:2])
+	
 	var $export_folder_platformPath : Text
 	$export_folder_platformPath:=Import_AllTables(4)
 	SHOW ON DISK:C922($export_folder_platformPath)

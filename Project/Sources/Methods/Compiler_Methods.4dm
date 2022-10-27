@@ -31,6 +31,17 @@ C_TEXT:C284(Export_OneTable; $2)
 C_LONGINT:C283(Export_OneTable; $3)
 C_LONGINT:C283(Export_OneTable; $4)
 
+//STR_CheckForIssues
+C_TEXT:C284(STR_CheckForIssues; $0)
+C_TEXT:C284(STR_CheckForIssues; $1)
+
+//Table_FindBadCharsInRecords
+C_COLLECTION:C1488(Table_FindBadCharsInRecords; $0)
+C_LONGINT:C283(Table_FindBadCharsInRecords; $1)
+C_COLLECTION:C1488(Table_FindBadCharsInRecords; $2)
+C_BOOLEAN:C305(Table_FindBadCharsInRecords; $3)
+C_LONGINT:C283(Table_FindBadCharsInRecords; $4)
+
 //GenericWorker_GetOneWaiting
 C_OBJECT:C1216(GenericWorker_GetOneWaiting; $0)
 
@@ -71,6 +82,10 @@ C_LONGINT:C283(Worker_NTS_SetDatabaseParameter; $2)
 C_OBJECT:C1216(Worker_ChecksumOneTable; $1)
 C_OBJECT:C1216(Worker_ChecksumOneTable; $2)
 
+//Worker_FindBadCharsInRecords
+C_OBJECT:C1216(Worker_FindBadCharsInRecords; $1)
+C_OBJECT:C1216(Worker_FindBadCharsInRecords; $2)
+
 //GenericWorker_MarkAsBusy
 C_OBJECT:C1216(GenericWorker_MarkAsBusy; $1)
 
@@ -98,6 +113,9 @@ C_TEXT:C284(ExportImport_ReplaceChar; $1)
 C_TEXT:C284(ExportImport_ReplaceChar; $2)
 C_POINTER:C301(ExportImport_ReplaceChar; $3)
 C_LONGINT:C283(ExportImport_ReplaceChar; $4)
+
+//Export_PreCheck_FindBadChars
+C_OBJECT:C1216(Export_PreCheck_FindBadChars; $1)
 
 //Date2String
 C_TEXT:C284(Date2String; $0)
@@ -147,6 +165,10 @@ C_LONGINT:C283(Import_OneTable; $1)
 C_TEXT:C284(Import_OneTable; $2)
 C_LONGINT:C283(Import_OneTable; $3)
 
+//STR_GetListOfBadCharacters
+C_COLLECTION:C1488(STR_GetListOfBadCharacters; $0)
+C_TEXT:C284(STR_GetListOfBadCharacters; $1)
+
 //File_Delete
 C_TEXT:C284(File_Delete; $1)
 
@@ -179,3 +201,6 @@ C_TEXT:C284(File_GetExtension; $1)
 
 //OnErr_Install_Handler
 C_TEXT:C284(OnErr_Install_Handler; $1)
+
+//Export_PreCheck_RemoveBadChars
+C_OBJECT:C1216(Export_PreCheck_RemoveBadChars; $1)
