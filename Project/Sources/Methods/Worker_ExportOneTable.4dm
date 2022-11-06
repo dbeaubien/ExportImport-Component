@@ -16,6 +16,7 @@ var $error_message : Text
 $error_message:=Export_OneTable($options.table_no\
 ; $options.export_folder_platformPath\
 ; $options.next_table_sequence_number\
+; $options.fields_to_base64\
 ; $worker.progress_hdl_id)
 
 If ($error_message#"")

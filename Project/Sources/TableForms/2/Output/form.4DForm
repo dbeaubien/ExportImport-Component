@@ -118,9 +118,33 @@
 					"width": 250,
 					"height": 17,
 					"borderStyle": "none"
+				},
+				"label_Field_1": {
+					"type": "text",
+					"text": "Field_5",
+					"top": 10,
+					"left": 1040,
+					"width": 100,
+					"height": 17
+				},
+				"field_Field_1": {
+					"type": "input",
+					"dataSource": "[Table_2:2]Field_5:5",
+					"top": 37,
+					"left": 1040,
+					"width": 250,
+					"height": 17,
+					"borderStyle": "none"
 				}
 			}
 		}
 	],
-	"geometryStamp": 1
+	"geometryStamp": 28,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
 }

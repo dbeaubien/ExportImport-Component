@@ -3,15 +3,17 @@ Progress QUIT(0)
 Log_OpenDisplayWindow
 
 
-var $options : Object
-$options:=New object:C1471
-$options.num_processes:=3
-$options.fields_to_ignore:=New collection:C1472(->[Table_2:2]Field_3:3)
-//$options.tables_to_scan:=New collection(Table(->[Table_2]))  // null or empty means all tables
-
-Export_PreCheck_FindBadChars($options)
-Export_PreCheck_RemoveBadChars($options)
-Export_PreCheck_FindBadChars($options)
+If (False:C215)
+	var $options : Object
+	$options:=New object:C1471
+	$options.num_processes:=3
+	$options.fields_to_ignore:=New collection:C1472(->[Table_2:2]Field_3:3)
+	//$options.tables_to_scan:=New collection(Table(->[Table_2]))  // null or empty means all tables
+	
+	Export_PreCheck_FindBadChars($options)
+	Export_PreCheck_RemoveBadChars($options)
+	Export_PreCheck_FindBadChars($options)
+End if 
 
 If (False:C215)  // ## Create test data
 	var $i : Integer
@@ -50,7 +52,9 @@ End if
 
 If (False:C215)  // ## Export all tables
 	var $export_folder_platformPath : Text
-	$export_folder_platformPath:=Export_AllTables(4)
+	var $fields_to_base64 : Collection
+	$fields_to_base64:=New collection:C1472(->[Table_2:2]Field_2:2; ->[Table_2:2]Field_5:5)
+	$export_folder_platformPath:=Export_AllTables(4; $fields_to_base64)
 	SHOW ON DISK:C922($export_folder_platformPath)
 End if 
 
