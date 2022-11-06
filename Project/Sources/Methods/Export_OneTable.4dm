@@ -7,9 +7,10 @@
 #DECLARE($table_no : Integer\
 ; $exportToFolder_platformPath : Text\
 ; $next_table_sequence_number : Integer\
+; $fields_to_base64 : Collection\
 ; $progHdl : Integer)->$result : Text
 // ----------------------------------------------------
-ASSERT:C1129(Count parameters:C259=4)
+ASSERT:C1129(Count parameters:C259=5)
 $result:=""
 
 var ExportImport_Stop : Boolean
@@ -17,6 +18,17 @@ Case of
 	: (Not:C34(Is table number valid:C999($table_no)))  // bad table?
 	: (Records in table:C83(Table:C252($table_no)->)=0)  // no records?
 	Else 
+		
+		var $i : Integer
+		var $field_ptr : Pointer
+		var $field_Nums_in_table_to_base64 : Collection
+		$field_Nums_in_table_to_base64:=New collection:C1472()
+		For ($i; 0; $fields_to_base64.length-1)
+			$field_ptr:=$fields_to_base64[$i]
+			If (Table:C252($field_ptr)=$table_no)
+				$field_Nums_in_table_to_base64.push(Field:C253($field_ptr))
+			End if 
+		End for 
 		
 		var $MaxExportSize : Integer
 		$MaxExportSize:=250*1024*1024  // 250MB- used to segment created XML files
@@ -86,13 +98,15 @@ Case of
 			End if 
 			
 			// now loop through all fields
-			C_TEXT:C284($result2)
-			C_POINTER:C301($fieldptr)
+			var $force_base64 : Boolean
+			var $result2 : Text
 			SAX OPEN XML ELEMENT:C853($fileRef; "T_"+$table_name)
 			For ($j; 1; Get last field number:C255($table_ptr))  // for every field on the record
 				If (Is field number valid:C1000($table_no; $j))
-					$fieldptr:=Field:C253($table_no; $j)
-					$result2:=ExportImport_ExportField("ExportField"; ""; $fieldptr; $fileRef+0)
+					$field_ptr:=Field:C253($table_no; $j)
+					$force_base64:=($field_Nums_in_table_to_base64.indexOf($j)>=0)  // is a text field to be base64'd
+					
+					$result2:=Field_ExportToXmlFile($fileRef; $field_ptr; $force_base64)
 					If ($result2#"")
 						ExportImport_Stop:=True:C214
 						$result:=$result2

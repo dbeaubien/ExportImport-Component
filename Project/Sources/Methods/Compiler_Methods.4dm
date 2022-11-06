@@ -19,6 +19,7 @@ C_OBJECT:C1216(Worker_ExportOneTable; $2)
 //Export_AllTables
 C_TEXT:C284(Export_AllTables; $0)
 C_LONGINT:C283(Export_AllTables; $1)
+C_COLLECTION:C1488(Export_AllTables; $2)
 
 //Folder_ParentName
 C_TEXT:C284(Folder_ParentName; $0)
@@ -29,7 +30,8 @@ C_TEXT:C284(Export_OneTable; $0)
 C_LONGINT:C283(Export_OneTable; $1)
 C_TEXT:C284(Export_OneTable; $2)
 C_LONGINT:C283(Export_OneTable; $3)
-C_LONGINT:C283(Export_OneTable; $4)
+C_COLLECTION:C1488(Export_OneTable; $4)
+C_LONGINT:C283(Export_OneTable; $5)
 
 //STR_CheckForIssues
 C_TEXT:C284(STR_CheckForIssues; $0)
@@ -55,13 +57,6 @@ C_TEXT:C284(ExportImport_ImportField; $1)
 C_TEXT:C284(ExportImport_ImportField; $2)
 C_POINTER:C301(ExportImport_ImportField; $3)
 C_LONGINT:C283(ExportImport_ImportField; $4)
-
-//ExportImport_CheckFieldEmpty
-C_TEXT:C284(ExportImport_CheckFieldEmpty; $0)
-C_TEXT:C284(ExportImport_CheckFieldEmpty; $1)
-C_TEXT:C284(ExportImport_CheckFieldEmpty; $2)
-C_POINTER:C301(ExportImport_CheckFieldEmpty; $3)
-C_LONGINT:C283(ExportImport_CheckFieldEmpty; $4)
 
 //Time2String
 C_TEXT:C284(Time2String; $0)
@@ -117,6 +112,10 @@ C_LONGINT:C283(ExportImport_ReplaceChar; $4)
 //Export_PreCheck_FindBadChars
 C_OBJECT:C1216(Export_PreCheck_FindBadChars; $1)
 
+//Field_IsEmpty
+C_BOOLEAN:C305(Field_IsEmpty; $0)
+C_POINTER:C301(Field_IsEmpty; $1)
+
 //Date2String
 C_TEXT:C284(Date2String; $0)
 C_DATE:C307(Date2String; $1)
@@ -142,13 +141,6 @@ C_LONGINT:C283(GenericWorker_init; $2)
 //GenericWorker_MarkAsWaiting
 C_OBJECT:C1216(GenericWorker_MarkAsWaiting; $1)
 
-//ExportImport_ExportField
-C_TEXT:C284(ExportImport_ExportField; $0)
-C_TEXT:C284(ExportImport_ExportField; $1)
-C_TEXT:C284(ExportImport_ExportField; $2)
-C_POINTER:C301(ExportImport_ExportField; $3)
-C_LONGINT:C283(ExportImport_ExportField; $4)
-
 //Worker_NTS_Progress_Set_Progres
 C_LONGINT:C283(Worker_NTS_Progress_Set_Progres; $1)
 C_REAL:C285(Worker_NTS_Progress_Set_Progres; $2)
@@ -168,6 +160,12 @@ C_LONGINT:C283(Import_OneTable; $3)
 //STR_GetListOfBadCharacters
 C_COLLECTION:C1488(STR_GetListOfBadCharacters; $0)
 C_TEXT:C284(STR_GetListOfBadCharacters; $1)
+
+//Field_ExportToXmlFile
+C_TEXT:C284(Field_ExportToXmlFile; $0)
+C_TIME:C306(Field_ExportToXmlFile; $1)
+C_POINTER:C301(Field_ExportToXmlFile; $2)
+C_BOOLEAN:C305(Field_ExportToXmlFile; $3)
 
 //File_Delete
 C_TEXT:C284(File_Delete; $1)

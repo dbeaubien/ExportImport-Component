@@ -20,6 +20,7 @@ C_LONGINT:C283($xmllevel; $newseqnumber; $findpos; $total; $reccounter)
 C_LONGINT:C283($loopfields; $fieldtyp; $MyEvent)
 C_POINTER:C301($fieldptr)
 C_PICTURE:C286($pictvariable)
+var $textVariable : Text
 
 var $import_file_list : Collection
 If (Is table number valid:C999($table_no))  // Work out the files that are there to import
@@ -115,6 +116,9 @@ If ($import_file_list.length>0)
 								$fieldptr:=Field:C253($table_no; $loopfields)
 								$Fieldtyp:=Type:C295($fieldptr->)
 								Case of 
+									: ($Fieldtyp=Is alpha field:K8:1) | ($Fieldtyp=Is text:K8:3)
+										BLOB TO VARIABLE:C533($blob; $textVariable)
+										$fieldptr->:=$textVariable
 									: ($Fieldtyp=Is BLOB:K8:12)
 										$fieldptr->:=$blob
 										SET BLOB SIZE:C606($blob; 0)
