@@ -162,7 +162,8 @@ C_TEXT:C284(File_CreateFile; $2)
 C_TEXT:C284(Import_OneTable; $0)
 C_LONGINT:C283(Import_OneTable; $1)
 C_TEXT:C284(Import_OneTable; $2)
-C_LONGINT:C283(Import_OneTable; $3)
+C_BOOLEAN:C305(Import_OneTable; $3)
+C_LONGINT:C283(Import_OneTable; $4)
 
 //STR_GetListOfBadCharacters
 C_COLLECTION:C1488(STR_GetListOfBadCharacters; $0)
