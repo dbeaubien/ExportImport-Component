@@ -14,6 +14,7 @@ Log_INFO("Worker starting import of table ["+Table name:C256($options.table_no)+
 Table_Journaling_DISABLE(Table:C252($options.table_no))
 Import_OneTable($options.table_no\
 ; $options.import_folder_platformPath\
+; $options.truncation_before_import\
 ; $worker.progress_hdl_id)
 Table_Journaling_ENABLE(Table:C252($options.table_no))
 

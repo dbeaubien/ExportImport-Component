@@ -69,7 +69,7 @@ Case of
 		If ($value1="")
 			$value1:="0"
 		End if 
-		Log_INFO("$table_name="+$table_name)
+		
 		SAX OPEN XML ELEMENT:C853($fileRef; "Table_"+$table_name\
 			; "Sequenceno"; $value1\
 			; "Total"; $value2)

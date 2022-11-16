@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><preferences stamp="3">
+<?xml version="1.0" encoding="UTF-8"?><preferences stamp="4">
 	<com.4d>
 		<compiler>
 			<options compilation_path="3" target="all"/>
+			<typage default_for_button="2"/>
 		</compiler>
 	</com.4d>
 </preferences>

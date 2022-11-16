@@ -16,3 +16,4 @@ logs/*
 Settings/buildApp.4DSettings
 Libraries/lib4d-arm64.dylib
 Resources/Code Analysis/InternalProjectName.txt
+.DS_Store

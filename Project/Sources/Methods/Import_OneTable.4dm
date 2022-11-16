@@ -6,9 +6,10 @@
 //
 #DECLARE($table_no : Integer\
 ; $importFromFolder_platformPath : Text\
+; $truncation_before_import : Boolean\
 ; $progHdl : Integer)->$result : Text
 // ----------------------------------------------------
-ASSERT:C1129(Count parameters:C259=3)
+ASSERT:C1129(Count parameters:C259=4)
 $result:=""
 
 var ExportImport_Stop : Boolean
@@ -37,7 +38,7 @@ If (Is table number valid:C999($table_no))  // Work out the files that are there
 	End while 
 End if 
 
-If ($import_file_list.length>0)
+If ($import_file_list.length>0) & ($truncation_before_import)
 	TRUNCATE TABLE:C1051(Table:C252($table_no)->)
 End if 
 

@@ -63,6 +63,12 @@ C_TEXT:C284(Time2String; $0)
 C_TIME:C306(Time2String; $1)
 C_TEXT:C284(Time2String; $2)
 
+//Export_ListOfTables
+C_TEXT:C284(Export_ListOfTables; $0)
+C_LONGINT:C283(Export_ListOfTables; $1)
+C_COLLECTION:C1488(Export_ListOfTables; $2)
+C_COLLECTION:C1488(Export_ListOfTables; $3)
+
 //Worker_NTS_Progress_Set_Title
 C_LONGINT:C283(Worker_NTS_Progress_Set_Title; $1)
 C_TEXT:C284(Worker_NTS_Progress_Set_Title; $2)
@@ -124,6 +130,7 @@ C_TEXT:C284(Date2String; $2)
 //Import_AllTables
 C_TEXT:C284(Import_AllTables; $0)
 C_LONGINT:C283(Import_AllTables; $1)
+C_OBJECT:C1216(Import_AllTables; $2)
 
 //FieldData_2Text
 C_TEXT:C284(FieldData_2Text; $0)
@@ -155,7 +162,8 @@ C_TEXT:C284(File_CreateFile; $2)
 C_TEXT:C284(Import_OneTable; $0)
 C_LONGINT:C283(Import_OneTable; $1)
 C_TEXT:C284(Import_OneTable; $2)
-C_LONGINT:C283(Import_OneTable; $3)
+C_BOOLEAN:C305(Import_OneTable; $3)
+C_LONGINT:C283(Import_OneTable; $4)
 
 //STR_GetListOfBadCharacters
 C_COLLECTION:C1488(STR_GetListOfBadCharacters; $0)

@@ -20,7 +20,7 @@ If (False:C215)  // ## Create test data
 	
 	// create [Table_1] records
 	TRUNCATE TABLE:C1051([Table_1:1])
-	For ($i; 1; 15000)
+	For ($i; 1; 8000)
 		CREATE RECORD:C68([Table_1:1])
 		[Table_1:1]Field_2:2:="text "+String:C10($i)
 		[Table_1:1]Field_3:3:="alpha "+String:C10($i)
@@ -50,6 +50,12 @@ If (False:C215)  // ## Create test data
 	REDUCE SELECTION:C351([Table_2:2]; 0)
 End if 
 
+If (False:C215)
+	var $export_folder_platformPath : Text
+	$export_folder_platformPath:=Export_ListOfTables(3; New collection:C1472(Table:C252(->[Table_2:2])))
+	SHOW ON DISK:C922($export_folder_platformPath)
+End if 
+
 If (False:C215)  // ## Export all tables
 	var $export_folder_platformPath : Text
 	var $fields_to_base64 : Collection
@@ -58,13 +64,14 @@ If (False:C215)  // ## Export all tables
 	SHOW ON DISK:C922($export_folder_platformPath)
 End if 
 
-If (False:C215)  // ## Import exported data
-	TRUNCATE TABLE:C1051([Table_1:1])
-	TRUNCATE TABLE:C1051([Table_2:2])
+If (True:C214)  // ## Import exported data
+	var $options : Object
+	$options:=New object:C1471
+	$options.truncation_before_import:=False:C215  // default
 	
-	var $export_folder_platformPath : Text
-	$export_folder_platformPath:=Import_AllTables(4)
-	SHOW ON DISK:C922($export_folder_platformPath)
+	var $importFromFolder_platformPath : Text
+	$importFromFolder_platformPath:=Import_AllTables(4; $options)
+	SHOW ON DISK:C922($importFromFolder_platformPath)
 End if 
 
 BEEP:C151
