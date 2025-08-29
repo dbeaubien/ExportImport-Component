@@ -56,7 +56,7 @@ Case of
 	: ($fieldtyp=Is text:K8:3)
 		$fieldptr->:=$textpara
 		
-	: (($fieldtyp=Is integer:K8:5) | ($fieldtyp=Is longint:K8:6))
+	: (($fieldtyp=Is integer:K8:5) | ($fieldtyp=Is longint:K8:6) | ($fieldtyp=Is integer 64 bits:K8:25))
 		$fieldptr->:=Num:C11($textpara)
 		
 	: ($fieldtyp=Is real:K8:4)
@@ -66,7 +66,17 @@ Case of
 		$fieldptr->:=Num:C11($textpara)
 		
 	: (($fieldtyp=Is date:K8:7))
-		$fieldptr->:=Date:C102($textpara)
+		If (Position:C15("-"; $textpara)=4)  // if not a 4 digit year
+			$fieldptr->:=Date:C102($textpara)
+		Else   // this handles 5 digit years
+			var $date_without_time : Text
+			var $date_split_into_parts : Collection
+			$date_without_time:=Split string:C1554($textpara; "T")[0]
+			$date_split_into_parts:=Split string:C1554($date_without_time; "-")
+			If ($date_split_into_parts.length=3)  // expecting three parts (y, m, d)
+				$fieldptr->:=Add to date:C393(!00-00-00!; Num:C11($date_split_into_parts[0]); Num:C11($date_split_into_parts[1]); Num:C11($date_split_into_parts[2]))
+			End if 
+		End if 
 		
 	: (($fieldtyp=Is time:K8:8))
 		$fieldptr->:=Time:C179($textpara)
