@@ -2,10 +2,10 @@
 	"author": "Dani Beaubien",
 	"copyrights": "Copyright 2022 Infohandler.com",
 	"version": "2022.r2 (build 20220711)",
-	"buildDate": "2022-09-16",
+	"buildDate": "2022-10-16",
 	"url": "http://infohandler.com",
 	"manifestFormatVersion": "1.0",
-	"buildWith4DVersion": "v19.4 final (build 282375)",
+	"buildWith4DVersion": "v19 R6 final (build 282985)",
 	"methodList": [
 		"BuildNo_GetBuildNo_LogComp",
 		"Log_DEBUG",
