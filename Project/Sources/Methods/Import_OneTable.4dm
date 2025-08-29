@@ -39,7 +39,11 @@ If (Is table number valid:C999($table_no))  // Work out the files that are there
 End if 
 
 If ($import_file_list.length>0) & ($truncation_before_import)
+	READ WRITE:C146(Table:C252($table_no)->)
+	ALL RECORDS:C47(Table:C252($table_no)->)
+	Log_INFO("TRUNCATING TABLE ["+Table name:C256($table_no)+"]")
 	TRUNCATE TABLE:C1051(Table:C252($table_no)->)
+	Log_INFO("TRUNCATED TABLE ["+Table name:C256($table_no)+"]")
 End if 
 
 If ($import_file_list.length>0)

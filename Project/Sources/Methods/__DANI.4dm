@@ -1,7 +1,19 @@
 //%attributes = {}
+var $date_as_iso : Text
+var $date : Date
+
+$date_as_iso:="1956-03-26T00:00:00"
+$date:=Date:C102($date_as_iso)
+
+var $date_ios_parts : Collection
+$date_as_iso:="11956-03-26T00:00:00"
+$date_as_iso:=Split string:C1554($date_as_iso; "T")[0]
+$date_ios_parts:=Split string:C1554($date_as_iso; "-")
+$date:=Add to date:C393(!00-00-00!; Num:C11($date_ios_parts[0]); Num:C11($date_ios_parts[1]); Num:C11($date_ios_parts[2]))
+
+
 Progress QUIT(0)
 Log_OpenDisplayWindow
-
 
 If (False:C215)
 	var $options : Object
