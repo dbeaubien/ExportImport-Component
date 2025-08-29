@@ -32,6 +32,7 @@ Case of
 		
 		var $MaxExportSize : Integer
 		$MaxExportSize:=250*1024*1024  // 250MB- used to segment created XML files
+		$MaxExportSize:=25*1024*1024  // 25MB- used to segment created XML files
 		//$MaxExportSize:=1*1024*1024  // 1MB - used to segment created XML files
 		
 		var $segment : Integer
