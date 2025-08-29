@@ -1,17 +1,12 @@
 //%attributes = {"invisible":true,"shared":true,"preemptive":"incapable"}
 // Export_ListOfTables (num_workers; table_no_list{; fields_to_base64})
 //
-var $1; $num_workers : Integer
-var $2; $table_no_list : Collection
-var $3; $fields_to_base64 : Collection
-var $0; $export_folder_platformPath : Text
+#DECLARE($num_workers : Integer\
+; $table_no_list : Collection\
+; $fields_to_base64 : Collection)->$export_folder_platformPath : Text
+// ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259>=2)
 ASSERT:C1129(Count parameters:C259<=3)
-$num_workers:=$1
-$table_no_list:=$2
-If (Count parameters:C259>=3)
-	$fields_to_base64:=$3
-End if 
 If ($num_workers<=0)
 	$num_workers:=3
 End if 
