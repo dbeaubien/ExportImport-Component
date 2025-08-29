@@ -20,6 +20,9 @@ $error_message:=Export_OneTable($options.table_no\
 ; $worker.progress_hdl_id)
 
 If ($error_message#"")
+	Use ($worker)
+		$worker.error_message:=$error_message
+	End use 
 	ALERT:C41("ISSUE exporting ["+Table name:C256($options.table_no)+"]:\r"+$worker.error_message)
 	Log_INFO("ISSUE exporting ["+Table name:C256($options.table_no)+"]:\r"+$worker.error_message)
 End if 

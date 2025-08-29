@@ -1,18 +1,13 @@
-//%attributes = {"shared":true,"preemptive":"incapable"}
+//%attributes = {"shared":true,"executedOnServer":true,"preemptive":"incapable"}
 // Import_AllTables (numWorkers{; options})
 //
-var $1; $num_workers : Integer  // optional
-var $2; $options : Object  // optional
-var $0; $importFromFolder_platformPath : Text
+#DECLARE($num_workers : Integer; $options : Object)->$importFromFolder_platformPath : Text
+// ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259<=2)
-If (Count parameters:C259>=1)
-	$num_workers:=$1
-End if 
-If (Count parameters:C259>=2)
-	$options:=$2
-End if 
 $importFromFolder_platformPath:=""
-
+If ($num_workers<=0)
+	$num_workers:=3
+End if 
 If ($options=Null:C1517)
 	$options:=New object:C1471
 End if 
@@ -21,16 +16,7 @@ If ($options.truncation_before_import=Null:C1517)
 End if 
 
 Log_OpenDisplayWindow
-
-Case of 
-	: (Count parameters:C259=0)
-		GenericWorker_init("Table Importer"; 3)
-	: ($num_workers>0)
-		GenericWorker_init("Table Importer"; $num_workers)
-	Else 
-		GenericWorker_init("Table Importer"; 3)
-End case 
-
+GenericWorker_init("Table Importer"; $num_workers)
 
 Trigger_DISABLE
 
