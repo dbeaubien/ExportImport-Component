@@ -1,0 +1,94 @@
+{
+	"_method_": {
+		"Export_AllTables": {
+			"Syntax": "**Export_AllTables**( *num_workers* : Integer; *fields_to_base64* : Collection )->export_folder_platformPath : Text",
+			"Params": [
+				[
+					"num_workers",
+					"Integer",
+					"->"
+				],
+				[
+					"fields_to_base64",
+					"Collection",
+					"->"
+				],
+				[
+					"export_folder_platformPath",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Export_ListOfTables": {
+			"Syntax": "**Export_ListOfTables**( *num_workers* : Integer; *table_no_list* : Collection; *fields_to_base64* : Collection )->export_folder_platformPath : Text",
+			"Params": [
+				[
+					"num_workers",
+					"Integer",
+					"->"
+				],
+				[
+					"table_no_list",
+					"Collection",
+					"->"
+				],
+				[
+					"fields_to_base64",
+					"Collection",
+					"->"
+				],
+				[
+					"export_folder_platformPath",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Export_PreCheck_FindBadChars": {
+			"Syntax": "**Export_PreCheck_FindBadChars**( *incoming_options* : Object )",
+			"Params": [
+				[
+					"incoming_options",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"Import_AllTables": {
+			"Syntax": "**Import_AllTables**( *num_workers* : Integer; *options* : Object )->importFromFolder_platformPath : Text",
+			"Params": [
+				[
+					"num_workers",
+					"Integer",
+					"->"
+				],
+				[
+					"options",
+					"Object",
+					"->"
+				],
+				[
+					"importFromFolder_platformPath",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Export_PreCheck_RemoveBadChars": {
+			"Syntax": "**Export_PreCheck_RemoveBadChars**( *incoming_options* : Object )",
+			"Params": [
+				[
+					"incoming_options",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		}
+	}
+}
