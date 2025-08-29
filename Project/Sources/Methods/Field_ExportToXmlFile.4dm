@@ -46,7 +46,7 @@ Case of
 				$dummytext:=Replace string:C233($dummytext; ","; ".")  // needed if used on a system with decimal comma
 				SAX ADD XML ELEMENT VALUE:C855($xml_file_ref; $dummytext)
 				
-			: (($field_type=Is integer:K8:5) | ($field_type=Is longint:K8:6))
+			: (($field_type=Is integer:K8:5) | ($field_type=Is longint:K8:6) | ($field_type=Is integer 64 bits:K8:25))
 				SAX ADD XML ELEMENT VALUE:C855($xml_file_ref; String:C10($field_ptr->))
 				
 			: (($field_type=Is date:K8:7))
