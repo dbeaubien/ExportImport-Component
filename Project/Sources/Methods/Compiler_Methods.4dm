@@ -210,3 +210,11 @@ C_TEXT:C284(OnErr_Install_Handler; $1)
 
 //Export_PreCheck_RemoveBadChars
 C_OBJECT:C1216(Export_PreCheck_RemoveBadChars; $1)
+
+//ExpImpComp_GetBuildNo
+C_OBJECT:C1216(ExpImpComp_GetBuildNo; $0)
+
+//ExpImpComp_SetBuildNo
+C_TEXT:C284(ExpImpComp_SetBuildNo; $1)
+C_TEXT:C284(ExpImpComp_SetBuildNo; $2)
+C_TEXT:C284(ExpImpComp_SetBuildNo; $3)
