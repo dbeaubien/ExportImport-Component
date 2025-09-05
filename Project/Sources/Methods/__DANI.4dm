@@ -1,16 +1,22 @@
 //%attributes = {}
-var $date_as_iso : Text
-var $date : Date
 
-$date_as_iso:="1956-03-26T00:00:00"
-$date:=Date:C102($date_as_iso)
+// Task 9073 - Export/Import code for datafile rebuilds improvements
+/*
+Make a few changes/improvements to the export/import process we follow to rebuild datafiles:
+- In scan for bad characters, add a check to detect if PK fields are null, 0 or an empty GUID.
+- Work out how to add a check for duplicate values on fields marked as unique.
+- Dump out record counts into a file as part of the export and post import.
+- Could the import process utilized the export's table count file to validate the #s are part of the import?
+- Add a check for fields where NULLs don't map to blank.
 
-var $date_ios_parts : Collection
-$date_as_iso:="11956-03-26T00:00:00"
-$date_as_iso:=Split string:C1554($date_as_iso; "T")[0]
-$date_ios_parts:=Split string:C1554($date_as_iso; "-")
-$date:=Add to date:C393(!00-00-00!; Num:C11($date_ios_parts[0]); Num:C11($date_ios_parts[1]); Num:C11($date_ios_parts[2]))
+Perhaps the "bad character" scan is turned into a "health check scan".
 
+Also thinking that the component has a dialog that is shown that gives access to all these tools.
+It would need a way to be able to pick tables to export and a way to mark which fields should be base64'd
+
+Could there be a way that the current settings that were user could be saved to a settings file which could then be reused in subsequent usages?
+
+*/
 
 Progress QUIT(0)
 Log_OpenDisplayWindow

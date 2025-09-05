@@ -1,0 +1,347 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"events": [
+		"onLoad",
+		"onClick",
+		"onActivate"
+	],
+	"windowTitle": "Datafile Exporter / Importer",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {
+				"Group Box": {
+					"type": "groupBox",
+					"top": 89,
+					"left": 15,
+					"width": 470,
+					"height": 165,
+					"fontFamily": "Lucida Grande Bold",
+					"fontSize": 13,
+					"fontWeight": "bold",
+					"text": "Health Check"
+				},
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 0,
+					"left": 0,
+					"width": 500,
+					"height": 38,
+					"fill": "#808080",
+					"stroke": "#808080"
+				},
+				"Text3": {
+					"type": "text",
+					"top": 9,
+					"left": 8,
+					"width": 475,
+					"height": 20,
+					"stroke": "#FFFFFF",
+					"class": "default_-_large",
+					"textAlign": "left",
+					"fontWeight": "bold",
+					"text": "Datafile Exporter / Importer",
+					"fontSize": 18
+				},
+				"Group Box1": {
+					"type": "groupBox",
+					"top": 279,
+					"left": 15,
+					"width": 470,
+					"height": 165,
+					"fontFamily": "Lucida Grande Bold",
+					"fontSize": 13,
+					"fontWeight": "bold",
+					"text": "Data Exporter"
+				},
+				"Group Box2": {
+					"type": "groupBox",
+					"top": 469,
+					"left": 15,
+					"width": 470,
+					"height": 165,
+					"fontFamily": "Lucida Grande Bold",
+					"fontSize": 13,
+					"fontWeight": "bold",
+					"text": "Data Importer"
+				},
+				"btn_done": {
+					"type": "button",
+					"top": 739,
+					"left": 387,
+					"width": 88,
+					"height": 21,
+					"dataSource": "",
+					"action": "cancel",
+					"shortcutKey": "[Return]",
+					"text": "Done",
+					"class": "default",
+					"focusable": false,
+					"defaultButton": true,
+					"events": []
+				},
+				"Text1": {
+					"type": "text",
+					"top": 60,
+					"left": 3,
+					"width": 259,
+					"height": 16,
+					"class": "",
+					"text": "Number of worker processes to use:",
+					"textAlign": "right"
+				},
+				"Input": {
+					"type": "input",
+					"left": 266,
+					"top": 60,
+					"width": 45,
+					"height": 17,
+					"dataSourceTypeHint": "integer",
+					"dataSource": "Form:C1466.num_worker_processes",
+					"min": 1,
+					"max": 10,
+					"numberFormat": "#0",
+					"textAlign": "center"
+				},
+				"Text2": {
+					"type": "text",
+					"top": 61,
+					"left": 318,
+					"width": 49,
+					"height": 16,
+					"class": "",
+					"text": "(1 - 10)",
+					"textAlign": "automatic"
+				}
+			}
+		},
+		{
+			"objects": {
+				"btn_scan_badCharacters": {
+					"type": "button",
+					"top": 190,
+					"left": 99,
+					"width": 168,
+					"height": 21,
+					"dataSource": "",
+					"action": "",
+					"shortcutKey": "[Return]",
+					"text": "Bad Character Scan",
+					"class": "default",
+					"focusable": false,
+					"defaultButton": false,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/btn_scan_badCharacters.4dm"
+				},
+				"btn_fix_badCharacters": {
+					"type": "button",
+					"top": 219,
+					"left": 99,
+					"width": 168,
+					"height": 21,
+					"dataSource": "",
+					"action": "",
+					"shortcutKey": "[Return]",
+					"text": "Fix Character Scan",
+					"class": "default",
+					"focusable": false,
+					"defaultButton": false,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/btn_fix_badCharacters.4dm"
+				},
+				"btn_select_fields_to_ignore": {
+					"type": "button",
+					"top": 149,
+					"left": 36,
+					"width": 208,
+					"height": 21,
+					"dataSource": "",
+					"action": "",
+					"shortcutKey": "[Return]",
+					"text": "Select Alpha Fields to Ignore",
+					"class": "default",
+					"focusable": false,
+					"defaultButton": false,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/btn_select_fields_to_ignore.4dm"
+				},
+				"btn_select_tables_to_export": {
+					"type": "button",
+					"top": 340,
+					"left": 36,
+					"width": 208,
+					"height": 21,
+					"dataSource": "",
+					"action": "",
+					"shortcutKey": "[Return]",
+					"text": "Select Tables to Export",
+					"class": "default",
+					"focusable": false,
+					"defaultButton": false,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/btn_select_tables_to_export.4dm"
+				},
+				"Input1": {
+					"type": "input",
+					"left": 253,
+					"top": 342,
+					"width": 225,
+					"height": 17,
+					"dataSourceTypeHint": "text",
+					"dataSource": "Form:C1466.selected_table_label",
+					"min": "",
+					"max": "",
+					"borderStyle": "none",
+					"fill": "transparent",
+					"enterable": false,
+					"focusable": false
+				},
+				"btn_export_tables": {
+					"type": "button",
+					"top": 414,
+					"left": 94,
+					"width": 168,
+					"height": 21,
+					"dataSource": "",
+					"action": "",
+					"shortcutKey": "[Return]",
+					"text": "Export Selected Tables",
+					"class": "default",
+					"focusable": false,
+					"defaultButton": false,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/btn_export_tables.4dm"
+				},
+				"Text4": {
+					"type": "text",
+					"top": 310,
+					"left": 53,
+					"width": 209,
+					"height": 16,
+					"class": "",
+					"text": "Max export file size MB:",
+					"textAlign": "right"
+				},
+				"Input2": {
+					"type": "input",
+					"left": 266,
+					"top": 310,
+					"width": 45,
+					"height": 17,
+					"dataSourceTypeHint": "integer",
+					"dataSource": "Form:C1466.max_export_file_size_mb",
+					"min": 1,
+					"max": 100,
+					"numberFormat": "#0",
+					"textAlign": "center"
+				},
+				"Text5": {
+					"type": "text",
+					"top": 311,
+					"left": 318,
+					"width": 99,
+					"height": 16,
+					"class": "",
+					"text": "(1-100)",
+					"textAlign": "automatic"
+				},
+				"btn_select_fields_to_ignore1": {
+					"type": "button",
+					"top": 369,
+					"left": 37,
+					"width": 208,
+					"height": 21,
+					"dataSource": "",
+					"action": "",
+					"shortcutKey": "[Return]",
+					"text": "Select Alpha Fields to Base64",
+					"class": "default",
+					"focusable": false,
+					"defaultButton": false,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/btn_select_fields_to_ignore1.4dm"
+				},
+				"Input3": {
+					"type": "input",
+					"left": 253,
+					"top": 371,
+					"width": 225,
+					"height": 17,
+					"dataSourceTypeHint": "text",
+					"dataSource": "Form:C1466.selected_base64_field_label",
+					"min": "",
+					"max": "",
+					"borderStyle": "none",
+					"fill": "transparent",
+					"enterable": false,
+					"focusable": false
+				},
+				"btn_select_tables_to_export1": {
+					"type": "button",
+					"top": 121,
+					"left": 36,
+					"width": 208,
+					"height": 21,
+					"dataSource": "",
+					"action": "",
+					"shortcutKey": "[Return]",
+					"text": "Select Tables to Scan",
+					"class": "default",
+					"focusable": false,
+					"defaultButton": false,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/btn_select_tables_to_export1.4dm"
+				},
+				"Input4": {
+					"type": "input",
+					"left": 253,
+					"top": 123,
+					"width": 225,
+					"height": 17,
+					"dataSourceTypeHint": "text",
+					"dataSource": "Form:C1466.selected_scan_table_label",
+					"min": "",
+					"max": "",
+					"borderStyle": "none",
+					"fill": "transparent",
+					"enterable": false,
+					"focusable": false
+				}
+			}
+		}
+	],
+	"geometryStamp": 416,
+	"width": 500,
+	"height": 800,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"method": "method.4dm"
+}

@@ -13,6 +13,9 @@ ASSERT:C1129($incoming_options#Null:C1517)
 If ($incoming_options.tables_to_scan=Null:C1517)
 	$incoming_options.tables_to_scan:=New collection:C1472()
 End if 
+If ($incoming_options.fields_to_ignore=Null:C1517)
+	$incoming_options.fields_to_ignore:=New collection:C1472()
+End if 
 If ($incoming_options.num_processes=Null:C1517) || ($incoming_options.num_processes<=0)
 	$incoming_options.num_processes:=3
 End if 
@@ -64,7 +67,7 @@ Repeat
 	$options.table_no:=$table_no
 	$options.folder_platformPath:=$export_folder_platformPath
 	$options.folder_platformPath:=$export_folder_platformPath
-	$options.$fields_to_ignore:=$incoming_options.fields_to_ignore
+	$options.fields_to_ignore:=$incoming_options.fields_to_ignore
 	$options.remove_bad_characters:=Bool:C1537($incoming_options.remove_bad_characters)
 	GenericWorker_MarkAsBusy($worker)
 	CALL WORKER:C1389($worker.worker_name; "Worker_FindBadCharsInRecords"; $worker; $options)

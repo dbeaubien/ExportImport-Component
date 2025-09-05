@@ -218,3 +218,18 @@ C_OBJECT:C1216(ExpImpComp_GetBuildNo; $0)
 C_TEXT:C284(ExpImpComp_SetBuildNo; $1)
 C_TEXT:C284(ExpImpComp_SetBuildNo; $2)
 C_TEXT:C284(ExpImpComp_SetBuildNo; $3)
+
+//FriendlyFieldType
+C_TEXT:C284(FriendlyFieldType; $0)
+C_LONGINT:C283(FriendlyFieldType; $1)
+
+//Dialog_SelectTables
+C_TEXT:C284(Dialog_SelectTables; $1)
+C_COLLECTION:C1488(Dialog_SelectTables; $2)
+
+//Export_SetMaxFileSizeMB
+C_LONGINT:C283(Export_SetMaxFileSizeMB; $1)
+
+//Dialog_SelectFields
+C_TEXT:C284(Dialog_SelectFields; $1)
+C_COLLECTION:C1488(Dialog_SelectFields; $2)

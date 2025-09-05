@@ -15,7 +15,7 @@ Folder_VerifyExistance($options.folder_platformPath)
 
 var $result_messages : Collection
 $result_messages:=Table_FindBadCharsInRecords($options.table_no\
-; $options.$fields_to_ignore\
+; $options.fields_to_ignore\
 ; $options.remove_bad_characters\
 ; $worker.progress_hdl_id)
 
