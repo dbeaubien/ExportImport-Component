@@ -20,7 +20,7 @@ For ($i; 1; $num_workers)
 	
 	Use ($worker_details)
 		$worker_details.worker_number:=$i
-		$worker_details.worker_name:="w"+$worker_prefix+"_"+String:C10($i; "000")
+		$worker_details.worker_name:="w"+Replace string:C233($worker_prefix; " "; "_")+"_"+String:C10($i; "000")
 		$worker_details.num_operations_completed:=-1  // GenericWorker_MarkAsWaiting increments it
 		$worker_details.progress_hdl_id:=Progress New
 	End use 

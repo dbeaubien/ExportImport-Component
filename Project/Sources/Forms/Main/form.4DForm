@@ -3,11 +3,11 @@
 		"version": "1",
 		"kind": "form"
 	},
-	"windowSizingX": "variable",
+	"windowSizingX": "fixed",
 	"windowSizingY": "variable",
-	"windowMinWidth": 0,
-	"windowMinHeight": 0,
-	"windowMaxWidth": 32767,
+	"windowMinWidth": 500,
+	"windowMinHeight": 600,
+	"windowMaxWidth": 500,
 	"windowMaxHeight": 32767,
 	"events": [
 		"onLoad",
@@ -19,17 +19,6 @@
 	"pages": [
 		{
 			"objects": {
-				"Group Box": {
-					"type": "groupBox",
-					"top": 89,
-					"left": 15,
-					"width": 470,
-					"height": 165,
-					"fontFamily": "Lucida Grande Bold",
-					"fontSize": 13,
-					"fontWeight": "bold",
-					"text": "Health Check"
-				},
 				"Rectangle": {
 					"type": "rectangle",
 					"top": 0,
@@ -54,7 +43,7 @@
 				},
 				"Group Box1": {
 					"type": "groupBox",
-					"top": 279,
+					"top": 349,
 					"left": 15,
 					"width": 470,
 					"height": 165,
@@ -65,7 +54,7 @@
 				},
 				"Group Box2": {
 					"type": "groupBox",
-					"top": 469,
+					"top": 539,
 					"left": 15,
 					"width": 470,
 					"height": 165,
@@ -92,16 +81,17 @@
 				"Text1": {
 					"type": "text",
 					"top": 60,
-					"left": 3,
+					"left": 43,
 					"width": 259,
 					"height": 16,
 					"class": "",
 					"text": "Number of worker processes to use:",
-					"textAlign": "right"
+					"textAlign": "right",
+					"fontWeight": "bold"
 				},
 				"Input": {
 					"type": "input",
-					"left": 266,
+					"left": 306,
 					"top": 60,
 					"width": 45,
 					"height": 17,
@@ -115,12 +105,24 @@
 				"Text2": {
 					"type": "text",
 					"top": 61,
-					"left": 318,
+					"left": 358,
 					"width": 49,
 					"height": 16,
 					"class": "",
 					"text": "(1 - 10)",
-					"textAlign": "automatic"
+					"textAlign": "automatic",
+					"fontStyle": "italic"
+				},
+				"Group Box": {
+					"type": "groupBox",
+					"top": 89,
+					"left": 15,
+					"width": 470,
+					"height": 244,
+					"fontFamily": "Lucida Grande Bold",
+					"fontSize": 13,
+					"fontWeight": "bold",
+					"text": "Health Check"
 				}
 			}
 		},
@@ -128,14 +130,14 @@
 			"objects": {
 				"btn_scan_badCharacters": {
 					"type": "button",
-					"top": 190,
-					"left": 99,
-					"width": 168,
+					"top": 296,
+					"left": 67,
+					"width": 138,
 					"height": 21,
 					"dataSource": "",
 					"action": "",
 					"shortcutKey": "[Return]",
-					"text": "Bad Character Scan",
+					"text": "Scan",
 					"class": "default",
 					"focusable": false,
 					"defaultButton": false,
@@ -146,14 +148,14 @@
 				},
 				"btn_fix_badCharacters": {
 					"type": "button",
-					"top": 219,
-					"left": 99,
-					"width": 168,
+					"top": 296,
+					"left": 246,
+					"width": 218,
 					"height": 21,
 					"dataSource": "",
 					"action": "",
 					"shortcutKey": "[Return]",
-					"text": "Fix Character Scan",
+					"text": "Scan & Remove Bad Chars ",
 					"class": "default",
 					"focusable": false,
 					"defaultButton": false,
@@ -164,7 +166,7 @@
 				},
 				"btn_select_fields_to_ignore": {
 					"type": "button",
-					"top": 149,
+					"top": 248,
 					"left": 36,
 					"width": 208,
 					"height": 21,
@@ -182,7 +184,7 @@
 				},
 				"btn_select_tables_to_export": {
 					"type": "button",
-					"top": 340,
+					"top": 410,
 					"left": 36,
 					"width": 208,
 					"height": 21,
@@ -201,7 +203,7 @@
 				"Input1": {
 					"type": "input",
 					"left": 253,
-					"top": 342,
+					"top": 412,
 					"width": 225,
 					"height": 17,
 					"dataSourceTypeHint": "text",
@@ -215,7 +217,7 @@
 				},
 				"btn_export_tables": {
 					"type": "button",
-					"top": 414,
+					"top": 484,
 					"left": 94,
 					"width": 168,
 					"height": 21,
@@ -233,7 +235,7 @@
 				},
 				"Text4": {
 					"type": "text",
-					"top": 310,
+					"top": 380,
 					"left": 53,
 					"width": 209,
 					"height": 16,
@@ -244,7 +246,7 @@
 				"Input2": {
 					"type": "input",
 					"left": 266,
-					"top": 310,
+					"top": 380,
 					"width": 45,
 					"height": 17,
 					"dataSourceTypeHint": "integer",
@@ -256,7 +258,7 @@
 				},
 				"Text5": {
 					"type": "text",
-					"top": 311,
+					"top": 381,
 					"left": 318,
 					"width": 99,
 					"height": 16,
@@ -266,7 +268,7 @@
 				},
 				"btn_select_fields_to_ignore1": {
 					"type": "button",
-					"top": 369,
+					"top": 439,
 					"left": 37,
 					"width": 208,
 					"height": 21,
@@ -285,7 +287,7 @@
 				"Input3": {
 					"type": "input",
 					"left": 253,
-					"top": 371,
+					"top": 441,
 					"width": 225,
 					"height": 17,
 					"dataSourceTypeHint": "text",
@@ -299,7 +301,7 @@
 				},
 				"btn_select_tables_to_export1": {
 					"type": "button",
-					"top": 121,
+					"top": 214,
 					"left": 36,
 					"width": 208,
 					"height": 21,
@@ -318,7 +320,7 @@
 				"Input4": {
 					"type": "input",
 					"left": 253,
-					"top": 123,
+					"top": 216,
 					"width": 225,
 					"height": 17,
 					"dataSourceTypeHint": "text",
@@ -329,11 +331,43 @@
 					"fill": "transparent",
 					"enterable": false,
 					"focusable": false
+				},
+				"Input5": {
+					"type": "input",
+					"left": 253,
+					"top": 250,
+					"width": 225,
+					"height": 17,
+					"dataSourceTypeHint": "text",
+					"dataSource": "Form:C1466.selected_ignore_field_label",
+					"min": "",
+					"max": "",
+					"borderStyle": "none",
+					"fill": "transparent",
+					"enterable": false,
+					"focusable": false
+				},
+				"Line": {
+					"type": "line",
+					"top": 286,
+					"left": 25,
+					"width": 449,
+					"height": 0,
+					"stroke": "#c0c0c0"
+				},
+				"Text6": {
+					"type": "text",
+					"top": 119,
+					"left": 37,
+					"width": 425,
+					"height": 87,
+					"class": "",
+					"text": "The Health Check will look for records with:\r- a field that is marked unique with a non-unique value\r- a primary key that is NULL or not set\r- an alpha field with a char that is unexpected in this type of field.\r- a date field that has a 5 digit year"
 				}
 			}
 		}
 	],
-	"geometryStamp": 416,
+	"geometryStamp": 556,
 	"width": 500,
 	"height": 800,
 	"editor": {

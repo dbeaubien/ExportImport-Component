@@ -33,11 +33,11 @@ Case of
 			End for 
 		End for 
 		Form:C1466.table_list:=Form:C1466.table_list.orderBy("table name")
-		Form:C1466.scan_table_list:=Form:C1466.table_list.orderBy("table name").copy()
+		Form:C1466.bad_char_scan_table_list:=Form:C1466.table_list.orderBy("table name").copy()
 		
-		// copy to field list to Form.bad_char_scan_field_list
-		Form:C1466.bad_char_scan_field_list:=Form:C1466.field_list.query("field_type IN :1"; [Is text:K8:3; Is alpha field:K8:1]).copy()
-		Form:C1466.bad_char_scan_field_list:=Form:C1466.bad_char_scan_field_list.orderBy("table name, field_name")
+		// copy to field list to Form.bad_char_scan_ignore_field_list
+		Form:C1466.bad_char_scan_ignore_field_list:=Form:C1466.field_list.query("field_type IN :1"; [Is text:K8:3; Is alpha field:K8:1]).copy()
+		Form:C1466.bad_char_scan_ignore_field_list:=Form:C1466.bad_char_scan_ignore_field_list.orderBy("table name, field_name")
 		
 		// copy to field list to Form.base64_field_list and deselect them all
 		Form:C1466.base64_field_list:=Form:C1466.field_list.query("field_type IN :1"; [Is text:K8:3; Is alpha field:K8:1]).copy()
@@ -57,30 +57,44 @@ Case of
 End case 
 
 
-Form:C1466.num_tables_selected:=Form:C1466.table_list.query("is_selected=:1"; True:C214).length
-Case of 
-	: (Form:C1466.num_tables_selected=Form:C1466.table_list.length)
-		Form:C1466.selected_table_label:="Export all "+String:C10(Form:C1466.num_tables_selected)+" tables"
-		
-	: (Form:C1466.num_tables_selected=0)
-		Form:C1466.selected_table_label:="Export no tables"
-		
-	Else 
-		Form:C1466.selected_table_label:="Export "+String:C10(Form:C1466.num_tables_selected)+" of "+String:C10(Form:C1466.table_list.length)+" tables"
-End case 
-
-Form:C1466.num_scan_tables_selected:=Form:C1466.scan_table_list.query("is_selected=:1"; True:C214).length
-Case of 
-	: (Form:C1466.num_scan_tables_selected=Form:C1466.scan_table_list.length)
-		Form:C1466.selected_scan_table_label:="Scan all "+String:C10(Form:C1466.num_scan_tables_selected)+" tables"
-		
-	: (Form:C1466.num_scan_tables_selected=0)
-		Form:C1466.selected_scan_table_label:="Scan no tables"
-		
-	Else 
-		Form:C1466.selected_scan_table_label:="Scan "+String:C10(Form:C1466.num_scan_tables_selected)+" of "+String:C10(Form:C1466.scan_table_list.length)+" tables"
-End case 
+If (True:C214)
+	
+	Form:C1466.num_scan_tables_selected:=Form:C1466.bad_char_scan_table_list.query("is_selected=:1"; True:C214).length
+	Case of 
+		: (Form:C1466.num_scan_tables_selected=Form:C1466.bad_char_scan_table_list.length)
+			Form:C1466.selected_scan_table_label:="Scan all "+String:C10(Form:C1466.num_scan_tables_selected)+" tables"
+			
+		: (Form:C1466.num_scan_tables_selected=0)
+			Form:C1466.selected_scan_table_label:="Scan no tables"
+			
+		Else 
+			Form:C1466.selected_scan_table_label:="Scan "+String:C10(Form:C1466.num_scan_tables_selected)+" of "+String:C10(Form:C1466.bad_char_scan_table_list.length)+" tables"
+	End case 
+	
+	Form:C1466.num_selected_ignore_field:=Form:C1466.bad_char_scan_ignore_field_list\
+		.query("is_selected=:1"; True:C214)\
+		.length
+	Form:C1466.selected_ignore_field_label:=String:C10(Form:C1466.num_selected_ignore_field)\
+		+" alpha fields will be not scanned"
+End if 
 
 
-Form:C1466.num_selected_base64_field:=Form:C1466.base64_field_list.query("is_selected=:1"; True:C214).length
-Form:C1466.selected_base64_field_label:=String:C10(Form:C1466.num_selected_base64_field)+" alpha fields will be Base64'd"
+If (True:C214)
+	Form:C1466.num_tables_selected:=Form:C1466.table_list.query("is_selected=:1"; True:C214).length
+	Case of 
+		: (Form:C1466.num_tables_selected=Form:C1466.table_list.length)
+			Form:C1466.selected_table_label:="Export all "+String:C10(Form:C1466.num_tables_selected)+" tables"
+			
+		: (Form:C1466.num_tables_selected=0)
+			Form:C1466.selected_table_label:="Export no tables"
+			
+		Else 
+			Form:C1466.selected_table_label:="Export "+String:C10(Form:C1466.num_tables_selected)+" of "+String:C10(Form:C1466.table_list.length)+" tables"
+	End case 
+	
+	Form:C1466.num_selected_base64_field:=Form:C1466.base64_field_list\
+		.query("is_selected=:1"; True:C214)\
+		.length
+	Form:C1466.selected_base64_field_label:=String:C10(Form:C1466.num_selected_base64_field)\
+		+" alpha fields will be Base64'd"
+End if 

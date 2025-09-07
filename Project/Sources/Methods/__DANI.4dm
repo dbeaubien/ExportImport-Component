@@ -25,12 +25,12 @@ If (False:C215)
 	var $options : Object
 	$options:=New object:C1471
 	$options.num_processes:=3
-	$options.fields_to_ignore:=New collection:C1472(->[Table_2:2]Field_3:3)
+	$options.field_ptrs_to_ignore:=New collection:C1472(->[Table_2:2]Field_3:3)
 	//$options.tables_to_scan:=New collection(Table(->[Table_2]))  // null or empty means all tables
 	
-	Export_PreCheck_FindBadChars($options)
+	Export_HealthCheck_Scan($options)
 	Export_PreCheck_RemoveBadChars($options)
-	Export_PreCheck_FindBadChars($options)
+	Export_HealthCheck_Scan($options)
 End if 
 
 If (False:C215)  // ## Create test data

@@ -20,3 +20,5 @@ While (_generic_workers.query("ready_for_new_work=:1"; True:C214).length=0)
 End while 
 
 $worker:=_generic_workers.query("ready_for_new_work=:1"; True:C214)[0]
+
+GenericWorker_MarkAsBusy($worker)

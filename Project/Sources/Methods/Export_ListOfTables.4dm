@@ -74,7 +74,6 @@ If ($queue_list.length>0)
 		$queue_action:=$queue_list[$index]
 		$table_no:=$queue_action.table_no
 		$worker:=GenericWorker_GetOneWaiting()  // will not return until there is a worker that is waiting for work
-		GenericWorker_MarkAsBusy($worker)
 		
 		Case of 
 			: ($queue_action.action="export")
