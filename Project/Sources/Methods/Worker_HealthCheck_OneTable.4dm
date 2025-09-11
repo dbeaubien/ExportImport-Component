@@ -24,14 +24,6 @@ $result_messages:=cs:C1710.HealthCheckerWorker.new($options.table_no)\
 .Set_to_Remove_Bad_Chars($options.remove_bad_characters)\
 .Perform_Health_Check()
 
-If (False:C215)
-	var $result_messages : Collection
-	$result_messages:=Table_FindBadCharsInRecords($options.table_no\
-		; $options.field_ptrs_to_ignore\
-		; $options.remove_bad_characters\
-		; $worker.progress_hdl_id)
-End if 
-
 var $results_log_file : 4D:C1709.File
 If ($result_messages.length=0)
 	$results_log_file:=$options.folder.file("NO ISSUES - "+Table name:C256($options.table_no)+".txt")

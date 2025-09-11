@@ -115,8 +115,9 @@ C_TEXT:C284($fileChecksum)
 $fileChecksum:=File_GetChecksum($vt_path2File; "md5")
 
 // Move the temp file to it's final name
-$pathToChecksumFile:=$destinationFolder+"%t %c.txt"  // Final checksum file name
+$pathToChecksumFile:=$destinationFolder+"%t - %c - %n.txt"  // Final checksum file name
 $pathToChecksumFile:=Replace string:C233($pathToChecksumFile; "%t"; Table name:C256($tablePtr))
-$pathToChecksumFile:=Replace string:C233($pathToChecksumFile; "%c"; $fileChecksum)
+$pathToChecksumFile:=Replace string:C233($pathToChecksumFile; "%c"; Uppercase:C13($fileChecksum))
+$pathToChecksumFile:=Replace string:C233($pathToChecksumFile; "%n"; String:C10(Records in table:C83($tablePtr->))+" recs")
 File_Delete($pathToChecksumFile)  // remove any older version 
 MOVE DOCUMENT:C540($vt_path2File; $pathToChecksumFile)

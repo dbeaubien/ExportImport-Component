@@ -47,6 +47,7 @@ Case of
 	: (FORM Event:C1606.code=On Unload:K2:2)
 		
 	: (FORM Event:C1606.code=On Close Box:K2:21)
+		CANCEL:C270
 		
 	: (FORM Event:C1606.code=On Clicked:K2:4)
 		
