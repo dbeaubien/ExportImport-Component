@@ -37,13 +37,6 @@ C_LONGINT:C283(Export_OneTable; $5)
 C_TEXT:C284(STR_CheckForIssues; $0)
 C_TEXT:C284(STR_CheckForIssues; $1)
 
-//Table_FindBadCharsInRecords
-C_COLLECTION:C1488(Table_FindBadCharsInRecords; $0)
-C_LONGINT:C283(Table_FindBadCharsInRecords; $1)
-C_COLLECTION:C1488(Table_FindBadCharsInRecords; $2)
-C_BOOLEAN:C305(Table_FindBadCharsInRecords; $3)
-C_LONGINT:C283(Table_FindBadCharsInRecords; $4)
-
 //GenericWorker_GetOneWaiting
 C_OBJECT:C1216(GenericWorker_GetOneWaiting; $0)
 

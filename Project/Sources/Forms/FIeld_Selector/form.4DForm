@@ -140,7 +140,7 @@
 							},
 							"enterable": false,
 							"width": 290,
-							"dataSource": "\"[\"+This:C1470.table_name+\"]\"+This:C1470.field_name"
+							"dataSource": "\"[\"+This:C1470.table_name+\"] \"+This:C1470.field_name"
 						},
 						{
 							"header": {

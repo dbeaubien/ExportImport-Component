@@ -1,7 +1,8 @@
 Case of 
 	: (FORM Event:C1606.code=On Load:K2:1)
+		Form:C1466.truncation_before_import:=False:C215
 		Form:C1466.num_worker_processes:=3
-		Form:C1466.max_export_file_size_mb:=25
+		Form:C1466.max_export_file_size_mb:=10
 		
 		var $table_no; $field_no; $field_type : Integer
 		Form:C1466.table_list:=[]
@@ -32,16 +33,16 @@ Case of
 					is_selected: False:C215})
 			End for 
 		End for 
-		Form:C1466.table_list:=Form:C1466.table_list.orderBy("table name")
-		Form:C1466.bad_char_scan_table_list:=Form:C1466.table_list.orderBy("table name").copy()
+		Form:C1466.table_list:=Form:C1466.table_list.orderBy("table_name")
+		Form:C1466.bad_char_scan_table_list:=Form:C1466.table_list.orderBy("table_name").copy()
 		
 		// copy to field list to Form.bad_char_scan_ignore_field_list
 		Form:C1466.bad_char_scan_ignore_field_list:=Form:C1466.field_list.query("field_type IN :1"; [Is text:K8:3; Is alpha field:K8:1]).copy()
-		Form:C1466.bad_char_scan_ignore_field_list:=Form:C1466.bad_char_scan_ignore_field_list.orderBy("table name, field_name")
+		Form:C1466.bad_char_scan_ignore_field_list:=Form:C1466.bad_char_scan_ignore_field_list.orderBy("table_name, field_name")
 		
 		// copy to field list to Form.base64_field_list and deselect them all
 		Form:C1466.base64_field_list:=Form:C1466.field_list.query("field_type IN :1"; [Is text:K8:3; Is alpha field:K8:1]).copy()
-		Form:C1466.base64_field_list:=Form:C1466.base64_field_list.orderBy("table name, field_name")
+		Form:C1466.base64_field_list:=Form:C1466.base64_field_list.orderBy("table_name, field_name")
 		
 		
 	: (FORM Event:C1606.code=On Unload:K2:2)

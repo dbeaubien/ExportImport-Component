@@ -1,3 +1,5 @@
+var $window_ref : Integer
+$window_ref:=Frontmost window:C447()
 
 If (Form:C1466.num_scan_tables_selected=0)
 	ALERT:C41("At least 1 table must be selected in order to do the scan.")
@@ -12,14 +14,19 @@ If (Form:C1466.num_selected_ignore_field>0)
 	$message+="\r\rThe bad character scan will ignore "+String:C10(Form:C1466.num_selected_ignore_field)+" fields."
 End if 
 
-CONFIRM:C162($message; "Scan "+String:C10(Form:C1466.num_scan_tables_selected)+" tables"; "Cancel")
+var $button_text : Text
+$button_text:="Scan "+String:C10(Form:C1466.num_scan_tables_selected)
+If (Form:C1466.num_scan_tables_selected=1)
+	$button_text+=" table"
+Else 
+	$button_text+=" tables"
+End if 
+CONFIRM:C162($message; $button_text; "Cancel")
 If (OK=0)
 	return 
 End if 
 
-var $window_ref : Integer
 var $export_folder_platformPath : Text
-$window_ref:=Frontmost window:C447()
 HIDE WINDOW:C436($window_ref)
 
 var $options : Object

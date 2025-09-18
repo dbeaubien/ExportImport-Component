@@ -1,5 +1,4 @@
 //%attributes = {}
-
 // Task 9073 - Export/Import code for datafile rebuilds improvements
 /*
 Make a few changes/improvements to the export/import process we follow to rebuild datafiles:
@@ -20,6 +19,8 @@ Could there be a way that the current settings that were user could be saved to 
 
 Progress QUIT(0)
 Log_OpenDisplayWindow
+Export_Import_Dialog
+
 
 If (False:C215)
 	var $options : Object
@@ -82,7 +83,7 @@ If (False:C215)  // ## Export all tables
 	SHOW ON DISK:C922($export_folder_platformPath)
 End if 
 
-If (True:C214)  // ## Import exported data
+If (False:C215)  // ## Import exported data
 	var $options : Object
 	$options:=New object:C1471
 	$options.truncation_before_import:=False:C215  // default

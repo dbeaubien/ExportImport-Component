@@ -416,7 +416,7 @@
 					"type": "button",
 					"top": 426,
 					"left": 90,
-					"width": 168,
+					"width": 178,
 					"height": 21,
 					"dataSource": "",
 					"action": "",
@@ -441,11 +441,50 @@
 					"width": 549,
 					"height": 0,
 					"stroke": "#c0c0c0"
+				},
+				"Line3": {
+					"type": "line",
+					"top": 386,
+					"left": 25,
+					"width": 549,
+					"height": 0,
+					"stroke": "#c0c0c0"
+				},
+				"btn_import_tables": {
+					"type": "button",
+					"top": 426,
+					"left": 90,
+					"width": 188,
+					"height": 21,
+					"dataSource": "",
+					"action": "",
+					"shortcutKey": "[Return]",
+					"text": "Import Records from Disk",
+					"class": "default",
+					"focusable": false,
+					"defaultButton": false,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/btn_import_tables.4dm"
+				},
+				"Check Box": {
+					"type": "checkbox",
+					"text": "Truncate Table before Importing Records",
+					"top": 150,
+					"left": 128,
+					"width": 279,
+					"height": 29,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.truncation_before_import",
+					"dataSourceTypeHint": "boolean"
 				}
 			}
 		}
 	],
-	"geometryStamp": 714,
+	"geometryStamp": 720,
 	"width": 600,
 	"height": 500,
 	"editor": {
