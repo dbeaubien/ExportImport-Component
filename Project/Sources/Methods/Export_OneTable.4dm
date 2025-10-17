@@ -31,9 +31,12 @@ Case of
 		End for 
 		
 		var $MaxExportSize : Integer
-		$MaxExportSize:=250*1024*1024  // 250MB- used to segment created XML files
-		$MaxExportSize:=25*1024*1024  // 25MB- used to segment created XML files
-		//$MaxExportSize:=1*1024*1024  // 1MB - used to segment created XML files
+		If (Storage:C1525.export.max_export_file_size_mb=Null:C1517)
+			$MaxExportSize:=25  // 25MB- used to segment created XML files
+		Else 
+			$MaxExportSize:=Storage:C1525.export.max_export_file_size_mb
+		End if 
+		$MaxExportSize:=Storage:C1525.export.max_export_file_size_mb*1024*1024
 		
 		var $segment : Integer
 		$segment:=1

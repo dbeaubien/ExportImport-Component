@@ -37,13 +37,6 @@ C_LONGINT:C283(Export_OneTable; $5)
 C_TEXT:C284(STR_CheckForIssues; $0)
 C_TEXT:C284(STR_CheckForIssues; $1)
 
-//Table_FindBadCharsInRecords
-C_COLLECTION:C1488(Table_FindBadCharsInRecords; $0)
-C_LONGINT:C283(Table_FindBadCharsInRecords; $1)
-C_COLLECTION:C1488(Table_FindBadCharsInRecords; $2)
-C_BOOLEAN:C305(Table_FindBadCharsInRecords; $3)
-C_LONGINT:C283(Table_FindBadCharsInRecords; $4)
-
 //GenericWorker_GetOneWaiting
 C_OBJECT:C1216(GenericWorker_GetOneWaiting; $0)
 
@@ -83,9 +76,9 @@ C_LONGINT:C283(Worker_NTS_SetDatabaseParameter; $2)
 C_OBJECT:C1216(Worker_ChecksumOneTable; $1)
 C_OBJECT:C1216(Worker_ChecksumOneTable; $2)
 
-//Worker_FindBadCharsInRecords
-C_OBJECT:C1216(Worker_FindBadCharsInRecords; $1)
-C_OBJECT:C1216(Worker_FindBadCharsInRecords; $2)
+//Worker_HealthCheck_OneTable
+C_OBJECT:C1216(Worker_HealthCheck_OneTable; $1)
+C_OBJECT:C1216(Worker_HealthCheck_OneTable; $2)
 
 //GenericWorker_MarkAsBusy
 C_OBJECT:C1216(GenericWorker_MarkAsBusy; $1)
@@ -115,8 +108,8 @@ C_TEXT:C284(ExportImport_ReplaceChar; $2)
 C_POINTER:C301(ExportImport_ReplaceChar; $3)
 C_LONGINT:C283(ExportImport_ReplaceChar; $4)
 
-//Export_PreCheck_FindBadChars
-C_OBJECT:C1216(Export_PreCheck_FindBadChars; $1)
+//Export_HealthCheck_Scan
+C_OBJECT:C1216(Export_HealthCheck_Scan; $1)
 
 //Field_IsEmpty
 C_BOOLEAN:C305(Field_IsEmpty; $0)
@@ -210,3 +203,32 @@ C_TEXT:C284(OnErr_Install_Handler; $1)
 
 //Export_PreCheck_RemoveBadChars
 C_OBJECT:C1216(Export_PreCheck_RemoveBadChars; $1)
+
+//ExpImpComp_GetBuildNo
+C_OBJECT:C1216(ExpImpComp_GetBuildNo; $0)
+
+//ExpImpComp_SetBuildNo
+C_TEXT:C284(ExpImpComp_SetBuildNo; $1)
+C_TEXT:C284(ExpImpComp_SetBuildNo; $2)
+C_TEXT:C284(ExpImpComp_SetBuildNo; $3)
+
+//FriendlyFieldType
+C_TEXT:C284(FriendlyFieldType; $0)
+C_LONGINT:C283(FriendlyFieldType; $1)
+
+//Dialog_SelectTables
+C_TEXT:C284(Dialog_SelectTables; $1)
+C_COLLECTION:C1488(Dialog_SelectTables; $2)
+
+//Export_SetMaxFileSizeMB
+C_LONGINT:C283(Export_SetMaxFileSizeMB; $1)
+
+//Dialog_SelectFields
+C_TEXT:C284(Dialog_SelectFields; $1)
+C_COLLECTION:C1488(Dialog_SelectFields; $2)
+
+//Export_HealthCheck_Scan
+C_TEXT:C284(Export_HealthCheck_Scan; $0)
+
+//Export_PreCheck_RemoveBadChars
+C_TEXT:C284(Export_PreCheck_RemoveBadChars; $0)

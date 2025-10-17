@@ -45,7 +45,6 @@ If (OK=1)
 				$worker_options.import_folder_platformPath:=$folder.folder("XML").platformPath
 				$worker_options.checksum_folder_platformPath:=$folder.folder("MD5 - after import").platformPath
 				$worker_options.truncation_before_import:=$options.truncation_before_import
-				GenericWorker_MarkAsBusy($worker)
 				CALL WORKER:C1389($worker.worker_name; "Worker_ImportOneTable"; $worker; $worker_options)
 				DELAY PROCESS:C323(Current process:C322; 20)  // add a slight delay, give worker a chance to startup
 			End if 
