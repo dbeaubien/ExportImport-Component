@@ -14,7 +14,6 @@ Also thinking that the component has a dialog that is shown that gives access to
 It would need a way to be able to pick tables to export and a way to mark which fields should be base64'd
 
 Could there be a way that the current settings that were user could be saved to a settings file which could then be reused in subsequent usages?
-
 */
 
 Progress QUIT(0)
