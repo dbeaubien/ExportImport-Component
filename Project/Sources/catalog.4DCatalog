@@ -15,11 +15,13 @@
 		<field name="Field_10" uuid="D4F8DE5CE54648A9B68A133A7909EA4F" type="18" never_null="true" id="10"/>
 		<field name="Field_11" uuid="E29642D97CA9481788057A98A50A31B9" type="12" never_null="true" id="11"/>
 		<field name="Field_12" uuid="6D8F8A7C69224B26893BC37FACE8F151" type="21" blob_switch_size="2147483647" never_null="true" id="12"/>
+		<field name="aField_13" uuid="D56394786EE44DAF8A93EF85A35C1C90" type="10" limiting_length="255" never_null="true" id="13"/>
+		<field name="GUID" uuid="3EA75CEF91C84104A9238D19D022DE66" type="10" unique="true" autogenerate="true" store_as_UUID="true" never_null="true" id="14"/>
 		<primary_key field_name="ID" field_uuid="B17E7E3046BD45DBAAA34E800489C7E9"/>
 		<table_extra output_form="Output">
-			<editor_table_info displayable_fields_count="14">
+			<editor_table_info displayable_fields_count="16">
 				<color red="255" green="255" blue="255" alpha="0"/>
-				<coordinates left="40" top="40" width="183.49011230469" height="342.69802856445"/>
+				<coordinates left="40" top="40" width="187.66979980469" height="397.08474731445"/>
 			</editor_table_info>
 		</table_extra>
 	</table>
@@ -31,12 +33,17 @@
 		<field name="Field_5" uuid="0C8DFAD5457743E99A3D1F6FC63248EC" type="10" never_null="true" id="5"/>
 		<primary_key field_name="ID" field_uuid="2D009D5B5A3A4C78824546317647FF5C"/>
 		<table_extra output_form="Output">
-			<editor_table_info displayable_fields_count="6">
+			<editor_table_info displayable_fields_count="7">
 				<color red="255" green="255" blue="255" alpha="0"/>
-				<coordinates left="296.607421875" top="39.769454956055" width="120" height="167.33203125"/>
+				<coordinates left="296.607421875" top="39.769454956055" width="123.9765625" height="202.375"/>
 			</editor_table_info>
 		</table_extra>
 	</table>
+	<index kind="regular" unique_keys="true" uuid="40E41EFD4CE94DE29294C1C965016750" type="1">
+		<field_ref uuid="3EA75CEF91C84104A9238D19D022DE66" name="GUID">
+			<table_ref uuid="CB616CA563154DEEB650CD138CC743C9" name="Table_1"/>
+		</field_ref>
+	</index>
 	<index kind="regular" unique_keys="true" uuid="4B6C3AA75F90452CAFC5433D62EA8FA8" type="7">
 		<field_ref uuid="2D009D5B5A3A4C78824546317647FF5C" name="ID">
 			<table_ref uuid="2060CDF3341046508AACC86E412C633A" name="Table_2"/>

@@ -1,0 +1,190 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"events": [
+		"onLoad",
+		"onClick",
+		"onUnload"
+	],
+	"windowTitle": "",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 0,
+					"left": 0,
+					"width": 480,
+					"height": 38,
+					"fill": "#808080",
+					"stroke": "#808080"
+				},
+				"dialog_title": {
+					"type": "text",
+					"top": 9,
+					"left": 8,
+					"width": 465,
+					"height": 20,
+					"stroke": "#FFFFFF",
+					"class": "default_-_large",
+					"textAlign": "left",
+					"fontWeight": "bold",
+					"text": "{dialog_title}",
+					"fontSize": 18
+				},
+				"btn_select": {
+					"type": "button",
+					"top": 668,
+					"left": 388,
+					"width": 78,
+					"height": 21,
+					"dataSource": "",
+					"action": "cancel",
+					"shortcutKey": "[Return]",
+					"text": "Close",
+					"class": "default",
+					"focusable": false,
+					"defaultButton": true,
+					"events": [],
+					"sizingY": "move"
+				},
+				"Text1": {
+					"type": "text",
+					"top": 663,
+					"left": 5,
+					"width": 259,
+					"height": 16,
+					"class": "",
+					"text": "Option click to apply to all",
+					"textAlign": "left",
+					"fontStyle": "italic",
+					"sizingY": "move"
+				}
+			}
+		},
+		{
+			"objects": {
+				"List Box": {
+					"type": "listbox",
+					"left": 0,
+					"top": 59,
+					"width": 478,
+					"height": 601,
+					"events": [
+						"onClick"
+					],
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.field_list",
+					"currentItemSource": "Form:C1466._selected_field",
+					"method": "ObjectMethods/List Box.4dm",
+					"focusable": false,
+					"hideSystemHighlight": true,
+					"scrollbarHorizontal": "hidden",
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"showHeaders": true,
+					"resizingMode": "legacy",
+					"sortable": false,
+					"columns": [
+						{
+							"header": {
+								"text": "",
+								"name": "Header1"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"dataSource": "This:C1470.is_selected",
+							"dataSourceTypeHint": "boolean",
+							"width": 36,
+							"resizable": false,
+							"textAlign": "center"
+						},
+						{
+							"header": {
+								"name": "Header2",
+								"text": "#",
+								"textAlign": "center",
+								"fontWeight": "bold"
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer2"
+							},
+							"dataSource": "\"[\"+String:C10(This:C1470.table_no; \"#000\")+\"]\"+String:C10(This:C1470.field_no; \"#000\")",
+							"dataSourceTypeHint": "text",
+							"enterable": false,
+							"resizable": false,
+							"width": 70,
+							"textAlign": "center"
+						},
+						{
+							"header": {
+								"name": "Header4",
+								"text": "[Table]Field",
+								"fontWeight": "bold"
+							},
+							"name": "Column4",
+							"footer": {
+								"name": "Footer4"
+							},
+							"enterable": false,
+							"width": 290,
+							"dataSource": "\"[\"+This:C1470.table_name+\"] \"+This:C1470.field_name"
+						},
+						{
+							"header": {
+								"name": "Header3",
+								"text": "Type",
+								"fontWeight": "bold"
+							},
+							"name": "Column3",
+							"width": 50,
+							"dataSource": "This:C1470.field_type_friendly",
+							"enterable": false,
+							"resizable": false,
+							"footer": {
+								"name": "Footer3"
+							},
+							"textAlign": "center"
+						}
+					]
+				},
+				"numFieldsSelected": {
+					"type": "text",
+					"top": 40,
+					"left": 3,
+					"width": 472,
+					"height": 16,
+					"class": "",
+					"text": "{numFieldsSelected}",
+					"textAlign": "center",
+					"fontStyle": "italic",
+					"sizingY": "fixed",
+					"sizingX": "grow"
+				}
+			}
+		}
+	],
+	"geometryStamp": 272,
+	"width": 480,
+	"height": 700,
+	"method": "method.4dm",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
+}

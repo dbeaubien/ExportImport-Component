@@ -7,3 +7,4 @@ C_COLLECTION:C1488(_OnErr_MethodStack)
 C_COLLECTION:C1488(_generic_workers)
 
 C_LONGINT:C283(Button)
+C_VARIANT:C1683(c)

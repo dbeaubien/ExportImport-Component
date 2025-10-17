@@ -193,13 +193,13 @@
 						"onClick"
 					]
 				},
-				"Button7": {
+				"btn_continue": {
 					"type": "button",
 					"top": 166,
 					"left": 318,
 					"width": 88,
 					"height": 21,
-					"dataSource": "Button",
+					"dataSource": "",
 					"action": "cancel",
 					"shortcutKey": "[Return]",
 					"text": "Continue",
@@ -293,7 +293,7 @@
 			"View 9": {}
 		}
 	},
-	"geometryStamp": 12,
+	"geometryStamp": 13,
 	"$4d": {
 		"version": "1",
 		"kind": "form"

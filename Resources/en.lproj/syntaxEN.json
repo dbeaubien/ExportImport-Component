@@ -21,6 +21,11 @@
 			],
 			"Summary": ""
 		},
+		"Export_Import_Dialog": {
+			"Syntax": "**Export_Import_Dialog**()",
+			"Params": [],
+			"Summary": ""
+		},
 		"Export_ListOfTables": {
 			"Syntax": "**Export_ListOfTables**( *num_workers* : Integer; *table_no_list* : Collection; *fields_to_base64* : Collection )->export_folder_platformPath : Text",
 			"Params": [
@@ -47,13 +52,18 @@
 			],
 			"Summary": ""
 		},
-		"Export_PreCheck_FindBadChars": {
-			"Syntax": "**Export_PreCheck_FindBadChars**( *incoming_options* : Object )",
+		"Export_HealthCheck_Scan": {
+			"Syntax": "**Export_HealthCheck_Scan**( *incoming_options* : Object )->export_folder_platformPath : Text",
 			"Params": [
 				[
 					"incoming_options",
 					"Object",
 					"->"
+				],
+				[
+					"export_folder_platformPath",
+					"Text",
+					"<-"
 				]
 			],
 			"Summary": ""
@@ -80,12 +90,161 @@
 			"Summary": ""
 		},
 		"Export_PreCheck_RemoveBadChars": {
-			"Syntax": "**Export_PreCheck_RemoveBadChars**( *incoming_options* : Object )",
+			"Syntax": "**Export_PreCheck_RemoveBadChars**( *incoming_options* : Object )->export_folder_platformPath : Text",
 			"Params": [
 				[
 					"incoming_options",
 					"Object",
 					"->"
+				],
+				[
+					"export_folder_platformPath",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"cs.ExportImport": {
+		"HealthCheckerWorker": {
+			"new()": {
+				"Syntax": "**.new**( *table_no* : Integer )",
+				"Params": [
+					[
+						"table_no",
+						"Integer",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"HealthChecker": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		}
+	},
+	"HealthCheckerWorker": {
+		"Set_Alpha_Field_Ptrs_to_Ignore_Bad_Chars()": {
+			"Syntax": "**.Set_Alpha_Field_Ptrs_to_Ignore_Bad_Chars**( *field_ptrs_to_ignore* : Collection ) : cs.ExportImport.HealthCheckerWorker",
+			"Params": [
+				[
+					"field_ptrs_to_ignore",
+					"Collection",
+					"->"
+				],
+				[
+					"",
+					"cs.ExportImport.HealthCheckerWorker",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Perform_Health_Check()": {
+			"Syntax": "**.Perform_Health_Check**()->result_messages : Collection",
+			"Params": [
+				[
+					"result_messages",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Set_Progress_Hdl()": {
+			"Syntax": "**.Set_Progress_Hdl**( *prog_hdl* : Integer ) : cs.ExportImport.HealthCheckerWorker",
+			"Params": [
+				[
+					"prog_hdl",
+					"Integer",
+					"->"
+				],
+				[
+					"",
+					"cs.ExportImport.HealthCheckerWorker",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Set_to_Remove_Bad_Chars()": {
+			"Syntax": "**.Set_to_Remove_Bad_Chars**( *do_remove* : Boolean ) : cs.ExportImport.HealthCheckerWorker",
+			"Params": [
+				[
+					"do_remove",
+					"Boolean",
+					"->"
+				],
+				[
+					"",
+					"cs.ExportImport.HealthCheckerWorker",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Set_Folder()": {
+			"Syntax": "**.Set_Folder**( *folder* : 4D.Folder ) : cs.ExportImport.HealthCheckerWorker",
+			"Params": [
+				[
+					"folder",
+					"4D.Folder",
+					"->"
+				],
+				[
+					"",
+					"cs.ExportImport.HealthCheckerWorker",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"HealthChecker": {
+		"Get_Target_Folder()": {
+			"Syntax": "**.Get_Target_Folder**()->target_folder : 4D.Folder",
+			"Params": [
+				[
+					"target_folder",
+					"4D.Folder",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Set_Alpha_Field_Ptrs_to_Ignore_Bad_Chars()": {
+			"Syntax": "**.Set_Alpha_Field_Ptrs_to_Ignore_Bad_Chars**( *field_ptrs_to_ignore* : Collection ) : cs.ExportImport.HealthChecker",
+			"Params": [
+				[
+					"field_ptrs_to_ignore",
+					"Collection",
+					"->"
+				],
+				[
+					"",
+					"cs.ExportImport.HealthChecker",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Set_Tables_to_Check()": {
+			"Syntax": "**.Set_Tables_to_Check**( *tables_to_scan* : Collection ) : cs.ExportImport.HealthChecker",
+			"Params": [
+				[
+					"tables_to_scan",
+					"Collection",
+					"->"
+				],
+				[
+					"",
+					"cs.ExportImport.HealthChecker",
+					"<-"
 				]
 			],
 			"Summary": ""
