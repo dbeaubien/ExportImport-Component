@@ -16,17 +16,9 @@ End if
 ASSERT:C1129($table_no_list.length>0; "expecting a list of table nos for $2")
 ASSERT:C1129(Value type:C1509($table_no_list[0])=Is real:K8:4; "expecting a list of table nos for $2")
 
-
-var $folder_name : Text
-$folder_name:="Table Export "\
-+Date2String(Current date:C33; "yyyy-mm-dd ")\
-+Time2String(Current time:C178; "24hh.mm.ss")
-$export_folder_platformPath:=Folder:C1567(fk data folder:K87:12; *).folder($folder_name).platformPath
-
-var $xml_folder_platformPath; $checksum_folder_platformPath : Text
-$xml_folder_platformPath:=Folder:C1567(fk data folder:K87:12; *).folder($folder_name).folder("XML").platformPath
-$checksum_folder_platformPath:=Folder:C1567(fk data folder:K87:12; *).folder($folder_name).folder("MD5").platformPath
-
+var $root_folder : 4D:C1709.Folder
+$root_folder:=cs:C1710._Utils.new().Get_Named_Working_Folder("Table Export")
+$export_folder_platformPath:=$root_folder.platformPath
 
 var $queue_list : Collection
 var $queue_action : Object
@@ -79,7 +71,7 @@ If ($queue_list.length>0)
 			: ($queue_action.action="export")
 				$options:=New object:C1471()
 				$options.table_no:=$table_no
-				$options.export_folder_platformPath:=$xml_folder_platformPath
+				$options.export_folder_platformPath:=$root_folder.folder("XML").platformPath
 				$options.next_table_sequence_number:=Get database parameter:C643(Table:C252($table_no)->; Table sequence number:K37:31)
 				$options.fields_to_base64:=$fields_to_base64
 				CALL WORKER:C1389($worker.worker_name; "Worker_ExportOneTable"; $worker; $options)
@@ -87,7 +79,7 @@ If ($queue_list.length>0)
 			: ($queue_action.action="checksum")
 				$options:=New object:C1471()
 				$options.table_no:=$table_no
-				$options.export_folder_platformPath:=$checksum_folder_platformPath
+				$options.export_folder_platformPath:=$root_folder.folder("MD5").platformPath
 				$options.records_per_block:=$queue_action.records_per_MD5_block
 				CALL WORKER:C1389($worker.worker_name; "Worker_ChecksumOneTable"; $worker; $options)
 				
@@ -102,5 +94,3 @@ If ($queue_list.length>0)
 	GenericWorker_WaitForAllWaiting()
 	GenericWorker_KillAll()
 End if 
-
-$0:=$export_folder_platformPath

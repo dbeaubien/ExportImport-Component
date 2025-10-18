@@ -2,10 +2,12 @@
 
 property _tables_to_scan : Collection
 property _field_ptrs_to_ignore : Collection
+property _utils : cs:C1710._Utils
 
 Class constructor
 	This:C1470._tables_to_scan:=[]
 	This:C1470._field_ptrs_to_ignore:=[]
+	This:C1470._utils:=cs:C1710._Utils.new()
 	
 	
 	//Mark:-************ PUBLIC FUNCTIONS
@@ -33,13 +35,7 @@ Function Set_Alpha_Field_Ptrs_to_Ignore_Bad_Chars($field_ptrs_to_ignore : Collec
 	
 	
 Function Get_Target_Folder()->$target_folder : 4D:C1709.Folder
-	var $folder_name : Text
-	$folder_name:="_Health Check Scan "\
-		+Date2String(Current date:C33; "yyyy-mm-dd ")\
-		+Time2String(Current time:C178; "24hh.mm.ss")
-	
-	$target_folder:=Folder:C1567(fk data folder:K87:12; *).folder($folder_name)
-	$target_folder.create()
+	$target_folder:=This:C1470._utils.Get_Named_Working_Folder("Health Check Scan")
 	
 	
 	
