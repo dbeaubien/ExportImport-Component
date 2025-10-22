@@ -12,11 +12,14 @@ Function Field_Map_For_Table($table_name : Text)->$field_map : Object
 	$field_map:={}
 	$field_map.table_name:=$table_name
 	$field_map.table_no:=ds:C1482[$table_name].getInfo().tableNumber
+	$field_map.num_records:=ds:C1482[$table_name].getCount()
+	$field_map.num_fields:=0
 	$field_map.primaryKey:=ds:C1482[$table_name].getInfo().primaryKey
 	
 	var $field_no; $type : Integer
 	For ($field_no; 1; Get last field number:C255($field_map.table_no))
 		If (Is field number valid:C1000($field_map.table_no; $field_no))
+			$field_map.num_fields+=1
 			GET FIELD PROPERTIES:C258($field_map.table_no; $field_no; $type)
 			$field_map["f"+String:C10($field_no)]:={\
 				name: Field name:C257($field_map.table_no; $field_no); \

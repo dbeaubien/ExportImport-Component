@@ -107,6 +107,33 @@
 		}
 	},
 	"cs.ExportImport": {
+		"Table_Exporter": {
+			"new()": {
+				"Syntax": "**.new**( *target_folder* : 4D.Folder )",
+				"Params": [
+					[
+						"target_folder",
+						"4D.Folder",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"_Utils": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"HealthChecker": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
 		"HealthCheckerWorker": {
 			"new()": {
 				"Syntax": "**.new**( *table_no* : Integer )",
@@ -120,12 +147,115 @@
 				"Summary": ""
 			}
 		},
-		"HealthChecker": {
+		"Record_Encoder_Decoder": {
 			"new()": {
 				"Syntax": "**.new**()",
 				"Params": [],
 				"Summary": ""
 			}
+		}
+	},
+	"Table_Exporter": {
+		"Set_File_Max_MB_Size()": {
+			"Syntax": "**.Set_File_Max_MB_Size**( *max_mb* : Integer )",
+			"Params": [
+				[
+					"max_mb",
+					"Integer",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"Export_All_Records()": {
+			"Syntax": "**.Export_All_Records**( *table_no* : Integer ) : Object",
+			"Params": [
+				[
+					"table_no",
+					"Integer",
+					"->"
+				],
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Get_Target_Folder()": {
+			"Syntax": "**.Get_Target_Folder**() : 4D.Folder",
+			"Params": [
+				[
+					"",
+					"4D.Folder",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"_Utils": {
+		"Get_Named_Working_Folder()": {
+			"Syntax": "**.Get_Named_Working_Folder**( *folder_name_root* : Text )->folder : 4D.Folder",
+			"Params": [
+				[
+					"folder_name_root",
+					"Text",
+					"->"
+				],
+				[
+					"folder",
+					"4D.Folder",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"HealthChecker": {
+		"Get_Target_Folder()": {
+			"Syntax": "**.Get_Target_Folder**()->target_folder : 4D.Folder",
+			"Params": [
+				[
+					"target_folder",
+					"4D.Folder",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Set_Alpha_Field_Ptrs_to_Ignore_Bad_Chars()": {
+			"Syntax": "**.Set_Alpha_Field_Ptrs_to_Ignore_Bad_Chars**( *field_ptrs_to_ignore* : Collection ) : cs.ExportImport.HealthChecker",
+			"Params": [
+				[
+					"field_ptrs_to_ignore",
+					"Collection",
+					"->"
+				],
+				[
+					"",
+					"cs.ExportImport.HealthChecker",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Set_Tables_to_Check()": {
+			"Syntax": "**.Set_Tables_to_Check**( *tables_to_scan* : Collection ) : cs.ExportImport.HealthChecker",
+			"Params": [
+				[
+					"tables_to_scan",
+					"Collection",
+					"->"
+				],
+				[
+					"",
+					"cs.ExportImport.HealthChecker",
+					"<-"
+				]
+			],
+			"Summary": ""
 		}
 	},
 	"HealthCheckerWorker": {
@@ -205,45 +335,60 @@
 			"Summary": ""
 		}
 	},
-	"HealthChecker": {
-		"Get_Target_Folder()": {
-			"Syntax": "**.Get_Target_Folder**()->target_folder : 4D.Folder",
+	"Record_Encoder_Decoder": {
+		"Record_to_JSON()": {
+			"Syntax": "**.Record_to_JSON**( *field_map* : Object; *entity* : 4D.Entity )->record_json : Object",
 			"Params": [
 				[
-					"target_folder",
-					"4D.Folder",
+					"field_map",
+					"Object",
+					"->"
+				],
+				[
+					"entity",
+					"4D.Entity",
+					"->"
+				],
+				[
+					"record_json",
+					"Object",
 					"<-"
 				]
 			],
 			"Summary": ""
 		},
-		"Set_Alpha_Field_Ptrs_to_Ignore_Bad_Chars()": {
-			"Syntax": "**.Set_Alpha_Field_Ptrs_to_Ignore_Bad_Chars**( *field_ptrs_to_ignore* : Collection ) : cs.ExportImport.HealthChecker",
+		"JSON_to_Record()": {
+			"Syntax": "**.JSON_to_Record**( *field_map* : Object; *record_json* : Text )->entity : 4D.Entity",
 			"Params": [
 				[
-					"field_ptrs_to_ignore",
-					"Collection",
+					"field_map",
+					"Object",
 					"->"
 				],
 				[
-					"",
-					"cs.ExportImport.HealthChecker",
+					"record_json",
+					"Text",
+					"->"
+				],
+				[
+					"entity",
+					"4D.Entity",
 					"<-"
 				]
 			],
 			"Summary": ""
 		},
-		"Set_Tables_to_Check()": {
-			"Syntax": "**.Set_Tables_to_Check**( *tables_to_scan* : Collection ) : cs.ExportImport.HealthChecker",
+		"Field_Map_For_Table()": {
+			"Syntax": "**.Field_Map_For_Table**( *table_name* : Text )->field_map : Object",
 			"Params": [
 				[
-					"tables_to_scan",
-					"Collection",
+					"table_name",
+					"Text",
 					"->"
 				],
 				[
-					"",
-					"cs.ExportImport.HealthChecker",
+					"field_map",
+					"Object",
 					"<-"
 				]
 			],
