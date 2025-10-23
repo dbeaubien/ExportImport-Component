@@ -1,17 +1,12 @@
 //%attributes = {"invisible":true,"shared":true,"preemptive":"incapable"}
-// Export_ListOfTables (num_workers; table_no_list{; fields_to_base64})
+// Export_ListOfTables (num_workers; table_no_list)
 //
 #DECLARE($num_workers : Integer\
-; $table_no_list : Collection\
-; $fields_to_base64 : Collection)->$export_folder_platformPath : Text
+; $table_no_list : Collection)->$export_folder_platformPath : Text
 // ----------------------------------------------------
-ASSERT:C1129(Count parameters:C259>=2)
-ASSERT:C1129(Count parameters:C259<=3)
+ASSERT:C1129(Count parameters:C259=2)
 If ($num_workers<=0)
 	$num_workers:=3
-End if 
-If ($fields_to_base64=Null:C1517)
-	$fields_to_base64:=New collection:C1472()
 End if 
 ASSERT:C1129($table_no_list.length>0; "expecting a list of table nos for $2")
 ASSERT:C1129(Value type:C1509($table_no_list[0])=Is real:K8:4; "expecting a list of table nos for $2")
@@ -71,9 +66,8 @@ If ($queue_list.length>0)
 			: ($queue_action.action="export")
 				$options:=New object:C1471()
 				$options.table_no:=$table_no
-				$options.export_folder_platformPath:=$root_folder.folder("XML").platformPath
+				$options.export_folder_platformPath:=$root_folder.folder("Data").platformPath
 				$options.next_table_sequence_number:=Get database parameter:C643(Table:C252($table_no)->; Table sequence number:K37:31)
-				$options.fields_to_base64:=$fields_to_base64
 				CALL WORKER:C1389($worker.worker_name; "Worker_ExportOneTable"; $worker; $options)
 				
 			: ($queue_action.action="checksum")

@@ -23,4 +23,3 @@ $window_ref:=Open form window:C675("Main"; Plain form window:K39:10; *)
 BRING TO FRONT:C326($window_ref)
 DIALOG:C40("Main"; $form_data)
 CLOSE WINDOW:C154
-

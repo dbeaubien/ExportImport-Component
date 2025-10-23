@@ -1,20 +1,36 @@
 //%attributes = {}
-// Task 9073 - Export/Import code for datafile rebuilds improvements
+// Export_Import_Dialog
+
+var $target_folder : 4D:C1709.Folder
+$target_folder:=cs:C1710._Utils.new().Get_Named_Working_Folder("Table Export")
+
+var $exporter : cs:C1710.Table_Exporter
+$exporter:=cs:C1710.Table_Exporter.new($target_folder.folder("Data"))
+$exporter.Set_File_Max_MB_Size(10)
+
+var $progHdl : Integer
+var $manifest : Object
+$progHdl:=Progress New()
+$manifest:={exports: []}
+$manifest.exports.push($exporter.Export_All_Records(Table:C252(->[Table_1:1]); $progHdl))
+$manifest.exports.push($exporter.Export_All_Records(Table:C252(->[Table_2:2]); $progHdl))
+Progress QUIT($progHdl)
+TEXT TO DOCUMENT:C1237($target_folder.file("Export Manifest.json").platformPath; JSON Stringify:C1217($manifest; *); "utf-8")
+SHOW ON DISK:C922($target_folder.platformPath)
+
+
+BEEP:C151
+ABORT:C156
+
+// TODO: things to do
 /*
-Make a few changes/improvements to the export/import process we follow to rebuild datafiles:
-- In scan for bad characters, add a check to detect if PK fields are null, 0 or an empty GUID.
-- Work out how to add a check for duplicate values on fields marked as unique.
-- Dump out record counts into a file as part of the export and post import.
-- Could the import process utilized the export's table count file to validate the #s are part of the import?
-- Add a check for fields where NULLs don't map to blank.
+- export & import the "next sequence #" for each table
+  put at same level as the "Data" folder
 
-Perhaps the "bad character" scan is turned into a "health check scan".
-
-Also thinking that the component has a dialog that is shown that gives access to all these tools.
-It would need a way to be able to pick tables to export and a way to mark which fields should be base64'd
 
 Could there be a way that the current settings that were user could be saved to a settings file which could then be reused in subsequent usages?
 */
+
 
 Progress QUIT(0)
 Log_OpenDisplayWindow
@@ -76,9 +92,7 @@ End if
 
 If (False:C215)  // ## Export all tables
 	var $export_folder_platformPath : Text
-	var $fields_to_base64 : Collection
-	$fields_to_base64:=New collection:C1472(->[Table_2:2]Field_2:2; ->[Table_2:2]Field_5:5)
-	$export_folder_platformPath:=Export_AllTables(4; $fields_to_base64)
+	$export_folder_platformPath:=Export_AllTables(4)
 	SHOW ON DISK:C922($export_folder_platformPath)
 End if 
 

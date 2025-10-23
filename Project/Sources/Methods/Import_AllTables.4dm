@@ -20,11 +20,11 @@ GenericWorker_init("Table Importer"; $num_workers)
 
 Trigger_DISABLE
 
-$importFromFolder_platformPath:=Select folder:C670("Select Folder that contains XML Export folder"; 1234)
+$importFromFolder_platformPath:=Select folder:C670("Select Folder that contains Data Export folder"; 1234)
 If (OK=1)
 	var $folder : 4D:C1709.Folder
 	$folder:=Folder:C1567($importFromFolder_platformPath; fk platform path:K87:2)
-	If ($folder.folders().query("name=:1"; "XML").length=1)
+	If ($folder.folders().query("name=:1"; "Data").length=1)
 		
 		If ($folder.folder("MD5 - after import").exists)
 			$folder.folder("MD5 - after import").delete(Delete with contents:K24:24)
@@ -42,7 +42,7 @@ If (OK=1)
 				
 				$worker_options:=New object:C1471()
 				$worker_options.table_no:=$table_no
-				$worker_options.import_folder_platformPath:=$folder.folder("XML").platformPath
+				$worker_options.import_folder_platformPath:=$folder.folder("Data").platformPath
 				$worker_options.checksum_folder_platformPath:=$folder.folder("MD5 - after import").platformPath
 				$worker_options.truncation_before_import:=$options.truncation_before_import
 				CALL WORKER:C1389($worker.worker_name; "Worker_ImportOneTable"; $worker; $worker_options)

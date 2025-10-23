@@ -30,8 +30,8 @@ Function Get_Target_Folder() : 4D:C1709.Folder
 	return This:C1470._target_folder
 	
 	
-Function Export_All_Records($table_no : Integer) : Object
-	ASSERT:C1129(Count parameters:C259=1)
+Function Export_All_Records($table_no : Integer; $progHdl : Integer) : Object
+	ASSERT:C1129((Count parameters:C259=1) | (Count parameters:C259=2))
 	ASSERT:C1129(Is table number valid:C999($table_no))
 	
 	This:C1470._init($table_no)
@@ -39,9 +39,18 @@ Function Export_All_Records($table_no : Integer) : Object
 	
 	var $entity : 4D:C1709.Entity
 	var $encoder : cs:C1710.Record_Encoder_Decoder
+	var $ms; $num_records_in_table; $num_records_exported : Integer
 	$encoder:=cs:C1710.Record_Encoder_Decoder.new()
+	$num_records_in_table:=ds:C1482[This:C1470._result.table_name].getCount()
+	Progress_Set_Title_ALT($progHdl; "Exporting ["+This:C1470._result.table_name+"] records...")
 	This:C1470._open_new_export_file()
 	For each ($entity; ds:C1482[This:C1470._result.table_name].all())
+		$num_records_exported+=1
+		If ($ms<Milliseconds:C459)
+			Progress_Set_Progress_ALT($progHdl; $num_records_exported/$num_records_in_table; "exported "+String:C10($num_records_exported; "###,###,###,##0")+" of "+String:C10($num_records_in_table; "###,###,###,##0"))
+			$ms:=Milliseconds:C459+300  // next update
+		End if 
+		
 		This:C1470._open_new_export_file_if_needed()
 		This:C1470._result.num_records_exported+=1
 		This:C1470._append_to_buffer($encoder.Record_to_JSON(This:C1470._field_mapping; $entity))

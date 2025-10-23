@@ -16,5 +16,7 @@ If (Count parameters:C259>=3)
 	$subtitle:=$3
 End if 
 
-CALL WORKER:C1389("Worker_NTS_ExportImport"; "Worker_NTS_Progress_Set_Progres"\
-; $progHdl; $progress_ratio; $subtitle)
+If ($progHdl>0)
+	CALL WORKER:C1389("Worker_NTS_ExportImport"; "Worker_NTS_Progress_Set_Progres"\
+		; $progHdl; $progress_ratio; $subtitle)
+End if 
