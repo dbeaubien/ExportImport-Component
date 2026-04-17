@@ -1,7 +1,7 @@
 // cs.Utils
 
 Class constructor
-	This:C1470.version:=1
+	
 	
 	
 	//Mark:-************ PUBLIC FUNCTIONS

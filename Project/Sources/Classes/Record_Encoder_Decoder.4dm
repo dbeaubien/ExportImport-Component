@@ -2,7 +2,6 @@
 
 property _blob_compress_level : Integer
 Class constructor
-	This:C1470.version:=1
 	This:C1470._blob_compress_level:=GZIP best compression mode:K22:18
 	
 	
@@ -17,7 +16,7 @@ Function Field_Map_For_Table($table_name : Text)->$field_map : Object
 	$field_map.primaryKey:=ds:C1482[$table_name].getInfo().primaryKey
 	
 	var $field_no; $type : Integer
-	For ($field_no; 1; Get last field number:C255($field_map.table_no))
+	For ($field_no; 1; Last field number:C255($field_map.table_no))
 		If (Is field number valid:C1000($field_map.table_no; $field_no))
 			$field_map.num_fields+=1
 			GET FIELD PROPERTIES:C258($field_map.table_no; $field_no; $type)
@@ -36,7 +35,7 @@ Function Record_to_JSON($field_map : Object; $entity : 4D:C1709.Entity)->$record
 	
 	var $field_no : Integer
 	var $name; $map_name; $encoded : Text
-	For ($field_no; 1; Get last field number:C255($field_map.table_no))
+	For ($field_no; 1; Last field number:C255($field_map.table_no))
 		If (Is field number valid:C1000($field_map.table_no; $field_no))
 			$name:=Field name:C257($field_map.table_no; $field_no)
 			$map_name:="f"+String:C10($field_no)

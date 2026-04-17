@@ -22,8 +22,14 @@
 			"Summary": ""
 		},
 		"Export_Import_Dialog": {
-			"Syntax": "**Export_Import_Dialog**()",
-			"Params": [],
+			"Syntax": "**Export_Import_Dialog**() : Variant",
+			"Params": [
+				[
+					"",
+					"Variant",
+					"<-"
+				]
+			],
 			"Summary": ""
 		},
 		"Export_ListOfTables": {
@@ -120,6 +126,20 @@
 				"Summary": ""
 			}
 		},
+		"HealthChecker": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"Record_Encoder_Decoder": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
 		"_Utils": {
 			"new()": {
 				"Syntax": "**.new**()",
@@ -127,10 +147,26 @@
 				"Summary": ""
 			}
 		},
-		"HealthChecker": {
+		"Table_Importer": {
 			"new()": {
-				"Syntax": "**.new**()",
-				"Params": [],
+				"Syntax": "**.new**( *table_no* : Integer; *mapping_file* : 4D.File; *source_file_list* : Collection )",
+				"Params": [
+					[
+						"table_no",
+						"Integer",
+						"->"
+					],
+					[
+						"mapping_file",
+						"4D.File",
+						"->"
+					],
+					[
+						"source_file_list",
+						"Collection",
+						"->"
+					]
+				],
 				"Summary": ""
 			}
 		},
@@ -146,32 +182,30 @@
 				],
 				"Summary": ""
 			}
-		},
-		"Record_Encoder_Decoder": {
-			"new()": {
-				"Syntax": "**.new**()",
-				"Params": [],
-				"Summary": ""
-			}
 		}
 	},
 	"Table_Exporter": {
-		"Set_File_Max_MB_Size()": {
-			"Syntax": "**.Set_File_Max_MB_Size**( *max_mb* : Integer )",
+		"Get_Target_Folder()": {
+			"Syntax": "**.Get_Target_Folder**() : 4D.Folder",
 			"Params": [
 				[
-					"max_mb",
-					"Integer",
-					"->"
+					"",
+					"4D.Folder",
+					"<-"
 				]
 			],
 			"Summary": ""
 		},
 		"Export_All_Records()": {
-			"Syntax": "**.Export_All_Records**( *table_no* : Integer ) : Object",
+			"Syntax": "**.Export_All_Records**( *table_no* : Integer; *progHdl* : Integer ) : Object",
 			"Params": [
 				[
 					"table_no",
+					"Integer",
+					"->"
+				],
+				[
+					"progHdl",
 					"Integer",
 					"->"
 				],
@@ -183,31 +217,13 @@
 			],
 			"Summary": ""
 		},
-		"Get_Target_Folder()": {
-			"Syntax": "**.Get_Target_Folder**() : 4D.Folder",
+		"Set_File_Max_MB_Size()": {
+			"Syntax": "**.Set_File_Max_MB_Size**( *max_mb* : Integer )",
 			"Params": [
 				[
-					"",
-					"4D.Folder",
-					"<-"
-				]
-			],
-			"Summary": ""
-		}
-	},
-	"_Utils": {
-		"Get_Named_Working_Folder()": {
-			"Syntax": "**.Get_Named_Working_Folder**( *folder_name_root* : Text )->folder : 4D.Folder",
-			"Params": [
-				[
-					"folder_name_root",
-					"Text",
+					"max_mb",
+					"Integer",
 					"->"
-				],
-				[
-					"folder",
-					"4D.Folder",
-					"<-"
 				]
 			],
 			"Summary": ""
@@ -258,84 +274,28 @@
 			"Summary": ""
 		}
 	},
-	"HealthCheckerWorker": {
-		"Set_Alpha_Field_Ptrs_to_Ignore_Bad_Chars()": {
-			"Syntax": "**.Set_Alpha_Field_Ptrs_to_Ignore_Bad_Chars**( *field_ptrs_to_ignore* : Collection ) : cs.ExportImport.HealthCheckerWorker",
-			"Params": [
-				[
-					"field_ptrs_to_ignore",
-					"Collection",
-					"->"
-				],
-				[
-					"",
-					"cs.ExportImport.HealthCheckerWorker",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"Perform_Health_Check()": {
-			"Syntax": "**.Perform_Health_Check**()->result_messages : Collection",
-			"Params": [
-				[
-					"result_messages",
-					"Collection",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"Set_Progress_Hdl()": {
-			"Syntax": "**.Set_Progress_Hdl**( *prog_hdl* : Integer ) : cs.ExportImport.HealthCheckerWorker",
-			"Params": [
-				[
-					"prog_hdl",
-					"Integer",
-					"->"
-				],
-				[
-					"",
-					"cs.ExportImport.HealthCheckerWorker",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"Set_to_Remove_Bad_Chars()": {
-			"Syntax": "**.Set_to_Remove_Bad_Chars**( *do_remove* : Boolean ) : cs.ExportImport.HealthCheckerWorker",
-			"Params": [
-				[
-					"do_remove",
-					"Boolean",
-					"->"
-				],
-				[
-					"",
-					"cs.ExportImport.HealthCheckerWorker",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"Set_Folder()": {
-			"Syntax": "**.Set_Folder**( *folder* : 4D.Folder ) : cs.ExportImport.HealthCheckerWorker",
-			"Params": [
-				[
-					"folder",
-					"4D.Folder",
-					"->"
-				],
-				[
-					"",
-					"cs.ExportImport.HealthCheckerWorker",
-					"<-"
-				]
-			],
-			"Summary": ""
-		}
-	},
 	"Record_Encoder_Decoder": {
+		"JSON_to_New_Record()": {
+			"Syntax": "**.JSON_to_New_Record**( *field_map* : Object; *record_data* : Object )->entity : 4D.Entity",
+			"Params": [
+				[
+					"field_map",
+					"Object",
+					"->"
+				],
+				[
+					"record_data",
+					"Object",
+					"->"
+				],
+				[
+					"entity",
+					"4D.Entity",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
 		"Record_to_JSON()": {
 			"Syntax": "**.Record_to_JSON**( *field_map* : Object; *entity* : 4D.Entity )->record_json : Object",
 			"Params": [
@@ -357,27 +317,6 @@
 			],
 			"Summary": ""
 		},
-		"JSON_to_Record()": {
-			"Syntax": "**.JSON_to_Record**( *field_map* : Object; *record_json* : Text )->entity : 4D.Entity",
-			"Params": [
-				[
-					"field_map",
-					"Object",
-					"->"
-				],
-				[
-					"record_json",
-					"Text",
-					"->"
-				],
-				[
-					"entity",
-					"4D.Entity",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
 		"Field_Map_For_Table()": {
 			"Syntax": "**.Field_Map_For_Table**( *table_name* : Text )->field_map : Object",
 			"Params": [
@@ -389,6 +328,135 @@
 				[
 					"field_map",
 					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"_Utils": {
+		"Get_Named_Working_Folder()": {
+			"Syntax": "**.Get_Named_Working_Folder**( *folder_name_root* : Text )->folder : 4D.Folder",
+			"Params": [
+				[
+					"folder_name_root",
+					"Text",
+					"->"
+				],
+				[
+					"folder",
+					"4D.Folder",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"Table_Importer": {
+		"Use_Progress_Dialog()": {
+			"Syntax": "**.Use_Progress_Dialog**( *progress_dialog_id* : Integer ) : cs.ExportImport.Table_Importer",
+			"Params": [
+				[
+					"progress_dialog_id",
+					"Integer",
+					"->"
+				],
+				[
+					"",
+					"cs.ExportImport.Table_Importer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Import_Records()": {
+			"Syntax": "**.Import_Records**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"Truncate_Before_Import()": {
+			"Syntax": "**.Truncate_Before_Import**() : cs.ExportImport.Table_Importer",
+			"Params": [
+				[
+					"",
+					"cs.ExportImport.Table_Importer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"HealthCheckerWorker": {
+		"Perform_Health_Check()": {
+			"Syntax": "**.Perform_Health_Check**()->result_messages : Collection",
+			"Params": [
+				[
+					"result_messages",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Set_to_Remove_Bad_Chars()": {
+			"Syntax": "**.Set_to_Remove_Bad_Chars**( *do_remove* : Boolean ) : cs.ExportImport.HealthCheckerWorker",
+			"Params": [
+				[
+					"do_remove",
+					"Boolean",
+					"->"
+				],
+				[
+					"",
+					"cs.ExportImport.HealthCheckerWorker",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Set_Alpha_Field_Ptrs_to_Ignore_Bad_Chars()": {
+			"Syntax": "**.Set_Alpha_Field_Ptrs_to_Ignore_Bad_Chars**( *field_ptrs_to_ignore* : Collection ) : cs.ExportImport.HealthCheckerWorker",
+			"Params": [
+				[
+					"field_ptrs_to_ignore",
+					"Collection",
+					"->"
+				],
+				[
+					"",
+					"cs.ExportImport.HealthCheckerWorker",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Set_Progress_Hdl()": {
+			"Syntax": "**.Set_Progress_Hdl**( *prog_hdl* : Integer ) : cs.ExportImport.HealthCheckerWorker",
+			"Params": [
+				[
+					"prog_hdl",
+					"Integer",
+					"->"
+				],
+				[
+					"",
+					"cs.ExportImport.HealthCheckerWorker",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Set_Folder()": {
+			"Syntax": "**.Set_Folder**( *folder* : 4D.Folder ) : cs.ExportImport.HealthCheckerWorker",
+			"Params": [
+				[
+					"folder",
+					"4D.Folder",
+					"->"
+				],
+				[
+					"",
+					"cs.ExportImport.HealthCheckerWorker",
 					"<-"
 				]
 			],

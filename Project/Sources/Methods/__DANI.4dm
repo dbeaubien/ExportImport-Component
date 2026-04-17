@@ -43,7 +43,7 @@ If (True:C214)
 		.Truncate_Before_Import()\
 		.Import_Records()
 	
-	var $num_records_in_table : Integer
+	var $num_records_in_table; $records_per_block : Integer
 	Case of 
 		: ($num_records_in_table>100000)
 			$records_per_block:=1000
@@ -75,7 +75,7 @@ If (False:C215)
 	$exporter:=cs:C1710.Table_Exporter.new($target_folder.folder("Data"))
 	$exporter.Set_File_Max_MB_Size(10)
 	
-	var $progress_dialog_id : Integer
+	
 	var $manifest : Object
 	$progress_dialog_id:=Progress New()
 	$manifest:={exports: []}
@@ -159,17 +159,14 @@ If (False:C215)
 End if 
 
 If (False:C215)  // ## Export all tables
-	var $export_folder_platformPath : Text
 	$export_folder_platformPath:=Export_AllTables(4)
 	SHOW ON DISK:C922($export_folder_platformPath)
 End if 
 
 If (False:C215)  // ## Import exported data
-	var $options : Object
 	$options:={}
 	$options.truncation_before_import:=False:C215  // default
 	
-	var $importFromFolder_platformPath : Text
 	$importFromFolder_platformPath:=Import_AllTables(4; $options)
 	SHOW ON DISK:C922($importFromFolder_platformPath)
 End if 

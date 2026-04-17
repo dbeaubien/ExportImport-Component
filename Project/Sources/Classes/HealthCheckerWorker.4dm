@@ -1,5 +1,7 @@
 // cs.HealthCheckerWorker
 
+property _table_name : Text
+property _table_ptr : Pointer
 property _folder : 4D:C1709.Folder
 property _table_no : Integer
 property _prog_hdl : Integer
@@ -113,7 +115,6 @@ Function Perform_Health_Check()->$result_messages : Collection
 			; "Checking fields uniqueness..."\
 			; -1; "")
 		
-		var $distinct_values : Collection
 		For each ($field_ptr; $scannable_fields.unique_fields)
 			$distinct_values:=ds:C1482[This:C1470._table_name].all().distinct(Field name:C257($field_ptr))
 			If ($distinct_values.length#Records in selection:C76($table_ptr->))
@@ -258,7 +259,7 @@ Function _get_scannable_fields()->$scannable_fields : Object
 	var $field_info : Object
 	var $field_no; $type; $length : Integer
 	var $isIndexed; $isUnique : Boolean
-	For ($field_no; 1; Get last field number:C255(This:C1470._table_no))
+	For ($field_no; 1; Last field number:C255(This:C1470._table_no))
 		If (Is field number valid:C1000(This:C1470._table_no; $field_no))
 			$field_ptr:=Field:C253(This:C1470._table_no; $field_no)
 			$type:=Type:C295($field_ptr->)

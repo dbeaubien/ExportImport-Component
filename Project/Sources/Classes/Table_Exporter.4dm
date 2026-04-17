@@ -1,5 +1,6 @@
 // cs.Table_Exporter
 
+property _max_bytes_in_file : Integer
 property _result : Object
 property _encoder : cs:C1710.Record_Encoder_Decoder
 property _target_folder : 4D:C1709.Folder
