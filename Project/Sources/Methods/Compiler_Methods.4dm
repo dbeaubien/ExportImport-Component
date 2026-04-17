@@ -1,6 +1,10 @@
 //%attributes = {"invisible":true}
 
 
+//FriendlyFieldType
+C_TEXT:C284(FriendlyFieldType; $0)
+C_LONGINT:C283(FriendlyFieldType; $1)
+
 //File_DeriveFileTypeFromName
 C_TEXT:C284(File_DeriveFileTypeFromName; $0)
 C_TEXT:C284(File_DeriveFileTypeFromName; $1)
@@ -76,12 +80,12 @@ C_LONGINT:C283(Worker_NTS_SetDatabaseParameter; $2)
 C_OBJECT:C1216(Worker_ChecksumOneTable; $1)
 C_OBJECT:C1216(Worker_ChecksumOneTable; $2)
 
-//Worker_HealthCheck_OneTable
-C_OBJECT:C1216(Worker_HealthCheck_OneTable; $1)
-C_OBJECT:C1216(Worker_HealthCheck_OneTable; $2)
-
 //GenericWorker_MarkAsBusy
 C_OBJECT:C1216(GenericWorker_MarkAsBusy; $1)
+
+//Export_HealthCheck_Scan
+C_TEXT:C284(Export_HealthCheck_Scan; $0)
+C_OBJECT:C1216(Export_HealthCheck_Scan; $1)
 
 //Table_GenerateChecksumFile
 C_TEXT:C284(Table_GenerateChecksumFile; $0)
@@ -89,6 +93,10 @@ C_POINTER:C301(Table_GenerateChecksumFile; $1)
 C_LONGINT:C283(Table_GenerateChecksumFile; $2)
 C_TEXT:C284(Table_GenerateChecksumFile; $3)
 C_LONGINT:C283(Table_GenerateChecksumFile; $4)
+
+//Dialog_SelectTables
+C_TEXT:C284(Dialog_SelectTables; $1)
+C_COLLECTION:C1488(Dialog_SelectTables; $2)
 
 //Progress_Set_Progress_ALT
 C_LONGINT:C283(Progress_Set_Progress_ALT; $1)
@@ -107,9 +115,6 @@ C_TEXT:C284(ExportImport_ReplaceChar; $1)
 C_TEXT:C284(ExportImport_ReplaceChar; $2)
 C_POINTER:C301(ExportImport_ReplaceChar; $3)
 C_LONGINT:C283(ExportImport_ReplaceChar; $4)
-
-//Export_HealthCheck_Scan
-C_OBJECT:C1216(Export_HealthCheck_Scan; $1)
 
 //Field_IsEmpty
 C_BOOLEAN:C305(Field_IsEmpty; $0)
@@ -162,6 +167,12 @@ C_LONGINT:C283(Import_OneTable; $4)
 C_COLLECTION:C1488(STR_GetListOfBadCharacters; $0)
 C_TEXT:C284(STR_GetListOfBadCharacters; $1)
 
+//ExpImpComp_GetBuildNo
+C_OBJECT:C1216(ExpImpComp_GetBuildNo; $0)
+
+//Export_SetMaxFileSizeMB
+C_LONGINT:C283(Export_SetMaxFileSizeMB; $1)
+
 //Field_ExportToXmlFile
 C_TEXT:C284(Field_ExportToXmlFile; $0)
 C_TIME:C306(Field_ExportToXmlFile; $1)
@@ -191,6 +202,11 @@ C_OBJECT:C1216(Worker_ImportOneTable; $2)
 C_TEXT:C284(Record_GetChecksum; $0)
 C_POINTER:C301(Record_GetChecksum; $1)
 
+//ExpImpComp_SetBuildNo
+C_TEXT:C284(ExpImpComp_SetBuildNo; $1)
+C_TEXT:C284(ExpImpComp_SetBuildNo; $2)
+C_TEXT:C284(ExpImpComp_SetBuildNo; $3)
+
 //Table_Journaling_DISABLE
 C_POINTER:C301(Table_Journaling_DISABLE; $1)
 
@@ -201,34 +217,14 @@ C_TEXT:C284(File_GetExtension; $1)
 //OnErr_Install_Handler
 C_TEXT:C284(OnErr_Install_Handler; $1)
 
+//Worker_HealthCheck_OneTable
+C_OBJECT:C1216(Worker_HealthCheck_OneTable; $1)
+C_OBJECT:C1216(Worker_HealthCheck_OneTable; $2)
+
 //Export_PreCheck_RemoveBadChars
+C_TEXT:C284(Export_PreCheck_RemoveBadChars; $0)
 C_OBJECT:C1216(Export_PreCheck_RemoveBadChars; $1)
-
-//ExpImpComp_GetBuildNo
-C_OBJECT:C1216(ExpImpComp_GetBuildNo; $0)
-
-//ExpImpComp_SetBuildNo
-C_TEXT:C284(ExpImpComp_SetBuildNo; $1)
-C_TEXT:C284(ExpImpComp_SetBuildNo; $2)
-C_TEXT:C284(ExpImpComp_SetBuildNo; $3)
-
-//FriendlyFieldType
-C_TEXT:C284(FriendlyFieldType; $0)
-C_LONGINT:C283(FriendlyFieldType; $1)
-
-//Dialog_SelectTables
-C_TEXT:C284(Dialog_SelectTables; $1)
-C_COLLECTION:C1488(Dialog_SelectTables; $2)
-
-//Export_SetMaxFileSizeMB
-C_LONGINT:C283(Export_SetMaxFileSizeMB; $1)
 
 //Dialog_SelectFields
 C_TEXT:C284(Dialog_SelectFields; $1)
 C_COLLECTION:C1488(Dialog_SelectFields; $2)
-
-//Export_HealthCheck_Scan
-C_TEXT:C284(Export_HealthCheck_Scan; $0)
-
-//Export_PreCheck_RemoveBadChars
-C_TEXT:C284(Export_PreCheck_RemoveBadChars; $0)

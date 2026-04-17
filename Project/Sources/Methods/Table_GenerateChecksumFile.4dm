@@ -13,7 +13,6 @@
 ; $progHdl : Integer)->$pathToChecksumFile : Text
 // ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259=4)
-$pathToChecksumFile:=""
 
 // Get the table from our unique field ptr
 var $table_no : Integer
@@ -36,25 +35,20 @@ ORDER BY:C49($tablePtr->; $uniqueFieldPtr->; >)
 // Loop through every record gathering the information to build
 // a checksum for each block and a final checksum for the entire
 // table.
-C_TEXT:C284($rowChecksum; $firstRecordUniqueFldValue; $vt_tableRAW; $vt_rowRAW)
-C_LONGINT:C283($blockNo; $rowsInBlockCount)
-$blockNo:=0
-$rowsInBlockCount:=0
-$firstRecordUniqueFldValue:=""
-$vt_tableRAW:=""
-$vt_rowRAW:=""
+var $blockNo; $rowsInBlockCount : Integer
+var $rowChecksum; $firstRecordUniqueFldValue; $vt_tableRAW; $vt_rowRAW : Text
+
 
 // Output the gathered checksums to a temporary file
-C_TEXT:C284($vt_path2File; $vt_header)
-C_TIME:C306($docRef)
+var $vt_path2File; $vt_header : Text
+var $docRef : Time
 $vt_path2File:=$destinationFolder+"p"+String:C10(Current process:C322)+"_"+String:C10(Milliseconds:C459)+".txt"
 File_Delete($vt_path2File)
 $docRef:=File_CreateFile($vt_path2File)
 If ($docRef#-1)
-	$vt_header:=""
-	$vt_header:=$vt_header+"Table: "+Table name:C256($tablePtr)+Char:C90(Carriage return:K15:38)
-	$vt_header:=$vt_header+"Rows Count: "+String:C10(Records in table:C83($tablePtr->))+" recs"+Char:C90(Carriage return:K15:38)
-	$vt_header:=$vt_header+Char:C90(Carriage return:K15:38)
+	$vt_header+="Table: "+Table name:C256($tablePtr)+Char:C90(Carriage return:K15:38)
+	$vt_header+="Rows Count: "+String:C10(Records in table:C83($tablePtr->))+" recs"+Char:C90(Carriage return:K15:38)
+	$vt_header+=Char:C90(Carriage return:K15:38)
 	SEND PACKET:C103($docRef; $vt_header)
 	
 	
@@ -68,33 +62,32 @@ If ($docRef#-1)
 		End if 
 		If ($rowsInBlockCount=0)  // start of a block
 			$rowsInBlockCount:=0
-			$blockNo:=$blockNo+1
+			$blockNo+=1
 			$firstRecordUniqueFldValue:=FieldData_2Text($uniqueFieldPtr)
 		End if 
 		
 		// gather all the stored data from the current row/record
 		$rowChecksum:=Record_GetChecksum($tablePtr)
-		$rowsInBlockCount:=$rowsInBlockCount+1
+		$rowsInBlockCount+=1
 		
 		// detect if we are at the end of the block or not
-		If ($rowsInBlockCount<$maxRowsPerBlock) & ($row#Records in selection:C76($tablePtr->))
-			$vt_rowRAW:=$vt_rowRAW+$rowChecksum+Char:C90(Carriage return:K15:38)
+		If ($rowsInBlockCount<$maxRowsPerBlock) && ($row#Records in selection:C76($tablePtr->))
+			$vt_rowRAW+=$rowChecksum+Char:C90(Carriage return:K15:38)
 			
 		Else   // At the end of the block, do a block checksum
 			If ($maxRowsPerBlock=1)
-				$vt_tableRAW:=$vt_tableRAW+"Row "+String:C10($blockNo)+" ("+$firstRecordUniqueFldValue+") :"+$rowChecksum+Char:C90(Carriage return:K15:38)
+				$vt_tableRAW+="Row "+String:C10($blockNo)+" ("+$firstRecordUniqueFldValue+") :"+$rowChecksum+Char:C90(Carriage return:K15:38)
 			Else 
 				If ($row=Records in selection:C76($tablePtr->))
 					$maxRowsPerBlock:=$maxRowsPerBlock-1
 				End if 
-				$vt_tableRAW:=$vt_tableRAW+"Block "+String:C10($blockNo)+" Rows "+String:C10($row-$rowsInBlockCount+1)+"-"+String:C10($row)+" ("+$firstRecordUniqueFldValue+"->"+String:C10($uniqueFieldPtr->)+") :"
-				$vt_tableRAW:=$vt_tableRAW+STR_GetChecksum_MD5($vt_rowRAW)+Char:C90(Carriage return:K15:38)
+				$vt_tableRAW+="Block "+String:C10($blockNo)+" Rows "+String:C10($row-$rowsInBlockCount+1)+"-"+String:C10($row)+" ("+$firstRecordUniqueFldValue+"->"+String:C10($uniqueFieldPtr->)+") :"
+				$vt_tableRAW+=STR_GetChecksum_MD5($vt_rowRAW)+Char:C90(Carriage return:K15:38)
 			End if 
 			
 			// output to disk if getting "large"
 			If (Length:C16($vt_tableRAW)>2048)
 				SEND PACKET:C103($docRef; $vt_tableRAW)
-				//SEND PACKET($docRef;$vt_rowRAW)
 				$vt_tableRAW:=""
 			End if 
 			
@@ -111,7 +104,7 @@ If ($docRef#-1)
 End if 
 
 // Generate the full table checksum for the table (used in the file name)
-C_TEXT:C284($fileChecksum)
+var $fileChecksum : Text
 $fileChecksum:=File_GetChecksum($vt_path2File; "md5")
 
 // Move the temp file to it's final name

@@ -1,13 +1,13 @@
 //%attributes = {"invisible":true,"preemptive":"capable"}
 // STR_GetListOfBadCharacters (value) : bad_character_list
 //
+// as per: https://www.w3.org/TR/xml/#charsets
+// Valid Chars ::= #x9 | #xA | #xD | [#x20-#xD7FF] | [#xE000-#xFFFD] | [#x10000-#x10FFFF]
+//
 #DECLARE($input : Text)->$bad_character_list : Collection
 // ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259=1)
-$bad_character_list:=New collection:C1472()
-
-// as per: https://www.w3.org/TR/xml/#charsets
-// Valid Chars ::= #x9 | #xA | #xD | [#x20-#xD7FF] | [#xE000-#xFFFD] | [#x10000-#x10FFFF]
+$bad_character_list:=[]
 
 var $is_bad : Boolean
 var $i; $char_code : Integer
@@ -27,9 +27,9 @@ For ($i; 1; Length:C16($input))
 	End case 
 	
 	If ($is_bad)
-		$bad_character_list.push(New object:C1471(\
-			"pos"; $i; \
-			"char_code"; $char_code\
-			))
+		$bad_character_list.push({\
+			pos: $i; \
+			char_code: $char_code\
+			})
 	End if 
 End for 

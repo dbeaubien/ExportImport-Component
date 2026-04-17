@@ -6,18 +6,13 @@
 //   Returns true if the file exists. 
 //   It will create any parent folders if missing.
 //
-C_TEXT:C284($1; $filePath)  // Path to file
-C_BOOLEAN:C305($0; $doesExist)  // File does exist
+#DECLARE($file_path : Text)->$does_file_exist : Boolean
+// ----------------------------------------------------
+ASSERT:C1129(Count parameters:C259=1)
 
-$doesExist:=False:C215
-If (Asserted:C1132(Count parameters:C259=1))
-	$filePath:=$1
-	
-	If ($filePath#"")
-		Folder_VerifyExistance(Folder_ParentName($filePath))  // ensure the parent folder exists
-		
-		$doesExist:=(Test path name:C476($filePath)=Is a document:K24:1)
-	End if 
-	
+If ($file_path="")
+	return 
 End if 
-$0:=$doesExist
+
+Folder_VerifyExistance(Folder_ParentName($file_path))  // ensure the parent folder exists
+$does_file_exist:=(Test path name:C476($file_path)=Is a document:K24:1)

@@ -10,12 +10,12 @@ If ($num_workers<=0)
 	$num_workers:=3
 End if 
 If ($fields_to_base64=Null:C1517)
-	$fields_to_base64:=New collection:C1472()
+	$fields_to_base64:=[]
 End if 
 
 var $table_no_list : Collection
 var $table_no : Integer
-$table_no_list:=New collection:C1472()
+$table_no_list:=[]
 For ($table_no; 1; Get last table number:C254)
 	Case of 
 		: (Not:C34(Is table number valid:C999($table_no)))
