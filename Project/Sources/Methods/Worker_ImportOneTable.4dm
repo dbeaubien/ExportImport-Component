@@ -9,18 +9,18 @@
 // ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259=2)
 
-Log_INFO("Worker starting import of table ["+Table name:C256($options.table_no)+"].")
-
+// Mark: Import records
+Log_INFO("Importing ["+Table name:C256($options.table_no)+"].")
 Table_Journaling_DISABLE(Table:C252($options.table_no))
 Import_OneTable($options.table_no\
 ; $options.import_folder_platformPath\
 ; $options.truncation_before_import\
 ; $worker.progress_hdl_id)
 Table_Journaling_ENABLE(Table:C252($options.table_no))
+Log_INFO("Imported table ["+Table name:C256($options.table_no)+"] - "+String:C10(Records in table:C83(Table:C252($options.table_no)->))+" records")
 
-var $primaryKey_FieldPtr : Pointer
-$primaryKey_FieldPtr:=Table_GetUniqueFieldPtr(Table:C252($options.table_no))
 
+// Mark: Checksum records
 var $num_records_in_table; $records_per_block : Integer
 $num_records_in_table:=Records in table:C83(Table:C252($options.table_no)->)
 If ($num_records_in_table>0)
@@ -34,12 +34,12 @@ If ($num_records_in_table>0)
 	End case 
 	
 	var $pathToChecksumFile : Text
+	var $primaryKey_FieldPtr : Pointer
+	$primaryKey_FieldPtr:=Table_GetUniqueFieldPtr(Table:C252($options.table_no))
 	$pathToChecksumFile:=Table_GenerateChecksumFile($primaryKey_FieldPtr\
 		; $records_per_block\
 		; $options.checksum_folder_platformPath\
 		; $worker.progress_hdl_id)
 End if 
-
-Log_INFO("Worker completed import of table ["+Table name:C256($options.table_no)+"].")
 
 GenericWorker_MarkAsWaiting($worker)  // Resets the worker as being able to accept new tasks

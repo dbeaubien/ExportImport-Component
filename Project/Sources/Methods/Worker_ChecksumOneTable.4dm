@@ -9,7 +9,8 @@
 // ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259=2)
 
-Log_INFO("Worker starting checksum of table ["+Table name:C256($options.table_no)+"].")
+Log_INFO("Checksumming ["+Table name:C256($options.table_no)+"] - "\
++String:C10(Records in table:C83(Table:C252($options.table_no)->); "###,###,###,##0")+" records")
 
 var $primaryKey_FieldPtr : Pointer
 $primaryKey_FieldPtr:=Table_GetUniqueFieldPtr(Table:C252($options.table_no))
@@ -20,6 +21,6 @@ $pathToChecksumFile:=Table_GenerateChecksumFile($primaryKey_FieldPtr\
 ; $options.export_folder_platformPath\
 ; $worker.progress_hdl_id)
 
-Log_INFO("Worker completed checksum of table ["+Table name:C256($options.table_no)+"]. Checksum file: "+$pathToChecksumFile)
+Log_INFO("Checksumed ["+Table name:C256($options.table_no)+"]")
 
 GenericWorker_MarkAsWaiting($worker)  // Resets the worker as being able to accept new tasks

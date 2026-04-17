@@ -1,5 +1,7 @@
 // cs.HealthCheckerWorker
 
+property _table_name : Text
+property _table_ptr : Pointer
 property _folder : 4D:C1709.Folder
 property _table_no : Integer
 property _prog_hdl : Integer
@@ -49,7 +51,7 @@ Function Set_to_Remove_Bad_Chars($do_remove : Boolean) : cs:C1710.HealthCheckerW
 	
 	
 Function Perform_Health_Check()->$result_messages : Collection
-	$result_messages:=New collection:C1472()
+	$result_messages:=[]
 	If (ds:C1482[This:C1470._table_name].getCount()=0)
 		return 
 	End if 
@@ -93,12 +95,12 @@ Function Perform_Health_Check()->$result_messages : Collection
 			$result_messages.push("Table has a record where the Primary Key \""+Field name:C257($field_ptr)+"\" is NULL.")
 		End if 
 		Case of 
-			: (Type:C295($field_ptr->)=Is longint:K8:6) | (Type:C295($field_ptr->)=Is integer:K8:5)
+			: (Type:C295($field_ptr->)=Is longint:K8:6) || (Type:C295($field_ptr->)=Is integer:K8:5)
 				If ($distinct_values.at(0)=0)
 					$result_messages.push("Table has a record where the Primary Key \""+Field name:C257($field_ptr)+"\" is 0.")
 				End if 
 				
-			: (Type:C295($field_ptr->)=Is text:K8:3) | (Type:C295($field_ptr->)=Is alpha field:K8:1)
+			: (Type:C295($field_ptr->)=Is text:K8:3) || (Type:C295($field_ptr->)=Is alpha field:K8:1)
 				If ($distinct_values.at(0)="")
 					$result_messages.push("Table has a record where the Primary Key \""+Field name:C257($field_ptr)+"\" is blank.")
 				End if 
@@ -113,7 +115,6 @@ Function Perform_Health_Check()->$result_messages : Collection
 			; "Checking fields uniqueness..."\
 			; -1; "")
 		
-		var $distinct_values : Collection
 		For each ($field_ptr; $scannable_fields.unique_fields)
 			$distinct_values:=ds:C1482[This:C1470._table_name].all().distinct(Field name:C257($field_ptr))
 			If ($distinct_values.length#Records in selection:C76($table_ptr->))
@@ -138,8 +139,8 @@ Function Perform_Health_Check()->$result_messages : Collection
 		
 		// Mark: scan string fields for "bad" characters
 		$result:=This:C1470._check_current_record_for_bad_characters($scannable_fields; $table_ptr)
-		$record_was_updated:=$record_was_updated | $result.was_updated
-		If (This:C1470._do_remove_bad_chars & $result.was_updated)
+		$record_was_updated:=$record_was_updated || $result.was_updated
+		If (This:C1470._do_remove_bad_chars && $result.was_updated)
 			$result_messages.combine($result.issues)
 			$result_messages.push("Cleansed Record "+String:C10(Record number:C243($table_ptr->))+": ["+This:C1470._table_name+"] saved")
 		End if 
@@ -258,7 +259,7 @@ Function _get_scannable_fields()->$scannable_fields : Object
 	var $field_info : Object
 	var $field_no; $type; $length : Integer
 	var $isIndexed; $isUnique : Boolean
-	For ($field_no; 1; Get last field number:C255(This:C1470._table_no))
+	For ($field_no; 1; Last field number:C255(This:C1470._table_no))
 		If (Is field number valid:C1000(This:C1470._table_no; $field_no))
 			$field_ptr:=Field:C253(This:C1470._table_no; $field_no)
 			$type:=Type:C295($field_ptr->)
@@ -284,7 +285,7 @@ Function _get_scannable_fields()->$scannable_fields : Object
 				: (Find in array:C230($field_ptrs_to_ignoreArr; $field_ptr)>0)
 					// ignore the text field
 					
-				: ($type=Is alpha field:K8:1) | ($type=Is text:K8:3)
+				: ($type=Is alpha field:K8:1) || ($type=Is text:K8:3)
 					$scannable_fields.string_fields.push($field_ptr)
 			End case 
 		End if 

@@ -7,7 +7,6 @@
 #DECLARE($type : Integer)->$friendly : Text
 // ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259=1)
-$friendly:=""
 
 Case of 
 	: ($type=Is text:K8:3)

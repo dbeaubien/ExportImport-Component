@@ -27,13 +27,11 @@ HIDE WINDOW:C436($window_ref)
 Export_SetMaxFileSizeMB(Form:C1466.max_export_file_size_mb)
 
 If (Form:C1466.num_tables_selected=Form:C1466.table_list.length)
-	$export_folder_platformPath:=Export_AllTables(Form:C1466.num_worker_processes\
-		; Form:C1466.base64_field_list.query("is_selected=:1"; True:C214).extract("field_ptr"))
+	$export_folder_platformPath:=Export_AllTables(Form:C1466.num_worker_processes)
 	
 Else 
 	$export_folder_platformPath:=Export_ListOfTables(Form:C1466.num_worker_processes\
-		; Form:C1466.table_list.query("is_selected=:1"; True:C214).extract("table_no")\
-		; Form:C1466.base64_field_list.query("is_selected=:1"; True:C214).extract("field_ptr"))
+		; Form:C1466.table_list.query("is_selected=:1"; True:C214).extract("table_no"))
 End if 
 
 SHOW WINDOW:C435($window_ref)

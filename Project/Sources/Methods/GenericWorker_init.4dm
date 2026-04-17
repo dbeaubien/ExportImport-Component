@@ -3,15 +3,12 @@
 //
 #DECLARE($worker_prefix : Text; $num_workers : Integer)
 // ----------------------------------------------------
-// HISTORY
-//   Created by: DB (06/02/2022)
-// ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259=2)
 ASSERT:C1129($worker_prefix#"")
 ASSERT:C1129($num_workers>0)
 
 var _generic_workers : Collection
-_generic_workers:=New collection:C1472()
+_generic_workers:=[]
 
 var $i : Integer
 var $worker_details : Object

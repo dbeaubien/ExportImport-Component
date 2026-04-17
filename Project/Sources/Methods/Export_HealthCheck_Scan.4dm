@@ -65,7 +65,7 @@ Repeat
 	
 	$index+=1
 	$no_more_work:=($health_checker._tables_to_scan.length<=$index)
-Until ($no_more_work) | (Process aborted:C672)
+Until ($no_more_work) || (Process aborted:C672)
 
 GenericWorker_WaitForAllWaiting()
 GenericWorker_KillAll()

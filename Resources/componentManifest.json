@@ -1,0 +1,17 @@
+﻿{
+	"author": "Dani Beaubien",
+	"copyrights": "Copyright 2026 Open Road Development, Inc.",
+	"version": "2026.r1 (build 20260417)",
+	"buildDate": "2026-04-17",
+	"url": "http://openRoadDevelopment.com",
+	"manifestFormatVersion": "1.0",
+	"buildWith4DVersion": "v21 final (build 100422)",
+	"methodList": [
+		"Export_AllTables",
+		"Export_HealthCheck_Scan",
+		"Export_Import_Dialog",
+		"Export_ListOfTables",
+		"Export_PreCheck_RemoveBadChars",
+		"Import_AllTables"
+	]
+}

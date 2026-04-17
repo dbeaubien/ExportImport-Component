@@ -5,9 +5,7 @@
 //   For each worker, sends the options to it to
 //   trigger a gentle shutdown
 //
-// ----------------------------------------------------
-// HISTORY
-//   Created by: DB (06/02/2022)
+
 // ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259=0)
 

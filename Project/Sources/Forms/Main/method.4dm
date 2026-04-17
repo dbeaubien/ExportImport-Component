@@ -40,11 +40,6 @@ Case of
 		Form:C1466.bad_char_scan_ignore_field_list:=Form:C1466.field_list.query("field_type IN :1"; [Is text:K8:3; Is alpha field:K8:1]).copy()
 		Form:C1466.bad_char_scan_ignore_field_list:=Form:C1466.bad_char_scan_ignore_field_list.orderBy("table_name, field_name")
 		
-		// copy to field list to Form.base64_field_list and deselect them all
-		Form:C1466.base64_field_list:=Form:C1466.field_list.query("field_type IN :1"; [Is text:K8:3; Is alpha field:K8:1]).copy()
-		Form:C1466.base64_field_list:=Form:C1466.base64_field_list.orderBy("table_name, field_name")
-		
-		
 	: (FORM Event:C1606.code=On Unload:K2:2)
 		
 	: (FORM Event:C1606.code=On Close Box:K2:21)
@@ -93,10 +88,4 @@ If (True:C214)
 		Else 
 			Form:C1466.selected_table_label:="Export "+String:C10(Form:C1466.num_tables_selected)+" of "+String:C10(Form:C1466.table_list.length)+" tables"
 	End case 
-	
-	Form:C1466.num_selected_base64_field:=Form:C1466.base64_field_list\
-		.query("is_selected=:1"; True:C214)\
-		.length
-	Form:C1466.selected_base64_field_label:=String:C10(Form:C1466.num_selected_base64_field)\
-		+" alpha fields will be Base64'd"
 End if 

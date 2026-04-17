@@ -11,7 +11,6 @@
 ; $progHdl : Integer)->$result : Text
 // ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259=5)
-$result:=""
 
 var ExportImport_Stop : Boolean
 Case of 
@@ -22,7 +21,7 @@ Case of
 		var $i : Integer
 		var $field_ptr : Pointer
 		var $field_Nums_in_table_to_base64 : Collection
-		$field_Nums_in_table_to_base64:=New collection:C1472()
+		$field_Nums_in_table_to_base64:=[]
 		For ($i; 0; $fields_to_base64.length-1)
 			$field_ptr:=$fields_to_base64[$i]
 			If (Table:C252($field_ptr)=$table_no)
@@ -79,7 +78,7 @@ Case of
 			; "Total"; $value2)
 		
 		
-		var $i; $j; $ms : Integer
+		var $j; $ms : Integer
 		Progress_Set_Title_ALT($progHdl; "Exporting ["+Table name:C256($table_no)+"] records...")
 		For ($i; 1; $num_records_in_table)  // for every record in the table
 			If ($ms<Milliseconds:C459)
@@ -105,7 +104,7 @@ Case of
 			var $force_base64 : Boolean
 			var $result2 : Text
 			SAX OPEN XML ELEMENT:C853($fileRef; "T_"+$table_name)
-			For ($j; 1; Get last field number:C255($table_ptr))  // for every field on the record
+			For ($j; 1; Last field number:C255($table_ptr))  // for every field on the record
 				If (Is field number valid:C1000($table_no; $j))
 					$field_ptr:=Field:C253($table_no; $j)
 					$force_base64:=($field_Nums_in_table_to_base64.indexOf($j)>=0)  // is a text field to be base64'd
@@ -116,7 +115,7 @@ Case of
 						$result:=$result2
 					End if 
 					If (ExportImport_Stop)
-						$j:=Get last field number:C255($table_ptr)+1
+						$j:=Last field number:C255($table_ptr)+1
 					End if 
 				End if 
 			End for 
@@ -140,5 +139,3 @@ Case of
 			READ WRITE:C146($table_ptr->)
 		End if 
 End case 
-
-
