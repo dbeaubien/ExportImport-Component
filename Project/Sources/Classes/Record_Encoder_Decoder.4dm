@@ -68,8 +68,24 @@ Function Record_to_JSON($field_map : Object; $entity : 4D:C1709.Entity)->$record
 	End for 
 	
 	
-Function JSON_to_Record($field_map : Object; $record_json : Text)->$entity : 4D:C1709.Entity
-	TRACE:C157
+Function JSON_to_New_Record($field_map : Object; $record_data : Object)->$entity : 4D:C1709.Entity
+	var $field_name : Text
+	var $field_mapping : Object
+	$entity:=ds:C1482[$field_map.table_name].new()
+	For each ($field_name; $record_data)
+		$field_mapping:=$field_map[$field_name]
+		Case of 
+			: ($field_mapping=Null:C1517)
+			: ($field_mapping.type=Is object:K8:27)
+				$entity[$field_mapping.name]:=This:C1470._decode_to_object($record_data[$field_name])
+			: ($field_mapping.type=Is BLOB:K8:12)
+				$entity[$field_mapping.name]:=This:C1470._decode_to_blob($record_data[$field_name])
+			: ($field_mapping.type=Is picture:K8:10)
+				$entity[$field_mapping.name]:=This:C1470._decode_to_picture($record_data[$field_name])
+			Else 
+				$entity[$field_mapping.name]:=$record_data[$field_name]
+		End case 
+	End for each 
 	
 	
 	
@@ -122,12 +138,17 @@ Function _decode_to_blob($encoded : Text)->$blob : Blob
 		End if 
 		BASE64 DECODE:C896($encoded; $blob)
 		
+		var $existing_compression : Integer
+		BLOB PROPERTIES:C536($blob; $existing_compression)
+		
 		// restore the original compression used
 		Case of 
-			: ($prior_compression=Is not compressed:K22:11)
-				EXPAND BLOB:C535($blob)
-			: ($prior_compression=This:C1470._blob_compress_level)
+			: ($prior_compression=$existing_compression)
 				// nothing to do since that is how we encoded it
+				
+			: ($prior_compression=Is not compressed:K22:11) & ($existing_compression#Is not compressed:K22:11)
+				EXPAND BLOB:C535($blob)
+				
 			Else 
 				EXPAND BLOB:C535($blob)
 				COMPRESS BLOB:C534($blob; $prior_compression)

@@ -106,7 +106,7 @@ Function _close_current_export_file_if_needed()
 	
 	
 Function _clear_buffer()
-	This:C1470._buffer:="{ records: [\r"
+	This:C1470._buffer:="{ \"records\": [\r"
 	
 	
 Function _append_to_buffer($data : Object)
@@ -121,5 +121,5 @@ Function _buffer_is_too_large() : Boolean
 	
 Function _write_buffer_to_file($file : 4D:C1709.File)
 	var $blob : Blob
-	CONVERT FROM TEXT:C1011(This:C1470._buffer+"\t{eof:true}]\r}"; "utf-8"; $blob)
+	CONVERT FROM TEXT:C1011(This:C1470._buffer+"\t{\"eof\":true}\r]\r}"; "utf-8"; $blob)
 	BLOB TO DOCUMENT:C526(This:C1470._current_export_file.platformPath; $blob)

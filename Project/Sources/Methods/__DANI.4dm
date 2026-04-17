@@ -1,22 +1,90 @@
 //%attributes = {}
 // Export_Import_Dialog
+Progress QUIT(0)
 
-var $target_folder : 4D:C1709.Folder
-$target_folder:=cs:C1710._Utils.new().Get_Named_Working_Folder("Table Export")
+// IMPORT
+If (True:C214)
+	
+	var $importFromFolder_platformPath : Text
+	$importFromFolder_platformPath:=Select folder:C670("Select Folder that contains 'Data' Export folder"; 1234)
+	If (OK#1)
+		return 
+	End if 
+	
+	var $source_folder : 4D:C1709.Folder
+	$source_folder:=Folder:C1567($importFromFolder_platformPath; fk platform path:K87:2)\
+		.folder("Data")
+	If (Not:C34($source_folder.exists))
+		ALERT:C41("ABORTING. Cannot find the 'Data' subfolder.")
+		return 
+	End if 
+	
+	var $table_no : Integer
+	var $mapping_file : 4D:C1709.File
+	$table_no:=Table:C252(->[Table_2:2])
+	$mapping_file:=$source_folder.file(Table name:C256($table_no)+" - field_mapping.json")
+	If (Not:C34($mapping_file.exists))
+		ALERT:C41("ABORTING. Cannot find the '"+Table name:C256($table_no)+" - field_mapping.json' file.")
+		return 
+	End if 
+	
+	var $source_file_list : Collection
+	$source_file_list:=$source_folder\
+		.files()\
+		.query("fullName=:1"; Table name:C256($table_no)+" - table export@.json")\
+		.orderBy("fullName")
+	
+	var $progress_dialog_id : Integer
+	$progress_dialog_id:=Progress New()
+	
+	cs:C1710.Table_Importer\
+		.new($table_no; $mapping_file; $source_file_list)\
+		.Use_Progress_Dialog($progress_dialog_id)\
+		.Truncate_Before_Import()\
+		.Import_Records()
+	
+	var $num_records_in_table : Integer
+	Case of 
+		: ($num_records_in_table>100000)
+			$records_per_block:=1000
+		: ($num_records_in_table>10000)
+			$records_per_block:=100
+		Else 
+			$records_per_block:=10
+	End case 
+	
+	var $pathToChecksumFile : Text
+	var $primaryKey_FieldPtr : Pointer
+	$primaryKey_FieldPtr:=Table_GetUniqueFieldPtr(Table:C252($table_no))
+	$pathToChecksumFile:=Table_GenerateChecksumFile($primaryKey_FieldPtr\
+		; $records_per_block\
+		; Folder:C1567($importFromFolder_platformPath; fk platform path:K87:2).folder("MD5 - after import").platformPath\
+		; $progress_dialog_id)
+	
+	Progress QUIT($progress_dialog_id)
+	
+End if 
 
-var $exporter : cs:C1710.Table_Exporter
-$exporter:=cs:C1710.Table_Exporter.new($target_folder.folder("Data"))
-$exporter.Set_File_Max_MB_Size(10)
 
-var $progHdl : Integer
-var $manifest : Object
-$progHdl:=Progress New()
-$manifest:={exports: []}
-$manifest.exports.push($exporter.Export_All_Records(Table:C252(->[Table_1:1]); $progHdl))
-$manifest.exports.push($exporter.Export_All_Records(Table:C252(->[Table_2:2]); $progHdl))
-Progress QUIT($progHdl)
-TEXT TO DOCUMENT:C1237($target_folder.file("Export Manifest.json").platformPath; JSON Stringify:C1217($manifest; *); "utf-8")
-SHOW ON DISK:C922($target_folder.platformPath)
+// EXPORT
+If (False:C215)
+	var $target_folder : 4D:C1709.Folder
+	$target_folder:=cs:C1710._Utils.new().Get_Named_Working_Folder("Table Export")
+	
+	var $exporter : cs:C1710.Table_Exporter
+	$exporter:=cs:C1710.Table_Exporter.new($target_folder.folder("Data"))
+	$exporter.Set_File_Max_MB_Size(10)
+	
+	var $progress_dialog_id : Integer
+	var $manifest : Object
+	$progress_dialog_id:=Progress New()
+	$manifest:={exports: []}
+	$manifest.exports.push($exporter.Export_All_Records(Table:C252(->[Table_1:1]); $progress_dialog_id))
+	$manifest.exports.push($exporter.Export_All_Records(Table:C252(->[Table_2:2]); $progress_dialog_id))
+	Progress QUIT($progress_dialog_id)
+	TEXT TO DOCUMENT:C1237($target_folder.file("Export Manifest.json").platformPath; JSON Stringify:C1217($manifest; *); "utf-8")
+	SHOW ON DISK:C922($target_folder.platformPath)
+End if 
 
 
 BEEP:C151

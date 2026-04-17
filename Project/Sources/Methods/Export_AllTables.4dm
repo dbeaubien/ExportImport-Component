@@ -21,4 +21,9 @@ For ($table_no; 1; Get last table number:C254)
 	End case 
 End for 
 
+If ($table_no_list.length=0)
+	ALERT:C41("ABORTING EXPORT: All the tables are empty so there is nothing to export.")
+	return 
+End if 
+
 $export_folder_platformPath:=Export_ListOfTables($num_workers; $table_no_list)

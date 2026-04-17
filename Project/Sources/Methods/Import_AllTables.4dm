@@ -20,7 +20,7 @@ GenericWorker_init("Table Importer"; $num_workers)
 
 Trigger_DISABLE
 
-$importFromFolder_platformPath:=Select folder:C670("Select Folder that contains Data Export folder"; 1234)
+$importFromFolder_platformPath:=Select folder:C670("Select Folder that contains 'Data' Export folder"; 1234)
 If (OK=1)
 	var $folder : 4D:C1709.Folder
 	$folder:=Folder:C1567($importFromFolder_platformPath; fk platform path:K87:2)
