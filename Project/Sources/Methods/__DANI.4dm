@@ -1,20 +1,104 @@
 //%attributes = {}
-// Task 9073 - Export/Import code for datafile rebuilds improvements
+// Export_Import_Dialog
+Progress QUIT(0)
+
+// IMPORT
+If (True:C214)
+	
+	var $importFromFolder_platformPath : Text
+	$importFromFolder_platformPath:=Select folder:C670("Select Folder that contains 'Data' Export folder"; 1234)
+	If (OK#1)
+		return 
+	End if 
+	
+	var $source_folder : 4D:C1709.Folder
+	$source_folder:=Folder:C1567($importFromFolder_platformPath; fk platform path:K87:2)\
+		.folder("Data")
+	If (Not:C34($source_folder.exists))
+		ALERT:C41("ABORTING. Cannot find the 'Data' subfolder.")
+		return 
+	End if 
+	
+	var $table_no : Integer
+	var $mapping_file : 4D:C1709.File
+	$table_no:=Table:C252(->[Table_2:2])
+	$mapping_file:=$source_folder.file(Table name:C256($table_no)+" - field_mapping.json")
+	If (Not:C34($mapping_file.exists))
+		ALERT:C41("ABORTING. Cannot find the '"+Table name:C256($table_no)+" - field_mapping.json' file.")
+		return 
+	End if 
+	
+	var $source_file_list : Collection
+	$source_file_list:=$source_folder\
+		.files()\
+		.query("fullName=:1"; Table name:C256($table_no)+" - table export@.json")\
+		.orderBy("fullName")
+	
+	var $progress_dialog_id : Integer
+	$progress_dialog_id:=Progress New()
+	
+	cs:C1710.Table_Importer\
+		.new($table_no; $mapping_file; $source_file_list)\
+		.Use_Progress_Dialog($progress_dialog_id)\
+		.Truncate_Before_Import()\
+		.Import_Records()
+	
+	var $num_records_in_table; $records_per_block : Integer
+	Case of 
+		: ($num_records_in_table>100000)
+			$records_per_block:=1000
+		: ($num_records_in_table>10000)
+			$records_per_block:=100
+		Else 
+			$records_per_block:=10
+	End case 
+	
+	var $pathToChecksumFile : Text
+	var $primaryKey_FieldPtr : Pointer
+	$primaryKey_FieldPtr:=Table_GetUniqueFieldPtr(Table:C252($table_no))
+	$pathToChecksumFile:=Table_GenerateChecksumFile($primaryKey_FieldPtr\
+		; $records_per_block\
+		; Folder:C1567($importFromFolder_platformPath; fk platform path:K87:2).folder("MD5 - after import").platformPath\
+		; $progress_dialog_id)
+	
+	Progress QUIT($progress_dialog_id)
+	
+End if 
+
+
+// EXPORT
+If (False:C215)
+	var $target_folder : 4D:C1709.Folder
+	$target_folder:=cs:C1710._Utils.new().Get_Named_Working_Folder("Table Export")
+	
+	var $exporter : cs:C1710.Table_Exporter
+	$exporter:=cs:C1710.Table_Exporter.new($target_folder.folder("Data"))
+	$exporter.Set_File_Max_MB_Size(10)
+	
+	
+	var $manifest : Object
+	$progress_dialog_id:=Progress New()
+	$manifest:={exports: []}
+	$manifest.exports.push($exporter.Export_All_Records(Table:C252(->[Table_1:1]); $progress_dialog_id))
+	$manifest.exports.push($exporter.Export_All_Records(Table:C252(->[Table_2:2]); $progress_dialog_id))
+	Progress QUIT($progress_dialog_id)
+	TEXT TO DOCUMENT:C1237($target_folder.file("Export Manifest.json").platformPath; JSON Stringify:C1217($manifest; *); "utf-8")
+	SHOW ON DISK:C922($target_folder.platformPath)
+End if 
+
+
+BEEP:C151
+ABORT:C156
+
+// TODO: things to do
 /*
-Make a few changes/improvements to the export/import process we follow to rebuild datafiles:
-- In scan for bad characters, add a check to detect if PK fields are null, 0 or an empty GUID.
-- Work out how to add a check for duplicate values on fields marked as unique.
-- Dump out record counts into a file as part of the export and post import.
-- Could the import process utilized the export's table count file to validate the #s are part of the import?
-- Add a check for fields where NULLs don't map to blank.
+- export & import the "next sequence #" for each table
+  put at same level as the "Data" folder
 
-Perhaps the "bad character" scan is turned into a "health check scan".
-
-Also thinking that the component has a dialog that is shown that gives access to all these tools.
-It would need a way to be able to pick tables to export and a way to mark which fields should be base64'd
 
 Could there be a way that the current settings that were user could be saved to a settings file which could then be reused in subsequent usages?
 */
+
 
 Progress QUIT(0)
 Log_OpenDisplayWindow
@@ -75,19 +159,14 @@ If (False:C215)
 End if 
 
 If (False:C215)  // ## Export all tables
-	var $export_folder_platformPath : Text
-	var $fields_to_base64 : Collection
-	$fields_to_base64:=New collection:C1472(->[Table_2:2]Field_2:2; ->[Table_2:2]Field_5:5)
-	$export_folder_platformPath:=Export_AllTables(4; $fields_to_base64)
+	$export_folder_platformPath:=Export_AllTables(4)
 	SHOW ON DISK:C922($export_folder_platformPath)
 End if 
 
 If (False:C215)  // ## Import exported data
-	var $options : Object
 	$options:={}
 	$options.truncation_before_import:=False:C215  // default
 	
-	var $importFromFolder_platformPath : Text
 	$importFromFolder_platformPath:=Import_AllTables(4; $options)
 	SHOW ON DISK:C922($importFromFolder_platformPath)
 End if 

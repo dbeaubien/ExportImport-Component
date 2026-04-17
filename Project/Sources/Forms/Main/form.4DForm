@@ -371,39 +371,6 @@
 					"text": "(1-100)",
 					"textAlign": "automatic"
 				},
-				"btn_select_fields_to_ignore1": {
-					"type": "button",
-					"top": 247,
-					"left": 91,
-					"width": 208,
-					"height": 21,
-					"dataSource": "",
-					"action": "",
-					"shortcutKey": "[Return]",
-					"text": "Select Alpha Fields to Base64",
-					"class": "default",
-					"focusable": false,
-					"defaultButton": false,
-					"events": [
-						"onClick"
-					],
-					"method": "ObjectMethods/btn_select_fields_to_ignore1.4dm"
-				},
-				"Input3": {
-					"type": "input",
-					"left": 307,
-					"top": 249,
-					"width": 225,
-					"height": 17,
-					"dataSourceTypeHint": "text",
-					"dataSource": "Form:C1466.selected_base64_field_label",
-					"min": "",
-					"max": "",
-					"borderStyle": "none",
-					"fill": "transparent",
-					"enterable": false,
-					"focusable": false
-				},
 				"Line1": {
 					"type": "line",
 					"top": 386,
@@ -484,7 +451,7 @@
 			}
 		}
 	],
-	"geometryStamp": 720,
+	"geometryStamp": 722,
 	"width": 600,
 	"height": 500,
 	"editor": {
