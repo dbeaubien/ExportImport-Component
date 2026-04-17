@@ -3,16 +3,10 @@
 // 
 // DESCRIPTION:
 //   Returns true if the folder exists
+#DECLARE($path_to_folder : Text)->$does_folder_exist : Boolean
+// ----------------------------------------------------
+ASSERT:C1129(Count parameters:C259=1)
 
-C_TEXT:C284($1; $pathToFolder)
-C_BOOLEAN:C305($0; $doesExist)
-
-$doesExist:=False:C215
-If (Asserted:C1132(Count parameters:C259=1))
-	$pathToFolder:=$1
-	
-	If ($pathToFolder#"")
-		$doesExist:=(Test path name:C476($pathToFolder)=Is a folder:K24:2)
-	End if 
+If ($path_to_folder#"")
+	$does_folder_exist:=(Test path name:C476($path_to_folder)=Is a folder:K24:2)
 End if 
-$0:=$doesExist

@@ -4,37 +4,19 @@
 // DESCRIPTION
 //   Generic Export/Import of whole database as XML files
 //
-C_TEXT:C284($0; $1; $2; $result; $job; $textpara)
-C_POINTER:C301($3; $blobpara)  // mulitpurpose parameter, also used for pointer on field
-C_LONGINT:C283($4; $longintpara)
+// $blobpara ($3) - mulitpurpose parameter, also used for pointer on field
+#DECLARE($job : Text; $textpara : Text; $blobpara : Pointer; $longintpara : Integer)->$result : Text
 // ----------------------------------------------------
-// HISTORY
-//   Created by: DB (07/26/11)
-// ----------------------------------------------------
-$result:=""
-$job:=$1
-If (Count parameters:C259>1)
-	$textpara:=$2
-Else 
-	$textpara:=""
-End if 
-If (Count parameters:C259>2)
-	$blobpara:=$3
-Else 
+
+var $internalrecord : Blob
+If (Count parameters:C259<3)
 	$blobpara:=->$internalrecord
 End if 
-If (Count parameters:C259>3)
-	$longintpara:=$4
-Else 
-	$longintpara:=0
-End if 
 
-C_BOOLEAN:C305(ExportImport_Stop)  // this is the only global variable
-
-C_TIME:C306($ref)
-C_BLOB:C604($internalrecord)
-C_POINTER:C301($fieldptr)
-C_LONGINT:C283($Fieldtyp; $Fieldlength)
+var ExportImport_Stop : Boolean  // this is the only global variable
+var $Fieldtyp; $Fieldlength : Integer
+var $fieldptr : Pointer
+var $ref : Time
 
 $fieldptr:=$blobpara
 $ref:=?00:00:00?+$longintpara
@@ -56,7 +38,7 @@ Case of
 	: ($fieldtyp=Is text:K8:3)
 		$fieldptr->:=$textpara
 		
-	: (($fieldtyp=Is integer:K8:5) | ($fieldtyp=Is longint:K8:6) | ($fieldtyp=Is integer 64 bits:K8:25))
+	: (($fieldtyp=Is integer:K8:5) || ($fieldtyp=Is longint:K8:6) || ($fieldtyp=Is integer 64 bits:K8:25))
 		$fieldptr->:=Num:C11($textpara)
 		
 	: ($fieldtyp=Is real:K8:4)
@@ -87,7 +69,7 @@ Case of
 	: (($fieldtyp=Is object:K8:27))  //   Mod by: Dani Beaubien (01/22/2019) 
 		$fieldptr->:=JSON Parse:C1218($textpara)
 		
-	: (($fieldtyp=Is BLOB:K8:12) | ($fieldtyp=Is picture:K8:10))
+	: (($fieldtyp=Is BLOB:K8:12) || ($fieldtyp=Is picture:K8:10))
 		If ($textpara#"")
 			$result:="ExportImport: Internal Error, found Blob without CData"+Field name:C257($fieldptr)
 		End if 

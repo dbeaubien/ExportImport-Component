@@ -1,7 +1,7 @@
 
-If (Not:C34(Is compiled mode:C492)) & (Structure file:C489(*)=Structure file:C489)
+If (Not:C34(Is compiled mode:C492)) && (Structure file:C489(*)=Structure file:C489)
 	
-	var $window_ref
+	var $window_ref : Integer
 	$window_ref:=Open form window:C675("ReleaseBuildNo_d"; Regular window:K27:1; 420; 250)
 	BRING TO FRONT:C326($window_ref)
 	DIALOG:C40("ReleaseBuildNo_d")

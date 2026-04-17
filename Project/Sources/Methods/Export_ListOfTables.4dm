@@ -11,7 +11,7 @@ If ($num_workers<=0)
 	$num_workers:=3
 End if 
 If ($fields_to_base64=Null:C1517)
-	$fields_to_base64:=New collection:C1472()
+	$fields_to_base64:=[]
 End if 
 ASSERT:C1129($table_no_list.length>0; "expecting a list of table nos for $2")
 ASSERT:C1129(Value type:C1509($table_no_list[0])=Is real:K8:4; "expecting a list of table nos for $2")
@@ -30,8 +30,8 @@ $checksum_folder_platformPath:=Folder:C1567(fk data folder:K87:12; *).folder($fo
 
 var $queue_list : Collection
 var $queue_action : Object
-$queue_list:=New collection:C1472
-$queue_action:=New object:C1471
+$queue_list:=[]
+$queue_action:={}
 var $table_no : Integer
 For ($table_no; 1; Get last table number:C254)
 	Case of 
@@ -63,44 +63,45 @@ $queue_list:=$queue_list.orderBy("num_records desc")
 Log_OpenDisplayWindow
 
 
-If ($queue_list.length>0)
-	GenericWorker_init("Table Exporter"; $num_workers)
-	
-	var $no_more_work : Boolean
-	var $worker; $options : Object
-	var $index : Integer
-	$index:=0
-	Repeat 
-		$queue_action:=$queue_list[$index]
-		$table_no:=$queue_action.table_no
-		$worker:=GenericWorker_GetOneWaiting()  // will not return until there is a worker that is waiting for work
-		
-		Case of 
-			: ($queue_action.action="export")
-				$options:=New object:C1471()
-				$options.table_no:=$table_no
-				$options.export_folder_platformPath:=$xml_folder_platformPath
-				$options.next_table_sequence_number:=Get database parameter:C643(Table:C252($table_no)->; Table sequence number:K37:31)
-				$options.fields_to_base64:=$fields_to_base64
-				CALL WORKER:C1389($worker.worker_name; "Worker_ExportOneTable"; $worker; $options)
-				
-			: ($queue_action.action="checksum")
-				$options:=New object:C1471()
-				$options.table_no:=$table_no
-				$options.export_folder_platformPath:=$checksum_folder_platformPath
-				$options.records_per_block:=$queue_action.records_per_MD5_block
-				CALL WORKER:C1389($worker.worker_name; "Worker_ChecksumOneTable"; $worker; $options)
-				
-		End case 
-		
-		DELAY PROCESS:C323(Current process:C322; 20)  // add a slight delay, give worker a chance to startup
-		
-		$index:=$index+1
-		$no_more_work:=($queue_list.length<=$index)
-	Until ($no_more_work) | (Process aborted:C672)
-	
-	GenericWorker_WaitForAllWaiting()
-	GenericWorker_KillAll()
+If ($queue_list.length=0)
+	return 
 End if 
 
-$0:=$export_folder_platformPath
+
+GenericWorker_init("Table Exporter"; $num_workers)
+
+var $no_more_work : Boolean
+var $worker; $options : Object
+var $index : Integer
+$index:=0
+Repeat 
+	$queue_action:=$queue_list[$index]
+	$table_no:=$queue_action.table_no
+	$worker:=GenericWorker_GetOneWaiting()  // will not return until there is a worker that is waiting for work
+	
+	Case of 
+		: ($queue_action.action="export")
+			$options:={}
+			$options.table_no:=$table_no
+			$options.export_folder_platformPath:=$xml_folder_platformPath
+			$options.next_table_sequence_number:=Get database parameter:C643(Table:C252($table_no)->; Table sequence number:K37:31)
+			$options.fields_to_base64:=$fields_to_base64
+			CALL WORKER:C1389($worker.worker_name; "Worker_ExportOneTable"; $worker; $options)
+			
+		: ($queue_action.action="checksum")
+			$options:={}
+			$options.table_no:=$table_no
+			$options.export_folder_platformPath:=$checksum_folder_platformPath
+			$options.records_per_block:=$queue_action.records_per_MD5_block
+			CALL WORKER:C1389($worker.worker_name; "Worker_ChecksumOneTable"; $worker; $options)
+			
+	End case 
+	
+	DELAY PROCESS:C323(Current process:C322; 20)  // add a slight delay, give worker a chance to startup
+	
+	$index+=1
+	$no_more_work:=($queue_list.length<=$index)
+Until ($no_more_work) || (Process aborted:C672)
+
+GenericWorker_WaitForAllWaiting()
+GenericWorker_KillAll()

@@ -7,9 +7,6 @@
 //
 #DECLARE()->$worker : Object
 // ----------------------------------------------------
-// HISTORY
-//   Created by: DB (06/02/2022)
-// ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259=0)
 
 var _generic_workers : Collection  // defined by GenericWorker_init()

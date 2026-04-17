@@ -7,11 +7,6 @@
 //
 #DECLARE($tablePtr : Pointer)->$uniqueRecIDField : Pointer
 // ----------------------------------------------------
-// HISTORY
-//   Created by: DB (08/09/08)
-//   Mod: DB (10/23/2011) - Enhanced some error checking
-//   Mod by: Dani Beaubien (04/02/2019) - pre-emptive capable
-// ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259=1)
 
 var $table_name : Text

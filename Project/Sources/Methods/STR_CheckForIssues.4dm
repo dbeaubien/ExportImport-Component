@@ -7,7 +7,6 @@
 #DECLARE($input : Text)->$issue : Text
 // ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259=1)
-$issue:=""
 
 var $i; $char_code : Integer
 For ($i; 1; Length:C16($input))
@@ -15,8 +14,8 @@ For ($i; 1; Length:C16($input))
 	
 	If ($char_code<Backspace:K15:36)  // < ASCII 8
 		If ($issue#"")
-			$issue:=$issue+", "
+			$issue+=", "
 		End if 
-		$issue:=$issue+"ASCII "+String:C10($char_code)+" @ pos "+String:C10($i)
+		$issue+="ASCII "+String:C10($char_code)+" @ pos "+String:C10($i)
 	End if 
 End for 

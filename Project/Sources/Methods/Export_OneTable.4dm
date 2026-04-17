@@ -11,7 +11,6 @@
 ; $progHdl : Integer)->$result : Text
 // ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259=5)
-$result:=""
 
 var ExportImport_Stop : Boolean
 Case of 
@@ -22,7 +21,7 @@ Case of
 		var $i : Integer
 		var $field_ptr : Pointer
 		var $field_Nums_in_table_to_base64 : Collection
-		$field_Nums_in_table_to_base64:=New collection:C1472()
+		$field_Nums_in_table_to_base64:=[]
 		For ($i; 0; $fields_to_base64.length-1)
 			$field_ptr:=$fields_to_base64[$i]
 			If (Table:C252($field_ptr)=$table_no)
@@ -140,5 +139,3 @@ Case of
 			READ WRITE:C146($table_ptr->)
 		End if 
 End case 
-
-

@@ -14,4 +14,4 @@ var $window_ref
 $window_ref:=Open form window:C675("Field_Selector"; Sheet form window:K39:12; *)
 BRING TO FRONT:C326($window_ref)
 DIALOG:C40("Field_Selector"; $form_data)
-CLOSE WINDOW:C154
+CLOSE WINDOW:C154($window_ref)
