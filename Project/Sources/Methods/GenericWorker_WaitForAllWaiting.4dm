@@ -6,9 +6,6 @@
 //   assigned tasks.
 //
 // ----------------------------------------------------
-// HISTORY
-//   Created by: DB (06/02/2022)
-// ----------------------------------------------------
 
 var _generic_workers : Collection
 While (_generic_workers.query("ready_for_new_work=:1"; False:C215).length#0)

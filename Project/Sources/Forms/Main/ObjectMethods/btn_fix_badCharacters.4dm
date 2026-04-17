@@ -32,7 +32,7 @@ var $export_folder_platformPath : Text
 HIDE WINDOW:C436($window_ref)
 
 var $options : Object
-$options:=New object:C1471
+$options:={}
 $options.num_processes:=Form:C1466.num_worker_processes
 $options.tables_to_scan:=Form:C1466.bad_char_scan_table_list.query("is_selected=:1"; True:C214).extract("table_no")
 $options.field_ptrs_to_ignore:=Form:C1466.bad_char_scan_ignore_field_list.query("is_selected=:1"; True:C214).extract("field_ptr")

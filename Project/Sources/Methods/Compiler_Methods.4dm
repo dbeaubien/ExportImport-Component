@@ -23,10 +23,19 @@ C_OBJECT:C1216(Worker_ExportOneTable; $2)
 //Export_AllTables
 C_TEXT:C284(Export_AllTables; $0)
 C_LONGINT:C283(Export_AllTables; $1)
+C_COLLECTION:C1488(Export_AllTables; $2)
 
 //Folder_ParentName
 C_TEXT:C284(Folder_ParentName; $0)
 C_TEXT:C284(Folder_ParentName; $1)
+
+//Export_OneTable
+C_TEXT:C284(Export_OneTable; $0)
+C_LONGINT:C283(Export_OneTable; $1)
+C_TEXT:C284(Export_OneTable; $2)
+C_LONGINT:C283(Export_OneTable; $3)
+C_COLLECTION:C1488(Export_OneTable; $4)
+C_LONGINT:C283(Export_OneTable; $5)
 
 //STR_CheckForIssues
 C_TEXT:C284(STR_CheckForIssues; $0)
@@ -55,6 +64,7 @@ C_TEXT:C284(Time2String; $2)
 C_TEXT:C284(Export_ListOfTables; $0)
 C_LONGINT:C283(Export_ListOfTables; $1)
 C_COLLECTION:C1488(Export_ListOfTables; $2)
+C_COLLECTION:C1488(Export_ListOfTables; $3)
 
 //Worker_NTS_Progress_Set_Title
 C_LONGINT:C283(Worker_NTS_Progress_Set_Title; $1)
@@ -162,6 +172,12 @@ C_OBJECT:C1216(ExpImpComp_GetBuildNo; $0)
 
 //Export_SetMaxFileSizeMB
 C_LONGINT:C283(Export_SetMaxFileSizeMB; $1)
+
+//Field_ExportToXmlFile
+C_TEXT:C284(Field_ExportToXmlFile; $0)
+C_TIME:C306(Field_ExportToXmlFile; $1)
+C_POINTER:C301(Field_ExportToXmlFile; $2)
+C_BOOLEAN:C305(Field_ExportToXmlFile; $3)
 
 //File_Delete
 C_TEXT:C284(File_Delete; $1)

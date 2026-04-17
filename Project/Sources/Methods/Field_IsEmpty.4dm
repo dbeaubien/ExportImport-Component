@@ -6,20 +6,16 @@
 //
 #DECLARE($field_ptr : Pointer)->$is_empty : Boolean
 // ----------------------------------------------------
-// HISTORY
-//   Created by: DB (07/26/11)
-// ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259=1)
-$is_empty:=False:C215
 
 var $field_type : Integer
 $field_type:=Type:C295($field_ptr->)
 
 Case of 
-	: (($field_type=Is alpha field:K8:1) | ($field_type=Is text:K8:3))
+	: (($field_type=Is alpha field:K8:1) || ($field_type=Is text:K8:3))
 		$is_empty:=($field_ptr->="")
 		
-	: (($field_type=Is real:K8:4) | ($field_type=Is integer:K8:5) | ($field_type=Is longint:K8:6))
+	: (($field_type=Is real:K8:4) || ($field_type=Is integer:K8:5) || ($field_type=Is longint:K8:6))
 		$is_empty:=($field_ptr->=0)
 		
 	: (($field_type=Is date:K8:7))

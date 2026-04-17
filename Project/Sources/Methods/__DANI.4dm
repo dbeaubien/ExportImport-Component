@@ -107,7 +107,7 @@ Export_Import_Dialog
 
 If (False:C215)
 	var $options : Object
-	$options:=New object:C1471
+	$options:={}
 	$options.num_processes:=3
 	$options.field_ptrs_to_ignore:=New collection:C1472(->[Table_2:2]Field_3:3)
 	//$options.tables_to_scan:=New collection(Table(->[Table_2]))  // null or empty means all tables
@@ -134,7 +134,7 @@ If (False:C215)  // ## Create test data
 		[Table_1:1]Field_9:9:=100000+$i+($i/1000)
 		VARIABLE TO BLOB:C532($i; [Table_1:1]Field_10:10)
 		//[Table_1]Field_11:=
-		[Table_1:1]Field_12:12:=New object:C1471("i"; $i)
+		[Table_1:1]Field_12:12:={i: $i}
 		SAVE RECORD:C53([Table_1:1])
 	End for 
 	REDUCE SELECTION:C351([Table_1:1]; 0)
@@ -166,7 +166,7 @@ End if
 
 If (False:C215)  // ## Import exported data
 	var $options : Object
-	$options:=New object:C1471
+	$options:={}
 	$options.truncation_before_import:=False:C215  // default
 	
 	var $importFromFolder_platformPath : Text

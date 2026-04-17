@@ -5,52 +5,30 @@
 //   A generic method to create a file and properly set the
 //   creator types. By default the file is set as a text file.
 //
-C_TEXT:C284($1; $vt_pathToCreateFileAt)
-C_TEXT:C284($2; $vt_FileType)
-C_TIME:C306($0; $vh_docRef)
-// ----------------------------------------------------
-// HISTORY
-//   Created by: DB (10/25/07)
+#DECLARE($path_to_create_file_at : Text; $file_type : Text)->$doc_ref : Time
 // ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259<=2)
-$vh_docRef:=?00:00:00?  // Clear our var
-// ###################   Load parms   ##################
-If (Count parameters:C259>=1)
-	$vt_pathToCreateFileAt:=$1
-Else 
-	$vt_pathToCreateFileAt:=""
-End if 
 
-If (Count parameters:C259>=2)
-	$vt_FileType:=$2
-Else 
-	$vt_FileType:=File_DeriveFileTypeFromName($vt_pathToCreateFileAt)
-	If ($vt_FileType="")
-		If (Is Windows:C1573)
-			$vt_FileType:="TXT"
-		Else 
-			$vt_FileType:="TEXT"
-		End if 
+If (Count parameters:C259<2)
+	$file_type:=File_DeriveFileTypeFromName($path_to_create_file_at)
+	If ($file_type="")
+		$file_type:=(Is Windows:C1573) ? "TXT" : "TEXT"
 	End if 
 End if 
 
-
-// ###################   Do the deed  ##################
-C_TEXT:C284($vt_docActuallyCreated)
-$vh_docRef:=Create document:C266($vt_pathToCreateFileAt; $vt_FileType)
+var $doc_actually_created : Text
+$doc_ref:=Create document:C266($path_to_create_file_at; $file_type)
 If (OK=1)
-	$vt_docActuallyCreated:=Document
-	CLOSE DOCUMENT:C267($vh_docRef)
+	$doc_actually_created:=Document
+	CLOSE DOCUMENT:C267($doc_ref)
 	
 	// Make sure that the name we specified (if any) is the name of the created file
-	If ($vt_pathToCreateFileAt#"") & ($vt_pathToCreateFileAt#$vt_docActuallyCreated)
-		MOVE DOCUMENT:C540($vt_docActuallyCreated; $vt_pathToCreateFileAt)
-		$vt_docActuallyCreated:=$vt_pathToCreateFileAt
+	If ($path_to_create_file_at#"") && ($path_to_create_file_at#$doc_actually_created)
+		MOVE DOCUMENT:C540($doc_actually_created; $path_to_create_file_at)
+		$doc_actually_created:=$path_to_create_file_at
 	End if 
 	
-	$vh_docRef:=Open document:C264($vt_docActuallyCreated)
+	$doc_ref:=Open document:C264($doc_actually_created)
 Else 
-	$vh_docRef:=-1
+	$doc_ref:=-1
 End if 
-
-$0:=$vh_docRef

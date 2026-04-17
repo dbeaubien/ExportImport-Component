@@ -9,7 +9,7 @@ If ($num_workers<=0)
 	$num_workers:=3
 End if 
 If ($options=Null:C1517)
-	$options:=New object:C1471
+	$options:={}
 End if 
 If ($options.truncation_before_import=Null:C1517)
 	$options.truncation_before_import:=True:C214  // default
@@ -40,7 +40,7 @@ If (OK=1)
 				If ($worker.progress_hdl_id=0)
 				End if 
 				
-				$worker_options:=New object:C1471()
+				$worker_options:={}
 				$worker_options.table_no:=$table_no
 				$worker_options.import_folder_platformPath:=$folder.folder("Data").platformPath
 				$worker_options.checksum_folder_platformPath:=$folder.folder("MD5 - after import").platformPath
@@ -55,5 +55,3 @@ End if
 GenericWorker_WaitForAllWaiting()
 GenericWorker_KillAll()
 Trigger_ENABLE
-
-$0:=$importFromFolder_platformPath
