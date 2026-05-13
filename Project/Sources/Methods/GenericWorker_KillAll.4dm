@@ -10,7 +10,6 @@
 ASSERT:C1129(Count parameters:C259=0)
 
 var $worker : Object
-var _generic_workers : Collection  // defined by GenericWorker_init()
 
 For each ($worker; _generic_workers)
 	Progress QUIT($worker.progress_hdl_id)

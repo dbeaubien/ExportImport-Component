@@ -9,8 +9,6 @@
 // ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259=0)
 
-var _generic_workers : Collection  // defined by GenericWorker_init()
-
 // find those that can accept jobs
 While (_generic_workers.query("ready_for_new_work=:1"; True:C214).length=0)
 	DELAY PROCESS:C323(Current process:C322; 60)  // pause for 1 second between checks
