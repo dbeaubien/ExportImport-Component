@@ -13,7 +13,6 @@ If (Count parameters:C259<3)
 	$blobpara:=->$internalrecord
 End if 
 
-var ExportImport_Stop : Boolean  // this is the only global variable
 var $Fieldtyp; $Fieldlength : Integer
 var $fieldptr : Pointer
 var $ref : Time

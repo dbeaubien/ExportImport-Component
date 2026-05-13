@@ -9,23 +9,12 @@ If (Not:C34(Is compiled mode:C492)) && (Structure file:C489(*)=Structure file:C4
 	
 	Log_OpenDisplayWindow
 	
-	ARRAY TEXT:C222($components; 0)
-	COMPONENT LIST:C1001($components)
+	CA_OnStartup()
+	Snippet_ShowSelectorWindow()
 	
-	If (Find in array:C230($components; "Code Analysis")>0)
-		EXECUTE FORMULA:C63("CA_OnStartup")
-	End if 
-	
-	If (Find in array:C230($components; "CodeSnippets")>0)
-		EXECUTE FORMULA:C63("Snippet_ShowSelectorWindow")
-	End if 
-	
-	If (Find in array:C230($components; "Mainfest Generator")>0)
-		EXECUTE METHOD:C1007("Manifest_SetAuthor"; *; "Dani Beaubien")
-		EXECUTE METHOD:C1007("Manifest_SetBuildDate"; *; Current date:C33)
-		EXECUTE METHOD:C1007("Manifest_SetURL"; *; "http://openRoadDevelopment.com")
-		EXECUTE METHOD:C1007("Manifest_SetCopyright"; *; "Copyright "+String:C10(Year of:C25(Current date:C33))+" Open Road Development, Inc.")
-		EXECUTE METHOD:C1007("Manifest_SetVersion"; *; ExpImpComp_GetBuildNo.versionLong; True:C214)
-	End if 
-	
+	Manifest_SetAuthor("Dani Beaubien")
+	Manifest_SetBuildDate(Current date:C33)
+	Manifest_SetURL("http://openRoadDevelopment.com")
+	Manifest_SetCopyright("Copyright "+String:C10(Year of:C25(Current date:C33))+" Open Road Development, Inc.")
+	Manifest_SetVersion(ExpImpComp_GetBuildNo.versionLong; True:C214)
 End if 
