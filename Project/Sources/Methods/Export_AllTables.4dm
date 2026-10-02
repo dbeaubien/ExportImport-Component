@@ -1,28 +1,13 @@
-//%attributes = {"invisible":true,"shared":true,"executedOnServer":true,"preemptive":"incapable"}
-// Export_AllTables (num_workers{; fields_to_base64})
+//%attributes = {"invisible":true,"shared":true,"preemptive":"incapable"}
+// Export_AllTables (num_workers{; fields_to_base64}) : export set path
+//
+// DESCRIPTION
+//   A wrapper over ExportPass, every table, empty ones included (spec 12).
+//   num_workers 0 means the pass's default (spec 15). fields_to_base64 is
+//   ignored. A refused or failed export still returns the set's path: its
+//   run report says why.
 //
 #DECLARE($num_workers : Integer\
 ; $fields_to_base64 : Collection)->$export_folder_platformPath : Text
 // ----------------------------------------------------
-ASSERT:C1129(Count parameters:C259<=2)
-$export_folder_platformPath:=""
-If ($num_workers<=0)
-	$num_workers:=3
-End if 
-If ($fields_to_base64=Null:C1517)
-	$fields_to_base64:=[]
-End if 
-
-var $table_no_list : Collection
-var $table_no : Integer
-$table_no_list:=[]
-For ($table_no; 1; Get last table number:C254)
-	Case of 
-		: (Not:C34(Is table number valid:C999($table_no)))
-		: (Records in table:C83(Table:C252($table_no)->)=0)
-		Else 
-			$table_no_list.push($table_no)
-	End case 
-End for 
-
-$export_folder_platformPath:=Export_ListOfTables($num_workers; $table_no_list; $fields_to_base64)
+$export_folder_platformPath:=cs.ExportPass.new({workers: ($num_workers<=0) ? Null : $num_workers}).run().export_set

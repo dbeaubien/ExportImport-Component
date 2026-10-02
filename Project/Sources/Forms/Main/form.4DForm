@@ -3,105 +3,290 @@
 		"version": "1",
 		"kind": "form"
 	},
-	"windowSizingX": "fixed",
-	"windowSizingY": "fixed",
-	"windowMinWidth": 500,
-	"windowMinHeight": 500,
-	"windowMaxWidth": 500,
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 820,
+	"windowMinHeight": 560,
+	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
 	"events": [
 		"onLoad",
-		"onClick",
-		"onActivate",
-		"onCloseBox"
+		"onCloseBox",
+		"onTimer"
 	],
 	"windowTitle": "Datafile Exporter / Importer",
 	"destination": "detailScreen",
 	"pages": [
 		{
 			"objects": {
-				"Rectangle": {
-					"type": "rectangle",
-					"top": 0,
-					"left": 0,
-					"width": 600,
-					"height": 38,
-					"fill": "#808080",
-					"stroke": "#808080"
-				},
-				"Text3": {
-					"type": "text",
-					"top": 9,
-					"left": 8,
-					"width": 575,
-					"height": 20,
-					"stroke": "#FFFFFF",
-					"class": "default_-_large",
-					"textAlign": "left",
-					"fontWeight": "bold",
-					"text": "Datafile Exporter / Importer",
-					"fontSize": 18
-				},
-				"Text1": {
-					"type": "text",
-					"top": 58,
-					"left": 43,
-					"width": 259,
-					"height": 16,
-					"class": "",
-					"text": "Number of worker processes to use:",
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"Input": {
-					"type": "input",
-					"left": 306,
-					"top": 58,
-					"width": 45,
-					"height": 17,
-					"dataSourceTypeHint": "integer",
-					"dataSource": "Form:C1466.num_worker_processes",
-					"min": 1,
-					"max": 10,
-					"numberFormat": "#0",
-					"textAlign": "center"
-				},
-				"Text2": {
-					"type": "text",
-					"top": 59,
-					"left": 358,
-					"width": 49,
-					"height": 16,
-					"class": "",
-					"text": "(1 - 10)",
-					"textAlign": "automatic",
-					"fontStyle": "italic"
-				},
-				"Tab Control": {
-					"type": "tab",
-					"text": "Tab control",
-					"top": 89,
+				"steps": {
+					"type": "listbox",
+					"listboxType": "collection",
+					"dataSource": "Form.steps",
+					"currentItemSource": "Form.step",
+					"selectionMode": "single",
+					"showHeaders": false,
+					"top": 10,
 					"left": 10,
-					"width": 579,
-					"height": 401,
-					"labels": [
-						"Health Checks",
-						"Export Records",
-						"Import Records"
+					"width": 180,
+					"height": 580,
+					"sizingY": "grow",
+					"focusable": false,
+					"sortable": false,
+					"movableRows": false,
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "hidden",
+					"horizontalLineStroke": "transparent",
+					"verticalLineStroke": "transparent",
+					"events": [
+						"onSelectionChange"
 					],
-					"labelsPlacement": "top",
-					"action": "gotoPage"
+					"method": "Dialog_Event",
+					"columns": [
+						{
+							"name": "steps_c_mark",
+							"dataSource": "This.mark",
+							"dataSourceTypeHint": "text",
+							"width": 26,
+							"enterable": false,
+							"resizable": false,
+							"textAlign": "center",
+							"header": {
+								"name": "steps_h_mark",
+								"text": ""
+							}
+						},
+						{
+							"name": "steps_c_name",
+							"dataSource": "This.name",
+							"dataSourceTypeHint": "text",
+							"width": 150,
+							"enterable": false,
+							"resizable": false,
+							"header": {
+								"name": "steps_h_name",
+								"text": "Step"
+							}
+						}
+					]
 				},
-				"Button": {
-					"type": "button",
-					"text": "Escape",
-					"top": 9,
-					"left": 620,
-					"width": 69,
-					"height": 18,
+				"info_datafile": {
+					"type": "input",
+					"top": 10,
+					"left": 205,
+					"width": 685,
+					"height": 17,
+					"dataSource": "Form.datafile_line",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"sizingX": "grow"
+				},
+				"set_label": {
+					"type": "text",
+					"text": "Export set:",
+					"top": 37,
+					"left": 205,
+					"width": 75,
+					"height": 17
+				},
+				"set_list": {
+					"type": "dropdown",
+					"top": 34,
+					"left": 285,
+					"width": 480,
+					"height": 22,
+					"dataSource": "Form.set_list",
+					"dataSourceTypeHint": "object",
 					"events": [
 						"onClick"
 					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingX": "grow"
+				},
+				"set_choose": {
+					"type": "button",
+					"text": "Choose…",
+					"top": 34,
+					"left": 775,
+					"width": 115,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingX": "move"
+				},
+				"info_set": {
+					"type": "input",
+					"top": 60,
+					"left": 285,
+					"width": 605,
+					"height": 16,
+					"dataSource": "Form.set_line",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"sizingX": "grow"
+				},
+				"unusable": {
+					"type": "text",
+					"text": "This target is unusable.",
+					"top": 80,
+					"left": 205,
+					"width": 685,
+					"height": 17,
+					"fontWeight": "bold",
+					"stroke": "#C00000",
+					"visibility": "hidden",
+					"sizingX": "grow"
+				},
+				"line_top": {
+					"type": "line",
+					"top": 102,
+					"left": 205,
+					"width": 685,
+					"height": 0,
+					"stroke": "#C0C0C0",
+					"sizingX": "grow"
+				},
+				"prog_line": {
+					"type": "input",
+					"top": 312,
+					"left": 205,
+					"width": 685,
+					"height": 17,
+					"dataSource": "Form.run.line",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"fontWeight": "bold",
+					"visibility": "hidden",
+					"sizingX": "grow"
+				},
+				"prog_bar": {
+					"type": "progress",
+					"top": 334,
+					"left": 205,
+					"width": 685,
+					"height": 16,
+					"dataSource": "Form.run.bar",
+					"dataSourceTypeHint": "number",
+					"min": 0,
+					"max": 100,
+					"visibility": "hidden",
+					"sizingX": "grow"
+				},
+				"prog_times": {
+					"type": "input",
+					"top": 358,
+					"left": 205,
+					"width": 685,
+					"height": 17,
+					"dataSource": "Form.run.times",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"visibility": "hidden",
+					"sizingX": "grow"
+				},
+				"prog_stop": {
+					"type": "button",
+					"text": "Stop",
+					"top": 270,
+					"left": 775,
+					"width": 115,
+					"height": 26,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"visibility": "hidden",
+					"sizingX": "move"
+				},
+				"prog_grid": {
+					"type": "listbox",
+					"listboxType": "collection",
+					"dataSource": "Form.run.rows",
+					"top": 384,
+					"left": 205,
+					"width": 685,
+					"height": 206,
+					"selectionMode": "none",
+					"focusable": false,
+					"sortable": false,
+					"movableRows": false,
+					"scrollbarHorizontal": "hidden",
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"columns": [
+						{
+							"name": "prog_c_table",
+							"dataSource": "This.name",
+							"width": 300,
+							"enterable": false,
+							"header": {
+								"name": "prog_h_table",
+								"text": "Table"
+							},
+							"dataSourceTypeHint": "text"
+						},
+						{
+							"name": "prog_c_state",
+							"dataSource": "This.state",
+							"width": 100,
+							"enterable": false,
+							"header": {
+								"name": "prog_h_state",
+								"text": "State"
+							},
+							"dataSourceTypeHint": "text"
+						},
+						{
+							"name": "prog_c_records",
+							"dataSource": "This.records",
+							"width": 180,
+							"enterable": false,
+							"header": {
+								"name": "prog_h_records",
+								"text": "Records"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "prog_c_elapsed",
+							"dataSource": "This.elapsed",
+							"width": 90,
+							"enterable": false,
+							"header": {
+								"name": "prog_h_elapsed",
+								"text": "Elapsed"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						}
+					],
+					"visibility": "hidden"
+				},
+				"key_esc": {
+					"type": "button",
+					"text": "Esc",
+					"top": 10,
+					"left": -150,
+					"width": 80,
+					"height": 18,
 					"shortcutAccel": false,
 					"shortcutControl": false,
 					"shortcutShift": false,
@@ -109,16 +294,13 @@
 					"shortcutKey": "[Esc]",
 					"focusable": false
 				},
-				"Button1": {
+				"key_period": {
 					"type": "button",
 					"text": "Cmd .",
-					"top": 29,
-					"left": 620,
-					"width": 69,
+					"top": 30,
+					"left": -150,
+					"width": 80,
 					"height": 18,
-					"events": [
-						"onClick"
-					],
 					"shortcutAccel": true,
 					"shortcutControl": false,
 					"shortcutShift": false,
@@ -126,16 +308,13 @@
 					"shortcutKey": ".",
 					"focusable": false
 				},
-				"Button2": {
+				"key_enter": {
 					"type": "button",
 					"text": "Enter",
-					"top": 49,
-					"left": 620,
-					"width": 69,
+					"top": 50,
+					"left": -150,
+					"width": 80,
 					"height": 18,
-					"events": [
-						"onClick"
-					],
 					"shortcutAccel": false,
 					"shortcutControl": false,
 					"shortcutShift": false,
@@ -143,16 +322,13 @@
 					"shortcutKey": "[Enter]",
 					"focusable": false
 				},
-				"Button3": {
+				"key_return": {
 					"type": "button",
 					"text": "Return",
-					"top": 69,
-					"left": 620,
-					"width": 69,
+					"top": 70,
+					"left": -150,
+					"width": 80,
 					"height": 18,
-					"events": [
-						"onClick"
-					],
 					"shortcutAccel": false,
 					"shortcutControl": false,
 					"shortcutShift": false,
@@ -160,306 +336,1423 @@
 					"shortcutKey": "[Return]",
 					"focusable": false
 				},
-				"Button4": {
+				"close": {
 					"type": "button",
-					"text": "Cmd w",
-					"top": 89,
-					"left": 620,
-					"width": 69,
+					"text": "Cmd W",
+					"top": 90,
+					"left": -150,
+					"width": 80,
 					"height": 18,
-					"events": [
-						"onClick"
-					],
 					"shortcutAccel": true,
 					"shortcutControl": false,
 					"shortcutShift": false,
 					"shortcutAlt": false,
 					"shortcutKey": "w",
 					"focusable": false,
-					"action": "cancel"
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event"
 				}
 			}
 		},
 		{
 			"objects": {
-				"btn_scan_badCharacters": {
-					"type": "button",
-					"top": 426,
-					"left": 67,
-					"width": 138,
-					"height": 21,
-					"dataSource": "",
-					"action": "",
-					"shortcutKey": "[Return]",
-					"text": "Scan",
-					"class": "default",
-					"focusable": false,
-					"defaultButton": false,
-					"events": [
-						"onClick"
-					],
-					"method": "ObjectMethods/btn_scan_badCharacters.4dm"
-				},
-				"btn_fix_badCharacters": {
-					"type": "button",
-					"top": 426,
-					"left": 296,
-					"width": 218,
-					"height": 21,
-					"dataSource": "",
-					"action": "",
-					"shortcutKey": "[Return]",
-					"text": "Scan & Remove Bad Chars ",
-					"class": "default",
-					"focusable": false,
-					"defaultButton": false,
-					"events": [
-						"onClick"
-					],
-					"method": "ObjectMethods/btn_fix_badCharacters.4dm"
-				},
-				"btn_select_fields_to_ignore": {
-					"type": "button",
-					"top": 308,
-					"left": 56,
-					"width": 208,
-					"height": 21,
-					"dataSource": "",
-					"action": "",
-					"shortcutKey": "[Return]",
-					"text": "Select Alpha Fields to Ignore",
-					"class": "default",
-					"focusable": false,
-					"defaultButton": false,
-					"events": [
-						"onClick"
-					],
-					"method": "ObjectMethods/btn_select_fields_to_ignore.4dm"
-				},
-				"btn_select_tables_to_export1": {
-					"type": "button",
-					"top": 264,
-					"left": 56,
-					"width": 208,
-					"height": 21,
-					"dataSource": "",
-					"action": "",
-					"shortcutKey": "[Return]",
-					"text": "Select Tables to Scan",
-					"class": "default",
-					"focusable": false,
-					"defaultButton": false,
-					"events": [
-						"onClick"
-					],
-					"method": "ObjectMethods/btn_select_tables_to_export1.4dm"
-				},
-				"Input4": {
-					"type": "input",
-					"left": 273,
-					"top": 266,
-					"width": 225,
-					"height": 17,
-					"dataSourceTypeHint": "text",
-					"dataSource": "Form:C1466.selected_scan_table_label",
-					"min": "",
-					"max": "",
-					"borderStyle": "none",
-					"fill": "transparent",
-					"enterable": false,
-					"focusable": false
-				},
-				"Input5": {
-					"type": "input",
-					"left": 273,
-					"top": 310,
-					"width": 225,
-					"height": 17,
-					"dataSourceTypeHint": "text",
-					"dataSource": "Form:C1466.selected_ignore_field_label",
-					"min": "",
-					"max": "",
-					"borderStyle": "none",
-					"fill": "transparent",
-					"enterable": false,
-					"focusable": false
-				},
-				"Line": {
-					"type": "line",
-					"top": 386,
-					"left": 25,
-					"width": 549,
-					"height": 0,
-					"stroke": "#c0c0c0"
-				},
-				"Text6": {
+				"hc_title": {
 					"type": "text",
-					"top": 139,
-					"left": 57,
-					"width": 425,
-					"height": 87,
-					"class": "",
-					"text": "The Health Check will look for records with:\r- a field that is marked unique with a non-unique value\r- a primary key that is NULL or not set\r- an alpha field with a char that is unexpected in this type of field.\r- a date field that has a 5 digit year"
-				}
-			}
-		},
-		{
-			"objects": {
-				"btn_select_tables_to_export": {
+					"text": "Health check",
+					"top": 110,
+					"left": 205,
+					"width": 685,
+					"height": 20,
+					"fontWeight": "bold",
+					"fontSize": 15,
+					"sizingX": "grow"
+				},
+				"hc_about": {
+					"type": "text",
+					"text": "It finds blockers, which the export refuses, and signs of damage, which the export copies as they are. First verify the source copy with the MSC (Verify ▸ Records and indexes).",
+					"top": 136,
+					"left": 205,
+					"width": 560,
+					"height": 32,
+					"sizingX": "grow"
+				},
+				"hc_msc": {
 					"type": "button",
-					"top": 198,
-					"left": 90,
-					"width": 208,
-					"height": 21,
-					"dataSource": "",
-					"action": "",
-					"shortcutKey": "[Return]",
-					"text": "Select Tables to Export",
-					"class": "default",
-					"focusable": false,
-					"defaultButton": false,
+					"text": "Open MSC",
+					"top": 140,
+					"left": 775,
+					"width": 115,
+					"height": 22,
 					"events": [
 						"onClick"
 					],
-					"method": "ObjectMethods/btn_select_tables_to_export.4dm"
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingX": "move"
 				},
-				"Input1": {
-					"type": "input",
-					"left": 307,
-					"top": 200,
-					"width": 225,
-					"height": 17,
-					"dataSourceTypeHint": "text",
-					"dataSource": "Form:C1466.selected_table_label",
-					"min": "",
-					"max": "",
-					"borderStyle": "none",
-					"fill": "transparent",
-					"enterable": false,
+				"hc_tables": {
+					"type": "button",
+					"text": "Tables…",
+					"top": 176,
+					"left": 205,
+					"width": 140,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
 					"focusable": false
 				},
-				"Text4": {
-					"type": "text",
-					"top": 148,
-					"left": 27,
-					"width": 209,
-					"height": 16,
-					"class": "",
-					"text": "Max export file size MB:",
-					"textAlign": "right"
-				},
-				"Input2": {
+				"hc_tables_info": {
 					"type": "input",
-					"left": 240,
-					"top": 148,
-					"width": 45,
+					"top": 179,
+					"left": 355,
+					"width": 400,
 					"height": 17,
+					"dataSource": "Form.tables_label",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
+				},
+				"hc_fields": {
+					"type": "button",
+					"text": "Fields to ignore…",
+					"top": 204,
+					"left": 205,
+					"width": 140,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false
+				},
+				"hc_fields_info": {
+					"type": "input",
+					"top": 207,
+					"left": 355,
+					"width": 400,
+					"height": 17,
+					"dataSource": "Form.fields_label",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
+				},
+				"hc_workers_label": {
+					"type": "text",
+					"text": "Workers:",
+					"top": 235,
+					"left": 205,
+					"width": 60,
+					"height": 17
+				},
+				"hc_workers": {
+					"type": "input",
+					"top": 232,
+					"left": 270,
+					"width": 50,
+					"height": 22,
+					"dataSource": "Form.workers.healthCheck",
 					"dataSourceTypeHint": "integer",
-					"dataSource": "Form:C1466.max_export_file_size_mb",
 					"min": 1,
-					"max": 100,
 					"numberFormat": "#0",
 					"textAlign": "center"
 				},
-				"Text5": {
-					"type": "text",
-					"top": 149,
-					"left": 292,
-					"width": 99,
-					"height": 16,
-					"class": "",
-					"text": "(1-100)",
-					"textAlign": "automatic"
-				},
-				"Line1": {
-					"type": "line",
-					"top": 386,
-					"left": 25,
-					"width": 549,
-					"height": 0,
-					"stroke": "#c0c0c0"
-				},
-				"btn_export_tables": {
-					"type": "button",
-					"top": 426,
-					"left": 90,
-					"width": 178,
-					"height": 21,
-					"dataSource": "",
-					"action": "",
-					"shortcutKey": "[Return]",
-					"text": "Export Selected Tables",
-					"class": "default",
+				"hc_check": {
+					"type": "input",
+					"top": 262,
+					"left": 205,
+					"width": 560,
+					"height": 40,
+					"dataSource": "Form.check_text",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
 					"focusable": false,
-					"defaultButton": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"multiline": "yes",
+					"scrollbarVertical": "automatic",
+					"sizingX": "grow"
+				},
+				"hc_run": {
+					"type": "button",
+					"text": "Run",
+					"top": 270,
+					"left": 775,
+					"width": 115,
+					"height": 26,
 					"events": [
 						"onClick"
 					],
-					"method": "ObjectMethods/btn_export_tables.4dm"
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingX": "move"
+				},
+				"hc_res_banner": {
+					"type": "input",
+					"top": 312,
+					"left": 205,
+					"width": 685,
+					"height": 34,
+					"dataSource": "Form.view.banner",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"multiline": "yes",
+					"fontWeight": "bold",
+					"sizingX": "grow"
+				},
+				"hc_res_notes": {
+					"type": "input",
+					"top": 348,
+					"left": 205,
+					"width": 685,
+					"height": 30,
+					"dataSource": "Form.view.notes",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"multiline": "yes",
+					"scrollbarVertical": "automatic",
+					"sizingX": "grow"
+				},
+				"hc_res_grid": {
+					"type": "listbox",
+					"listboxType": "collection",
+					"dataSource": "Form.view.rows",
+					"top": 382,
+					"left": 205,
+					"width": 685,
+					"height": 178,
+					"selectionMode": "none",
+					"focusable": false,
+					"sortable": false,
+					"movableRows": false,
+					"scrollbarHorizontal": "hidden",
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"columns": [
+						{
+							"name": "hc_c_table",
+							"dataSource": "This.name",
+							"width": 340,
+							"enterable": false,
+							"header": {
+								"name": "hc_h_table",
+								"text": "Table"
+							},
+							"dataSourceTypeHint": "text"
+						},
+						{
+							"name": "hc_c_records",
+							"dataSource": "This.records",
+							"width": 110,
+							"enterable": false,
+							"header": {
+								"name": "hc_h_records",
+								"text": "Records",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "number",
+							"numberFormat": "###,###,###,##0",
+							"textAlign": "right"
+						},
+						{
+							"name": "hc_c_blockers",
+							"dataSource": "This.blockers",
+							"width": 110,
+							"enterable": false,
+							"header": {
+								"name": "hc_h_blockers",
+								"text": "Blockers",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "number",
+							"numberFormat": "###,###,###,##0",
+							"textAlign": "right"
+						},
+						{
+							"name": "hc_c_damage",
+							"dataSource": "This.damage",
+							"width": 120,
+							"enterable": false,
+							"header": {
+								"name": "hc_h_damage",
+								"text": "Signs of damage",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "number",
+							"numberFormat": "###,###,###,##0",
+							"textAlign": "right"
+						}
+					],
+					"metaSource": "This.meta"
+				},
+				"hc_res_open": {
+					"type": "button",
+					"text": "Open report",
+					"top": 568,
+					"left": 205,
+					"width": 110,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingY": "move"
+				},
+				"hc_res_show": {
+					"type": "button",
+					"text": "Show on disk",
+					"top": 568,
+					"left": 323,
+					"width": 110,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingY": "move"
+				},
+				"hc_res_leave": {
+					"type": "button",
+					"text": "Leave blocked tables out",
+					"top": 568,
+					"left": 441,
+					"width": 180,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingY": "move"
+				},
+				"hc_res_fix": {
+					"type": "button",
+					"text": "Remove bad characters",
+					"top": 568,
+					"left": 629,
+					"width": 170,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingY": "move"
 				}
 			}
 		},
 		{
 			"objects": {
-				"Line2": {
-					"type": "line",
-					"top": 386,
-					"left": 25,
-					"width": 549,
-					"height": 0,
-					"stroke": "#c0c0c0"
+				"ex_title": {
+					"type": "text",
+					"text": "Export",
+					"top": 110,
+					"left": 205,
+					"width": 685,
+					"height": 20,
+					"fontWeight": "bold",
+					"fontSize": 15,
+					"sizingX": "grow"
 				},
-				"Line3": {
-					"type": "line",
-					"top": 386,
-					"left": 25,
-					"width": 549,
-					"height": 0,
-					"stroke": "#c0c0c0"
+				"ex_about": {
+					"type": "text",
+					"text": "It writes an export set next to this datafile. It runs the health check's blocker gate first, and refuses the export on any blocker.",
+					"top": 136,
+					"left": 205,
+					"width": 685,
+					"height": 32,
+					"sizingX": "grow"
 				},
-				"btn_import_tables": {
+				"ex_tables": {
 					"type": "button",
-					"top": 426,
-					"left": 90,
-					"width": 188,
-					"height": 21,
-					"dataSource": "",
-					"action": "",
-					"shortcutKey": "[Return]",
-					"text": "Import Records from Disk",
-					"class": "default",
-					"focusable": false,
-					"defaultButton": false,
+					"text": "Tables…",
+					"top": 176,
+					"left": 205,
+					"width": 140,
+					"height": 22,
 					"events": [
 						"onClick"
 					],
-					"method": "ObjectMethods/btn_import_tables.4dm"
+					"method": "Dialog_Event",
+					"focusable": false
 				},
-				"Check Box": {
-					"type": "checkbox",
-					"text": "Truncate Table before Importing Records",
-					"top": 150,
-					"left": 128,
-					"width": 279,
-					"height": 29,
+				"ex_tables_info": {
+					"type": "input",
+					"top": 179,
+					"left": 355,
+					"width": 400,
+					"height": 17,
+					"dataSource": "Form.tables_label",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent"
+				},
+				"ex_workers_label": {
+					"type": "text",
+					"text": "Workers:",
+					"top": 207,
+					"left": 205,
+					"width": 60,
+					"height": 17
+				},
+				"ex_workers": {
+					"type": "input",
+					"top": 204,
+					"left": 270,
+					"width": 50,
+					"height": 22,
+					"dataSource": "Form.workers.export",
+					"dataSourceTypeHint": "integer",
+					"min": 1,
+					"numberFormat": "#0",
+					"textAlign": "center"
+				},
+				"ex_check": {
+					"type": "input",
+					"top": 234,
+					"left": 205,
+					"width": 560,
+					"height": 68,
+					"dataSource": "Form.check_text",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"multiline": "yes",
+					"scrollbarVertical": "automatic",
+					"sizingX": "grow"
+				},
+				"ex_run": {
+					"type": "button",
+					"text": "Run",
+					"top": 270,
+					"left": 775,
+					"width": 115,
+					"height": 26,
 					"events": [
 						"onClick"
 					],
-					"dataSource": "Form:C1466.truncation_before_import",
-					"dataSourceTypeHint": "boolean"
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingX": "move"
+				},
+				"ex_res_banner": {
+					"type": "input",
+					"top": 312,
+					"left": 205,
+					"width": 685,
+					"height": 34,
+					"dataSource": "Form.view.banner",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"multiline": "yes",
+					"fontWeight": "bold",
+					"sizingX": "grow"
+				},
+				"ex_res_notes": {
+					"type": "input",
+					"top": 348,
+					"left": 205,
+					"width": 685,
+					"height": 30,
+					"dataSource": "Form.view.notes",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"multiline": "yes",
+					"scrollbarVertical": "automatic",
+					"sizingX": "grow"
+				},
+				"ex_res_digest_label": {
+					"type": "text",
+					"text": "Set digest:",
+					"top": 384,
+					"left": 205,
+					"width": 75,
+					"height": 17
+				},
+				"ex_res_digest": {
+					"type": "input",
+					"top": 384,
+					"left": 285,
+					"width": 480,
+					"height": 17,
+					"dataSource": "Form.view.digest",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"sizingX": "grow"
+				},
+				"ex_res_digest_copy": {
+					"type": "button",
+					"text": "Copy",
+					"top": 381,
+					"left": 775,
+					"width": 115,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingX": "move"
+				},
+				"ex_res_digest_note": {
+					"type": "text",
+					"text": "This export set's fingerprint. Copy it now and keep it outside the set (a ticket, an email). At the import, paste it under Set digest: the import then refuses a set that has changed since this export.",
+					"top": 405,
+					"left": 205,
+					"width": 685,
+					"height": 34,
+					"sizingX": "grow"
+				},
+				"ex_res_grid": {
+					"type": "listbox",
+					"listboxType": "collection",
+					"dataSource": "Form.view.rows",
+					"top": 444,
+					"left": 205,
+					"width": 685,
+					"height": 116,
+					"selectionMode": "none",
+					"focusable": false,
+					"sortable": false,
+					"movableRows": false,
+					"scrollbarHorizontal": "hidden",
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"columns": [
+						{
+							"name": "ex_c_table",
+							"dataSource": "This.name",
+							"width": 340,
+							"enterable": false,
+							"header": {
+								"name": "ex_h_table",
+								"text": "Table"
+							},
+							"dataSourceTypeHint": "text"
+						},
+						{
+							"name": "ex_c_records",
+							"dataSource": "This.records",
+							"width": 110,
+							"enterable": false,
+							"header": {
+								"name": "ex_h_records",
+								"text": "Records",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "number",
+							"numberFormat": "###,###,###,##0",
+							"textAlign": "right"
+						},
+						{
+							"name": "ex_c_blockers",
+							"dataSource": "This.blockers",
+							"width": 110,
+							"enterable": false,
+							"header": {
+								"name": "ex_h_blockers",
+								"text": "Blockers",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "number",
+							"numberFormat": "###,###,###,##0",
+							"textAlign": "right"
+						},
+						{
+							"name": "ex_c_damage",
+							"dataSource": "This.damage",
+							"width": 120,
+							"enterable": false,
+							"header": {
+								"name": "ex_h_damage",
+								"text": "Signs of damage",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "number",
+							"numberFormat": "###,###,###,##0",
+							"textAlign": "right"
+						}
+					],
+					"metaSource": "This.meta"
+				},
+				"ex_res_open": {
+					"type": "button",
+					"text": "Open report",
+					"top": 568,
+					"left": 205,
+					"width": 110,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingY": "move"
+				},
+				"ex_res_show": {
+					"type": "button",
+					"text": "Show on disk",
+					"top": 568,
+					"left": 323,
+					"width": 110,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingY": "move"
+				},
+				"ex_res_leave": {
+					"type": "button",
+					"text": "Leave blocked tables out",
+					"top": 568,
+					"left": 441,
+					"width": 180,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingY": "move"
+				}
+			}
+		},
+		{
+			"objects": {
+				"sw_title": {
+					"type": "text",
+					"text": "Switch to target",
+					"top": 110,
+					"left": 205,
+					"width": 685,
+					"height": 20,
+					"fontWeight": "bold",
+					"fontSize": 15,
+					"sizingX": "grow"
+				},
+				"sw_about": {
+					"type": "text",
+					"text": "4D closes this datafile, ends every process and reopens on a new, empty datafile in this folder, where the export sets stay in sight. Then open this dialog again: it opens on Import.",
+					"top": 136,
+					"left": 205,
+					"width": 685,
+					"height": 48,
+					"sizingX": "grow"
+				},
+				"sw_language": {
+					"type": "input",
+					"top": 188,
+					"left": 205,
+					"width": 685,
+					"height": 32,
+					"dataSource": "Form.language_line",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"multiline": "yes",
+					"sizingX": "grow"
+				},
+				"sw_name_label": {
+					"type": "text",
+					"text": "Target file:",
+					"top": 231,
+					"left": 205,
+					"width": 75,
+					"height": 17
+				},
+				"sw_name": {
+					"type": "input",
+					"top": 228,
+					"left": 285,
+					"width": 400,
+					"height": 22,
+					"dataSource": "Form.target_name",
+					"dataSourceTypeHint": "text",
+					"events": [
+						"onDataChange"
+					],
+					"method": "Dialog_Event"
+				},
+				"sw_folder_label": {
+					"type": "text",
+					"text": "Folder:",
+					"top": 258,
+					"left": 205,
+					"width": 75,
+					"height": 17
+				},
+				"sw_folder": {
+					"type": "input",
+					"top": 258,
+					"left": 285,
+					"width": 480,
+					"height": 17,
+					"dataSource": "Form.data_folder",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"sizingX": "grow"
+				},
+				"sw_check": {
+					"type": "input",
+					"top": 282,
+					"left": 205,
+					"width": 560,
+					"height": 28,
+					"dataSource": "Form.check_text",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"multiline": "yes",
+					"scrollbarVertical": "automatic",
+					"sizingX": "grow"
+				},
+				"sw_run": {
+					"type": "button",
+					"text": "Create target…",
+					"top": 284,
+					"left": 775,
+					"width": 115,
+					"height": 26,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingX": "move"
+				}
+			}
+		},
+		{
+			"objects": {
+				"im_title": {
+					"type": "text",
+					"text": "Import",
+					"top": 110,
+					"left": 205,
+					"width": 685,
+					"height": 20,
+					"fontWeight": "bold",
+					"fontSize": 15,
+					"sizingX": "grow"
+				},
+				"im_summary": {
+					"type": "input",
+					"top": 136,
+					"left": 205,
+					"width": 685,
+					"height": 64,
+					"dataSource": "Form.summary",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"multiline": "yes",
+					"sizingX": "grow"
+				},
+				"im_workers_label": {
+					"type": "text",
+					"text": "Workers:",
+					"top": 209,
+					"left": 205,
+					"width": 60,
+					"height": 17
+				},
+				"im_workers": {
+					"type": "input",
+					"top": 206,
+					"left": 270,
+					"width": 50,
+					"height": 22,
+					"dataSource": "Form.workers.import",
+					"dataSourceTypeHint": "integer",
+					"min": 1,
+					"numberFormat": "#0",
+					"textAlign": "center"
+				},
+				"im_set_digest_label": {
+					"type": "text",
+					"text": "Set digest:",
+					"top": 209,
+					"left": 335,
+					"width": 70,
+					"height": 17
+				},
+				"im_set_digest": {
+					"type": "input",
+					"top": 206,
+					"left": 410,
+					"width": 355,
+					"height": 22,
+					"dataSource": "Form.given_digest",
+					"dataSourceTypeHint": "text",
+					"placeholder": "Optional: the digest the export showed",
+					"tooltip": "Paste the set digest the export showed. A set that has changed since its export is then refused. Leave it empty to skip the check.",
+					"events": [
+						"onDataChange"
+					],
+					"method": "Dialog_Event"
+				},
+				"im_set_digest_paste": {
+					"type": "button",
+					"text": "Paste",
+					"top": 206,
+					"left": 775,
+					"width": 115,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingX": "move"
+				},
+				"im_check": {
+					"type": "input",
+					"top": 236,
+					"left": 205,
+					"width": 560,
+					"height": 66,
+					"dataSource": "Form.check_text",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"multiline": "yes",
+					"scrollbarVertical": "automatic",
+					"sizingX": "grow"
+				},
+				"im_run": {
+					"type": "button",
+					"text": "Run",
+					"top": 270,
+					"left": 775,
+					"width": 115,
+					"height": 26,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingX": "move"
+				},
+				"im_res_banner": {
+					"type": "input",
+					"top": 312,
+					"left": 205,
+					"width": 685,
+					"height": 34,
+					"dataSource": "Form.view.banner",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"multiline": "yes",
+					"fontWeight": "bold",
+					"sizingX": "grow"
+				},
+				"im_res_notes": {
+					"type": "input",
+					"top": 348,
+					"left": 205,
+					"width": 685,
+					"height": 30,
+					"dataSource": "Form.view.notes",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"multiline": "yes",
+					"scrollbarVertical": "automatic",
+					"sizingX": "grow"
+				},
+				"im_res_grid": {
+					"type": "listbox",
+					"listboxType": "collection",
+					"dataSource": "Form.view.rows",
+					"top": 382,
+					"left": 205,
+					"width": 685,
+					"height": 178,
+					"selectionMode": "none",
+					"focusable": false,
+					"sortable": false,
+					"movableRows": false,
+					"scrollbarHorizontal": "automatic",
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"columns": [
+						{
+							"name": "im_c_name",
+							"dataSource": "This.name",
+							"width": 150,
+							"enterable": false,
+							"header": {
+								"name": "im_h_name",
+								"text": "Table"
+							},
+							"dataSourceTypeHint": "text"
+						},
+						{
+							"name": "im_c_set",
+							"dataSource": "This.set",
+							"width": 80,
+							"enterable": false,
+							"header": {
+								"name": "im_h_set",
+								"text": "In the set",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "im_c_target",
+							"dataSource": "This.target",
+							"width": 95,
+							"enterable": false,
+							"header": {
+								"name": "im_h_target",
+								"text": "In this datafile",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "im_c_removed",
+							"dataSource": "This.removed",
+							"width": 70,
+							"enterable": false,
+							"header": {
+								"name": "im_h_removed",
+								"text": "Removed",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "im_c_loaded",
+							"dataSource": "This.loaded",
+							"width": 80,
+							"enterable": false,
+							"header": {
+								"name": "im_h_loaded",
+								"text": "Loaded",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "im_c_matched",
+							"dataSource": "This.matched",
+							"width": 75,
+							"enterable": false,
+							"header": {
+								"name": "im_h_matched",
+								"text": "Matched",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "im_c_missing",
+							"dataSource": "This.missing",
+							"width": 60,
+							"enterable": false,
+							"header": {
+								"name": "im_h_missing",
+								"text": "Missing",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "im_c_extra",
+							"dataSource": "This.extra",
+							"width": 55,
+							"enterable": false,
+							"header": {
+								"name": "im_h_extra",
+								"text": "Extra",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "im_c_changed",
+							"dataSource": "This.changed",
+							"width": 60,
+							"enterable": false,
+							"header": {
+								"name": "im_h_changed",
+								"text": "Changed",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "im_c_duplicate",
+							"dataSource": "This.duplicate",
+							"width": 65,
+							"enterable": false,
+							"header": {
+								"name": "im_h_duplicate",
+								"text": "Duplicate",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "im_c_unverified",
+							"dataSource": "This.unverified",
+							"width": 70,
+							"enterable": false,
+							"header": {
+								"name": "im_h_unverified",
+								"text": "Unverified",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "im_c_sequence",
+							"dataSource": "This.sequence",
+							"width": 65,
+							"enterable": false,
+							"header": {
+								"name": "im_h_sequence",
+								"text": "Sequence",
+								"textAlign": "center"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "center"
+						}
+					]
+				},
+				"im_res_open": {
+					"type": "button",
+					"text": "Open report",
+					"top": 568,
+					"left": 205,
+					"width": 110,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingY": "move"
+				},
+				"im_res_show": {
+					"type": "button",
+					"text": "Show on disk",
+					"top": 568,
+					"left": 323,
+					"width": 110,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingY": "move"
+				},
+				"im_res_switch": {
+					"type": "button",
+					"text": "Go to Switch to target",
+					"top": 568,
+					"left": 441,
+					"width": 180,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingY": "move"
+				}
+			}
+		},
+		{
+			"objects": {
+				"cp_title": {
+					"type": "text",
+					"text": "Compare",
+					"top": 110,
+					"left": 205,
+					"width": 685,
+					"height": 20,
+					"fontWeight": "bold",
+					"fontSize": 15,
+					"sizingX": "grow"
+				},
+				"cp_about": {
+					"type": "text",
+					"text": "It checks this datafile against the export set, record by record, and writes its report into the set. After an import, reopen the target and run it again for extra assurance.",
+					"top": 136,
+					"left": 205,
+					"width": 685,
+					"height": 32,
+					"sizingX": "grow"
+				},
+				"cp_workers_label": {
+					"type": "text",
+					"text": "Workers:",
+					"top": 179,
+					"left": 205,
+					"width": 60,
+					"height": 17
+				},
+				"cp_workers": {
+					"type": "input",
+					"top": 176,
+					"left": 270,
+					"width": 50,
+					"height": 22,
+					"dataSource": "Form.workers.compare",
+					"dataSourceTypeHint": "integer",
+					"min": 1,
+					"numberFormat": "#0",
+					"textAlign": "center"
+				},
+				"cp_set_digest_label": {
+					"type": "text",
+					"text": "Set digest:",
+					"top": 179,
+					"left": 335,
+					"width": 70,
+					"height": 17
+				},
+				"cp_set_digest": {
+					"type": "input",
+					"top": 176,
+					"left": 410,
+					"width": 355,
+					"height": 22,
+					"dataSource": "Form.given_digest",
+					"dataSourceTypeHint": "text",
+					"placeholder": "Optional: the digest the export showed",
+					"tooltip": "Paste the set digest the export showed. A set that has changed since its export is then refused. Leave it empty to skip the check.",
+					"events": [
+						"onDataChange"
+					],
+					"method": "Dialog_Event"
+				},
+				"cp_set_digest_paste": {
+					"type": "button",
+					"text": "Paste",
+					"top": 176,
+					"left": 775,
+					"width": 115,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingX": "move"
+				},
+				"cp_check": {
+					"type": "input",
+					"top": 206,
+					"left": 205,
+					"width": 560,
+					"height": 96,
+					"dataSource": "Form.check_text",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"multiline": "yes",
+					"scrollbarVertical": "automatic",
+					"sizingX": "grow"
+				},
+				"cp_run": {
+					"type": "button",
+					"text": "Run",
+					"top": 270,
+					"left": 775,
+					"width": 115,
+					"height": 26,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingX": "move"
+				},
+				"cp_res_banner": {
+					"type": "input",
+					"top": 312,
+					"left": 205,
+					"width": 685,
+					"height": 34,
+					"dataSource": "Form.view.banner",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"multiline": "yes",
+					"fontWeight": "bold",
+					"sizingX": "grow"
+				},
+				"cp_res_notes": {
+					"type": "input",
+					"top": 348,
+					"left": 205,
+					"width": 685,
+					"height": 30,
+					"dataSource": "Form.view.notes",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"focusable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"multiline": "yes",
+					"scrollbarVertical": "automatic",
+					"sizingX": "grow"
+				},
+				"cp_res_grid": {
+					"type": "listbox",
+					"listboxType": "collection",
+					"dataSource": "Form.view.rows",
+					"top": 382,
+					"left": 205,
+					"width": 685,
+					"height": 178,
+					"selectionMode": "none",
+					"focusable": false,
+					"sortable": false,
+					"movableRows": false,
+					"scrollbarHorizontal": "automatic",
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"columns": [
+						{
+							"name": "cp_c_name",
+							"dataSource": "This.name",
+							"width": 160,
+							"enterable": false,
+							"header": {
+								"name": "cp_h_name",
+								"text": "Table"
+							},
+							"dataSourceTypeHint": "text"
+						},
+						{
+							"name": "cp_c_set",
+							"dataSource": "This.set",
+							"width": 80,
+							"enterable": false,
+							"header": {
+								"name": "cp_h_set",
+								"text": "In the set",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "cp_c_target",
+							"dataSource": "This.target",
+							"width": 95,
+							"enterable": false,
+							"header": {
+								"name": "cp_h_target",
+								"text": "In this datafile",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "cp_c_matched",
+							"dataSource": "This.matched",
+							"width": 75,
+							"enterable": false,
+							"header": {
+								"name": "cp_h_matched",
+								"text": "Matched",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "cp_c_missing",
+							"dataSource": "This.missing",
+							"width": 60,
+							"enterable": false,
+							"header": {
+								"name": "cp_h_missing",
+								"text": "Missing",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "cp_c_extra",
+							"dataSource": "This.extra",
+							"width": 55,
+							"enterable": false,
+							"header": {
+								"name": "cp_h_extra",
+								"text": "Extra",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "cp_c_changed",
+							"dataSource": "This.changed",
+							"width": 60,
+							"enterable": false,
+							"header": {
+								"name": "cp_h_changed",
+								"text": "Changed",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "cp_c_duplicate",
+							"dataSource": "This.duplicate",
+							"width": 65,
+							"enterable": false,
+							"header": {
+								"name": "cp_h_duplicate",
+								"text": "Duplicate",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "cp_c_unverified",
+							"dataSource": "This.unverified",
+							"width": 70,
+							"enterable": false,
+							"header": {
+								"name": "cp_h_unverified",
+								"text": "Unverified",
+								"textAlign": "right"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "right"
+						},
+						{
+							"name": "cp_c_sequence",
+							"dataSource": "This.sequence",
+							"width": 65,
+							"enterable": false,
+							"header": {
+								"name": "cp_h_sequence",
+								"text": "Sequence",
+								"textAlign": "center"
+							},
+							"dataSourceTypeHint": "text",
+							"textAlign": "center"
+						}
+					]
+				},
+				"cp_res_open": {
+					"type": "button",
+					"text": "Open report",
+					"top": 568,
+					"left": 205,
+					"width": 110,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingY": "move"
+				},
+				"cp_res_show": {
+					"type": "button",
+					"text": "Show on disk",
+					"top": 568,
+					"left": 323,
+					"width": 110,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingY": "move"
+				},
+				"cp_res_switch": {
+					"type": "button",
+					"text": "Go to Switch to target",
+					"top": 568,
+					"left": 441,
+					"width": 180,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "Dialog_Event",
+					"focusable": false,
+					"sizingY": "move"
 				}
 			}
 		}
 	],
-	"geometryStamp": 722,
-	"width": 600,
-	"height": 500,
-	"editor": {
-		"activeView": "View 1",
-		"defaultView": "View 1",
-		"views": {
-			"View 1": {}
-		}
-	},
+	"width": 900,
+	"height": 600,
 	"method": "method.4dm"
 }

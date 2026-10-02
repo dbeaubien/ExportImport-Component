@@ -1,0 +1,56 @@
+{
+	"pass": "compare",
+	"verdict": "failed",
+	"next_step": "See the failure, then run Compare again. If it fails again, treat the target as unusable.",
+	"problems": [],
+	"cautions": [],
+	"datafile": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+	"export_set": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 18.33.09:",
+	"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 18.33.09:Compare 2026-10-01 19.50.36.txt",
+	"started": "2026-10-02T01:50:36.366Z",
+	"ended": "2026-10-02T01:50:37.496Z",
+	"component_version": "2026.r4 (build 20261001)",
+	"app_version": "2102 (build 100579)",
+	"machine": "Dani's Mac Studio",
+	"os_user": "Dani Beaubien",
+	"options": {},
+	"phases": [
+		{
+			"name": "compare",
+			"started": "2026-10-02T01:50:36.378Z",
+			"ended": "2026-10-02T01:50:37.496Z"
+		}
+	],
+	"failure": {
+		"phase": "compare",
+		"table": "Bench_Wide",
+		"key": null,
+		"errors": [
+			{
+				"errCode": 85,
+				"componentSignature": "4DRT",
+				"message": "Dereferencing a Null pointer."
+			}
+		],
+		"call_chain": [
+			{
+				"type": "classFunction",
+				"name": "_Job.run",
+				"line": 9,
+				"database": "ExportImport",
+				"formula": "This.output.failure:={table: This.job.table.name; key: This._key; errors: Last errors; call_chain: Call chain}"
+			},
+			{
+				"type": "projectMethod",
+				"name": "WorkerPool_RunJob",
+				"line": 15,
+				"database": "ExportImport",
+				"formula": "$json:=JSON Stringify(cs[$class].new($job).run())"
+			}
+		]
+	},
+	"tables": [],
+	"discrepancies": [],
+	"unverified": [],
+	"unverified_ranges": []
+}

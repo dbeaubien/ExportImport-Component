@@ -1,4 +1,3 @@
-
 If (Not:C34(Is compiled mode:C492)) && (Structure file:C489(*)=Structure file:C489)
 	
 	var $window_ref : Integer
@@ -6,8 +5,6 @@ If (Not:C34(Is compiled mode:C492)) && (Structure file:C489(*)=Structure file:C4
 	BRING TO FRONT:C326($window_ref)
 	DIALOG:C40("ReleaseBuildNo_d")
 	CLOSE WINDOW:C154
-	
-	Log_OpenDisplayWindow
 	
 	CA_OnStartup()
 	Snippet_ShowSelectorWindow()

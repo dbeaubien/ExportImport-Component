@@ -1,0 +1,84 @@
+{
+	"method": "__Check_Preflight",
+	"when": "2026-10-01T22:59:23.668Z",
+	"compiled": true,
+	"place": "source",
+	"datafile": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+	"export_set": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.59.21:",
+	"language": {
+		"problems": [
+			"The data language is \"en\" here and \"fr\" in the export set, so keys would sort differently. Set it to \"fr\" in 4D Preferences ▸ General, then create a new target datafile."
+		],
+		"cautions": [
+			"26 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys], [Spike_TextKey]"
+		],
+		"ok": true
+	},
+	"source": {
+		"import": {
+			"problems": [
+				"This datafile is the export set's source, and the import empties every table it loads. Switch to a new target datafile, then run the import."
+			],
+			"cautions": [
+				"26 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys], [Spike_TextKey]"
+			]
+		},
+		"compare": {
+			"problems": [],
+			"cautions": [
+				"26 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys], [Spike_TextKey]"
+			]
+		},
+		"ms": 20,
+		"ok": true
+	},
+	"version": {
+		"problems": [
+			"This export set was written by ExportImport 2000.r1 (build 20000101), and this is 2026.r4 (build 20261001). Import and Compare need the same version and build: use that one, or export again with this one."
+		],
+		"cautions": [
+			"26 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys], [Spike_TextKey]"
+		],
+		"ok": true
+	},
+	"signature": {
+		"problems": [
+			"The structure differs: [Table_1]GUID (field 14) isn't in the export set"
+		],
+		"cautions": [
+			"26 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys], [Spike_TextKey]"
+		],
+		"ok": true
+	},
+	"missing": {
+		"problems": [
+			"This export set has no manifest.json: its export didn't finish, or it isn't an export set. Run the export again."
+		],
+		"cautions": [],
+		"ok": true
+	},
+	"unreadable": {
+		"problems": [
+			"This export set's manifest.json can't be read. Run the export again."
+		],
+		"cautions": [],
+		"ok": true
+	},
+	"no_path": {
+		"problems": [
+			"There is no export set at \"\""
+		],
+		"cautions": [],
+		"ok": true
+	},
+	"summary": {
+		"source": "Import: the source refused; Compare: no problem",
+		"version": "1 problem, named",
+		"signature": "1 problem, the field named",
+		"language": "1 problem, named",
+		"missing": "1 problem, named",
+		"unreadable": "1 problem, named",
+		"no_path": "1 problem, named",
+		"ms": 20
+	}
+}

@@ -1,0 +1,279 @@
+{
+	"method": "__Spike_Codec_Cost",
+	"when": "2026-10-02T13:45:40.039Z",
+	"compiled": true,
+	"cores": 10,
+	"tables": [
+		"Bench_Small_11",
+		"Bench_Small_12",
+		"Bench_Small_13",
+		"Bench_Small_14",
+		"Bench_Small_15",
+		"Bench_Small_16",
+		"Bench_Small_17",
+		"Bench_Small_18",
+		"Bench_Small_19",
+		"Bench_Small_20"
+	],
+	"count": 5000,
+	"check": {
+		"preemptive": true,
+		"failure": null,
+		"records": 50000,
+		"differ": 0
+	},
+	"runs": [
+		{
+			"workers": 1,
+			"variant": "goto",
+			"preemptive": true,
+			"failure": null,
+			"us_per_record": [
+				0.6
+			],
+			"us_per_record_mean": 0.6,
+			"records_per_s": 1666667
+		},
+		{
+			"workers": 1,
+			"variant": "class",
+			"preemptive": true,
+			"failure": null,
+			"us_per_record": [
+				14.8
+			],
+			"us_per_record_mean": 14.8,
+			"records_per_s": 67568
+		},
+		{
+			"workers": 1,
+			"variant": "arrays",
+			"preemptive": true,
+			"failure": null,
+			"us_per_record": [
+				12.2
+			],
+			"us_per_record_mean": 12.2,
+			"records_per_s": 81967
+		},
+		{
+			"workers": 2,
+			"variant": "goto",
+			"preemptive": true,
+			"failure": null,
+			"us_per_record": [
+				1.2,
+				1.2
+			],
+			"us_per_record_mean": 1.2,
+			"records_per_s": 1666667
+		},
+		{
+			"workers": 2,
+			"variant": "class",
+			"preemptive": true,
+			"failure": null,
+			"us_per_record": [
+				16.8,
+				16.6
+			],
+			"us_per_record_mean": 16.7,
+			"records_per_s": 119048
+		},
+		{
+			"workers": 2,
+			"variant": "arrays",
+			"preemptive": true,
+			"failure": null,
+			"us_per_record": [
+				14.8,
+				14.2
+			],
+			"us_per_record_mean": 14.5,
+			"records_per_s": 135135
+		},
+		{
+			"workers": 4,
+			"variant": "goto",
+			"preemptive": true,
+			"failure": null,
+			"us_per_record": [
+				1.2,
+				1.2,
+				1.4,
+				1.4
+			],
+			"us_per_record_mean": 1.3,
+			"records_per_s": 2857143
+		},
+		{
+			"workers": 4,
+			"variant": "class",
+			"preemptive": true,
+			"failure": null,
+			"us_per_record": [
+				22.8,
+				22.4,
+				22.2,
+				22.4
+			],
+			"us_per_record_mean": 22.5,
+			"records_per_s": 175439
+		},
+		{
+			"workers": 4,
+			"variant": "arrays",
+			"preemptive": true,
+			"failure": null,
+			"us_per_record": [
+				18.6,
+				18.2,
+				18,
+				18.2
+			],
+			"us_per_record_mean": 18.3,
+			"records_per_s": 215054
+		},
+		{
+			"workers": 10,
+			"variant": "goto",
+			"preemptive": true,
+			"failure": null,
+			"us_per_record": [
+				8,
+				9.4,
+				9.6,
+				10,
+				10.2,
+				9.8,
+				9.6,
+				9.8,
+				9.6,
+				9.6
+			],
+			"us_per_record_mean": 9.6,
+			"records_per_s": 980392
+		},
+		{
+			"workers": 10,
+			"variant": "class",
+			"preemptive": true,
+			"failure": null,
+			"us_per_record": [
+				45.2,
+				43,
+				45,
+				43.8,
+				44.8,
+				45.2,
+				44.8,
+				44.4,
+				44.2,
+				44.2
+			],
+			"us_per_record_mean": 44.5,
+			"records_per_s": 221239
+		},
+		{
+			"workers": 10,
+			"variant": "arrays",
+			"preemptive": true,
+			"failure": null,
+			"us_per_record": [
+				34,
+				38.2,
+				40.6,
+				36.2,
+				38.6,
+				35.8,
+				36.2,
+				36.8,
+				33.8,
+				33.8
+			],
+			"us_per_record_mean": 36.4,
+			"records_per_s": 246305
+		}
+	],
+	"summary": {
+		"goto": {
+			"1": {
+				"us": 0.6,
+				"records_per_s": 1666667
+			},
+			"2": {
+				"us": 1.2,
+				"records_per_s": 1666667
+			},
+			"4": {
+				"us": 1.3,
+				"records_per_s": 2857143
+			},
+			"10": {
+				"us": 9.6,
+				"records_per_s": 980392
+			}
+		},
+		"class": {
+			"1": {
+				"us": 14.8,
+				"records_per_s": 67568
+			},
+			"2": {
+				"us": 16.7,
+				"records_per_s": 119048
+			},
+			"4": {
+				"us": 22.5,
+				"records_per_s": 175439
+			},
+			"10": {
+				"us": 44.5,
+				"records_per_s": 221239
+			}
+		},
+		"arrays": {
+			"1": {
+				"us": 12.2,
+				"records_per_s": 81967
+			},
+			"2": {
+				"us": 14.5,
+				"records_per_s": 135135
+			},
+			"4": {
+				"us": 18.3,
+				"records_per_s": 215054
+			},
+			"10": {
+				"us": 36.4,
+				"records_per_s": 246305
+			}
+		},
+		"encode_us": {
+			"1": {
+				"class": 14.2,
+				"arrays": 11.6
+			},
+			"2": {
+				"class": 15.5,
+				"arrays": 13.3
+			},
+			"4": {
+				"class": 21.2,
+				"arrays": 17
+			},
+			"10": {
+				"class": 34.9,
+				"arrays": 26.8
+			}
+		},
+		"winner": {
+			"1": "arrays",
+			"2": "arrays",
+			"4": "arrays",
+			"10": "arrays"
+		}
+	},
+	"ok": true
+}

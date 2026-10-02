@@ -1,0 +1,872 @@
+{
+	"method": "__Check_Fixer",
+	"when": "2026-10-01T22:15:45.567Z",
+	"compiled": true,
+	"cores": 10,
+	"blocked": {
+		"verdict": "blocked",
+		"next_step": "Nothing was changed. Fix the blockers on the source copy, or leave their tables out. Then run the fixer again.",
+		"problems": [],
+		"cautions": [],
+		"failure": null,
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Fixer 2026-10-01 16.15.45.txt",
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T22:15:45.607Z",
+				"ended": "2026-10-01T22:15:46.676Z"
+			}
+		],
+		"blocked_tables": [
+			{
+				"number": 26,
+				"name": "Spike_Keys",
+				"elapsed": 0,
+				"records": 15,
+				"blockers": 1,
+				"damage": 0,
+				"checks": {
+					"blank_key": 1
+				},
+				"characters_removed": 0,
+				"records_saved": 0
+			}
+		],
+		"findings": 1,
+		"first_findings": [
+			{
+				"table": "Spike_Keys",
+				"key": "",
+				"field": "PK",
+				"kind": "blank_key",
+				"records": 1
+			}
+		],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Fixer: blocked",
+		"txt_line_1_ok": true,
+		"json_verdict": "blocked",
+		"txt": [
+			"Fixer: blocked",
+			"Next step: Nothing was changed. Fix the blockers on the source copy, or leave their tables out. Then run the fixer again.",
+			"",
+			"Problems:  (none)",
+			"Cautions:  (none)",
+			"",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 16:15:45   Ended: 16:15:46   Elapsed: 00:00:01",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    tables [26]",
+			"",
+			"Phases",
+			"  gate              00:00:01",
+			"",
+			"Tables: 1 of 27 in the structure",
+			"  No  Table       Records  Blockers  Damage  Characters removed  Records saved   Elapsed       Checks",
+			"  26  Spike_Keys       15         1       0                   0              0  00:00:00  blank_key 1",
+			""
+		],
+		"log": [
+			"2026-10-01 16:15:45  Fixer started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:15:45  options: {\"tables\":[26]}",
+			"2026-10-01 16:15:45  phase 1 of 3: gate",
+			"2026-10-01 16:15:45  [Spike_Keys] started",
+			"2026-10-01 16:15:45  [Spike_Keys] done: 15 records, 00:00:00",
+			"2026-10-01 16:15:46  ended: blocked",
+			""
+		],
+		"unchanged": true,
+		"ok": true
+	},
+	"locked": {
+		"verdict": "failed",
+		"next_step": "See the failure, then run the fixer again.",
+		"problems": [],
+		"cautions": [],
+		"failure": {
+			"phase": "fix",
+			"table": "Spike_Keys",
+			"key": "c05_control",
+			"errors": [
+				{
+					"errCode": 9,
+					"componentSignature": "ExportImport",
+					"message": "the record is locked by another process, so its bad characters can't be removed"
+				}
+			],
+			"call_chain": [
+				{
+					"type": "classFunction",
+					"name": "_Job.run",
+					"line": 9,
+					"database": "ExportImport",
+					"formula": "This.output.failure:={table: This.job.table.name; key: This._key; errors: Last errors; call_chain: Call chain}"
+				},
+				{
+					"type": "projectMethod",
+					"name": "WorkerPool_RunJob",
+					"line": 15,
+					"database": "ExportImport",
+					"formula": "$json:=JSON Stringify(cs[$class].new($job).run())"
+				}
+			]
+		},
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Fixer 2026-10-01 16.15.47.txt",
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T22:15:47.850Z",
+				"ended": "2026-10-01T22:15:48.871Z"
+			},
+			{
+				"name": "fix",
+				"started": "2026-10-01T22:15:48.871Z",
+				"ended": "2026-10-01T22:15:49.882Z"
+			}
+		],
+		"blocked_tables": [],
+		"findings": 0,
+		"first_findings": [],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Fixer: failed",
+		"txt_line_1_ok": true,
+		"json_verdict": "failed",
+		"txt": [
+			"Fixer: failed",
+			"Next step: See the failure, then run the fixer again.",
+			"",
+			"Problems:  (none)",
+			"Cautions:  (none)",
+			"",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 16:15:47   Ended: 16:15:49   Elapsed: 00:00:02",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    tables [26]; workers 1",
+			"",
+			"Phases",
+			"  gate              00:00:01",
+			"  fix               00:00:01",
+			"",
+			"Tables: 1 of 27 in the structure",
+			"  No  Table       Records  Blockers  Damage  Characters removed  Records saved   Elapsed  Checks",
+			"  26  Spike_Keys       14         0       0                   0              0  00:00:00        ",
+			"",
+			"Failure",
+			"  Phase:  fix",
+			"  Table:  Spike_Keys",
+			"  Key:    c05_control",
+			"  Error:  9 the record is locked by another process, so its bad characters can't be removed",
+			""
+		],
+		"log": [
+			"2026-10-01 16:15:47  Fixer started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:15:47  options: {\"tables\":[26],\"workers\":1}",
+			"2026-10-01 16:15:47  phase 1 of 3: gate",
+			"2026-10-01 16:15:47  [Spike_Keys] started",
+			"2026-10-01 16:15:47  [Spike_Keys] done: 14 records, 00:00:00",
+			"2026-10-01 16:15:48  phase 2 of 3: fix",
+			"2026-10-01 16:15:48  triggers off",
+			"2026-10-01 16:15:48  [Spike_Keys] started",
+			"2026-10-01 16:15:49  triggers on",
+			"2026-10-01 16:15:49  failed: [Spike_Keys] key c05_control: 9 the record is locked by another process, so its bad characters can't be removed",
+			"2026-10-01 16:15:49  ended: failed",
+			""
+		],
+		"trigger_calls": 1,
+		"ok": true
+	},
+	"stopped": {
+		"verdict": "failed",
+		"next_step": "See the failure, then run the fixer again.",
+		"problems": [],
+		"cautions": [],
+		"failure": {
+			"phase": "fix",
+			"table": null,
+			"key": null,
+			"reason": "stopped by operator",
+			"errors": [],
+			"call_chain": null
+		},
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Fixer 2026-10-01 16.15.51.txt",
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T22:15:51.077Z",
+				"ended": "2026-10-01T22:15:56.129Z"
+			},
+			{
+				"name": "fix",
+				"started": "2026-10-01T22:15:56.129Z",
+				"ended": "2026-10-01T22:16:12.232Z"
+			}
+		],
+		"blocked_tables": [],
+		"findings": 0,
+		"first_findings": [],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Fixer: failed",
+		"txt_line_1_ok": true,
+		"json_verdict": "failed",
+		"txt": [
+			"Fixer: failed",
+			"Next step: See the failure, then run the fixer again.",
+			"",
+			"Problems:  (none)",
+			"Cautions:  (none)",
+			"",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 16:15:51   Ended: 16:16:12   Elapsed: 00:00:21",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    tables [3,4]",
+			"",
+			"Phases",
+			"  gate              00:00:05",
+			"  fix               00:00:16",
+			"",
+			"Tables: 2 of 27 in the structure",
+			"  No  Table       Records  Blockers  Damage  Characters removed  Records saved   Elapsed  Checks",
+			"   3  Bench_Wide  1997994         0       0                   0              0  00:00:04        ",
+			"   4  Bench_Text  1000000         0       0                   0              0  00:00:01        ",
+			"",
+			"Failure",
+			"  Phase:  fix",
+			"  Table:  none",
+			"  Key:    none",
+			"  Reason: stopped by operator",
+			""
+		],
+		"log": [
+			"2026-10-01 16:15:51  Fixer started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:15:51  options: {\"tables\":[3,4]}",
+			"2026-10-01 16:15:51  phase 1 of 3: gate",
+			"2026-10-01 16:15:51  [Bench_Wide] started",
+			"2026-10-01 16:15:51  [Bench_Text] started",
+			"2026-10-01 16:15:52  [Bench_Text] done: 1000000 records, 00:00:01",
+			"2026-10-01 16:15:55  [Bench_Wide] done: 1997994 records, 00:00:04",
+			"2026-10-01 16:15:56  phase 2 of 3: fix",
+			"2026-10-01 16:15:56  triggers off",
+			"2026-10-01 16:15:56  [Bench_Wide] started",
+			"2026-10-01 16:15:56  [Bench_Text] started",
+			"2026-10-01 16:16:12  triggers on",
+			"2026-10-01 16:16:12  stopped by operator",
+			"2026-10-01 16:16:12  ended: failed",
+			""
+		],
+		"trigger_calls": 1,
+		"ok": true
+	},
+	"ignored": {
+		"verdict": "warnings",
+		"next_step": "Only signs of damage, which the export copies as they are. Run the export.",
+		"problems": [],
+		"cautions": [
+			"1 record keys hold bad characters, which the fixer leaves as they are. Fix them on the source copy if they shouldn't be there"
+		],
+		"failure": null,
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Fixer 2026-10-01 16.16.13.txt",
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T22:16:13.412Z",
+				"ended": "2026-10-01T22:16:14.483Z"
+			},
+			{
+				"name": "fix",
+				"started": "2026-10-01T22:16:14.483Z",
+				"ended": "2026-10-01T22:16:15.579Z"
+			},
+			{
+				"name": "scan",
+				"started": "2026-10-01T22:16:15.579Z",
+				"ended": "2026-10-01T22:16:16.677Z"
+			}
+		],
+		"blocked_tables": [],
+		"findings": 4,
+		"first_findings": [
+			{
+				"table": "Spike_Keys",
+				"key": "c05_space_uuid",
+				"field": "Auto_UUID",
+				"kind": "space_uuid"
+			},
+			{
+				"table": "Spike_Keys",
+				"key": "w10_blank",
+				"field": "Auto_UUID",
+				"kind": "space_uuid"
+			},
+			{
+				"table": "Spike_Keys",
+				"key": "w12_only_key",
+				"field": "Auto_UUID",
+				"kind": "space_uuid"
+			},
+			{
+				"table": "Spike_Keys",
+				"key": "c06_key\u0001",
+				"field": "PK",
+				"kind": "key_bad_character",
+				"value": "\"c06_key\\u0001\"",
+				"characters": [
+					{
+						"pos": 8,
+						"char_code": 1
+					}
+				]
+			}
+		],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Fixer: warnings",
+		"txt_line_1_ok": true,
+		"json_verdict": "warnings",
+		"txt": [
+			"Fixer: warnings",
+			"Next step: Only signs of damage, which the export copies as they are. Run the export.",
+			"",
+			"Problems:  (none)",
+			"Cautions:",
+			"  - 1 record keys hold bad characters, which the fixer leaves as they are. Fix them on the source copy if they shouldn't be there",
+			"",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 16:16:13   Ended: 16:16:16   Elapsed: 00:00:03",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    tables [26]; field_ptrs_to_ignore [\"[Spike_Keys]Alt_Code\"]",
+			"",
+			"Phases",
+			"  gate              00:00:01",
+			"  fix               00:00:01",
+			"  scan              00:00:01",
+			"",
+			"Tables: 1 of 27 in the structure",
+			"  No  Table       Records  Blockers  Damage  Characters removed  Records saved   Elapsed                             Checks",
+			"  26  Spike_Keys       15         0       4                   7              6  00:00:00  space_uuid 3, key_bad_character 1",
+			""
+		],
+		"log": [
+			"2026-10-01 16:16:13  Fixer started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:16:13  options: {\"tables\":[26],\"field_ptrs_to_ignore\":[\"[Spike_Keys]Alt_Code\"]}",
+			"2026-10-01 16:16:13  phase 1 of 3: gate",
+			"2026-10-01 16:16:13  [Spike_Keys] started",
+			"2026-10-01 16:16:13  [Spike_Keys] done: 15 records, 00:00:00",
+			"2026-10-01 16:16:14  phase 2 of 3: fix",
+			"2026-10-01 16:16:14  triggers off",
+			"2026-10-01 16:16:14  [Spike_Keys] started",
+			"2026-10-01 16:16:14  [Spike_Keys] done: 15 records, 00:00:00",
+			"2026-10-01 16:16:15  triggers on",
+			"2026-10-01 16:16:15  phase 3 of 3: scan",
+			"2026-10-01 16:16:15  [Spike_Keys] started",
+			"2026-10-01 16:16:15  [Spike_Keys] done: 15 records, 00:00:00",
+			"2026-10-01 16:16:16  caution: 1 record keys hold bad characters, which the fixer leaves as they are. Fix them on the source copy if they shouldn't be there",
+			"2026-10-01 16:16:16  ended: warnings",
+			""
+		],
+		"rows": [
+			{
+				"number": 26,
+				"name": "Spike_Keys",
+				"elapsed": 0.001,
+				"records": 15,
+				"blockers": 0,
+				"damage": 4,
+				"checks": {
+					"space_uuid": 3,
+					"key_bad_character": 1
+				},
+				"characters_removed": 7,
+				"records_saved": 6
+			}
+		],
+		"removals": [
+			{
+				"table": "Spike_Keys",
+				"key": "c05_after_pair",
+				"characters": [
+					{
+						"field": "F_Text",
+						"pos": 3,
+						"char_code": 31
+					},
+					{
+						"field": "F_Text",
+						"pos": 5,
+						"char_code": 11
+					}
+				]
+			},
+			{
+				"table": "Spike_Keys",
+				"key": "c05_control",
+				"characters": [
+					{
+						"field": "F_Text",
+						"pos": 2,
+						"char_code": 1
+					}
+				]
+			},
+			{
+				"table": "Spike_Keys",
+				"key": "c05_fffe",
+				"characters": [
+					{
+						"field": "F_Text",
+						"pos": 2,
+						"char_code": 65534
+					}
+				]
+			},
+			{
+				"table": "Spike_Keys",
+				"key": "c05_ffff",
+				"characters": [
+					{
+						"field": "F_Text",
+						"pos": 2,
+						"char_code": 65535
+					}
+				]
+			},
+			{
+				"table": "Spike_Keys",
+				"key": "c05_high",
+				"characters": [
+					{
+						"field": "F_Text",
+						"pos": 2,
+						"char_code": 55296
+					}
+				]
+			},
+			{
+				"table": "Spike_Keys",
+				"key": "c05_low",
+				"characters": [
+					{
+						"field": "F_Text",
+						"pos": 2,
+						"char_code": 56320
+					}
+				]
+			}
+		],
+		"ok": true
+	},
+	"fixed": {
+		"verdict": "warnings",
+		"next_step": "Only signs of damage, which the export copies as they are. Run the export.",
+		"problems": [],
+		"cautions": [
+			"1 record keys hold bad characters, which the fixer leaves as they are. Fix them on the source copy if they shouldn't be there"
+		],
+		"failure": null,
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Fixer 2026-10-01 16.16.17.txt",
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T22:16:17.853Z",
+				"ended": "2026-10-01T22:16:18.912Z"
+			},
+			{
+				"name": "fix",
+				"started": "2026-10-01T22:16:18.912Z",
+				"ended": "2026-10-01T22:16:20.013Z"
+			},
+			{
+				"name": "scan",
+				"started": "2026-10-01T22:16:20.013Z",
+				"ended": "2026-10-01T22:16:21.109Z"
+			}
+		],
+		"blocked_tables": [],
+		"findings": 4,
+		"first_findings": [
+			{
+				"table": "Spike_Keys",
+				"key": "c05_space_uuid",
+				"field": "Auto_UUID",
+				"kind": "space_uuid"
+			},
+			{
+				"table": "Spike_Keys",
+				"key": "w10_blank",
+				"field": "Auto_UUID",
+				"kind": "space_uuid"
+			},
+			{
+				"table": "Spike_Keys",
+				"key": "w12_only_key",
+				"field": "Auto_UUID",
+				"kind": "space_uuid"
+			},
+			{
+				"table": "Spike_Keys",
+				"key": "c06_key\u0001",
+				"field": "PK",
+				"kind": "key_bad_character",
+				"value": "\"c06_key\\u0001\"",
+				"characters": [
+					{
+						"pos": 8,
+						"char_code": 1
+					}
+				]
+			}
+		],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Fixer: warnings",
+		"txt_line_1_ok": true,
+		"json_verdict": "warnings",
+		"txt": [
+			"Fixer: warnings",
+			"Next step: Only signs of damage, which the export copies as they are. Run the export.",
+			"",
+			"Problems:  (none)",
+			"Cautions:",
+			"  - 1 record keys hold bad characters, which the fixer leaves as they are. Fix them on the source copy if they shouldn't be there",
+			"",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 16:16:17   Ended: 16:16:21   Elapsed: 00:00:03",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    tables [26]",
+			"",
+			"Phases",
+			"  gate              00:00:01",
+			"  fix               00:00:01",
+			"  scan              00:00:01",
+			"",
+			"Tables: 1 of 27 in the structure",
+			"  No  Table       Records  Blockers  Damage  Characters removed  Records saved   Elapsed                             Checks",
+			"  26  Spike_Keys       15         0       4                   1              1  00:00:00  space_uuid 3, key_bad_character 1",
+			""
+		],
+		"log": [
+			"2026-10-01 16:16:17  Fixer started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:16:17  options: {\"tables\":[26]}",
+			"2026-10-01 16:16:17  phase 1 of 3: gate",
+			"2026-10-01 16:16:17  [Spike_Keys] started",
+			"2026-10-01 16:16:17  [Spike_Keys] done: 15 records, 00:00:00",
+			"2026-10-01 16:16:18  phase 2 of 3: fix",
+			"2026-10-01 16:16:18  triggers off",
+			"2026-10-01 16:16:18  [Spike_Keys] started",
+			"2026-10-01 16:16:19  [Spike_Keys] done: 15 records, 00:00:00",
+			"2026-10-01 16:16:20  triggers on",
+			"2026-10-01 16:16:20  phase 3 of 3: scan",
+			"2026-10-01 16:16:20  [Spike_Keys] started",
+			"2026-10-01 16:16:20  [Spike_Keys] done: 15 records, 00:00:00",
+			"2026-10-01 16:16:21  caution: 1 record keys hold bad characters, which the fixer leaves as they are. Fix them on the source copy if they shouldn't be there",
+			"2026-10-01 16:16:21  ended: warnings",
+			""
+		],
+		"rows": [
+			{
+				"number": 26,
+				"name": "Spike_Keys",
+				"elapsed": 0.001,
+				"records": 15,
+				"blockers": 0,
+				"damage": 4,
+				"checks": {
+					"space_uuid": 3,
+					"key_bad_character": 1
+				},
+				"characters_removed": 1,
+				"records_saved": 1
+			}
+		],
+		"removals": [
+			{
+				"table": "Spike_Keys",
+				"key": "c05_alpha",
+				"characters": [
+					{
+						"field": "Alt_Code",
+						"pos": 10,
+						"char_code": 27
+					}
+				]
+			}
+		],
+		"trigger_calls": 0,
+		"values": [
+			{
+				"key": "c05_control",
+				"expected": [
+					97,
+					98
+				],
+				"stored": [
+					97,
+					98
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_fffe",
+				"expected": [
+					97,
+					98
+				],
+				"stored": [
+					97,
+					98
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_ffff",
+				"expected": [
+					97
+				],
+				"stored": [
+					97
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_high",
+				"expected": [
+					97,
+					98
+				],
+				"stored": [
+					97,
+					98
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_low",
+				"expected": [
+					97,
+					98
+				],
+				"stored": [
+					97,
+					98
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_after_pair",
+				"expected": [
+					55357,
+					56832,
+					120
+				],
+				"stored": [
+					55357,
+					56832,
+					120
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_alpha",
+				"expected": [
+					99,
+					48,
+					53,
+					95,
+					97,
+					108,
+					112,
+					104,
+					97
+				],
+				"stored": [
+					99,
+					48,
+					53,
+					95,
+					97,
+					108,
+					112,
+					104,
+					97
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_clean",
+				"expected": [
+					116,
+					97,
+					98,
+					9,
+					108,
+					102,
+					10,
+					99,
+					114,
+					13,
+					55357,
+					56832,
+					233,
+					65533
+				],
+				"stored": [
+					116,
+					97,
+					98,
+					9,
+					108,
+					102,
+					10,
+					99,
+					114,
+					13,
+					55357,
+					56832,
+					233,
+					65533
+				],
+				"ok": true
+			}
+		],
+		"key_left": true,
+		"key_reported": true,
+		"ok": true
+	},
+	"after": {
+		"verdict": "warnings",
+		"next_step": "Only signs of damage, which the export copies as they are. Run the export.",
+		"problems": [],
+		"cautions": [],
+		"failure": null,
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Health check 2026-10-01 16.16.22.txt",
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T22:16:22.286Z",
+				"ended": "2026-10-01T22:16:23.350Z"
+			},
+			{
+				"name": "scan",
+				"started": "2026-10-01T22:16:23.350Z",
+				"ended": "2026-10-01T22:16:24.445Z"
+			}
+		],
+		"blocked_tables": [],
+		"findings": 3,
+		"first_findings": [
+			{
+				"table": "Spike_Keys",
+				"key": "c05_space_uuid",
+				"field": "Auto_UUID",
+				"kind": "space_uuid"
+			},
+			{
+				"table": "Spike_Keys",
+				"key": "w10_blank",
+				"field": "Auto_UUID",
+				"kind": "space_uuid"
+			},
+			{
+				"table": "Spike_Keys",
+				"key": "w12_only_key",
+				"field": "Auto_UUID",
+				"kind": "space_uuid"
+			}
+		],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Health check: warnings",
+		"txt_line_1_ok": true,
+		"json_verdict": "warnings",
+		"txt": [
+			"Health check: warnings",
+			"Next step: Only signs of damage, which the export copies as they are. Run the export.",
+			"",
+			"Problems:  (none)",
+			"Cautions:  (none)",
+			"",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 16:16:22   Ended: 16:16:24   Elapsed: 00:00:02",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    tables [26]",
+			"",
+			"Phases",
+			"  gate              00:00:01",
+			"  scan              00:00:01",
+			"",
+			"Tables: 1 of 27 in the structure",
+			"  No  Table       Records  Blockers  Damage   Elapsed        Checks",
+			"  26  Spike_Keys       14         0       3  00:00:00  space_uuid 3",
+			""
+		],
+		"log": [
+			"2026-10-01 16:16:22  Health check started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:16:22  options: {\"tables\":[26]}",
+			"2026-10-01 16:16:22  phase 1 of 2: gate",
+			"2026-10-01 16:16:22  [Spike_Keys] started",
+			"2026-10-01 16:16:22  [Spike_Keys] done: 14 records, 00:00:00",
+			"2026-10-01 16:16:23  phase 2 of 2: scan",
+			"2026-10-01 16:16:23  [Spike_Keys] started",
+			"2026-10-01 16:16:23  [Spike_Keys] done: 14 records, 00:00:00",
+			"2026-10-01 16:16:24  ended: warnings",
+			""
+		],
+		"checks": {
+			"space_uuid": 3
+		},
+		"ok": true
+	},
+	"preemptive": {
+		"jobs": 10,
+		"preemptive": true,
+		"failure": null,
+		"records_saved": 0
+	},
+	"summary": {
+		"blocked": "blocked, nothing saved",
+		"locked": "failed, error 9 on c05_control, trigger fires after",
+		"stopped": "failed in phase fix, trigger fires after",
+		"ignored": "6 records, 7 characters, Alt_Code left",
+		"fixed": "c05_alpha fixed, key left and reported, no trigger call",
+		"after": "warnings, no bad character left",
+		"preemptive": "10 jobs, preemptive True"
+	}
+}

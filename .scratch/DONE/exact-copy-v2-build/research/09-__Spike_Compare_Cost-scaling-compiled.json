@@ -1,0 +1,360 @@
+{
+	"method": "__Spike_Compare_Cost",
+	"when": "2026-10-02T00:55:50.080Z",
+	"compiled": true,
+	"cores": 10,
+	"export_set": "Export 2026-10-01 18.33",
+	"tables": [
+		"Bench_Small_11",
+		"Bench_Small_12",
+		"Bench_Small_13",
+		"Bench_Small_14",
+		"Bench_Small_15",
+		"Bench_Small_16",
+		"Bench_Small_17",
+		"Bench_Small_18",
+		"Bench_Small_19",
+		"Bench_Small_20"
+	],
+	"steps": [
+		{
+			"table": "Bench_Small_11",
+			"n": 5000,
+			"preemptive": true,
+			"us": {
+				"goto": 97.8,
+				"goto_encode": 465.8,
+				"goto_encode_property": 493.8,
+				"key_target": 97,
+				"walk": 0.2,
+				"walk_key_source": 107,
+				"walk_copy": 0.6,
+				"walk_copy_sha256": 1.2,
+				"walk_copy_md5": 1.2,
+				"base64": 0.2,
+				"class_call": 4.2,
+				"row_counter": 5.6,
+				"records_in_selection": 0,
+				"less_text": 0.2,
+				"position": 0.2
+			}
+		},
+		{
+			"table": "Bench_Small_12",
+			"n": 5000,
+			"preemptive": true,
+			"us": {
+				"goto": 97,
+				"goto_encode": 460.2,
+				"goto_encode_property": 504,
+				"key_target": 103.6,
+				"walk": 0.2,
+				"walk_key_source": 105.8,
+				"walk_copy": 0.6,
+				"walk_copy_sha256": 1.2,
+				"walk_copy_md5": 1.2,
+				"base64": 0.2,
+				"class_call": 0.6,
+				"row_counter": 0.6,
+				"records_in_selection": 0,
+				"less_text": 0.2,
+				"position": 0.2
+			}
+		},
+		{
+			"table": "Bench_Small_13",
+			"n": 5000,
+			"preemptive": true,
+			"us": {
+				"goto": 95,
+				"goto_encode": 450.2,
+				"goto_encode_property": 491.6,
+				"key_target": 95.6,
+				"walk": 0.2,
+				"walk_key_source": 109,
+				"walk_copy": 0.8,
+				"walk_copy_sha256": 1.2,
+				"walk_copy_md5": 1.2,
+				"base64": 0.2,
+				"class_call": 5.2,
+				"row_counter": 13.2,
+				"records_in_selection": 0,
+				"less_text": 0.2,
+				"position": 0
+			}
+		},
+		{
+			"table": "Bench_Small_14",
+			"n": 5000,
+			"preemptive": true,
+			"us": {
+				"goto": 98.6,
+				"goto_encode": 463.2,
+				"goto_encode_property": 483.2,
+				"key_target": 97.4,
+				"walk": 0.2,
+				"walk_key_source": 107.2,
+				"walk_copy": 0.8,
+				"walk_copy_sha256": 1.4,
+				"walk_copy_md5": 1.2,
+				"base64": 0.4,
+				"class_call": 4.8,
+				"row_counter": 12.4,
+				"records_in_selection": 0,
+				"less_text": 0.2,
+				"position": 0
+			}
+		},
+		{
+			"table": "Bench_Small_15",
+			"n": 5000,
+			"preemptive": true,
+			"us": {
+				"goto": 98.2,
+				"goto_encode": 445.4,
+				"goto_encode_property": 507.8,
+				"key_target": 100.4,
+				"walk": 0.4,
+				"walk_key_source": 104.2,
+				"walk_copy": 0.8,
+				"walk_copy_sha256": 1.2,
+				"walk_copy_md5": 1.2,
+				"base64": 0.4,
+				"class_call": 4,
+				"row_counter": 9.4,
+				"records_in_selection": 0,
+				"less_text": 0.2,
+				"position": 0.2
+			}
+		},
+		{
+			"table": "Bench_Small_16",
+			"n": 5000,
+			"preemptive": true,
+			"us": {
+				"goto": 97.8,
+				"goto_encode": 467,
+				"goto_encode_property": 487.6,
+				"key_target": 97,
+				"walk": 0.2,
+				"walk_key_source": 108,
+				"walk_copy": 0.6,
+				"walk_copy_sha256": 1.4,
+				"walk_copy_md5": 1.2,
+				"base64": 0.4,
+				"class_call": 5.2,
+				"row_counter": 7.8,
+				"records_in_selection": 0,
+				"less_text": 0.2,
+				"position": 0.2
+			}
+		},
+		{
+			"table": "Bench_Small_17",
+			"n": 5000,
+			"preemptive": true,
+			"us": {
+				"goto": 98.4,
+				"goto_encode": 461.2,
+				"goto_encode_property": 491.2,
+				"key_target": 96,
+				"walk": 0.2,
+				"walk_key_source": 103.6,
+				"walk_copy": 0.6,
+				"walk_copy_sha256": 1.4,
+				"walk_copy_md5": 1.4,
+				"base64": 0.4,
+				"class_call": 4.8,
+				"row_counter": 13.8,
+				"records_in_selection": 0,
+				"less_text": 0.2,
+				"position": 0
+			}
+		},
+		{
+			"table": "Bench_Small_18",
+			"n": 5000,
+			"preemptive": true,
+			"us": {
+				"goto": 88.6,
+				"goto_encode": 420.8,
+				"goto_encode_property": 489.2,
+				"key_target": 102.8,
+				"walk": 0.2,
+				"walk_key_source": 110.2,
+				"walk_copy": 0.6,
+				"walk_copy_sha256": 1.4,
+				"walk_copy_md5": 1.2,
+				"base64": 0.4,
+				"class_call": 6,
+				"row_counter": 20.8,
+				"records_in_selection": 0.2,
+				"less_text": 0,
+				"position": 0.2
+			}
+		},
+		{
+			"table": "Bench_Small_19",
+			"n": 5000,
+			"preemptive": true,
+			"us": {
+				"goto": 55.8,
+				"goto_encode": 105.2,
+				"goto_encode_property": 492.6,
+				"key_target": 113.8,
+				"walk": 0.2,
+				"walk_key_source": 133.8,
+				"walk_copy": 0.8,
+				"walk_copy_sha256": 1.4,
+				"walk_copy_md5": 1,
+				"base64": 0.4,
+				"class_call": 6.4,
+				"row_counter": 25.6,
+				"records_in_selection": 0,
+				"less_text": 0.2,
+				"position": 0.2
+			}
+		},
+		{
+			"table": "Bench_Small_20",
+			"n": 5000,
+			"preemptive": true,
+			"us": {
+				"goto": 56.2,
+				"goto_encode": 89,
+				"goto_encode_property": 499,
+				"key_target": 140,
+				"walk": 0.2,
+				"walk_key_source": 133,
+				"walk_copy": 0.6,
+				"walk_copy_sha256": 1.4,
+				"walk_copy_md5": 1,
+				"base64": 0.4,
+				"class_call": 7.6,
+				"row_counter": 25.6,
+				"records_in_selection": 0,
+				"less_text": 0.2,
+				"position": 0.2
+			}
+		}
+	],
+	"scaling": [
+		{
+			"workers": 1,
+			"preemptive": true,
+			"failure": null,
+			"us_per_record": [
+				33.4
+			],
+			"us_per_record_mean": 33.4,
+			"records_per_s": 29973
+		},
+		{
+			"workers": 2,
+			"preemptive": true,
+			"failure": null,
+			"us_per_record": [
+				51.6,
+				51.6
+			],
+			"us_per_record_mean": 51.6,
+			"records_per_s": 37157
+		},
+		{
+			"workers": 4,
+			"preemptive": true,
+			"failure": null,
+			"us_per_record": [
+				168.5,
+				161.7,
+				156.3,
+				147.1
+			],
+			"us_per_record_mean": 158.4,
+			"records_per_s": 24284
+		},
+		{
+			"workers": 6,
+			"preemptive": true,
+			"failure": null,
+			"us_per_record": [
+				447.3,
+				434.7,
+				415.2,
+				391.8,
+				371.7,
+				350.3
+			],
+			"us_per_record_mean": 401.8,
+			"records_per_s": 14451
+		},
+		{
+			"workers": 10,
+			"preemptive": true,
+			"failure": null,
+			"us_per_record": [
+				1109.5,
+				1115.5,
+				1082.2,
+				1054.4,
+				1010.7,
+				967.3,
+				923.9,
+				878,
+				835,
+				802
+			],
+			"us_per_record_mean": 977.9,
+			"records_per_s": 9664
+		}
+	],
+	"steps_failure": null,
+	"red": true,
+	"summary": {
+		"records_per_s": [
+			{
+				"workers": 1,
+				"records_per_s": 29973,
+				"us_per_record_mean": 33.4
+			},
+			{
+				"workers": 2,
+				"records_per_s": 37157,
+				"us_per_record_mean": 51.6
+			},
+			{
+				"workers": 4,
+				"records_per_s": 24284,
+				"us_per_record_mean": 158.4
+			},
+			{
+				"workers": 6,
+				"records_per_s": 14451,
+				"us_per_record_mean": 401.8
+			},
+			{
+				"workers": 10,
+				"records_per_s": 9664,
+				"us_per_record_mean": 977.9
+			}
+		],
+		"steps_us_first_job": {
+			"goto": 97.8,
+			"goto_encode": 465.8,
+			"goto_encode_property": 493.8,
+			"key_target": 97,
+			"walk": 0.2,
+			"walk_key_source": 107,
+			"walk_copy": 0.6,
+			"walk_copy_sha256": 1.2,
+			"walk_copy_md5": 1.2,
+			"base64": 0.2,
+			"class_call": 4.2,
+			"row_counter": 5.6,
+			"records_in_selection": 0,
+			"less_text": 0.2,
+			"position": 0.2
+		},
+		"red": true
+	}
+}

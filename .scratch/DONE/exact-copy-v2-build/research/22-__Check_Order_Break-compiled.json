@@ -1,0 +1,72 @@
+{
+	"method": "__Check_Order_Break",
+	"when": "2026-10-02T19:51:43.186Z",
+	"compiled": true,
+	"export": {
+		"verdict": "exported",
+		"problems": []
+	},
+	"segments": 1,
+	"compare": {
+		"verdict": "inconclusive",
+		"problems": [],
+		"failure": null,
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-02 13.51.43:Compare 2026-10-02 13.51.45.txt"
+	},
+	"swapped": [
+		501,
+		500
+	],
+	"discrepancies": [],
+	"ranges": [
+		{
+			"table": "Bench_Small_01",
+			"kind": "range",
+			"from": 501,
+			"to": null,
+			"inclusive": false,
+			"source_records": 500,
+			"target_records": 499,
+			"reason": "the source key 500 isn't after the key before it, 501, in this datafile's order: the two datafiles order keys differently"
+		}
+	],
+	"unverified": [
+		{
+			"table": "Bench_Small_01",
+			"kind": "unverified",
+			"key": 500,
+			"reason": "a source key after the order guard break in this table may match it"
+		},
+		{
+			"table": "Bench_Small_01",
+			"kind": "unverified",
+			"key": 502,
+			"reason": "the source key 500 isn't after the key before it, 501, in this datafile's order: the two datafiles order keys differently"
+		},
+		{
+			"table": "Bench_Small_01",
+			"kind": "unverified",
+			"key": 503,
+			"reason": "the source key 500 isn't after the key before it, 501, in this datafile's order: the two datafiles order keys differently"
+		}
+	],
+	"row": {
+		"number": 6,
+		"name": "Bench_Small_01",
+		"elapsed": 0.02,
+		"matched": 500,
+		"missing": 0,
+		"extra": 0,
+		"changed": 0,
+		"duplicate": 0,
+		"unverified": 500,
+		"expected": 1000,
+		"actual": 1000,
+		"sequence_expected": 1000,
+		"sequence_actual": 1000
+	},
+	"range_ok": true,
+	"extra_ok": true,
+	"ok": true,
+	"summary": "inconclusive, the second of the swapped pair unverified, extra 0, the range as before"
+}

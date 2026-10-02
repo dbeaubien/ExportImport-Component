@@ -1,0 +1,352 @@
+{
+	"method": "__Check_Compare_Detail",
+	"when": "2026-10-02T01:50:36.288Z",
+	"compiled": true,
+	"cores": 10,
+	"try_pointer": {
+		"size": 3,
+		"caught": null,
+		"escaped": null
+	},
+	"damaged": {
+		"verdict": "failed",
+		"next_step": "See the failure, then run Compare again. If it fails again, treat the target as unusable.",
+		"problems": [],
+		"cautions": [],
+		"failure": {
+			"phase": "compare",
+			"table": "Bench_Wide",
+			"key": null,
+			"errors": [
+				{
+					"errCode": 85,
+					"componentSignature": "4DRT",
+					"message": "Dereferencing a Null pointer."
+				}
+			],
+			"call_chain": [
+				{
+					"type": "classFunction",
+					"name": "_Job.run",
+					"line": 9,
+					"database": "ExportImport",
+					"formula": "This.output.failure:={table: This.job.table.name; key: This._key; errors: Last errors; call_chain: Call chain}"
+				},
+				{
+					"type": "projectMethod",
+					"name": "WorkerPool_RunJob",
+					"line": 15,
+					"database": "ExportImport",
+					"formula": "$json:=JSON Stringify(cs[$class].new($job).run())"
+				}
+			]
+		},
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 18.33.09:Compare 2026-10-01 19.50.36.txt",
+		"phases": [
+			{
+				"name": "compare",
+				"started": "2026-10-02T01:50:36.378Z",
+				"ended": "2026-10-02T01:50:37.496Z"
+			}
+		],
+		"blocked_tables": [],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Compare: failed",
+		"txt_line_1_ok": true,
+		"json_verdict": "failed",
+		"txt": [
+			"Compare: failed",
+			"Next step: See the failure, then run Compare again. If it fails again, treat the target as unusable.",
+			"",
+			"Problems:  (none)",
+			"Cautions:  (none)",
+			"",
+			"Export set: Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 18.33.09:",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 19:50:36   Ended: 19:50:37   Elapsed: 00:00:01",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    (defaults)",
+			"",
+			"Phases",
+			"  compare           00:00:01",
+			"",
+			"Tables: 0 of 27 in the structure",
+			"  No  Table  Expected  Actual  Matched  Missing  Extra  Changed  Duplicate  Unverified  Sequence expected  Sequence actual  Elapsed",
+			"",
+			"Failure",
+			"  Phase:  compare",
+			"  Table:  Bench_Wide",
+			"  Key:    none",
+			"  Error:  85 Dereferencing a Null pointer.",
+			""
+		],
+		"log": [
+			"2026-10-01 19:50:36  Compare started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 19:50:36  options: {}",
+			"2026-10-01 19:50:36  phase 1 of 1: compare",
+			"2026-10-01 19:50:36  [Bench_Wide] started",
+			"2026-10-01 19:50:36  [Bench_Text] started",
+			"2026-10-01 19:50:37  failed: [Bench_Wide] 85 Dereferencing a Null pointer.",
+			"2026-10-01 19:50:37  ended: failed",
+			""
+		],
+		"export_set": "Export 2026-10-01 18.33",
+		"planted": [
+			{
+				"file": "000001091633.seg",
+				"records": 18363,
+				"first_key": 1092730,
+				"last_key": 1111110
+			},
+			{
+				"file": "000001312835.seg",
+				"records": 19161,
+				"first_key": 1314154,
+				"last_key": 1333333
+			}
+		],
+		"ranges": [],
+		"unverified": [],
+		"discrepancies": [],
+		"row": null,
+		"ok": false
+	},
+	"values": {
+		"export": "exported",
+		"problems": [],
+		"ids": [
+			1,
+			2,
+			3
+		],
+		"blob_id": 1,
+		"minus_zero_kept": true,
+		"compare": {
+			"verdict": "failed",
+			"next_step": "See the failure, then run Compare again. If it fails again, treat the target as unusable.",
+			"problems": [],
+			"cautions": [
+				"24 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys], [Spike_TextKey]"
+			],
+			"failure": {
+				"phase": "compare",
+				"table": "Bench_Blob",
+				"key": null,
+				"errors": [
+					{
+						"errCode": 85,
+						"componentSignature": "4DRT",
+						"message": "Dereferencing a Null pointer."
+					}
+				],
+				"call_chain": [
+					{
+						"type": "classFunction",
+						"name": "_Job.run",
+						"line": 9,
+						"database": "ExportImport",
+						"formula": "This.output.failure:={table: This.job.table.name; key: This._key; errors: Last errors; call_chain: Call chain}"
+					},
+					{
+						"type": "projectMethod",
+						"name": "WorkerPool_RunJob",
+						"line": 15,
+						"database": "ExportImport",
+						"formula": "$json:=JSON Stringify(cs[$class].new($job).run())"
+					}
+				]
+			},
+			"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 19.50.38:Compare 2026-10-01 19.50.49.txt",
+			"phases": [
+				{
+					"name": "compare",
+					"started": "2026-10-02T01:50:49.333Z",
+					"ended": "2026-10-02T01:50:50.422Z"
+				}
+			],
+			"blocked_tables": [],
+			"files": {
+				".txt": true,
+				".json": true,
+				".log": true
+			},
+			"bom": [],
+			"missing_keys": [],
+			"txt_line_1": "Compare: failed",
+			"txt_line_1_ok": true,
+			"json_verdict": "failed",
+			"txt": [
+				"Compare: failed",
+				"Next step: See the failure, then run Compare again. If it fails again, treat the target as unusable.",
+				"",
+				"Problems:  (none)",
+				"Cautions:",
+				"  - 24 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys], [Spike_TextKey]",
+				"",
+				"Export set: Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 19.50.38:",
+				"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+				"Started:    2026-10-01 19:50:49   Ended: 19:50:50   Elapsed: 00:00:01",
+				"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+				"Run by:     Dani Beaubien on Dani's Mac Studio",
+				"Options:    (defaults)",
+				"",
+				"Phases",
+				"  compare           00:00:01",
+				"",
+				"Tables: 0 of 27 in the structure",
+				"  No  Table  Expected  Actual  Matched  Missing  Extra  Changed  Duplicate  Unverified  Sequence expected  Sequence actual  Elapsed",
+				"",
+				"Failure",
+				"  Phase:  compare",
+				"  Table:  Bench_Blob",
+				"  Key:    none",
+				"  Error:  85 Dereferencing a Null pointer.",
+				""
+			],
+			"log": [
+				"2026-10-01 19:50:49  Compare started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+				"2026-10-01 19:50:49  options: {}",
+				"2026-10-01 19:50:49  caution: 24 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys], [Spike_TextKey]",
+				"2026-10-01 19:50:49  phase 1 of 1: compare",
+				"2026-10-01 19:50:49  [Bench_Blob] started",
+				"2026-10-01 19:50:49  [Bench_Small_02] started",
+				"2026-10-01 19:50:49  [Bench_Small_01] started",
+				"2026-10-01 19:50:50  failed: [Bench_Blob] 85 Dereferencing a Null pointer.",
+				"2026-10-01 19:50:50  ended: failed",
+				""
+			]
+		},
+		"discrepancies": [],
+		"unverified": [],
+		"rows": [],
+		"checks": {
+			"minus_zero": false,
+			"trailing_space": false,
+			"blob": false,
+			"unreadable": false,
+			"cap": false
+		},
+		"ok": false,
+		"restored": true
+	},
+	"order": {
+		"export": "exported",
+		"problems": [],
+		"compare": {
+			"verdict": "failed",
+			"next_step": "See the failure, then run Compare again. If it fails again, treat the target as unusable.",
+			"problems": [],
+			"cautions": [
+				"26 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_TextKey]"
+			],
+			"failure": {
+				"phase": "compare",
+				"table": "Spike_Keys",
+				"key": null,
+				"errors": [
+					{
+						"errCode": 85,
+						"componentSignature": "4DRT",
+						"message": "Dereferencing a Null pointer."
+					}
+				],
+				"call_chain": [
+					{
+						"type": "classFunction",
+						"name": "_Job.run",
+						"line": 9,
+						"database": "ExportImport",
+						"formula": "This.output.failure:={table: This.job.table.name; key: This._key; errors: Last errors; call_chain: Call chain}"
+					},
+					{
+						"type": "projectMethod",
+						"name": "WorkerPool_RunJob",
+						"line": 15,
+						"database": "ExportImport",
+						"formula": "$json:=JSON Stringify(cs[$class].new($job).run())"
+					}
+				]
+			},
+			"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 19.50.51:Compare 2026-10-01 19.50.53.txt",
+			"phases": [
+				{
+					"name": "compare",
+					"started": "2026-10-02T01:50:53.942Z",
+					"ended": "2026-10-02T01:50:55.032Z"
+				}
+			],
+			"blocked_tables": [],
+			"files": {
+				".txt": true,
+				".json": true,
+				".log": true
+			},
+			"bom": [],
+			"missing_keys": [],
+			"txt_line_1": "Compare: failed",
+			"txt_line_1_ok": true,
+			"json_verdict": "failed",
+			"txt": [
+				"Compare: failed",
+				"Next step: See the failure, then run Compare again. If it fails again, treat the target as unusable.",
+				"",
+				"Problems:  (none)",
+				"Cautions:",
+				"  - 26 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_TextKey]",
+				"",
+				"Export set: Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 19.50.51:",
+				"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+				"Started:    2026-10-01 19:50:53   Ended: 19:50:55   Elapsed: 00:00:01",
+				"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+				"Run by:     Dani Beaubien on Dani's Mac Studio",
+				"Options:    (defaults)",
+				"",
+				"Phases",
+				"  compare           00:00:01",
+				"",
+				"Tables: 0 of 27 in the structure",
+				"  No  Table  Expected  Actual  Matched  Missing  Extra  Changed  Duplicate  Unverified  Sequence expected  Sequence actual  Elapsed",
+				"",
+				"Failure",
+				"  Phase:  compare",
+				"  Table:  Spike_Keys",
+				"  Key:    none",
+				"  Error:  85 Dereferencing a Null pointer.",
+				""
+			],
+			"log": [
+				"2026-10-01 19:50:53  Compare started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+				"2026-10-01 19:50:53  options: {}",
+				"2026-10-01 19:50:53  caution: 26 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_TextKey]",
+				"2026-10-01 19:50:53  phase 1 of 1: compare",
+				"2026-10-01 19:50:54  [Spike_Keys] started",
+				"2026-10-01 19:50:55  failed: [Spike_Keys] 85 Dereferencing a Null pointer.",
+				"2026-10-01 19:50:55  ended: failed",
+				""
+			]
+		},
+		"swapped": [
+			"c05_high",
+			"c05_low"
+		],
+		"discrepancies": [],
+		"ranges": [],
+		"row": null,
+		"ok": false,
+		"false_extra": false
+	},
+	"summary": {
+		"try_pointer": "works, cooperative",
+		"damaged": "failed, NOT as expected",
+		"values": "failed, NOT as expected: {\"minus_zero\":false,\"trailing_space\":false,\"blob\":false,\"unreadable\":false,\"cap\":false}",
+		"order": "failed, NOT as expected",
+		"restored": true
+	}
+}

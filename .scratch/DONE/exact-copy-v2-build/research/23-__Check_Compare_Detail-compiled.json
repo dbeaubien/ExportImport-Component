@@ -1,0 +1,574 @@
+{
+	"method": "__Check_Compare_Detail",
+	"when": "2026-10-02T19:47:31.027Z",
+	"compiled": true,
+	"cores": 10,
+	"damaged": {
+		"verdict": "inconclusive",
+		"next_step": "Some records are unverified: see the unverified ranges and records. Fix their cause (a damaged export set, keys that the two datafiles order differently, or target records that can't be read), then run Compare again.",
+		"problems": [],
+		"cautions": [],
+		"failure": null,
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-02 13.39.14:Compare 2026-10-02 13.47.31.txt",
+		"phases": [
+			{
+				"name": "compare",
+				"started": "2026-10-02T19:47:31.399Z",
+				"ended": "2026-10-02T19:50:31.070Z"
+			}
+		],
+		"blocked_tables": [],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Compare: inconclusive",
+		"txt_line_1_ok": true,
+		"json_verdict": "inconclusive",
+		"txt": [
+			"Compare: inconclusive",
+			"Next step: Some records are unverified: see the unverified ranges and records. Fix their cause (a damaged export set, keys that the two datafiles order differently, or target records that can't be read), then run Compare again.",
+			"",
+			"Problems:  (none)",
+			"Cautions:  (none)",
+			"",
+			"Export set: Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-02 13.39.14:",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-02 13:47:31   Ended: 13:50:31   Elapsed: 00:03:00",
+			"Component:  2026.r4 (build 20261002)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    (defaults)",
+			"",
+			"Phases",
+			"  compare           00:03:00",
+			"",
+			"Tables: 26 of 26 in the structure",
+			"  No  Table           Expected   Actual  Matched  Missing  Extra  Changed  Duplicate  Unverified  Sequence expected  Sequence actual   Elapsed",
+			"   1  Table_1             8000     8000     8000        0      0        0          0           0             135400           135400  00:00:01",
+			"   2  Table_2             6000     6000     6000        0      0        0          0           0              86102            86102  00:00:02",
+			"   3  Bench_Wide       1997994  1997994  1592326        0      0        0          0      405668            2000000          2000000  00:02:59",
+			"   4  Bench_Text       1000000  1000000  1000000        0      0        0          0           0                  0                0  00:01:30",
+			"   5  Bench_Blob         10000    10000    10000        0      0        0          0           0              10000            10000  00:00:40",
+			"   6  Bench_Small_01      1000     1000     1000        0      0        0          0           0               1000             1000  00:00:00",
+			"   7  Bench_Small_02      2000     2000     2000        0      0        0          0           0               2000             2000  00:00:01",
+			"   8  Bench_Small_03      3000     3000     3000        0      0        0          0           0               3000             3000  00:00:00",
+			"   9  Bench_Small_04      4000     4000     4000        0      0        0          0           0               4000             4000  00:00:00",
+			"  10  Bench_Small_05      5000     5000     5000        0      0        0          0           0               5000             5000  00:00:00",
+			"  11  Bench_Small_06      6000     6000     6000        0      0        0          0           0               6000             6000  00:00:00",
+			"  12  Bench_Small_07      7000     7000     7000        0      0        0          0           0            1007000          1007000  00:00:00",
+			"  13  Bench_Small_08      8000     8000     8000        0      0        0          0           0               8000             8000  00:00:01",
+			"  14  Bench_Small_09      9000     9000     9000        0      0        0          0           0               9000             9000  00:00:01",
+			"  15  Bench_Small_10     10000    10000    10000        0      0        0          0           0              10000            10000  00:00:00",
+			"  16  Bench_Small_11     11000    11000    11000        0      0        0          0           0              11000            11000  00:00:00",
+			"  17  Bench_Small_12     12000    12000    12000        0      0        0          0           0              12000            12000  00:00:00",
+			"  18  Bench_Small_13     13000    13000    13000        0      0        0          0           0              13000            13000  00:00:01",
+			"  19  Bench_Small_14     14000    14000    14000        0      0        0          0           0              14000            14000  00:00:01",
+			"  20  Bench_Small_15     15000    15000    15000        0      0        0          0           0              15000            15000  00:00:01",
+			"  21  Bench_Small_16     16000    16000    16000        0      0        0          0           0              16000            16000  00:00:01",
+			"  22  Bench_Small_17     17000    17000    17000        0      0        0          0           0              17000            17000  00:00:01",
+			"  23  Bench_Small_18     18000    18000    18000        0      0        0          0           0              18000            18000  00:00:01",
+			"  24  Bench_Small_19     19000    19000    19000        0      0        0          0           0              19000            19000  00:00:01",
+			"  25  Bench_Small_20     20000    20000    20000        0      0        0          0           0              20000            20000  00:00:01",
+			"  28  Check_Keys             0        0        0        0      0        0          0           0                  0                0  00:00:00",
+			"",
+			"Unverified ranges",
+			"  [Bench_Wide]  keys 1075107 to 1278143, 202834 in the set and 202834 in this datafile: the segment 000001074028.seg doesn't match its SHA-256",
+			"  [Bench_Wide]  keys 1333334 to 1536370, 202834 in the set and 202834 in this datafile: the segment 000001331996.seg is missing",
+			""
+		],
+		"log": [
+			"2026-10-02 13:47:31  Compare started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-02 13:47:31  options: {}",
+			"2026-10-02 13:47:31  phase 1 of 1: compare",
+			"2026-10-02 13:47:31  [Bench_Wide] started",
+			"2026-10-02 13:47:31  [Bench_Text] started",
+			"2026-10-02 13:49:01  [Bench_Text] done: 1000000 records, 00:01:30",
+			"2026-10-02 13:49:29  [Bench_Small_20] started",
+			"2026-10-02 13:49:29  [Bench_Small_20] done: 20000 records, 00:00:01",
+			"2026-10-02 13:49:29  [Bench_Small_19] started",
+			"2026-10-02 13:49:30  [Bench_Small_19] done: 19000 records, 00:00:01",
+			"2026-10-02 13:49:30  [Bench_Small_18] started",
+			"2026-10-02 13:49:31  [Bench_Small_18] done: 18000 records, 00:00:01",
+			"2026-10-02 13:49:31  [Bench_Small_17] started",
+			"2026-10-02 13:49:32  [Bench_Small_17] done: 17000 records, 00:00:01",
+			"2026-10-02 13:49:32  [Bench_Small_16] started",
+			"2026-10-02 13:49:33  [Bench_Small_16] done: 16000 records, 00:00:01",
+			"2026-10-02 13:49:33  [Bench_Small_15] started",
+			"2026-10-02 13:49:34  [Bench_Small_15] done: 15000 records, 00:00:01",
+			"2026-10-02 13:49:34  [Bench_Small_14] started",
+			"2026-10-02 13:49:35  [Bench_Small_14] done: 14000 records, 00:00:01",
+			"2026-10-02 13:49:35  [Bench_Small_13] started",
+			"2026-10-02 13:49:36  [Bench_Small_13] done: 13000 records, 00:00:01",
+			"2026-10-02 13:49:36  [Bench_Small_12] started",
+			"2026-10-02 13:49:37  [Bench_Small_12] done: 12000 records, 00:00:00",
+			"2026-10-02 13:49:37  [Bench_Small_11] started",
+			"2026-10-02 13:49:37  [Bench_Small_11] done: 11000 records, 00:00:00",
+			"2026-10-02 13:49:37  [Bench_Blob] started",
+			"2026-10-02 13:50:17  [Bench_Blob] done: 10000 records, 00:00:40",
+			"2026-10-02 13:50:17  [Bench_Small_10] started",
+			"2026-10-02 13:50:17  [Bench_Small_10] done: 10000 records, 00:00:00",
+			"2026-10-02 13:50:17  [Bench_Small_09] started",
+			"2026-10-02 13:50:18  [Bench_Small_09] done: 9000 records, 00:00:01",
+			"2026-10-02 13:50:18  [Table_1] started",
+			"2026-10-02 13:50:19  [Table_1] done: 8000 records, 00:00:01",
+			"2026-10-02 13:50:19  [Bench_Small_08] started",
+			"2026-10-02 13:50:19  [Bench_Small_08] done: 8000 records, 00:00:01",
+			"2026-10-02 13:50:19  [Bench_Small_07] started",
+			"2026-10-02 13:50:20  [Bench_Small_07] done: 7000 records, 00:00:00",
+			"2026-10-02 13:50:20  [Bench_Small_06] started",
+			"2026-10-02 13:50:20  [Bench_Small_06] done: 6000 records, 00:00:00",
+			"2026-10-02 13:50:20  [Table_2] started",
+			"2026-10-02 13:50:22  [Table_2] done: 6000 records, 00:00:02",
+			"2026-10-02 13:50:22  [Bench_Small_05] started",
+			"2026-10-02 13:50:22  [Bench_Small_05] done: 5000 records, 00:00:00",
+			"2026-10-02 13:50:22  [Bench_Small_04] started",
+			"2026-10-02 13:50:22  [Bench_Small_04] done: 4000 records, 00:00:00",
+			"2026-10-02 13:50:22  [Bench_Small_03] started",
+			"2026-10-02 13:50:22  [Bench_Small_03] done: 3000 records, 00:00:00",
+			"2026-10-02 13:50:22  [Bench_Small_02] started",
+			"2026-10-02 13:50:23  [Bench_Small_02] done: 2000 records, 00:00:01",
+			"2026-10-02 13:50:23  [Bench_Small_01] started",
+			"2026-10-02 13:50:23  [Bench_Small_01] done: 1000 records, 00:00:00",
+			"2026-10-02 13:50:23  [Check_Keys] started",
+			"2026-10-02 13:50:23  [Check_Keys] done: 0 records, 00:00:00",
+			"2026-10-02 13:50:30  [Bench_Wide] done: 1997994 records, 00:02:59",
+			"2026-10-02 13:50:31  ended: inconclusive",
+			""
+		],
+		"export_set": "Export 2026-10-02 13.39",
+		"planted": [
+			{
+				"file": "000001074028.seg",
+				"records": 202834,
+				"first_key": 1075107,
+				"last_key": 1278143
+			},
+			{
+				"file": "000001331996.seg",
+				"records": 202834,
+				"first_key": 1333334,
+				"last_key": 1536370
+			}
+		],
+		"ranges": [
+			{
+				"table": "Bench_Wide",
+				"kind": "range",
+				"from": 1075107,
+				"to": 1278143,
+				"inclusive": true,
+				"source_records": 202834,
+				"target_records": 202834,
+				"reason": "the segment 000001074028.seg doesn't match its SHA-256"
+			},
+			{
+				"table": "Bench_Wide",
+				"kind": "range",
+				"from": 1333334,
+				"to": 1536370,
+				"inclusive": true,
+				"source_records": 202834,
+				"target_records": 202834,
+				"reason": "the segment 000001331996.seg is missing"
+			}
+		],
+		"unverified": [
+			{
+				"table": "Bench_Wide",
+				"kind": "unverified",
+				"key": 1075107,
+				"reason": "the segment 000001074028.seg doesn't match its SHA-256"
+			},
+			{
+				"table": "Bench_Wide",
+				"kind": "unverified",
+				"key": 1075108,
+				"reason": "the segment 000001074028.seg doesn't match its SHA-256"
+			},
+			{
+				"table": "Bench_Wide",
+				"kind": "unverified",
+				"key": 1075109,
+				"reason": "the segment 000001074028.seg doesn't match its SHA-256"
+			},
+			{
+				"table": "Bench_Wide",
+				"key": null,
+				"not_listed": 404668
+			}
+		],
+		"discrepancies": [],
+		"row": {
+			"number": 3,
+			"name": "Bench_Wide",
+			"elapsed": 178.573,
+			"matched": 1592326,
+			"missing": 0,
+			"extra": 0,
+			"changed": 0,
+			"duplicate": 0,
+			"unverified": 405668,
+			"expected": 1997994,
+			"actual": 1997994,
+			"sequence_expected": 2000000,
+			"sequence_actual": 2000000
+		},
+		"ok": true
+	},
+	"values": {
+		"export": "exported",
+		"problems": [],
+		"ids": [
+			1,
+			2,
+			3
+		],
+		"blob_id": 1,
+		"minus_zero_kept": true,
+		"compare": {
+			"verdict": "notExact",
+			"next_step": "The target is unusable. Recreate it, then run the import again.",
+			"problems": [],
+			"cautions": [
+				"23 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Check_Keys]"
+			],
+			"failure": null,
+			"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-02 13.50.32:Compare 2026-10-02 13.50.44.txt",
+			"phases": [
+				{
+					"name": "compare",
+					"started": "2026-10-02T19:50:44.739Z",
+					"ended": "2026-10-02T19:51:06.610Z"
+				}
+			],
+			"blocked_tables": [],
+			"files": {
+				".txt": true,
+				".json": true,
+				".log": true
+			},
+			"bom": [],
+			"missing_keys": [],
+			"txt_line_1": "Compare: notExact",
+			"txt_line_1_ok": true,
+			"json_verdict": "notExact",
+			"txt": [
+				"Compare: notExact",
+				"Next step: The target is unusable. Recreate it, then run the import again.",
+				"",
+				"Problems:  (none)",
+				"Cautions:",
+				"  - 23 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Check_Keys]",
+				"",
+				"Export set: Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-02 13.50.32:",
+				"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+				"Started:    2026-10-02 13:50:44   Ended: 13:51:06   Elapsed: 00:00:22",
+				"Component:  2026.r4 (build 20261002)   4D: 2102 (build 100579)",
+				"Run by:     Dani Beaubien on Dani's Mac Studio",
+				"Options:    (defaults)",
+				"",
+				"Phases",
+				"  compare           00:00:22",
+				"",
+				"Tables: 3 of 26 in the structure",
+				"  No  Table           Expected  Actual  Matched  Missing  Extra  Changed  Duplicate  Unverified  Sequence expected  Sequence actual   Elapsed",
+				"   5  Bench_Blob         10000   10000    10000        0      0        1          0           0              10000            10000  00:00:21",
+				"   6  Bench_Small_01      1000    1000      999        0      0        2          0           1               1000             1000  00:00:00",
+				"   7  Bench_Small_02      2000    2000     2000        0      0     2000          0           0               2000             2000  00:00:00",
+				""
+			],
+			"log": [
+				"2026-10-02 13:50:44  Compare started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+				"2026-10-02 13:50:44  options: {}",
+				"2026-10-02 13:50:44  caution: 23 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Check_Keys]",
+				"2026-10-02 13:50:44  phase 1 of 1: compare",
+				"2026-10-02 13:50:44  [Bench_Blob] started",
+				"2026-10-02 13:50:44  [Bench_Small_02] started",
+				"2026-10-02 13:50:45  [Bench_Small_02] done: 2000 records, 00:00:00",
+				"2026-10-02 13:50:45  [Bench_Small_01] started",
+				"2026-10-02 13:50:45  [Bench_Small_01] done: 1000 records, 00:00:00",
+				"2026-10-02 13:51:05  [Bench_Blob] done: 10000 records, 00:00:21",
+				"2026-10-02 13:51:06  ended: notExact",
+				""
+			]
+		},
+		"discrepancies": [
+			{
+				"table": "Bench_Blob",
+				"kind": "changed",
+				"key": 1,
+				"fields": [
+					{
+						"number": 3,
+						"name": "Payload",
+						"source": {
+							"bytes": 235410,
+							"sha256": "272e630488f3d37506c1d24cf544eea6b7e57280f4dbfe80fd1e2dc36bd13856"
+						},
+						"target": {
+							"bytes": 235410,
+							"sha256": "0947bf899d78ddea19923105b1fb6079085799a17bd216da6a26a5497ec741dc"
+						}
+					}
+				]
+			},
+			{
+				"table": "Bench_Small_01",
+				"kind": "changed",
+				"key": 1,
+				"fields": [
+					{
+						"number": 4,
+						"name": "Amount",
+						"source": 0,
+						"target": 0,
+						"source_hex": "0000000000000000",
+						"target_hex": "0000000000000080"
+					}
+				]
+			},
+			{
+				"table": "Bench_Small_01",
+				"kind": "changed",
+				"key": 2,
+				"fields": [
+					{
+						"number": 3,
+						"name": "Name",
+						"source": "Name 2 Bench_Small_01",
+						"target": "Name 2 Bench_Small_01 ",
+						"source_length": 21,
+						"target_length": 22,
+						"first_difference": 22
+					}
+				]
+			},
+			{
+				"table": "Bench_Small_02",
+				"kind": "changed",
+				"key": 1,
+				"fields": [
+					{
+						"number": 6,
+						"name": "Active",
+						"source": false,
+						"target": true
+					}
+				]
+			},
+			{
+				"table": "Bench_Small_02",
+				"kind": "changed",
+				"key": 2,
+				"fields": [
+					{
+						"number": 6,
+						"name": "Active",
+						"source": false,
+						"target": true
+					}
+				]
+			},
+			{
+				"table": "Bench_Small_02",
+				"key": null,
+				"not_listed": 1000
+			}
+		],
+		"unverified": [
+			{
+				"table": "Bench_Small_01",
+				"kind": "unverified",
+				"key": 3,
+				"reason": "the record can't be read: [Bench_Small_01] record key 3: Note: a lone surrogate, which UTF-8 can't hold"
+			}
+		],
+		"rows": [
+			{
+				"number": 5,
+				"name": "Bench_Blob",
+				"elapsed": 20.772,
+				"matched": 10000,
+				"missing": 0,
+				"extra": 0,
+				"changed": 1,
+				"duplicate": 0,
+				"unverified": 0,
+				"expected": 10000,
+				"actual": 10000,
+				"sequence_expected": 10000,
+				"sequence_actual": 10000
+			},
+			{
+				"number": 6,
+				"name": "Bench_Small_01",
+				"elapsed": 0.024,
+				"matched": 999,
+				"missing": 0,
+				"extra": 0,
+				"changed": 2,
+				"duplicate": 0,
+				"unverified": 1,
+				"expected": 1000,
+				"actual": 1000,
+				"sequence_expected": 1000,
+				"sequence_actual": 1000
+			},
+			{
+				"number": 7,
+				"name": "Bench_Small_02",
+				"elapsed": 0.155,
+				"matched": 2000,
+				"missing": 0,
+				"extra": 0,
+				"changed": 2000,
+				"duplicate": 0,
+				"unverified": 0,
+				"expected": 2000,
+				"actual": 2000,
+				"sequence_expected": 2000,
+				"sequence_actual": 2000
+			}
+		],
+		"checks": {
+			"minus_zero": true,
+			"trailing_space": true,
+			"blob": true,
+			"unreadable": true,
+			"cap": true
+		},
+		"ok": true,
+		"restored": true
+	},
+	"order": {
+		"export": "exported",
+		"problems": [],
+		"compare": {
+			"verdict": "inconclusive",
+			"next_step": "Some records are unverified: see the unverified ranges and records. Fix their cause (a damaged export set, keys that the two datafiles order differently, or target records that can't be read), then run Compare again.",
+			"problems": [],
+			"cautions": [
+				"25 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20]"
+			],
+			"failure": null,
+			"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-02 13.51.08:Compare 2026-10-02 13.51.10.txt",
+			"phases": [
+				{
+					"name": "compare",
+					"started": "2026-10-02T19:51:10.299Z",
+					"ended": "2026-10-02T19:51:11.392Z"
+				}
+			],
+			"blocked_tables": [],
+			"files": {
+				".txt": true,
+				".json": true,
+				".log": true
+			},
+			"bom": [],
+			"missing_keys": [],
+			"txt_line_1": "Compare: inconclusive",
+			"txt_line_1_ok": true,
+			"json_verdict": "inconclusive",
+			"txt": [
+				"Compare: inconclusive",
+				"Next step: Some records are unverified: see the unverified ranges and records. Fix their cause (a damaged export set, keys that the two datafiles order differently, or target records that can't be read), then run Compare again.",
+				"",
+				"Problems:  (none)",
+				"Cautions:",
+				"  - 25 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20]",
+				"",
+				"Export set: Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-02 13.51.08:",
+				"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+				"Started:    2026-10-02 13:51:10   Ended: 13:51:11   Elapsed: 00:00:01",
+				"Component:  2026.r4 (build 20261002)   4D: 2102 (build 100579)",
+				"Run by:     Dani Beaubien on Dani's Mac Studio",
+				"Options:    (defaults)",
+				"",
+				"Phases",
+				"  compare           00:00:01",
+				"",
+				"Tables: 1 of 26 in the structure",
+				"  No  Table       Expected  Actual  Matched  Missing  Extra  Changed  Duplicate  Unverified  Sequence expected  Sequence actual   Elapsed",
+				"  28  Check_Keys        10      10        5        0      0        0          0           5                  0                0  00:00:00",
+				"",
+				"Unverified ranges",
+				"  [Check_Keys]  keys after \"c10_05\" to the end, 5 in the set and 4 in this datafile: the source key \"c10_04\" isn't after the key before it, \"c10_05\", in this datafile's order: the two datafiles order keys differently",
+				""
+			],
+			"log": [
+				"2026-10-02 13:51:10  Compare started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+				"2026-10-02 13:51:10  options: {}",
+				"2026-10-02 13:51:10  caution: 25 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20]",
+				"2026-10-02 13:51:10  phase 1 of 1: compare",
+				"2026-10-02 13:51:10  [Check_Keys] started",
+				"2026-10-02 13:51:10  [Check_Keys] done: 10 records, 00:00:00",
+				"2026-10-02 13:51:11  ended: inconclusive",
+				""
+			]
+		},
+		"swapped": [
+			"c10_05",
+			"c10_04"
+		],
+		"discrepancies": [],
+		"ranges": [
+			{
+				"table": "Check_Keys",
+				"kind": "range",
+				"from": "c10_05",
+				"to": null,
+				"inclusive": false,
+				"source_records": 5,
+				"target_records": 4,
+				"reason": "the source key \"c10_04\" isn't after the key before it, \"c10_05\", in this datafile's order: the two datafiles order keys differently"
+			}
+		],
+		"row": {
+			"number": 28,
+			"name": "Check_Keys",
+			"elapsed": 0.001,
+			"matched": 5,
+			"missing": 0,
+			"extra": 0,
+			"changed": 0,
+			"duplicate": 0,
+			"unverified": 5,
+			"expected": 10,
+			"actual": 10,
+			"sequence_expected": 0,
+			"sequence_actual": 0
+		},
+		"unverified": [
+			{
+				"table": "Check_Keys",
+				"kind": "unverified",
+				"key": "c10_04",
+				"reason": "a source key after the order guard break in this table may match it"
+			},
+			{
+				"table": "Check_Keys",
+				"kind": "unverified",
+				"key": "c10_06",
+				"reason": "the source key \"c10_04\" isn't after the key before it, \"c10_05\", in this datafile's order: the two datafiles order keys differently"
+			},
+			{
+				"table": "Check_Keys",
+				"kind": "unverified",
+				"key": "c10_07",
+				"reason": "the source key \"c10_04\" isn't after the key before it, \"c10_05\", in this datafile's order: the two datafiles order keys differently"
+			}
+		],
+		"ok": true,
+		"restored": true
+	},
+	"summary": {
+		"damaged": "inconclusive, two ranges of [Bench_Wide], the rest matched",
+		"values": "notExact, -0 in hex, trailing space, BLOB, unreadable record and the cap as expected",
+		"order": "inconclusive, the second of the swapped pair unverified, extra 0, the range as before",
+		"restored": true
+	}
+}

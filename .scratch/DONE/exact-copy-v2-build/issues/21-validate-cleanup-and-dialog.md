@@ -1,0 +1,271 @@
+# Validate the cleanup and the dialog together
+
+Status: resolved
+Assignee: Dani Beaubien (claimed 2026-10-02)
+Type: task
+Blocked by: 14, 15, 16, 17, 18, 22, 23 and 24 (part 2)
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, the Acceptance of tickets 14 to 18 and 22, .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Switch to target), docs/agents/issue-tracker-rules.md
+Gates: —
+
+## What to do
+
+At the human's request (2026-10-02), one session covers the run steps of tickets 14 to 18 and
+22, in place of one session each. Those tickets resolve once they are built and compiled, and
+point here. Run everything compiled. Each build session updates its own part below when it builds: 16 the Stop
+steps, 17 how to plant bad characters and a blocker, and 18 the `CREATE DATA FILE` checks.
+
+**Part 1: a small datafile, where each pass takes seconds.** Create a new datafile in a folder of
+its own, so its export sets stay apart from the bench's. Then run `__Bench_Generate(0.01)`.
+
+1. Open the dialog. It opens on Health check (15).
+2. From a method, `Export_HealthCheck_Scan({num_processes: 0})` returns a run report path, so the
+   old shared methods still run after the delete (14).
+3. Run `__Bench_Plant`: it puts a bad character in 3 `[Bench_Small_01]` records, and the blank
+   key 0 in one `[Bench_Small_02]` record, a blocker. In Fields to ignore…, tick
+   `[Bench_Small_01]Note`. The health check gives `blocked`, with `[Bench_Small_02]`'s row in red.
+   Leave blocked tables out unticks it. The health check then gives `warnings`, and Remove bad
+   characters is on. After its confirmation, the fixer gives `passed`, with 3 records saved (17).
+4. Tick every table and run the export: the gate refuses it, and the Export step shows the gate's
+   grid with `[Bench_Small_02]` in red (17). Run `__Bench_Plant(True)`, which gives that record
+   its key back. Export two tables: the "tables left out" caution shows. Then export every table:
+   `exported` (17).
+5. The dialog opens on Switch to target (15), with the set's data language (18). Spec 11's
+   `CREATE DATA FILE` checks (18):
+   - Type the source's own file name: the pre-flight says it already exists, and Create target…
+     is off. An empty name, and one without `.4DD`, are refused too.
+   - Put back `<source name> target.4DD`. Click Create target…, then Cancel: nothing happens.
+   - Click it again and choose Switch. Within about 10 s, 4D closes the source and reopens on the
+     new, empty file in the same folder. The dialog doesn't reopen by itself. Note anything 4D
+     shows on the way (a dialog, a log file question).
+   - The data folder holds `On Exit ran.txt`, naming the source, and `On Startup ran.txt`, naming
+     the target, each with its time: the throw-away markers of ticket 18.
+   - Then delete `Project/Sources/DatabaseMethods/onExit.4dm`, the first line of `onStartup.4dm`
+     and both `.txt` files.
+6. On the target, the dialog opens on Import (15). It shows the manifest summary (source, export
+   time, version, records and size) and a grid of each table's records in the set and in this
+   datafile (18). The import gives `exact`, and its grid adds Removed, Loaded and Compare's counts,
+   with ✓ under Sequence (18). The dialog then opens on Compare (15), and Compare run again gives
+   `exact` (18).
+7. Hand-edit the import's run report `.json` to `notExact`, then to `interrupted` with the load as
+   its last phase. Each time, the dialog opens on Switch to target with the "unusable" banner (15).
+   On the Import step, Go to Switch to target is on for `notExact` (18).
+8. Back on the source, run `__Check_Order_Break`. Compare gives `inconclusive`, not `notExact`. The
+   second record of the swapped pair is listed under `unverified` with the reason "a source key
+   after the order guard break in this table may match it", and the table's `extra` is 0 (22).
+   Its alert reads "inconclusive, the second of the swapped pair unverified, extra 0, the range as
+   before", and it writes `research/22-__Check_Order_Break-compiled.json`. The agent then deletes
+   the check.
+
+**Part 2: one guided run on the bench datafile, about 20 minutes.**
+
+First, [Export: self-check and set digest](24-export-self-check-and-set-digest.md) on part 1's
+small datafile, its source and its target (24):
+
+- a. On the source, export every table in the dialog. The phase line reaches "phase 4 of 4:
+  self_check", then the grid fills again. It gives `exported`, and the Export step shows the set
+  digest with Copy, and the note "This export set's fingerprint. Copy it now…". Copy puts the
+  digest on the clipboard. The set has `manifest.json` and no `manifest.json.tmp`. Its
+  `Export … .txt` has a `Set digest:` line and "Self-check: exact, see Compare … .txt".
+- b. Still on the source, Compare of that set gives `exact` and "The export set matches this
+  datafile."
+- c. On the target, the Import step's summary shows the same set digest, under "Set digest of
+  this set now". Its Paste fills Set digest, and the import gives `exact`. On the Compare step,
+  change one digit of the digest in the field and press Tab: the pre-flight shows "This export
+  set's digest is …, not …", and Run is off. Paste again: Run is on, and Compare runs.
+- d. Copy step a's set. In the copy, change one byte of a segment and put the segment's new
+  SHA-256 (`shasum -a 256`) in the copy's `manifest.json`. On the target, choose the copy, and
+  Paste step a's digest: the Import step's pre-flight shows the digest problem, so Run is off.
+  Delete the copy.
+- e. Delete step a's set too, before 4D opens `data.4DD`: the small datafile shares the bench's
+  data folder, so the dialog would choose that set and treat the bench as its target.
+
+Then the bench:
+
+1. Start an export: Stop takes Run's place. Stop it after about 10 s and confirm. It gives
+   `failed`, "stopped by operator", and the Runtime Explorer shows no `ExportImport_*` worker
+   left. Start it again and close the window with the close box: it asks "Stop export?". Keep running keeps it open. Press
+   Cmd-W and choose Stop: the window closes once the run has ended. Then reopen the dialog, start
+   a third export, and abort the dialog's process (`Export_Import_Dialog`) in the Runtime
+   Explorer: no error shows, so the messages sent to the closed window do no harm, and the run
+   report in that set ends `exported` (16). Start a fourth export, and press Stop once the phase
+   line says self_check: `failed`, "stopped by operator". That set has `manifest.json.tmp` and no
+   `manifest.json`, so the export set drop-down doesn't list it (24). Delete the four sets.
+2. The health check gives `passed`: the bench's 3 `space_uuid` findings were in `[Spike_Keys]`,
+   which ticket 14 removed (17). Then export (`exported`), which now ends with its self-check. The
+   dialog stays responsive throughout, with the phase line, the bar and its ETA, and the table grid
+   (16). Copy the set digest it shows (24).
+3. Switch to target, reopen, import (`exact`) with the set digest pasted, then run Compare again
+   (`exact`) (18, 24).
+4. Attach the `.json` run reports of steps 2 and 3 under `research/`, named `21-<pass>.json`.
+
+**Moved elsewhere:** ticket 16's `CALL FORM` check in a scratch host goes to
+[Final check on a customer copy](20-final-check-on-a-customer-copy.md), which runs the dialog in a
+real host.
+
+**Before this ticket:** if the spec map's open tickets add build tickets (extras before an order
+guard break, reworking the codec's per-record loops, the cut rule's cost), build them first, so
+part 2 covers them too.
+
+## Acceptance
+
+- [x] Every step gives what it says. A step that fails is fixed under this ticket, with a comment on
+      its build ticket, and then runs again.
+- [ ] The answer records spec 11's `CREATE DATA FILE` checks and the bench run's times. The
+      checks are recorded. The times aren't: see the Answer.
+
+## Comments
+
+- 2026-10-02, claimed. **Part 1 runs now, part 2 waits.** "Before this ticket" applies to part 2:
+  the spec map's [cut rule's cost](../../exact-copy-v2/issues/19-cut-rule-cost.md) (claimed)
+  and [Rework Compare's per-record path](../../exact-copy-v2/issues/21-rework-compare-per-record-path.md)
+  (after its probe, spec 20) may each add a build ticket that changes the export's or Compare's
+  speed. Part 2 runs once both resolve and their build tickets are built, so its times hold. Part 1
+  checks behaviour on a small datafile and doesn't depend on them.
+  - Desk check of part 1 against the code, no change needed. `__Bench_Generate(0.01)` gives
+    `[Bench_Small_01]` its 10 records (one segment, as `__Check_Order_Break` expects) and plants
+    nothing the health check finds. The gate takes `[Bench_Small_02]`'s key 0 as `blank_key`.
+  - "The dialog opens on …" (steps 5 and 6) means close the dialog and call
+    `Export_Import_Dialog` again: a run's end refreshes the marks but stays on its step.
+  - Step 3's "3 records saved" is the fixer run report's `records_saved`: the grid doesn't show it.
+  - Step 3's planted characters are in `Name`, so ticking `Note` in Fields to ignore… runs that
+    path but hides no finding.
+- 2026-10-02, from spec [Rework Compare's per-record path](../../exact-copy-v2/issues/21-rework-compare-per-record-path.md)
+  (grilled, still open): a second probe comes first,
+  [Probe: Compare's loop, step by step](../../exact-copy-v2/issues/22-probe-compare-loop-step-by-step.md).
+  Part 2 keeps waiting, as decided with the human, so its times and its import cover a reworked
+  Compare. If spec 21 adds a rework build ticket, that ticket runs `__Check_Order_Break` again
+  (restored from git if step 8 has deleted it).
+- 2026-10-02, from spec [Rework Compare's per-record path](../../exact-copy-v2/issues/21-rework-compare-per-record-path.md)
+  (resolved): its build ticket is [Compare: the lean merge loop](23-compare-lean-merge-loop.md),
+  with run steps of its own. Part 2 waits for it. That ticket runs `__Check_Order_Break` again
+  before deleting it, so step 8 can leave the check in place.
+- 2026-10-02, from spec [Trusting the export set](../../exact-copy-v2/issues/23-trusting-the-export-set.md)
+  (resolved): part 2 also waits for [Export: self-check and set digest](24-export-self-check-and-set-digest.md),
+  whose run steps marked (21) join this ticket. Every export now ends with a self-check, so part
+  2's export time includes it, and its import and Compare show the set digest. Ticket 24's steps
+  on the small datafile need part 1's datafile again.
+- 2026-10-02, part 1's run reports, in the data folder of `data-NEW.4DD` (the small datafile):
+  - Step 2 (confirmed by the human): `Health check 2026-10-02 11.24.34` gives `passed`, with
+    `workers` and `tables` Null, as the shared method sends them.
+  - Step 4: the export at 11.25.01 gives `refused`, its gate `blocked` on `[Bench_Small_02]`'s
+    `blank_key`. The export at 11.26.20 leaves 5 tables out, not 2, and gives `exported` with the
+    caution "5 tables with records left out of this export: …". The export at 11.26.54, of every
+    table, gives `exported` in 5 s.
+  - Step 5: On Exit ran at 17:27:53.253Z naming `data-NEW.4DD`, and On Startup at 17:27:54.309Z
+    naming `data-NEW target.4DD`, so the switch took about 1 s. The marker code is deleted, and
+    the agent deleted the two `.txt` files.
+  - Step 6: the import gives `exact` in 26 s, through all seven phases.
+  - **Not on disk:** step 3 (no health check or fixer run report after 11.24.34, and both
+    exports still hold the 3 planted `Char(1)` in `[Bench_Small_01]Name`), step 6's second Compare
+    (the one Compare report, 11.32.02 to 11.32.08, is the import's own), step 7 (the import's
+    report is unchanged since 11:32:08) and step 8 (no `research/22-__Check_Order_Break-compiled.json`).
+    Step 1, step 5's name checks and the dialog's views in steps 3 to 6 leave nothing on disk: the
+    human confirms them.
+  - The small datafile shares the bench's data folder, not a folder of its own. Before part 2, its
+    three export sets must leave that folder: on `data.4DD`, the dialog would choose the newest
+    set, whose source is `data-NEW.4DD`, and treat the bench as a target.
+- 2026-10-02, **part 1 is done** (the human). Steps 1, 3, 6's second Compare, 7 and 8, step 5's
+  name checks and the dialog's views ran on another machine and gave what they say. Their run
+  reports, and `research/22-__Check_Order_Break-compiled.json`, stayed on that machine. Nothing
+  was noted on what 4D showed during the switch. Part 2 waits for tickets 23 and 24.
+- 2026-10-02, from [Compare: the lean merge loop](23-compare-lean-merge-loop.md) (resolved): part 2
+  now waits only for [Export: self-check and set digest](24-export-self-check-and-set-digest.md).
+  Compare's default is 4 workers now, so the dialog's Compare and Import steps fill in 4. That
+  ticket ran `__Check_Order_Break` on the bench and then deleted it, with the other checks.
+- 2026-10-02, from [Export: self-check and set digest](24-export-self-check-and-set-digest.md)
+  (built, waiting on the compile and its bench run): its run steps are now in part 2, marked (24):
+  a to d on part 1's small datafile, the Stop during the self-check in step 1 (on the bench, where
+  the phase lasts long enough to press Stop), and the digest in steps 2 and 3. Part 2 waits for
+  that ticket's compile and bench run.
+- 2026-10-02, from [Export: self-check and set digest](24-export-self-check-and-set-digest.md)
+  (resolved): **part 2 is unblocked.** That ticket's bench run gave `exported` with the self-check
+  `exact`, but under load: Backblaze (`bztransmit`) used 97% CPU, likely on the new 3.8 GB set.
+  So part 2's step 2 export, with its self-check, gives the times that ticket couldn't. Before
+  part 2: pause Backblaze and exclude the data folder from it and from Spotlight, quit any other
+  4D, and delete `Export 2026-10-02 14.58.26` (that ticket's set) from the data folder. A quiet
+  machine exports the bench in about 62 to 84 s at 4 workers (tickets 19 and 23): if step 2's
+  export phase is far above that, the machine is still loaded. Record the export phase's and the
+  self-check's times from the Export run report's phases.
+- 2026-10-02, desk check of part 2 against the code (a wayfinder session, nothing run). One step
+  added, e; the rest matches the code.
+  - **Added e:** step a's set has `data-NEW.4DD` as its source and lands in the bench's data
+    folder. Left there, `data.4DD`'s dialog chooses it as the newest set, so it calls the bench a
+    target, opens on Import, and proposes `data-NEW target.4DD` as the target's name, which
+    exists. Part 1's three sets are already gone. `Export 2026-10-02 14.58.26` (ticket 24's set)
+    is still there: delete it before step a, as the comment above says.
+  - Step c: 4D's `#` ignores case, so a digest with one letter's case changed still matches.
+    Change a digit to another digit. The Set digest field reruns the pre-flight when it loses
+    focus (On Data Change), so press Tab after pasting.
+  - Step 1's Stop during self_check gives `failed` and "stopped by operator": the nested Compare's
+    pool sets the Stop as its failure, and the export takes that failure. The failure's `phase`
+    is Compare's own, `compare`, not `self_check`. Two exports at once don't share workers: a
+    worker's name holds its coordinator's process number (`ExportImport_<process>_<n>`).
+  - Step 1's third export now runs to its end with its self-check, about 4 minutes on a quiet
+    machine. Wait for it to end before you check its run report and start the fourth. Part 2 will
+    likely take 30 to 40 minutes, not 20: steps a to e switch datafiles three times, and the bench
+    runs three full exports, an import and two Compares.
+  - Disk: the volume has 26 GB free. Part 2 needs about 12 GB at most at once: in step 1, up to
+    three 3.8 GB sets before they are deleted; then step 2's set plus step 3's 5.7 GB target.
+- 2026-10-02, part 2's small-datafile steps, run by the human (reports in
+  `Export 2026-10-02 16.38.01`, exported from `data-NEW target.4DD` and imported into
+  `data-NEW target target.4DD`):
+  - **The set digest couldn't be copied or pasted**, and its purpose wasn't clear. The dialog's
+    process has no menu bar, so 4D's Cmd-C and Cmd-V do nothing in it. The human chose: Copy and
+    Paste buttons (Paste drops spaces and line breaks), and a rewording in place: the Export
+    step's note says what the digest is for, the field has the placeholder "Optional: the digest
+    the export showed" and a tooltip, and the Import summary's line, "Set digest of this set
+    now", can be selected. Steps a, c and d above now use the buttons.
+  - **Stop wasn't found** during these short runs. The human chose to put Stop in Run's place
+    during a run.
+  - **The import at 16.40.13, with the right digest, failed in the load**:
+    `[Bench_Small_20]` key 1, POSIX error 13 and "Access denied" on
+    `data-NEW target target.4DIndx`, so 4D couldn't write the new target's index file. That was
+    likely another program holding the brand-new file open (Backblaze or Spotlight), and the
+    digest played no part. The run said the target was unusable, as it should. The rerun at
+    16.40.54, without a digest, removed the failed load's 4,190 records and gave `exact`, with
+    the caution "…likely created by the host's On Startup", which was wrong here. The caution now
+    says "created by the host's On Startup, or left by an import that failed". The README says
+    what to do after an `Access denied` during the load.
+  - **To run again after the compile:** steps a, c and d with the buttons, and the Stop in Run's
+    place during bench step 1. Before that, exclude the data folder from Backblaze and Spotlight.
+- 2026-10-02, after the compile of `5ed8192` (the human), on `data-NEW target target.4DD`, in
+  `Export 2026-10-02 16.38.01`:
+  - Import at 16.56.19 with the set digest pasted: `exact`, its Compare `exact`, and the new
+    caution wording. So Paste fills the field, and the right digest passes.
+  - Import at 16.57.19 with the digest, stopped: `failed`, "stopped by operator", in resume
+    indexes. Triggers and constraints came back on, and the next step says the target is
+    unusable, as spec 13 says for a stop from the truncate through the flush. So Stop in Run's
+    place works on an import.
+  - **Not on disk:** step a's Copy (no export since 16.38.01), step c's separate Compare, and step
+    d's digest problem, which leaves no run report. The human confirmed all three: they give
+    what they say. **Part 2's bench
+    steps haven't run** (no set from `data.4DD`, no `research/21-*.json`), so this ticket stays
+    claimed.
+
+## Answer
+
+Resolved on 2026-10-02, accepted as done by the human. Parts 1 and 2 gave what they say. Some ran
+on another machine, and some were confirmed by the human without a run report (Comments).
+
+**The cleanup (14) and the dialog (15 to 18), with Compare's extras before an order break (22) and
+the export's self-check and set digest (24), work as built, after the fixes below.**
+
+- **Fixed under this ticket**, each with a comment on its build ticket:
+  - the set digest couldn't be copied or pasted, because the dialog's process has no menu bar.
+    Copy and Paste buttons now do it, and the dialog says what the digest is for (24);
+  - Stop wasn't found below the progress bar, so it now takes Run's place during a run (16);
+  - the import's caution on records removed before the load named only the host's On Startup,
+    and now also names an import that failed;
+  - the desk check added step e: the small datafile's set must leave the bench's data folder.
+- **Spec 11's `CREATE DATA FILE` checks:** an empty name, one without `.4DD` and an existing one
+  are refused, with Create target… off. Cancel does nothing. Switch closes the source and reopens
+  on the new, empty file in about 1 s (On Exit at 17:27:53.253Z naming `data-NEW.4DD`, On Startup
+  at 17:27:54.309Z naming `data-NEW target.4DD`), and the dialog doesn't reopen by itself.
+  Nothing was noted on what 4D shows during the switch.
+- **A surprise:** a load failed with `Access denied` on the new target's `.4DIndx`, likely a backup
+  tool or Spotlight opening the brand-new file. The README now says what to do.
+
+**Not validated: the bench times.** The human confirmed part 2's bench steps, but their run reports
+aren't on this machine and weren't attached under `research/`. So the export's and the self-check's
+times on a quiet machine are still unmeasured: ticket 24's run was under load. Ticket 20 records
+them on the customer copy.

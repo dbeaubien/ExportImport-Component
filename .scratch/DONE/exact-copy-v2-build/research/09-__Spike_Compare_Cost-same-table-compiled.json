@@ -1,0 +1,406 @@
+{
+	"method": "__Spike_Compare_Cost",
+	"when": "2026-10-02T00:52:05.194Z",
+	"compiled": true,
+	"cores": 10,
+	"export_set": "Export 2026-10-01 18.33",
+	"table": "Bench_Small_20",
+	"records": 20000,
+	"steps": {
+		"cooperative": {
+			"preemptive": false,
+			"failure": null,
+			"jobs": [
+				{
+					"table": "Bench_Small_20",
+					"n": 5000,
+					"preemptive": false,
+					"us": {
+						"goto": 2.8,
+						"goto_encode": 16,
+						"goto_encode_property": 16.8,
+						"key_target": 2.4,
+						"walk": 0.2,
+						"walk_key_source": 2.6,
+						"walk_copy": 0.6,
+						"walk_copy_sha256": 1.2,
+						"walk_copy_md5": 1,
+						"base64": 0.4,
+						"class_call": 0.2,
+						"row_counter": 0.2,
+						"records_in_selection": 0,
+						"less_text": 0.2,
+						"position": 0.2
+					}
+				}
+			]
+		},
+		"workers_1": {
+			"preemptive": true,
+			"failure": null,
+			"jobs": [
+				{
+					"table": "Bench_Small_20",
+					"n": 5000,
+					"preemptive": true,
+					"us": {
+						"goto": 0.6,
+						"goto_encode": 14.4,
+						"goto_encode_property": 14.8,
+						"key_target": 2.6,
+						"walk": 0.2,
+						"walk_key_source": 3,
+						"walk_copy": 0.6,
+						"walk_copy_sha256": 1.2,
+						"walk_copy_md5": 1,
+						"base64": 0.4,
+						"class_call": 0.2,
+						"row_counter": 0.6,
+						"records_in_selection": 0,
+						"less_text": 0.2,
+						"position": 0.2
+					}
+				}
+			]
+		},
+		"workers_10": {
+			"preemptive": true,
+			"failure": null,
+			"jobs": [
+				{
+					"table": "Bench_Small_20",
+					"n": 5000,
+					"preemptive": true,
+					"us": {
+						"goto": 19,
+						"goto_encode": 454,
+						"goto_encode_property": 507,
+						"key_target": 140,
+						"walk": 0.2,
+						"walk_key_source": 152.2,
+						"walk_copy": 0.8,
+						"walk_copy_sha256": 1.4,
+						"walk_copy_md5": 1.4,
+						"base64": 0.4,
+						"class_call": 5.8,
+						"row_counter": 20.2,
+						"records_in_selection": 0.2,
+						"less_text": 0,
+						"position": 0.2
+					}
+				},
+				{
+					"table": "Bench_Small_20",
+					"n": 5000,
+					"preemptive": true,
+					"us": {
+						"goto": 20,
+						"goto_encode": 461.4,
+						"goto_encode_property": 497.4,
+						"key_target": 143.6,
+						"walk": 0.4,
+						"walk_key_source": 150.2,
+						"walk_copy": 0.8,
+						"walk_copy_sha256": 1.6,
+						"walk_copy_md5": 1.4,
+						"base64": 0.4,
+						"class_call": 7.4,
+						"row_counter": 17.8,
+						"records_in_selection": 0.2,
+						"less_text": 0,
+						"position": 0.2
+					}
+				},
+				{
+					"table": "Bench_Small_20",
+					"n": 5000,
+					"preemptive": true,
+					"us": {
+						"goto": 19.8,
+						"goto_encode": 448.8,
+						"goto_encode_property": 499.8,
+						"key_target": 139,
+						"walk": 0.2,
+						"walk_key_source": 152,
+						"walk_copy": 0.6,
+						"walk_copy_sha256": 1.2,
+						"walk_copy_md5": 1.2,
+						"base64": 0.4,
+						"class_call": 7.4,
+						"row_counter": 26,
+						"records_in_selection": 0,
+						"less_text": 0.2,
+						"position": 0.2
+					}
+				},
+				{
+					"table": "Bench_Small_20",
+					"n": 5000,
+					"preemptive": true,
+					"us": {
+						"goto": 18.2,
+						"goto_encode": 447.8,
+						"goto_encode_property": 502.6,
+						"key_target": 142.8,
+						"walk": 0.2,
+						"walk_key_source": 152.8,
+						"walk_copy": 1,
+						"walk_copy_sha256": 1.6,
+						"walk_copy_md5": 1.2,
+						"base64": 0.6,
+						"class_call": 5.8,
+						"row_counter": 22,
+						"records_in_selection": 0,
+						"less_text": 0.2,
+						"position": 0.2
+					}
+				},
+				{
+					"table": "Bench_Small_20",
+					"n": 5000,
+					"preemptive": true,
+					"us": {
+						"goto": 19.8,
+						"goto_encode": 453.6,
+						"goto_encode_property": 503.4,
+						"key_target": 138.6,
+						"walk": 0.2,
+						"walk_key_source": 147,
+						"walk_copy": 0.8,
+						"walk_copy_sha256": 1.4,
+						"walk_copy_md5": 1.4,
+						"base64": 0.4,
+						"class_call": 6.4,
+						"row_counter": 25.6,
+						"records_in_selection": 0,
+						"less_text": 0.2,
+						"position": 0.2
+					}
+				},
+				{
+					"table": "Bench_Small_20",
+					"n": 5000,
+					"preemptive": true,
+					"us": {
+						"goto": 19.8,
+						"goto_encode": 471.4,
+						"goto_encode_property": 515.8,
+						"key_target": 145.8,
+						"walk": 0.4,
+						"walk_key_source": 149.4,
+						"walk_copy": 0.6,
+						"walk_copy_sha256": 1.2,
+						"walk_copy_md5": 1,
+						"base64": 0.4,
+						"class_call": 0.2,
+						"row_counter": 0.6,
+						"records_in_selection": 0,
+						"less_text": 0.2,
+						"position": 0
+					}
+				},
+				{
+					"table": "Bench_Small_20",
+					"n": 5000,
+					"preemptive": true,
+					"us": {
+						"goto": 19,
+						"goto_encode": 451.8,
+						"goto_encode_property": 494.6,
+						"key_target": 131.4,
+						"walk": 0.4,
+						"walk_key_source": 155.4,
+						"walk_copy": 0.8,
+						"walk_copy_sha256": 1.2,
+						"walk_copy_md5": 1.2,
+						"base64": 0.4,
+						"class_call": 7.4,
+						"row_counter": 24.2,
+						"records_in_selection": 0,
+						"less_text": 0.2,
+						"position": 0.2
+					}
+				},
+				{
+					"table": "Bench_Small_20",
+					"n": 5000,
+					"preemptive": true,
+					"us": {
+						"goto": 19.6,
+						"goto_encode": 455.2,
+						"goto_encode_property": 506.4,
+						"key_target": 145,
+						"walk": 0.2,
+						"walk_key_source": 152.6,
+						"walk_copy": 0.6,
+						"walk_copy_sha256": 1.2,
+						"walk_copy_md5": 1.2,
+						"base64": 0.4,
+						"class_call": 7.6,
+						"row_counter": 12.4,
+						"records_in_selection": 0,
+						"less_text": 0.2,
+						"position": 0
+					}
+				},
+				{
+					"table": "Bench_Small_20",
+					"n": 5000,
+					"preemptive": true,
+					"us": {
+						"goto": 18.2,
+						"goto_encode": 445.6,
+						"goto_encode_property": 508.2,
+						"key_target": 143,
+						"walk": 0.2,
+						"walk_key_source": 152.4,
+						"walk_copy": 0.8,
+						"walk_copy_sha256": 1.4,
+						"walk_copy_md5": 1,
+						"base64": 0.4,
+						"class_call": 5.2,
+						"row_counter": 24,
+						"records_in_selection": 0,
+						"less_text": 0.2,
+						"position": 0
+					}
+				},
+				{
+					"table": "Bench_Small_20",
+					"n": 5000,
+					"preemptive": true,
+					"us": {
+						"goto": 19.4,
+						"goto_encode": 426.6,
+						"goto_encode_property": 476,
+						"key_target": 125.4,
+						"walk": 0.4,
+						"walk_key_source": 146.4,
+						"walk_copy": 0.6,
+						"walk_copy_sha256": 1.4,
+						"walk_copy_md5": 1,
+						"base64": 0.4,
+						"class_call": 7.4,
+						"row_counter": 28,
+						"records_in_selection": 0.2,
+						"less_text": 0.2,
+						"position": 0
+					}
+				}
+			]
+		}
+	},
+	"full": {
+		"cooperative": {
+			"preemptive": false,
+			"failure": null,
+			"ms": 596,
+			"ms_per_record": 0.03,
+			"row": {
+				"records": 20000,
+				"matched": 20000,
+				"missing": 0,
+				"extra": 0,
+				"changed": 0,
+				"duplicate": 0,
+				"unverified": 0
+			}
+		},
+		"workers_1": {
+			"preemptive": true,
+			"failure": null,
+			"ms": 1572,
+			"ms_per_record": 0.079,
+			"row": {
+				"number": 25,
+				"name": "Bench_Small_20",
+				"elapsed": 0.551,
+				"records": 20000,
+				"matched": 20000,
+				"missing": 0,
+				"extra": 0,
+				"changed": 0,
+				"duplicate": 0,
+				"unverified": 0
+			}
+		},
+		"workers_10": {
+			"preemptive": true,
+			"failure": null,
+			"ms": 24493,
+			"ms_per_record": 1.225,
+			"row": {
+				"number": 25,
+				"name": "Bench_Small_20",
+				"elapsed": 23.481,
+				"records": 200000,
+				"matched": 200000,
+				"missing": 0,
+				"extra": 0,
+				"changed": 0,
+				"duplicate": 0,
+				"unverified": 0
+			}
+		}
+	},
+	"red": true,
+	"summary": {
+		"full_ms_per_record": {
+			"cooperative": 0.03,
+			"workers_1": 0.079,
+			"workers_10": 1.225
+		},
+		"steps_us_cooperative": {
+			"goto": 2.8,
+			"goto_encode": 16,
+			"goto_encode_property": 16.8,
+			"key_target": 2.4,
+			"walk": 0.2,
+			"walk_key_source": 2.6,
+			"walk_copy": 0.6,
+			"walk_copy_sha256": 1.2,
+			"walk_copy_md5": 1,
+			"base64": 0.4,
+			"class_call": 0.2,
+			"row_counter": 0.2,
+			"records_in_selection": 0,
+			"less_text": 0.2,
+			"position": 0.2
+		},
+		"steps_us_workers_1": {
+			"goto": 0.6,
+			"goto_encode": 14.4,
+			"goto_encode_property": 14.8,
+			"key_target": 2.6,
+			"walk": 0.2,
+			"walk_key_source": 3,
+			"walk_copy": 0.6,
+			"walk_copy_sha256": 1.2,
+			"walk_copy_md5": 1,
+			"base64": 0.4,
+			"class_call": 0.2,
+			"row_counter": 0.6,
+			"records_in_selection": 0,
+			"less_text": 0.2,
+			"position": 0.2
+		},
+		"steps_us_workers_10_first_job": {
+			"goto": 19,
+			"goto_encode": 454,
+			"goto_encode_property": 507,
+			"key_target": 140,
+			"walk": 0.2,
+			"walk_key_source": 152.2,
+			"walk_copy": 0.8,
+			"walk_copy_sha256": 1.4,
+			"walk_copy_md5": 1.4,
+			"base64": 0.4,
+			"class_call": 5.8,
+			"row_counter": 20.2,
+			"records_in_selection": 0.2,
+			"less_text": 0,
+			"position": 0.2
+		},
+		"red": true
+	}
+}
