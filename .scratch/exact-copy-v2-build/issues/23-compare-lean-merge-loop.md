@@ -1,6 +1,6 @@
 # Compare: the lean merge loop
 
-Status: claimed
+Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-02)
 Type: task
 Blocked by: —
@@ -189,4 +189,40 @@ ticket.
   `[Check_Keys]`'s empty table. `__Bench_Baseline` keeps its `compare_workers` parameter.
 - **Human step:** open the project on the bench datafile and Design ▸ Compile. Report any error
   here; then this ticket resolves.
+- 2026-10-02, compiled by the human after the cleanup: no error.
+
+## Answer
+
+Built, run and compiled on 2026-10-02 (commit `56623ce`, then the clean compile). What was built is
+in Comments ("built"), the runs under "run by the human" and "the bench again".
+
+**`_CompareJob`'s merge is probe 22's lean form, for every key type, with the same findings,
+counts, ranges and reasons. Compare's `workers` default is 4, like every pass's.**
+
+- **The loop:** one loop of probes (each source record, each damaged segment, the end of the
+  job), with one inner loop that takes the target records below each as extra or unverified. The
+  old `_next()` is inlined there, once, and runs only when the next target record is needed. State
+  is in locals, and `matched` is written once. `_next()`, `_unverified()` and `_Codec.key()` are
+  gone.
+- **Keys:** equal when their slices' bytes are, the 4-byte length included. Ordered by their
+  values, read as `key()` read them. The key's offset is found once per job, or walked when a
+  variable-width field comes before it. A matched pair is still checked with SHA-256.
+- **Proved,** compiled on the bench: every planted kind once on an Alpha key after a Text field
+  (the key changed only in case, the missing record's segment and position, the walk to the key),
+  the damaged and missing segments, the values and the detail cap, and the order break on an
+  Alpha and a Longint key, each `inconclusive` with no extra. `_CompareJob` runs preemptive. A
+  review by reading found two differences from the old loop, fixed before the runs: an empty table
+  with no key, and a Time key read from a record that won't encode.
+- **The bench:** Compare took 137 s at 2 workers, 116 s at 4 and 138 s at 6, each `exact`
+  ([23-Bench-Baseline-compare-4-compiled.json](../research/23-Bench-Baseline-compare-4-compiled.json)
+  and its two siblings), against 141 s at 2 for the old loop. At 2 workers the gain is small:
+  `[Bench_Wide]` sets the total, and there `encode()` dominates. The small tables gain about 40%.
+  The machine is noisy run to run, so the 2-worker run, first and cold, may be pessimistic.
+- **Compare's default is 4** (the human): the fastest, with 2 and 6 about 18% slower.
+  `_default_workers` is gone, and `_Pass._workers()` gives 4, capped at the core count. Spec 15
+  has a dated note.
+- `__Bench_Baseline({compare_workers})` stays until
+  [Export: self-check and set digest](24-export-self-check-and-set-digest.md) removes it.
+- **Not validated:** a Real, Int64, Date or Time key, which the bench doesn't have. Each takes the
+  fixed-width path that the Longint keys ran.
 

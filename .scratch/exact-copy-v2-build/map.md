@@ -181,6 +181,12 @@ The frontier is the open, unclaimed tickets whose blockers are all resolved. The
   unverified, except keys with `@`, from the rows' new `broke` and `extra_at`. The counts move
   with them, so a table with no other discrepancy gives `inconclusive`. `__Check_Order_Break` runs
   in ticket 21.
+- [Compare: the lean merge loop](issues/23-compare-lean-merge-loop.md): `_CompareJob` runs probe
+  22's lean loop for every key type, with the same results: keys equal by their bytes in place,
+  state in locals, the next target record fetched inline. `_Codec.key()` is gone. The restored
+  checks pass on the bench, with an Alpha key in a throw-away table, since deleted. Compare took
+  137, 116 and 138 s at 2, 4 and 6 workers, against 141 s at 2 for the old loop, so its default is
+  4, like every pass's.
 
 ## Why this order
 

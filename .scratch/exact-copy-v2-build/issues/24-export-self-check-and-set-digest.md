@@ -83,3 +83,16 @@ part 2. The bench run is this ticket's own, because ticket 21's part 2 times dep
 - [ ] A hand-edited segment, with its SHA-256 also changed in `manifest.json`: the import with the
       export's `set_digest` refuses (21).
 - [ ] The README matches.
+
+## Comments
+
+- 2026-10-02, from [Compare: the lean merge loop](23-compare-lean-merge-loop.md) (resolved), so
+  this ticket is unblocked:
+  - **Compare's default is 4**, like every pass's. `_default_workers` is gone, and
+    `_Pass._workers()` gives 4, capped at the core count. So the export and its self-check
+    default to the same count.
+  - "Ticket 23's run at Compare's default" is
+    [23-Bench-Baseline-compare-4-compiled.json](../research/23-Bench-Baseline-compare-4-compiled.json):
+    Compare 116 s, `[Bench_Wide]` 92 s, `[Bench_Text]` 96 s. The machine is noisy run to run
+    (that ticket's Answer): a first run after opening is slow, so compare against a warm run.
+  - `__Bench_Baseline({compare_workers})` is still there, for this ticket to remove.

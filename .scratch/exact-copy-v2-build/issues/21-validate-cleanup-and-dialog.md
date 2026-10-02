@@ -140,3 +140,7 @@ part 2 covers them too.
   name checks and the dialog's views ran on another machine and gave what they say. Their run
   reports, and `research/22-__Check_Order_Break-compiled.json`, stayed on that machine. Nothing
   was noted on what 4D showed during the switch. Part 2 waits for tickets 23 and 24.
+- 2026-10-02, from [Compare: the lean merge loop](23-compare-lean-merge-loop.md) (resolved): part 2
+  now waits only for [Export: self-check and set digest](24-export-self-check-and-set-digest.md).
+  Compare's default is 4 workers now, so the dialog's Compare and Import steps fill in 4. That
+  ticket ran `__Check_Order_Break` on the bench and then deleted it, with the other checks.
