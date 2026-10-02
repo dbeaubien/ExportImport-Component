@@ -17,6 +17,9 @@
 // The order guard: each source key must be above the one before it and
 // below the job's high, under the target's <. No source key contains @,
 // which < reads as a wildcard in its right operand: the export refuses one.
+// The per-record path (spec 21) keeps its state in locals, and reads each
+// key straight from its buffer: its bytes in place for equality, and its
+// value, as _Codec reads it, for order.
 //
 // Unverified records, never a discrepancy (spec 08, narrowed by spec 10):
 //   - a damaged segment (missing, or its size, SHA-256 or record count isn't
@@ -47,170 +50,236 @@
 Class extends _Job
 
 property _codec : cs._Codec
-property _t : Integer  // the position of the target record in hand, in the selection
-property _last : Variant  // the key of the last target record that could match, for duplicates; Null at first
-property _group : Object  // the duplicate finding of _last, or Null when it isn't listed
-property _in_group : Boolean  // _last is held by more than one record
 property _listed : Integer  // the findings listed, ranges aside
 
 Class constructor($job : Object)
 	Super($job)
-	This._t:=0
-	This._last:=Null
-	This._group:=Null
-	This._in_group:=False
 	This._listed:=0
 
 
 Function _run()
+	// One loop of probes: each source record, each damaged segment, then the
+	// end of the job. Before each, the target records below it are taken,
+	// as extra or unverified, and the next one is fetched only when needed.
 	var $table : Pointer
+	var $codec : cs._Codec
 	var $segment; $source; $target : Blob
-	var $s; $sk; $tk : Object
-	var $prev : Variant
-	var $kind; $why; $problem : Text
-	var $o; $len; $k; $done; $n : Integer
-	var $same; $extra : Boolean
+	var $s; $group : Object
+	var $widths : Collection
+	var $sk; $tk; $prev; $high; $last : Variant
+	var $kind; $why; $problem; $treason : Text
+	var $probe; $take; $i; $size; $o; $x; $len; $k; $done; $n; $t; $count; $matched; $key; $kw; $at; $ks; $kt; $ssize; $tsize; $f; $b : Integer
+	var $need; $end; $unread; $same; $in_group; $damaged : Boolean
 	For each ($kind; ["records"; "found"; "broke"; "extra_at"; "matched"; "missing"; "extra"; "changed"; "duplicate"; "unverified"])
 		This.output.row[$kind]:=0
 	End for each
 	This._codec:=cs._Codec.new(This.job.table)
+	$codec:=This._codec
+	$key:=$codec._key  // the record key's index in a buffer's fields
+	$widths:=$codec._fields.extract("width")  // 0: variable width, behind a 4-byte length
+	$kw:=($key<0) ? 0 : $widths[$key]  // no key: only an empty table passes the gate
+	$at:=0  // the key's offset in a buffer when only fixed-width fields come before it, else -1
+	For ($f; 0; $key-1)
+		$at:=(($at<0) || ($widths[$f]=0)) ? -1 : ($at+$widths[$f])
+	End for
+	$high:=This.job.high
+	$last:=Null  // the key of the last target record that could match, for duplicates
 	READ ONLY(Table(This.job.table.number)->)
 	$table:=This._range()
-	This.output.row.records:=Records in selection($table->)  // for the pool's log line: the pass removes it
-	$tk:=This._next($table; ->$target)
+	$count:=Records in selection($table->)
+	This.output.row.records:=$count  // for the pool's log line: the pass removes it
+	$need:=True
 
-	For each ($s; This.job.segments) Until ($why#"")
-		This._tick($done)
-		$problem:=This._read($s; ->$segment)
-		If ($problem#"")  // damaged: the target records before its keys are extra, and those in them unverified
-			While ($tk#Null) && ($tk.value<$s.first_key)
-				This._found("extra"; $tk.value)
-				$tk:=This._next($table; ->$target)
-			End while
-			$n:=This.output.row.unverified
-			$tk:=This._unverified($table; ->$target; $tk; $s.last_key; $problem)
-			This._unverified_range($s.first_key; $s.last_key; True; $s.records; This.output.row.unverified-$n; $problem)
-			$prev:=$s.last_key
-			$done+=$s.records
-		Else
+	Repeat
+		While (Not($damaged)) && ($o>=$size) && ($i<This.job.segments.length)  // the next segment
+			$s:=This.job.segments[$i]
+			$i+=1
+			This._tick($done)
+			$problem:=This._read($s; ->$segment)
+			$damaged:=($problem#"")
 			$o:=0
 			$k:=0
-			While ($o<BLOB size($segment))
-				$len:=BLOB to longint($segment; PC byte ordering; $o)  // moves $o past the length
-				$k+=1
-				$sk:=This._codec.key(->$segment; $o)
-				This._key:=$sk.value
-				Case of
-					: ($done>0) && Not($prev<$sk.value)
-						$why:="isn't after the key before it, "+JSON Stringify($prev)
-					: (This.job.high#Null) && Not($sk.value<This.job.high)
-						$why:="isn't before the next job's first key, "+JSON Stringify(This.job.high)
-				End case
-				If ($why#"")
-					$why:="the source key "+JSON Stringify($sk.value)+" "+$why+", in this datafile's order: the two datafiles order keys differently"
-					break
-				End if
-				$prev:=$sk.value
-				SET BLOB SIZE($source; $len)
-				COPY BLOB($segment; $source; $o; 0; $len)
+			$size:=$damaged ? 0 : BLOB size($segment)
+		End while
+		Case of
+			: ($damaged)
+				$probe:=1  // a damaged segment: the target records before its keys are extra, and those in them unverified
+			: ($o<$size)
+				$probe:=0  // the next source record
+			Else
+				$probe:=2  // the end of the job: the target records left
+		End case
 
-				Repeat   // the target records before this key are extra
-					$same:=($tk#Null) && ($tk.bytes#Null) && (Length($tk.bytes)=Length($sk.bytes)) && (Position($sk.bytes; $tk.bytes; 1; *)=1)
-					$extra:=($tk#Null) && Not($same) && ($tk.value<$sk.value)
-					If ($extra)
-						This._found("extra"; $tk.value)
-						$tk:=This._next($table; ->$target)
-					End if
-				Until (Not($extra))
-				Case of
-					: ($tk=Null) || (Not($same) && ($sk.value<$tk.value))
-						This._found("missing"; $sk.value; {segment: $s.file; position: $k})
-					: ($tk.bytes=Null)  // the same key, but the target record can't be read
-						This._found("unverified"; $tk.value; {reason: $tk.reason})
-						$tk:=This._next($table; ->$target)
-					Else   // the same key: equal bytes, or equal in the target's order
-						This.output.row.matched+=1
-						If (Generate digest($source; SHA256 digest)#Generate digest($target; SHA256 digest))
-							This._found("changed"; $sk.value; {fields: This._fields(->$source; ->$target)})
+		If ($probe=0)  // its key, and the order guard
+			$len:=BLOB to longint($segment; PC byte ordering; $o)  // moves $o past the length
+			$k+=1
+			$ks:=$o+$at
+			If ($at<0)  // walk the fields before the key
+				$ks:=$o
+				For ($f; 0; $key-1)
+					$x:=$ks
+					$ks+=($widths[$f]>0) ? $widths[$f] : (4+BLOB to longint($segment; PC byte ordering; $x))
+				End for
+			End if
+			$x:=$ks
+			$ssize:=$kw
+			Case of
+				: ($kw=0)  // Alpha, Text, UUID
+					$ssize:=4+BLOB to longint($segment; PC byte ordering; $x)  // moves $x to the text
+					$sk:=$codec._text(->$segment; $x; $ssize-4)
+				: ($kw=8)
+					$sk:=BLOB to real($segment; PC double real format; $x)
+				Else
+					$sk:=BLOB to longint($segment; PC byte ordering; $x)
+			End case
+			This._key:=$sk
+			Case of
+				: ($done>0) && Not($prev<$sk)
+					$why:="isn't after the key before it, "+JSON Stringify($prev)
+					$probe:=2
+				: ($high#Null) && Not($sk<$high)
+					$why:="isn't before the next job's first key, "+JSON Stringify($high)
+					$probe:=2
+				Else
+					$prev:=$sk
+			End case
+			If ($probe=2)  // the order guard broke: from the last good key to the end of the job's range
+				$why:="the source key "+JSON Stringify($sk)+" "+$why+", in this datafile's order: the two datafiles order keys differently"
+			End if
+		End if
+
+		$n:=-1
+		Repeat   // the target records before it
+			While ($need)  // the next target record that can match
+				If ($t>=$count)
+					$end:=True
+					$need:=False
+				Else
+					$t+=1
+					$unread:=False
+					Try
+						GOTO SELECTED RECORD($table->; $t)
+						$target:=$codec.encode()
+						$kt:=$at
+						If ($at<0)
+							$kt:=0
+							For ($f; 0; $key-1)
+								$x:=$kt
+								$kt+=($widths[$f]>0) ? $widths[$f] : (4+BLOB to longint($target; PC byte ordering; $x))
+							End for
 						End if
-						$tk:=This._next($table; ->$target)
-				End case
+						$x:=$kt
+						$tsize:=$widths[$key]  // not $kw: with no key, this throws, as key() did
+						Case of
+							: ($kw=0)
+								$tsize:=4+BLOB to longint($target; PC byte ordering; $x)
+								$tk:=$codec._text(->$target; $x; $tsize-4)
+							: ($kw=8)
+								$tk:=BLOB to real($target; PC double real format; $x)
+							Else
+								$tk:=BLOB to longint($target; PC byte ordering; $x)
+						End case
+					Catch
+						$unread:=True
+						$treason:="the record can't be read: "+Last errors.first().message
+						$tk:=Null
+						If (Selected record number($table->)=$t)  // it loaded: its key can be read
+							$tk:={v: Field(This.job.table.number; This.job.table.primary_key)->}.v  // through an object, as before: a time reads as seconds
+						End if
+					End try
+					Case of
+						: ($tk=Null)
+							This._found("unverified"; Null; {reason: $treason})
+						: (Value type($tk)=Is text) && (Position("@"; $tk; 1; *)>0)
+							This._found("extra"; $tk)
+							This.output.row.extra_at+=1
+						: ($last#Null) && ($tk=$last)
+							If ($in_group)
+								This.output.row.duplicate+=1
+								If ($group#Null)
+									$group.records+=1
+								End if
+							Else
+								$group:=This._found("duplicate"; $tk; {records: 2})
+								$in_group:=True
+							End if
+						Else
+							$last:=$tk
+							$in_group:=False
+							$need:=False
+					End case
+				End if
+			End while
 
+			$take:=0  // 0: stop here, 1: extra, 2: unverified
+			Case of
+				: ($probe=0)
+					$same:=Not($end) && Not($unread) && ($tsize=$ssize)
+					$b:=0
+					While ($same) && ($b<$ssize)  // the two keys' bytes, in place
+						$same:=($segment{$ks+$b}=$target{$kt+$b})
+						$b+=1
+					End while
+					If (Not($end) && Not($same) && ($tk<$sk))
+						$take:=1
+					End if
+				: ($end)
+				: ($probe=1)
+					Case of
+						: ($tk<$s.first_key)
+							$take:=1
+						: (Not($s.last_key<$tk))
+							$take:=2
+					End case
+				Else
+					$take:=($why="") ? 1 : 2
+			End case
+			If ($probe>0) && ($take#1) && ($n<0)  // a range counts its target records from the first that isn't extra
+				$n:=This.output.row.unverified
+			End if
+			Case of
+				: ($take=1)
+					This._found("extra"; $tk)
+					$need:=True
+				: ($take=2)
+					This._found("unverified"; $tk; {reason: ($probe=1) ? $problem : $why})
+					$need:=True
+			End case
+		Until ($take=0)
+
+		Case of
+			: ($probe=0)
+				Case of
+					: ($end) || (Not($same) && ($sk<$tk))
+						This._found("missing"; $sk; {segment: $s.file; position: $k})
+					: ($unread)  // the same key, but the target record can't be read
+						This._found("unverified"; $tk; {reason: $treason})
+						$need:=True
+					Else   // the same key: equal bytes, or equal in the target's order
+						$matched+=1
+						SET BLOB SIZE($source; $len)
+						COPY BLOB($segment; $source; $o; 0; $len)
+						If (Generate digest($source; SHA256 digest)#Generate digest($target; SHA256 digest))
+							This._found("changed"; $sk; {fields: This._fields(->$source; ->$target)})
+						End if
+						$need:=True
+				End case
 				$o+=$len
 				$done+=1
 				If ($done%1000=0)
 					This._tick($done)
 				End if
-			End while
-		End if
-	End for each
-
-	If ($why#"")  // the order guard broke: from the last good key to the end of the job's range
-		This.output.row.broke:=1
-		$n:=This.output.row.unverified
-		$tk:=This._unverified($table; ->$target; $tk; Null; $why)
-		This._unverified_range($prev; This.job.high; False; This.job.expected-$done; This.output.row.unverified-$n; $why)
-	End if
-	While ($tk#Null)  // the target records past the last source key
-		This._found("extra"; $tk.value)
-		$tk:=This._next($table; ->$target)
-	End while
-
-
-Function _next($table : Pointer; $buffer : Pointer) : Object
-	// The next target record that can match, encoded into $buffer: its key
-	// {bytes; value}, or Null past the end. One that can't be loaded or
-	// encoded gives {bytes: Null; value; reason}, value read from its key
-	// field, or Null when the record didn't load. On the way, a record whose
-	// key can't be read is unverified, one whose key contains @ is extra, and
-	// one whose key equals the one before is a duplicate.
-	var $key : Object
-	While (This._t<Records in selection($table->))
-		This._t+=1
-		Try
-			GOTO SELECTED RECORD($table->; This._t)
-			$buffer->:=This._codec.encode()
-			$key:=This._codec.key($buffer; 0)
-		Catch
-			$key:={bytes: Null; value: Null; reason: "the record can't be read: "+Last errors.first().message}
-			If (Selected record number($table->)=This._t)  // it loaded: its key can be read
-				$key.value:=Field(This.job.table.number; This.job.table.primary_key)->
-			End if
-		End try
-		This._key:=$key.value
-		Case of
-			: ($key.value=Null)
-				This._found("unverified"; Null; {reason: $key.reason})
-			: (Value type($key.value)=Is text) && (Position("@"; $key.value; 1; *)>0)
-				This._found("extra"; $key.value)
-				This.output.row.extra_at+=1
-			: (This._last#Null) && ($key.value=This._last)
-				If (This._in_group)
-					This.output.row.duplicate+=1
-					If (This._group#Null)
-						This._group.records+=1
-					End if
-				Else
-					This._group:=This._found("duplicate"; $key.value; {records: 2})
-					This._in_group:=True
-				End if
-			Else
-				This._last:=$key.value
-				This._in_group:=False
-				return $key
+			: ($probe=1)
+				This._unverified_range($s.first_key; $s.last_key; True; $s.records; This.output.row.unverified-$n; $problem)
+				$prev:=$s.last_key
+				$done+=$s.records
+				$damaged:=False
+			: ($why#"")
+				This.output.row.broke:=1
+				This._unverified_range($prev; $high; False; This.job.expected-$done; This.output.row.unverified-$n; $why)
 		End case
-	End while
-	return Null
-
-
-Function _unverified($table : Pointer; $buffer : Pointer; $tk : Object; $to : Variant; $reason : Text) : Object
-	// The target records from $tk up to $to, inclusive, are unverified (Null:
-	// to the end of the job's range). Returns the target record after them.
-	While ($tk#Null) && (($to=Null) || Not($to<$tk.value))
-		This._found("unverified"; $tk.value; {reason: $reason})
-		$tk:=This._next($table; $buffer)
-	End while
-	return $tk
+	Until ($probe=2)
+	This.output.row.matched:=$matched
 
 
 Function _unverified_range($from : Variant; $to : Variant; $inclusive : Boolean; $source : Integer; $target : Integer; $reason : Text)

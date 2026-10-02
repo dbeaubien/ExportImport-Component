@@ -21,7 +21,7 @@
 // Any discrepancy gives notExact. Otherwise, anything unverified gives
 // inconclusive, else exact.
 //
-// Options: workers (2 by default, spec 15) and detail_limit (spec 12).
+// Options: workers and detail_limit (spec 12).
 // Rows add expected, actual, matched, missing, extra, changed, duplicate,
 // unverified, sequence_expected and sequence_actual.
 
@@ -33,7 +33,6 @@ Class constructor($path : Text; $options : Object)
 	// $path: the export set's platform path.
 	Super("compare"; "Compare"; $options)
 	This._phase_count:=1
-	This._default_workers:=2
 	This._manifest:=cs._Manifest.new($path)
 
 

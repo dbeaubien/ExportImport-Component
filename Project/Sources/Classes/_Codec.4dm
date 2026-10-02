@@ -192,34 +192,6 @@ Function decode($buffer : Pointer; $offset : Integer)
 	End for each
 
 
-Function key($buffer : Pointer; $offset : Integer) : Object
-	// The record key: {bytes: its slice in Base64; value: a number or a text}.
-	// Compare bytes exactly, never with =, which ignores case and treats @ as a wildcard.
-	var $bytes : Blob
-	var $f : Object
-	var $o; $i; $size : Integer
-	var $base64 : Text
-	var $value : Variant
-	$o:=$offset
-	For ($i; 0; This._key-1)
-		$o+=This._size($buffer; $o; This._fields[$i])
-	End for
-	$f:=This._fields[This._key]
-	$size:=This._size($buffer; $o; $f)
-	SET BLOB SIZE($bytes; $size)
-	COPY BLOB($buffer->; $bytes; $o; 0; $size)
-	BASE64 ENCODE($bytes; $base64)
-	Case of
-		: ($f.kind=Is text)
-			$value:=This._text($buffer; $o+4; $size-4)
-		: ($size=8)
-			$value:=BLOB to real($buffer->; PC double real format; $o)
-		Else
-			$value:=BLOB to longint($buffer->; PC byte ordering; $o)
-	End case
-	return {bytes: $base64; value: $value}
-
-
 Function slices($buffer : Pointer; $offset : Integer) : Collection
 	// Each field's byte range in the buffer, its length included, in field order: [{start; size}].
 	var $slices : Collection

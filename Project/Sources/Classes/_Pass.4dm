@@ -25,7 +25,6 @@ property result : Object  // the result envelope, which is also the run report's
 property _pass : Text  // the envelope's pass: "healthCheck"
 property _name : Text  // the readable name: "Health check"
 property _phase_count : Integer
-property _default_workers : Integer  // the workers default before the core-count cap: 4, or 2 for Compare (spec 15)
 property _folder : 4D.Folder  // where the run report goes: next to the datafile unless a parent says otherwise
 property _log : cs._RunLog  // set by a parent to nest this run in its run log
 property _report : cs._RunReport
@@ -37,7 +36,6 @@ Class constructor($pass : Text; $name : Text; $options : Object)
 	This._pass:=$pass
 	This._name:=$name
 	This.options:=($options=Null) ? {} : $options
-	This._default_workers:=4
 	This._folder:=File(Data file; fk platform path).parent
 	This._table:=""
 	This._window:=0
@@ -169,9 +167,9 @@ Function _jobs($class : Text; $jobs : Collection) : Object
 
 
 Function _workers() : Integer
-	// The worker count: the workers option as given, or the pass's default
-	// capped at the core count (spec 15). The planner cuts by it.
-	return (This.options.workers=Null) ? [System info.cores; This._default_workers].min() : This.options.workers
+	// The worker count: the workers option as given, or 4 capped at the core
+	// count (spec 15). The planner cuts by it.
+	return (This.options.workers=Null) ? [System info.cores; 4].min() : This.options.workers
 
 
 Function _limit() : Integer

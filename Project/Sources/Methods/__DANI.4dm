@@ -1,12 +1,12 @@
 //%attributes = {}
 // Export_Import_Dialog
 
-If (Caps lock down:C547)
-	cs:C1710.ExportPass.new({tables: [Table:C252(->[Bench_Small_01:6])]}).run()
-End if 
+// __Bench_Generate(0.01)
 
-__Spike_Compare_Path
 
+BEEP:C151
+BEEP:C151
+ALERT:C41("ALL DONE")
 
 BEEP:C151
 ABORT:C156

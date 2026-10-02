@@ -1,14 +1,16 @@
 //%attributes = {"preemptive":"incapable"}
-// __Bench_Baseline
+// __Bench_Baseline ({compare_workers})
 //
 // DESCRIPTION
 //   DEV ONLY. Times the passes on the bench datafile (ticket 13): an export
 //   of every table, then a Compare self-check of its set, each at its
-//   default worker count (spec 15). Run it compiled.
+//   default worker count (spec 15), or Compare at compare_workers when it
+//   is 1 or more (ticket 23). Run it compiled.
 //   Writes "Bench Baseline <date>.json" next to the datafile, in the shape
 //   of spec 03's where it can: per table, export_ms and compare_ms are the
 //   run reports' elapsed. The export set is about 4 GB: delete it after.
 //
+#DECLARE($compare_workers : Integer)
 var $datafile; $file : 4D:C1709.File
 var $info; $volume; $result; $export; $compare; $row : Object
 var $export_pass : cs:C1710.ExportPass
@@ -34,7 +36,7 @@ $ms:=Milliseconds:C459
 $export:=$export_pass.run()
 $result.export_all_ms:=Milliseconds:C459-$ms
 
-$compare_pass:=cs:C1710.ComparePass.new($export.export_set; {})
+$compare_pass:=cs:C1710.ComparePass.new($export.export_set; ($compare_workers>0) ? {workers: $compare_workers} : {})
 $result.compare_workers:=$compare_pass._workers()
 $ms:=Milliseconds:C459
 $compare:=$compare_pass.run()

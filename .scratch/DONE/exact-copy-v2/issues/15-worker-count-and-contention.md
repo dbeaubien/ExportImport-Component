@@ -97,3 +97,11 @@ machine (10 cores), Compare's total peaks at 2 workers (37,157 records/s, agains
   - measuring every pass at 1, 2, 4, 6 and 10 workers before deciding;
   - reworking the codec with no probe.
 - 2026-10-02, from [Trusting the export set](23-trusting-the-export-set.md): the export passes its options to its self-check, as the import passes them to its Compare. A worker count given covers both. With none, each pass uses its own default.
+- 2026-10-02, from [Compare: the lean merge loop](../../../exact-copy-v2-build/issues/23-compare-lean-merge-loop.md)
+  (amends the answer): **Compare's default is 4, like every pass's**, so `_Pass._workers()` gives
+  4, capped at the core count, and `_default_workers` is gone. With the lean loop, the bench's
+  Compare took 137 s at 2 workers, 116 s at 4 and 138 s at 6, each `exact`. Under spec 21's rule,
+  the fewest workers within 10% of the fastest, that's 4. The 2-worker run came first, on a cold
+  cache, and the gap is inside the machine's run-to-run noise: the human accepted 4 anyway. The
+  rejection of "one constant for every pass" no longer holds for Compare: 4 cost the old loop a
+  third, but it is the lean loop's fastest.

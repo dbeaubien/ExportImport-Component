@@ -35,7 +35,7 @@ jobs, becomes unverified. Extras whose key contains `@` stay extra.
   [Validate the cleanup and the dialog together](21-validate-cleanup-and-dialog.md), on its small
   datafile. This ticket resolves once it is built and compiled.
 - [x] `compile` passes.
-- [ ] (21) `__Check_Order_Break`, compiled: the verdict is `inconclusive`, not `notExact`. The record
+- [x] (21) `__Check_Order_Break`, compiled: the verdict is `inconclusive`, not `notExact`. The record
       that the old check reported as extra (the second of the swapped pair, `"c05_high"` on
       `[Spike_Keys]`) is listed under `unverified` with the new reason, and the table's `extra` is
       0. The unverified range after the break is as before.
@@ -86,3 +86,8 @@ a key that contains `@` (spec 16).**
 
 **Not validated yet:** the run of `__Check_Order_Break` (ticket 21, which then deletes it). The
 cross-job case isn't planted: the rule treats every job of a table alike.
+- 2026-10-02, from [Validate the cleanup and the dialog together](21-validate-cleanup-and-dialog.md):
+  part 1 step 8 ran `__Check_Order_Break` on another machine and gave what the Acceptance says (the
+  human). Its `research/22-__Check_Order_Break-compiled.json` stayed on that machine. The check
+  stays in place: [Compare: the lean merge loop](23-compare-lean-merge-loop.md) runs it again, then
+  deletes it.

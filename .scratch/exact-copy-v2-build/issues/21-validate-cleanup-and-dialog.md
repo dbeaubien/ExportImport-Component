@@ -116,3 +116,27 @@ part 2 covers them too.
   whose run steps marked (21) join this ticket. Every export now ends with a self-check, so part
   2's export time includes it, and its import and Compare show the set digest. Ticket 24's steps
   on the small datafile need part 1's datafile again.
+- 2026-10-02, part 1's run reports, in the data folder of `data-NEW.4DD` (the small datafile):
+  - Step 2 (confirmed by the human): `Health check 2026-10-02 11.24.34` gives `passed`, with
+    `workers` and `tables` Null, as the shared method sends them.
+  - Step 4: the export at 11.25.01 gives `refused`, its gate `blocked` on `[Bench_Small_02]`'s
+    `blank_key`. The export at 11.26.20 leaves 5 tables out, not 2, and gives `exported` with the
+    caution "5 tables with records left out of this export: …". The export at 11.26.54, of every
+    table, gives `exported` in 5 s.
+  - Step 5: On Exit ran at 17:27:53.253Z naming `data-NEW.4DD`, and On Startup at 17:27:54.309Z
+    naming `data-NEW target.4DD`, so the switch took about 1 s. The marker code is deleted, and
+    the agent deleted the two `.txt` files.
+  - Step 6: the import gives `exact` in 26 s, through all seven phases.
+  - **Not on disk:** step 3 (no health check or fixer run report after 11.24.34, and both
+    exports still hold the 3 planted `Char(1)` in `[Bench_Small_01]Name`), step 6's second Compare
+    (the one Compare report, 11.32.02 to 11.32.08, is the import's own), step 7 (the import's
+    report is unchanged since 11:32:08) and step 8 (no `research/22-__Check_Order_Break-compiled.json`).
+    Step 1, step 5's name checks and the dialog's views in steps 3 to 6 leave nothing on disk: the
+    human confirms them.
+  - The small datafile shares the bench's data folder, not a folder of its own. Before part 2, its
+    three export sets must leave that folder: on `data.4DD`, the dialog would choose the newest
+    set, whose source is `data-NEW.4DD`, and treat the bench as a target.
+- 2026-10-02, **part 1 is done** (the human). Steps 1, 3, 6's second Compare, 7 and 8, step 5's
+  name checks and the dialog's views ran on another machine and gave what they say. Their run
+  reports, and `research/22-__Check_Order_Break-compiled.json`, stayed on that machine. Nothing
+  was noted on what 4D showed during the switch. Part 2 waits for tickets 23 and 24.

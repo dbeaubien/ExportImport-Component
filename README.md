@@ -159,7 +159,7 @@ keeps the name and parameters of earlier versions.
 - Paths are platform paths. A refused or failed run still returns its path, and its run report
   says why. A method that returns the `.txt` path returns "" if the run report couldn't be written.
 - `num_workers` and `num_processes` become the pass's `workers`. **0 or less means the pass's
-  default** (4, or 2 for Compare, capped at the core count), no longer 3.
+  default** (4, capped at the core count), no longer 3.
 - `fields_to_base64` and `truncation_before_import` are accepted and ignored: the import always
   empties the tables it loads.
 - "Every table" now includes empty tables, which the export writes as their count and sequence
@@ -279,7 +279,7 @@ $import:=cs.ExportImport.ImportPass.new($export.export_set).run()
 
 | Option | Passes | Default |
 |---|---|---|
-| `workers` | all | 4, or 2 for Compare, capped at the core count; at least 1. The import's Compare uses the import's |
+| `workers` | all | 4, capped at the core count; at least 1. The import's Compare uses the import's |
 | `tables` | health check, fixer, export | every table, empty ones included (a collection of table numbers) |
 | `field_ptrs_to_ignore` | health check, fixer | none (a collection of field pointers) |
 | `detail_limit` | health check, fixer, import, Compare | 1,000: the records listed per table (per table and check in the health check) |
