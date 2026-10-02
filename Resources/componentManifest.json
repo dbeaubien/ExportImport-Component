@@ -7,7 +7,6 @@
 	"manifestFormatVersion": "1.0",
 	"buildWith4DVersion": "v21.2 final (build 100579)",
 	"methodList": [
-		"__Check_Structure",
 		"Compare_ExportSet",
 		"Export_AllTables",
 		"Export_HealthCheck_Scan",

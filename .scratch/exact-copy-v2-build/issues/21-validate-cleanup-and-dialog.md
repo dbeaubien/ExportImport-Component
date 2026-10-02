@@ -35,7 +35,8 @@ its own, so its export sets stay apart from the bench's. Then run `__Bench_Gener
 
 1. Start an export, then Stop it after about 10 s. It gives `failed`, "stopped by operator", and
    leaves no worker. Closing the window during a run asks first (16). Delete the stopped set.
-2. The health check gives `warnings`, from the bench's 3 `space_uuid` findings (17). Then export
+2. The health check gives `passed`: the bench's 3 `space_uuid` findings were in `[Spike_Keys]`,
+   which ticket 14 removed (17). Then export
    (`exported`). The dialog stays responsive throughout, with the phase line, the bar and its ETA,
    and the table grid (16).
 3. Switch to target, reopen, import (`exact`), then run Compare again (`exact`) (18).

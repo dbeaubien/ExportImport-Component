@@ -70,5 +70,6 @@ Gates: compile
     `__Check_Scan_Plant` writes into `[Spike_Keys]`, and ticket 14 deletes both, while
     `__Bench_Generate` plants no bad character. Write the way into ticket 21 when building this
     ticket, for example a `__Bench_*` method, which ticket 14 keeps.
-  - The bench's health check gives `warnings`, not `passed`, because of its 3 `space_uuid`
-    findings (ticket 12's run).
+  - ~~The bench's health check gives `warnings`~~: its 3 `space_uuid` findings were in
+    `[Spike_Keys]` (the comment from ticket 05 above), which ticket 14 removed. So the bench should
+    give `passed` again, as this ticket's Acceptance expects.

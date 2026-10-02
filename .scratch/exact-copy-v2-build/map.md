@@ -147,6 +147,11 @@ The frontier is the open, unclaimed tickets whose blockers are all resolved. The
   through them on the bench. The namespace from a host, and an import into a host table whose
   trigger isn't thread-safe, weren't run: they moved to
   [Final check on a customer copy](issues/20-final-check-on-a-customer-copy.md).
+- [Delete the old code](issues/14-delete-old-code.md): 86 files are gone, the old XML, JSON, MD5
+  and health-check code and every `__Check_*` and `__Spike_*`, so 24 methods and 22 classes remain.
+  4D Progress and Component IH_Log are out of the dependencies, and the spike tables are out of
+  the catalog, so the bench's health check should give `passed` again. Commit `5bdc9ce` still
+  holds the dev code. `syntaxEN.json` still lists the deleted classes until 4D rewrites it.
 
 ## Why this order
 

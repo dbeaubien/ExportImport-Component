@@ -7,8 +7,6 @@ If (Not:C34(Is compiled mode:C492)) && (Structure file:C489(*)=Structure file:C4
 	DIALOG:C40("ReleaseBuildNo_d")
 	CLOSE WINDOW:C154
 	
-	Log_OpenDisplayWindow
-	
 	CA_OnStartup()
 	Snippet_ShowSelectorWindow()
 	

@@ -9,13 +9,11 @@
 
 Class extends _Pass
 
-property _job : Text  // the gate's job class: __FailingPass swaps in one that throws
 property _gate_only : Boolean  // the export's gate: no scan (spec 09)
 
 Class constructor($options : Object)
 	Super("healthCheck"; "Health check"; $options)
 	This._phase_count:=2
-	This._job:="_GateJob"
 	This._gate_only:=False
 
 
@@ -65,7 +63,7 @@ Function _gate() : Collection
 	For each ($job; $jobs)
 		$job.detail_limit:=This._limit()
 	End for each
-	$gate:=This._jobs(This._job; $jobs)
+	$gate:=This._jobs("_GateJob"; $jobs)
 	This.result.tables:=$gate.tables
 	This.result.findings:=$gate.findings
 	return $tables

@@ -14,7 +14,7 @@
 // order, and expected its record count. The pool queues jobs by cost.
 
 property workers : Integer
-property minimum : Integer  // records per job: 50,000. A constant, not an option: only __Check_Planner lowers it
+property minimum : Integer  // records per job: 50,000. A constant, not an option
 
 Class constructor($workers : Integer)
 	This.workers:=$workers

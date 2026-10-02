@@ -3,7 +3,7 @@
 Status: open
 Type: task
 Blocked by: —
-Reads: map.md Notes, 15-worker-count-and-contention.md (Answer), research/15-preemptive-contention-4d-facts.md (Arrays, Bulk reads), ../../exact-copy-v2-build/issues/09-compare-merge.md (Comments from "the speed probe" on), ../../exact-copy-v2-build/research/09-__Spike_Compare_Cost-scaling-compiled.json, Project/Sources/Classes/_Codec.4dm, Project/Sources/Methods/__Spike_Compare_Cost.4dm, Project/Sources/Classes/__CompareCost.4dm
+Reads: map.md Notes, 15-worker-count-and-contention.md (Answer), research/15-preemptive-contention-4d-facts.md (Arrays, Bulk reads), ../../exact-copy-v2-build/issues/09-compare-merge.md (Comments from "the speed probe" on), ../../exact-copy-v2-build/research/09-__Spike_Compare_Cost-scaling-compiled.json, Project/Sources/Classes/_Codec.4dm, and from commit 5bdc9ce (ticket 14 deleted them): `git show 5bdc9ce:Project/Sources/Methods/__Spike_Compare_Cost.4dm` and `git show 5bdc9ce:Project/Sources/Classes/__CompareCost.4dm`
 
 ## Question
 

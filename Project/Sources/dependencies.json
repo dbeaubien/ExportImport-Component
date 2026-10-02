@@ -9,10 +9,6 @@
 			"github": "4d/4D-NetKit",
 			"version": "4d"
 		},
-		"4D Progress": {
-			"github": "4d/4D-Progress",
-			"version": "4d"
-		},
 		"4D SVG": {
 			"github": "4d/4D-SVG",
 			"version": "4d"
@@ -27,10 +23,6 @@
 		},
 		"Manifest Generator 4D Component": {
 			"github": "dbeaubien/Manifest-Generator-4D-Component",
-			"version": "latest"
-		},
-		"Component IH_Log": {
-			"github": "Infohandler-com/Component-IH_Log",
 			"version": "latest"
 		},
 		"CodeAnalysis": {

@@ -21,8 +21,6 @@ $CRLF:=$CR+$LF
 var $reals : Collection  // extreme or tricky reals
 $reals:=[0; -0; 0.1+0.2; 1/3; Pi:K30:1; 1e+308; -1e+308; 4.450147717014e-308; 5.059232213414e-321; 123456789012300; 9.007199254741e+15; 0.0000000001]
 
-var $progress : Integer
-$progress:=Progress New
 var $ms : Integer
 $ms:=Milliseconds:C459
 
@@ -51,7 +49,6 @@ End for
 
 // ## Bench_Wide: every field type, ~5% nulls per field, gaps in the sequence
 $n:=Round:C94(2000000*$scale; 0)
-Progress SET TITLE($progress; "Bench_Wide")
 For ($i; 1; $n)
 	$u:=Dec:C9($i*0.6180339887499)
 	CREATE RECORD:C68([Bench_Wide:3])
@@ -79,9 +76,6 @@ For ($i; 1; $n)
 	If (Mod:C98($i; 997)=0)  // gaps: sequence number > record count
 		DELETE RECORD:C58([Bench_Wide:3])
 	End if 
-	If (Mod:C98($i; 5000)=0)
-		Progress SET PROGRESS($progress; $i/$n)
-	End if 
 End for 
 UNLOAD RECORD:C212([Bench_Wide:3])
 
@@ -95,7 +89,6 @@ End SQL
 
 // ## Bench_Text: UUID key, ~1.5 KB multi-line text with mixed line endings
 $n:=Round:C94(1000000*$scale; 0)
-Progress SET TITLE($progress; "Bench_Text")
 For ($i; 1; $n)
 	$u:=Dec:C9($i*0.6180339887499)
 	CREATE RECORD:C68([Bench_Text:4])
@@ -104,15 +97,11 @@ For ($i; 1; $n)
 	[Bench_Text:4]Notes:4:=Choose:C955($u<0.2; ""; "note "+String:C10($u)+$LF)
 	[Bench_Text:4]Created:5:=Add to date:C393(!00-00-00!; 1990+Mod:C98($i; 40); 1+Mod:C98($i; 12); 1+Mod:C98($i; 28))
 	SAVE RECORD:C53([Bench_Text:4])
-	If (Mod:C98($i; 5000)=0)
-		Progress SET PROGRESS($progress; $i/$n)
-	End if 
 End for 
 UNLOAD RECORD:C212([Bench_Text:4])
 
 // ## Bench_Blob: 50–350 KB BLOBs (some compressed or empty) and SVG/PNG/JPEG pictures
 $n:=Round:C94(10000*$scale; 0)
-Progress SET TITLE($progress; "Bench_Blob")
 For ($i; 1; $n)
 	$u:=Dec:C9($i*0.6180339887499)
 	CREATE RECORD:C68([Bench_Blob:5])
@@ -130,9 +119,6 @@ For ($i; 1; $n)
 	[Bench_Blob:5]Image:4:=__Bench_Picture($i)
 	[Bench_Blob:5]Meta:5:={i: $i; size: BLOB size:C605([Bench_Blob:5]Payload:3); list: [{a: 1}; {b: [$u; Null:C1517]}]}
 	SAVE RECORD:C53([Bench_Blob:5])
-	If (Mod:C98($i; 100)=0)
-		Progress SET PROGRESS($progress; $i/$n)
-	End if 
 End for 
 UNLOAD RECORD:C212([Bench_Blob:5])
 
@@ -146,7 +132,6 @@ For ($t; 1; Last table number:C254)
 				SET DATABASE PARAMETER:C642($table->; Table sequence number:K37:31; 1000000)
 			End if 
 			$n:=Round:C94(1000*$k*$scale; 0)
-			Progress SET TITLE($progress; Table name:C256($t))
 			For ($i; 1; $n)
 				CREATE RECORD:C68($table->)
 				Field:C253($t; 2)->:="C"+String:C10($i)
@@ -158,12 +143,10 @@ For ($t; 1; Last table number:C254)
 				SAVE RECORD:C53($table->)
 			End for 
 			UNLOAD RECORD:C212($table->)
-			Progress SET PROGRESS($progress; $k/20)
 		End if 
 	End if 
 End for 
 
-Progress QUIT($progress)
 File(Data file; fk platform path).parent.file("Bench Generate.json")\
 .setText(JSON Stringify({when: Timestamp; scale: $scale; compiled: Is compiled mode; generate_ms: Milliseconds-$ms}; *))  // picked up by __Bench_Baseline
 ALERT:C41("Bench data generated (scale "+String:C10($scale)+") in "+String:C10((Milliseconds:C459-$ms)/60000; "###,##0.0")+" min.")
