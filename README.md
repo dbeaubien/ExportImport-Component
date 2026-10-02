@@ -143,7 +143,8 @@ The dialog has a step list on the left: **Health check**, **Export**, **Switch t
   a grid, Open report and Show on disk.
 - **Workers:** one field per step that runs a pass, filled in with its pass's default.
 - **While a pass runs**, the dialog shows the phase, a bar for the phase with its ETA, and each
-  table's state, records and elapsed time. Stop asks first, then the pass takes its failure path.
+  table's state, records and elapsed time. Stop, in place of Run, asks first, then the pass takes
+  its failure path.
   Closing the window while a pass runs asks "Stop …?" first.
 
 The steps:
@@ -155,7 +156,7 @@ The steps:
   fields.
 - **Export:** Tables… and the cautions: free space smaller than the datafile, and tables with records
   left out. When the gate refuses, the step shows the gate's grid. Once exported, the step shows the
-  set digest, which can be selected and copied: keep it outside the export set, to check it at the
+  set digest with Copy: keep it outside the export set (a ticket, an email), to check it at the
   import.
 - **Switch to target:** the set's data language, with a reminder to check 4D Preferences ▸ General
   (a new datafile takes its data language from there). The target's file name starts as
@@ -168,8 +169,9 @@ The steps:
   Run.
 - **Compare:** Run, to compare the chosen set with this datafile. On the set's source, its next
   steps are for the source.
-- **Set digest** (Import and Compare): paste the digest kept from the export. When it isn't empty,
-  a different set digest is a pre-flight problem, so Run is off. Empty means not checked.
+- **Set digest** (Import and Compare): Paste puts the digest kept from the export in the field,
+  without spaces or line breaks. When it isn't empty, a different set digest is a pre-flight
+  problem, so Run is off. Empty means not checked.
 - **Import and Compare results:** a grid with each table's records in the set and in this datafile,
   the records the import removed and loaded, then Compare's matched, missing, extra, changed,
   duplicate and unverified counts and the sequence number check (✓ or ✗). On `notExact` or `failed`,
@@ -385,6 +387,10 @@ its Compare, the load finished: run Compare again. `inconclusive` means some rec
 verified (a damaged segment, keys that the two datafiles order differently, or target records that
 can't be read): fix the cause, then run Compare again.
 
+A load that fails with `Access denied` on the target's `.4DD` or `.4DIndx` (POSIX error 13) means
+another program had the new file open, likely a backup tool, Spotlight or an antivirus. Exclude the
+data folder from them, recreate the target and run the import again.
+
 ## Run reports and run logs
 
 Every run writes three files with the same name, `<Pass> yyyy-mm-dd hh.mm.ss` (local time), where
@@ -448,8 +454,8 @@ the datafile itself: verify the source copy with the MSC (Verify ▸ Records and
 
 - It refuses the export set's source datafile (matched by path): the import empties every table it
   loads.
-- It empties each exported table first. Records already in the target, often created by the host's
-  On Startup, are counted in the pre-flight and in a caution.
+- It empties each exported table first. Records already in the target, created by the host's On
+  Startup or left by an import that failed, are counted in the pre-flight and in a caution.
 - If the target has a log file open, the import closes it and says so in a caution: make a full
   backup, then turn the log file back on.
 - Triggers and constraints are off for every process during the load, and back on afterwards, after

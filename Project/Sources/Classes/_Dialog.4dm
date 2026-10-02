@@ -10,8 +10,8 @@
 // Dialog_RunPass, which sends the pass's progress and then its result to this
 // window through Dialog_Progress: see progress(). While it runs, the progress
 // objects (prog_*) cover the lower part of the page, where the step's result
-// objects (*_res_*) are, and every Run button is off. Switch to target runs
-// no pass: it calls CREATE DATA FILE, see _switch().
+// objects (*_res_*) are, and Stop takes the place of every Run button.
+// Switch to target runs no pass: it calls CREATE DATA FILE, see _switch().
 
 property steps : Collection  // the step list: {key; name; page; mark}
 property step : Object  // the selected step
@@ -135,6 +135,10 @@ Function event($e : Object)
 			End if
 		: ($e.objectName="ex_run")
 			This._start("Export"; "ExportPass"; ""; This._options("export"); This._tables())
+		: ($e.objectName="ex_res_digest_copy")
+			SET TEXT TO PASTEBOARD(This.view.digest)
+		: ($e.objectName="@_set_digest_paste")
+			This._paste_digest()
 		: ($e.objectName="sw_name") || ($e.objectName="@_set_digest")
 			This._show()
 		: ($e.objectName="sw_run")
@@ -391,7 +395,7 @@ Function _summary() : Text
 	return "Source: "+String($m.source.datafile)+"\r"+\
 		"Exported "+Replace string(Substring(String($m.started); 1; 19); "T"; " ")+" UTC, by ExportImport "+String($m.component_version)+"\r"+\
 		String($m.tables.sum("records"); "###,###,###,##0")+" records in "+String($m.tables.length)+" tables, "+String(Round($bytes/1048576; 0); "###,###,##0")+" MB\r"+\
-		"Set digest: "+This.set_digest
+		"Set digest of this set now: "+This.set_digest
 
 
 Function _options($key : Text) : Object
@@ -506,6 +510,7 @@ Function _objects()
 	$idle:=Not(This.running)
 	OBJECT SET VISIBLE(*; "unusable"; This.unusable)
 	OBJECT SET VISIBLE(*; "prog_@"; This.running)
+	OBJECT SET VISIBLE(*; "@_run"; $idle)  // prog_stop takes their place
 	OBJECT SET VISIBLE(*; "@_res_@"; $idle)
 	OBJECT SET VISIBLE(*; "ex_res_digest@"; $idle && (This.view.digest#""))
 	OBJECT SET ENABLED(*; "prog_stop"; This.running && Not(Bool(This.stop.requested)))
@@ -533,6 +538,17 @@ Function _choose()
 			This._load(This.elsewhere)
 			This._show()
 	End case
+
+
+Function _paste_digest()
+	// The Set digest field's Paste: the clipboard's text, without the spaces
+	// and line breaks that a digest copied from a ticket or an email brings.
+	var $c : Text
+	This.given_digest:=Get text from pasteboard
+	For each ($c; [" "; "\t"; "\r"; "\n"])
+		This.given_digest:=Replace string(This.given_digest; $c; "")
+	End for each
+	This._show()
 
 
 Function _leave_out()

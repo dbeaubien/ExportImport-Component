@@ -171,7 +171,7 @@ Function _run()
 	This._table:=""
 	This.result.tables:=$rows
 	If ($rows.sum("removed")>0)
-		This._caution(String($rows.sum("removed"))+" records removed from "+String($rows.query("removed > 0").length)+" tables before the load (likely created by the host's On Startup)")
+		This._caution(String($rows.sum("removed"))+" records removed from "+String($rows.query("removed > 0").length)+" tables before the load (created by the host's On Startup, or left by an import that failed)")
 	End if
 
 	This._phase("load"; $unusable)

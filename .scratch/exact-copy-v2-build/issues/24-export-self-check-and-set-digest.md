@@ -166,6 +166,14 @@ part 2. The bench run is this ticket's own, because ticket 21's part 2 times dep
     116 s to compare (`[Bench_Wide]` 92 s, `[Bench_Text]` 96 s), and its loaded run 175 s and 182 s.
     Under the same load, the self-check cost about what the export did (0.9 times), inside spec
     23's estimate of 1 to 1.5.
+- 2026-10-02, from [Validate the cleanup and the dialog together](21-validate-cleanup-and-dialog.md)
+  (part 2's small-datafile steps): the human couldn't copy or paste the set digest anywhere, and
+  found it unclear what it is for. The dialog's process has no menu bar, so 4D's Cmd-C and Cmd-V
+  do nothing, and the Import summary wasn't focusable. Fixed under ticket 21 (the human chose each
+  fix): Copy beside the export's digest, Paste beside each Set digest field (which drops spaces and
+  line breaks), a note on the Export step that says what the digest is for and when to use it, a
+  tooltip and the placeholder "Optional: the digest the export showed" on the field, and a
+  selectable summary line, "Set digest of this set now". README updated.
 
 ## Answer
 

@@ -63,27 +63,27 @@ small datafile, its source and its target (24):
 
 - a. On the source, export every table in the dialog. The phase line reaches "phase 4 of 4:
   self_check", then the grid fills again. It gives `exported`, and the Export step shows the set
-  digest, which can be selected and copied, with "Keep this digest outside the export set, to
-  check it at the import." The set has `manifest.json` and no `manifest.json.tmp`. Its
+  digest with Copy, and the note "This export set's fingerprint. Copy it now…". Copy puts the
+  digest on the clipboard. The set has `manifest.json` and no `manifest.json.tmp`. Its
   `Export … .txt` has a `Set digest:` line and "Self-check: exact, see Compare … .txt".
 - b. Still on the source, Compare of that set gives `exact` and "The export set matches this
   datafile."
-- c. On the target, the Import step's summary shows the same set digest. Paste it in Set digest
-  and import: `exact`. On the Compare step, paste the digest with one character changed: the
-  pre-flight shows "This export set's digest is …, not …", and Run is off. Paste the right one:
-  Run is on, and Compare runs.
+- c. On the target, the Import step's summary shows the same set digest, under "Set digest of
+  this set now". Its Paste fills Set digest, and the import gives `exact`. On the Compare step,
+  change one digit of the digest in the field and press Tab: the pre-flight shows "This export
+  set's digest is …, not …", and Run is off. Paste again: Run is on, and Compare runs.
 - d. Copy step a's set. In the copy, change one byte of a segment and put the segment's new
   SHA-256 (`shasum -a 256`) in the copy's `manifest.json`. On the target, choose the copy, and
-  paste step a's digest: the Import step's pre-flight shows the digest problem, so the import
-  refuses. Delete the copy.
+  Paste step a's digest: the Import step's pre-flight shows the digest problem, so Run is off.
+  Delete the copy.
 - e. Delete step a's set too, before 4D opens `data.4DD`: the small datafile shares the bench's
   data folder, so the dialog would choose that set and treat the bench as its target.
 
 Then the bench:
 
-1. Start an export, then Stop it after about 10 s and confirm. It gives `failed`, "stopped by
-   operator", and the Runtime Explorer shows no `ExportImport_*` worker left. Start it again and
-   close the window with the close box: it asks "Stop export?". Keep running keeps it open. Press
+1. Start an export: Stop takes Run's place. Stop it after about 10 s and confirm. It gives
+   `failed`, "stopped by operator", and the Runtime Explorer shows no `ExportImport_*` worker
+   left. Start it again and close the window with the close box: it asks "Stop export?". Keep running keeps it open. Press
    Cmd-W and choose Stop: the window closes once the run has ended. Then reopen the dialog, start
    a third export, and abort the dialog's process (`Export_Import_Dialog`) in the Runtime
    Explorer: no error shows, so the messages sent to the closed window do no harm, and the run
@@ -205,3 +205,25 @@ part 2 covers them too.
     runs three full exports, an import and two Compares.
   - Disk: the volume has 26 GB free. Part 2 needs about 12 GB at most at once: in step 1, up to
     three 3.8 GB sets before they are deleted; then step 2's set plus step 3's 5.7 GB target.
+- 2026-10-02, part 2's small-datafile steps, run by the human (reports in
+  `Export 2026-10-02 16.38.01`, exported from `data-NEW target.4DD` and imported into
+  `data-NEW target target.4DD`):
+  - **The set digest couldn't be copied or pasted**, and its purpose wasn't clear. The dialog's
+    process has no menu bar, so 4D's Cmd-C and Cmd-V do nothing in it. The human chose: Copy and
+    Paste buttons (Paste drops spaces and line breaks), and a rewording in place: the Export
+    step's note says what the digest is for, the field has the placeholder "Optional: the digest
+    the export showed" and a tooltip, and the Import summary's line, "Set digest of this set
+    now", can be selected. Steps a, c and d above now use the buttons.
+  - **Stop wasn't found** during these short runs. The human chose to put Stop in Run's place
+    during a run.
+  - **The import at 16.40.13, with the right digest, failed in the load**:
+    `[Bench_Small_20]` key 1, POSIX error 13 and "Access denied" on
+    `data-NEW target target.4DIndx`, so 4D couldn't write the new target's index file. That was
+    likely another program holding the brand-new file open (Backblaze or Spotlight), and the
+    digest played no part. The run said the target was unusable, as it should. The rerun at
+    16.40.54, without a digest, removed the failed load's 4,190 records and gave `exact`, with
+    the caution "…likely created by the host's On Startup", which was wrong here. The caution now
+    says "created by the host's On Startup, or left by an import that failed". The README says
+    what to do after an `Access denied` during the load.
+  - **To run again after the compile:** steps a, c and d with the buttons, and the Stop in Run's
+    place during bench step 1. Before that, exclude the data folder from Backblaze and Spotlight.

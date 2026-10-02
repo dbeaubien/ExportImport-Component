@@ -79,6 +79,10 @@ Gates: compile
   - **Unverified:** `Form` inside a method that `CALL FORM` runs, and field pointers inside the
     options passed to `New process`. Ticket 21's part 1 step 3 ignores a field, which covers the
     pointers.
+- 2026-10-02, from [Validate the cleanup and the dialog together](21-validate-cleanup-and-dialog.md):
+  the human didn't find Stop, below the bar on the right, during part 2's short runs on the small
+  datafile. Stop now takes the place of the step's Run button during a run (the human's choice):
+  `prog_stop` moved to Run's spot, and `_objects()` hides every `*_run` while a pass runs.
 
 ## Answer
 
