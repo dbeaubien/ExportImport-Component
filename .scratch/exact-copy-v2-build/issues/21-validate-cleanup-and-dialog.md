@@ -1,6 +1,6 @@
 # Validate the cleanup and the dialog together
 
-Status: claimed
+Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-02)
 Type: task
 Blocked by: 14, 15, 16, 17, 18, 22, 23 and 24 (part 2)
@@ -108,9 +108,10 @@ part 2 covers them too.
 
 ## Acceptance
 
-- [ ] Every step gives what it says. A step that fails is fixed under this ticket, with a comment on
+- [x] Every step gives what it says. A step that fails is fixed under this ticket, with a comment on
       its build ticket, and then runs again.
-- [ ] The answer records spec 11's `CREATE DATA FILE` checks and the bench run's times.
+- [ ] The answer records spec 11's `CREATE DATA FILE` checks and the bench run's times. The
+      checks are recorded. The times aren't: see the Answer.
 
 ## Comments
 
@@ -236,6 +237,35 @@ part 2 covers them too.
     unusable, as spec 13 says for a stop from the truncate through the flush. So Stop in Run's
     place works on an import.
   - **Not on disk:** step a's Copy (no export since 16.38.01), step c's separate Compare, and step
-    d's digest problem, which leaves no run report. The human confirms them. **Part 2's bench
+    d's digest problem, which leaves no run report. The human confirmed all three: they give
+    what they say. **Part 2's bench
     steps haven't run** (no set from `data.4DD`, no `research/21-*.json`), so this ticket stays
     claimed.
+
+## Answer
+
+Resolved on 2026-10-02, accepted as done by the human. Parts 1 and 2 gave what they say. Some ran
+on another machine, and some were confirmed by the human without a run report (Comments).
+
+**The cleanup (14) and the dialog (15 to 18), with Compare's extras before an order break (22) and
+the export's self-check and set digest (24), work as built, after the fixes below.**
+
+- **Fixed under this ticket**, each with a comment on its build ticket:
+  - the set digest couldn't be copied or pasted, because the dialog's process has no menu bar.
+    Copy and Paste buttons now do it, and the dialog says what the digest is for (24);
+  - Stop wasn't found below the progress bar, so it now takes Run's place during a run (16);
+  - the import's caution on records removed before the load named only the host's On Startup,
+    and now also names an import that failed;
+  - the desk check added step e: the small datafile's set must leave the bench's data folder.
+- **Spec 11's `CREATE DATA FILE` checks:** an empty name, one without `.4DD` and an existing one
+  are refused, with Create target… off. Cancel does nothing. Switch closes the source and reopens
+  on the new, empty file in about 1 s (On Exit at 17:27:53.253Z naming `data-NEW.4DD`, On Startup
+  at 17:27:54.309Z naming `data-NEW target.4DD`), and the dialog doesn't reopen by itself.
+  Nothing was noted on what 4D shows during the switch.
+- **A surprise:** a load failed with `Access denied` on the new target's `.4DIndx`, likely a backup
+  tool or Spotlight opening the brand-new file. The README now says what to do.
+
+**Not validated: the bench times.** The human confirmed part 2's bench steps, but their run reports
+aren't on this machine and weren't attached under `research/`. So the export's and the self-check's
+times on a quiet machine are still unmeasured: ticket 24's run was under load. Ticket 20 records
+them on the customer copy.

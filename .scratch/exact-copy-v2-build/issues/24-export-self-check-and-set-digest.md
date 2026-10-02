@@ -174,6 +174,9 @@ part 2. The bench run is this ticket's own, because ticket 21's part 2 times dep
   line breaks), a note on the Export step that says what the digest is for and when to use it, a
   tooltip and the placeholder "Optional: the digest the export showed" on the field, and a
   selectable summary line, "Set digest of this set now". README updated.
+- 2026-10-02, from [Validate the cleanup and the dialog together](21-validate-cleanup-and-dialog.md)
+  (resolved): its bench run wasn't attached, so this ticket's quiet-machine times are still
+  unmeasured. Ticket 20 records the export's and the self-check's times on the customer copy.
 
 ## Answer
 

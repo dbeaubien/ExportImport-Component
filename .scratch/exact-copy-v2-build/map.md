@@ -199,6 +199,12 @@ The frontier is the open, unclaimed tickets whose blockers are all resolved. The
   passes, −0 in a Real field and in an object included. A picture with two formats can't be built
   from code, so ticket 20's customer copy covers it. Its four methods stay for ticket 20, which
   deletes them.
+- [Validate the cleanup and the dialog together](issues/21-validate-cleanup-and-dialog.md): the
+  cleanup and the dialog work, accepted as done by the human. The run fixed the set digest's copy
+  and paste (Copy and Paste buttons, and a note on what the digest is for), put Stop in Run's
+  place, and added a README line on `Access denied` during the load. `CREATE DATA FILE` switches
+  in about 1 s. The bench times weren't recorded, so ticket 20 gives the first quiet-machine
+  times with the self-check.
 
 ## Why this order
 

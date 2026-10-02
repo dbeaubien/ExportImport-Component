@@ -66,3 +66,12 @@ end, compiled, on a copy of a customer datafile (30–40 GB):
   code, so the customer copy's run is its only check. Pictures pasted into the host's app may hold
   several formats. If the customer copy stores none, say a picture with two formats is still
   unverified.
+- 2026-10-02, from [Validate the cleanup and the dialog together](21-validate-cleanup-and-dialog.md)
+  (resolved), **so this ticket is unblocked**:
+  - Ticket 21's bench times weren't recorded. This run's times are the first on a quiet machine
+    with the self-check: record the export phase and the self-check apart, from the Export run
+    report's phases.
+  - Before the run, exclude the data folder from backup tools, Spotlight and any antivirus. On the
+    bench, a load failed with `Access denied` on a brand-new target's `.4DIndx`.
+  - The dialog has changed since ticket 18: Copy beside the export's set digest, Paste beside the
+    Import and Compare steps' Set digest field, and Stop in Run's place during a run.
