@@ -1,0 +1,467 @@
+{
+	"method": "__Check_Pool",
+	"when": "2026-10-01T20:42:15.057Z",
+	"compiled": true,
+	"ticket_03": {
+		"verdict": "blocked",
+		"tables": 27,
+		"findings": [
+			{
+				"table": "Bench_Wide",
+				"key": 1,
+				"field": "F_Int64",
+				"kind": "int64_range"
+			},
+			{
+				"table": "Bench_Wide",
+				"key": 2,
+				"field": "F_Int64",
+				"kind": "int64_range"
+			},
+			{
+				"table": "Bench_Wide",
+				"key": 3,
+				"field": "F_Int64",
+				"kind": "int64_range"
+			}
+		]
+	},
+	"workers_1": {
+		"verdict": "failed",
+		"next_step": "See the failure, then run the health check again.",
+		"problems": [],
+		"cautions": [],
+		"failure": {
+			"phase": "gate",
+			"table": null,
+			"key": null,
+			"errors": [
+				{
+					"errCode": 7,
+					"componentSignature": "4DRT",
+					"message": "A Numeric argument was expected."
+				},
+				{
+					"errCode": 21,
+					"componentSignature": "4DRT",
+					"message": "The method does not exist."
+				}
+			],
+			"call_chain": [
+				{
+					"type": "classFunction",
+					"name": "_Pass.run",
+					"line": 31,
+					"database": "ExportImport",
+					"formula": "This.result.failure:={phase: This._phase_name(); table: (This._table=\"\") ? Null : This._table; key: Null; errors: Last errors; call_chain: Call chain}"
+				},
+				{
+					"type": "projectMethod",
+					"name": "__Check_Pool",
+					"line": 53,
+					"database": "ExportImport",
+					"formula": "$r:=cs.HealthCheckPass.new({workers: $n}).run()"
+				},
+				{
+					"type": "projectMethod",
+					"name": "__DANI",
+					"line": 10,
+					"database": "ExportImport",
+					"formula": "__Check_Pool"
+				}
+			]
+		},
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Health check 2026-10-01 14.42.15.txt",
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T20:42:15.060Z",
+				"ended": "2026-10-01T20:42:15.064Z"
+			}
+		],
+		"blocked_tables": [],
+		"findings": 0,
+		"first_findings": [],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Health check: failed",
+		"txt_line_1_ok": true,
+		"json_verdict": "failed",
+		"txt": [
+			"Health check: failed",
+			"Next step: See the failure, then run the health check again.",
+			"",
+			"Problems:  (none)",
+			"Cautions:  (none)",
+			"",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 14:42:15   Ended: 14:42:15   Elapsed: 00:00:00",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    workers 1",
+			"",
+			"Phases",
+			"  gate              00:00:00",
+			"",
+			"Tables: 0 of 27 in the structure",
+			"  No  Table  Records  Blockers  Damage  Elapsed  Checks",
+			"",
+			"Failure",
+			"  Phase:  gate",
+			"  Table:  none",
+			"  Key:    none",
+			"  Error:  7 A Numeric argument was expected.",
+			""
+		],
+		"log": [
+			"2026-10-01 14:42:15  Health check started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 14:42:15  options: {\"workers\":1}",
+			"2026-10-01 14:42:15  phase 1 of 1: gate",
+			"2026-10-01 14:42:15  failed: 7 A Numeric argument was expected.",
+			"2026-10-01 14:42:15  ended: failed",
+			""
+		],
+		"rows_as_03": false,
+		"findings_as_03": false,
+		"all_findings": []
+	},
+	"workers_10": {
+		"verdict": "failed",
+		"next_step": "See the failure, then run the health check again.",
+		"problems": [],
+		"cautions": [],
+		"failure": {
+			"phase": "gate",
+			"table": null,
+			"key": null,
+			"errors": [
+				{
+					"errCode": 7,
+					"componentSignature": "4DRT",
+					"message": "A Numeric argument was expected."
+				},
+				{
+					"errCode": 21,
+					"componentSignature": "4DRT",
+					"message": "The method does not exist."
+				}
+			],
+			"call_chain": [
+				{
+					"type": "classFunction",
+					"name": "_Pass.run",
+					"line": 31,
+					"database": "ExportImport",
+					"formula": "This.result.failure:={phase: This._phase_name(); table: (This._table=\"\") ? Null : This._table; key: Null; errors: Last errors; call_chain: Call chain}"
+				},
+				{
+					"type": "projectMethod",
+					"name": "__Check_Pool",
+					"line": 53,
+					"database": "ExportImport",
+					"formula": "$r:=cs.HealthCheckPass.new({workers: $n}).run()"
+				},
+				{
+					"type": "projectMethod",
+					"name": "__DANI",
+					"line": 10,
+					"database": "ExportImport",
+					"formula": "__Check_Pool"
+				}
+			]
+		},
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Health check 2026-10-01 14.42.16.txt",
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T20:42:16.239Z",
+				"ended": "2026-10-01T20:42:16.239Z"
+			}
+		],
+		"blocked_tables": [],
+		"findings": 0,
+		"first_findings": [],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Health check: failed",
+		"txt_line_1_ok": true,
+		"json_verdict": "failed",
+		"txt": [
+			"Health check: failed",
+			"Next step: See the failure, then run the health check again.",
+			"",
+			"Problems:  (none)",
+			"Cautions:  (none)",
+			"",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 14:42:16   Ended: 14:42:16   Elapsed: 00:00:00",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    workers 10",
+			"",
+			"Phases",
+			"  gate              00:00:00",
+			"",
+			"Tables: 0 of 27 in the structure",
+			"  No  Table  Records  Blockers  Damage  Elapsed  Checks",
+			"",
+			"Failure",
+			"  Phase:  gate",
+			"  Table:  none",
+			"  Key:    none",
+			"  Error:  7 A Numeric argument was expected.",
+			""
+		],
+		"log": [
+			"2026-10-01 14:42:16  Health check started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 14:42:16  options: {\"workers\":10}",
+			"2026-10-01 14:42:16  phase 1 of 1: gate",
+			"2026-10-01 14:42:16  failed: 7 A Numeric argument was expected.",
+			"2026-10-01 14:42:16  ended: failed",
+			""
+		],
+		"rows_as_03": false,
+		"findings_as_03": false,
+		"all_findings": []
+	},
+	"direct": {
+		"preemptive": true,
+		"tables": 0,
+		"findings": 0,
+		"failure": {
+			"table": "Bench_Wide",
+			"errors": [
+				{
+					"errCode": 15,
+					"componentSignature": "4DRT",
+					"message": "This operation is not compatible with the two arguments."
+				}
+			],
+			"call_chain": [
+				{
+					"type": "classFunction",
+					"name": "_Job.run",
+					"line": 9,
+					"database": "ExportImport",
+					"formula": "This.output.failure:={table: This.job.table.name; key: This._key; errors: Last errors; call_chain: Call chain}"
+				},
+				{
+					"type": "projectMethod",
+					"name": "WorkerPool_RunJob",
+					"line": 15,
+					"database": "ExportImport",
+					"formula": "$json:=JSON Stringify(cs[$class].new($job).run())"
+				}
+			]
+		}
+	},
+	"failed": {
+		"verdict": "failed",
+		"next_step": "See the failure, then run the health check again.",
+		"problems": [],
+		"cautions": [],
+		"failure": {
+			"phase": "gate",
+			"table": null,
+			"key": null,
+			"errors": [
+				{
+					"errCode": 7,
+					"componentSignature": "4DRT",
+					"message": "A Numeric argument was expected."
+				},
+				{
+					"errCode": 21,
+					"componentSignature": "4DRT",
+					"message": "The method does not exist."
+				}
+			],
+			"call_chain": [
+				{
+					"type": "classFunction",
+					"name": "_Pass.run",
+					"line": 31,
+					"database": "ExportImport",
+					"formula": "This.result.failure:={phase: This._phase_name(); table: (This._table=\"\") ? Null : This._table; key: Null; errors: Last errors; call_chain: Call chain}"
+				},
+				{
+					"type": "projectMethod",
+					"name": "__Check_Pool",
+					"line": 70,
+					"database": "ExportImport",
+					"formula": "$result.failed:=__Check_Pass_Files(cs.__FailingPass.new({tables: [3]; workers: 1}).run())"
+				},
+				{
+					"type": "projectMethod",
+					"name": "__DANI",
+					"line": 10,
+					"database": "ExportImport",
+					"formula": "__Check_Pool"
+				}
+			]
+		},
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Health check 2026-10-01 14.42.18.txt",
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T20:42:18.473Z",
+				"ended": "2026-10-01T20:42:18.473Z"
+			}
+		],
+		"blocked_tables": [],
+		"findings": 0,
+		"first_findings": [],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Health check: failed",
+		"txt_line_1_ok": true,
+		"json_verdict": "failed",
+		"txt": [
+			"Health check: failed",
+			"Next step: See the failure, then run the health check again.",
+			"",
+			"Problems:  (none)",
+			"Cautions:  (none)",
+			"",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 14:42:18   Ended: 14:42:18   Elapsed: 00:00:00",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    tables [3]; workers 1",
+			"",
+			"Phases",
+			"  gate              00:00:00",
+			"",
+			"Tables: 0 of 27 in the structure",
+			"  No  Table  Records  Blockers  Damage  Elapsed  Checks",
+			"",
+			"Failure",
+			"  Phase:  gate",
+			"  Table:  none",
+			"  Key:    none",
+			"  Error:  7 A Numeric argument was expected.",
+			""
+		],
+		"log": [
+			"2026-10-01 14:42:18  Health check started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 14:42:18  options: {\"tables\":[3],\"workers\":1}",
+			"2026-10-01 14:42:18  phase 1 of 1: gate",
+			"2026-10-01 14:42:18  failed: 7 A Numeric argument was expected.",
+			"2026-10-01 14:42:18  ended: failed",
+			""
+		]
+	},
+	"stopped": {
+		"verdict": "failed",
+		"next_step": "See the failure, then run the health check again.",
+		"problems": [],
+		"cautions": [],
+		"failure": {
+			"phase": "gate",
+			"table": "Bench_Wide",
+			"errors": [
+				{
+					"errCode": 15,
+					"componentSignature": "4DRT",
+					"message": "This operation is not compatible with the two arguments."
+				}
+			],
+			"call_chain": [
+				{
+					"type": "classFunction",
+					"name": "_Job.run",
+					"line": 9,
+					"database": "ExportImport",
+					"formula": "This.output.failure:={table: This.job.table.name; key: This._key; errors: Last errors; call_chain: Call chain}"
+				},
+				{
+					"type": "projectMethod",
+					"name": "WorkerPool_RunJob",
+					"line": 15,
+					"database": "ExportImport",
+					"formula": "$json:=JSON Stringify(cs[$class].new($job).run())"
+				}
+			]
+		},
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Health check 2026-10-01 14.42.19.txt",
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T20:42:19.655Z",
+				"ended": "2026-10-01T20:42:20.673Z"
+			}
+		],
+		"blocked_tables": [],
+		"findings": 0,
+		"first_findings": [],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Health check: failed",
+		"txt_line_1_ok": true,
+		"json_verdict": "failed",
+		"txt": [
+			"Health check: failed",
+			"Next step: See the failure, then run the health check again.",
+			"",
+			"Problems:  (none)",
+			"Cautions:  (none)",
+			"",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 14:42:19   Ended: 14:42:20   Elapsed: 00:00:01",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    workers 2",
+			"",
+			"Phases",
+			"  gate              00:00:01",
+			"",
+			"Tables: 0 of 27 in the structure",
+			"  No  Table  Records  Blockers  Damage  Elapsed  Checks",
+			"",
+			"Failure",
+			"  Phase:  gate",
+			"  Table:  Bench_Wide",
+			"  Key:    none",
+			"  Error:  15 This operation is not compatible with the two arguments.",
+			""
+		],
+		"log": [
+			"2026-10-01 14:42:19  Health check started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 14:42:19  options: {\"workers\":2}",
+			"2026-10-01 14:42:19  phase 1 of 1: gate",
+			"2026-10-01 14:42:19  [Bench_Wide] started",
+			"2026-10-01 14:42:19  [Bench_Text] started",
+			"2026-10-01 14:42:20  failed: [Bench_Wide] 15 This operation is not compatible with the two arguments.",
+			"2026-10-01 14:42:20  ended: failed",
+			""
+		],
+		"workers_left": []
+	},
+	"summary": {
+		"workers_1": "failed, NOT as 03",
+		"workers_10": "failed, NOT as 03",
+		"preemptive": true,
+		"failed": "failed",
+		"stopped": "failed, , workers left: 0"
+	}
+}

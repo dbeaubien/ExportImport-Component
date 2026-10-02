@@ -11,7 +11,7 @@
 //
 #DECLARE($errorHandlerMethodName : Text)
 // ----------------------------------------------------
-ASSERT:C1129(Count parameters:C259=1)
+ASSERT:C1129(Count parameters:C259<=1)
 
 var _OnErr_MethodStack : Collection
 If (_OnErr_MethodStack=Null:C1517)

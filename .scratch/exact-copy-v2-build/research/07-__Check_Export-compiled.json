@@ -1,0 +1,1346 @@
+{
+	"method": "__Check_Export",
+	"when": "2026-10-01T22:37:31.987Z",
+	"compiled": true,
+	"cores": 10,
+	"json_2_53": "{\"key\":9007199254740991}",
+	"options": {
+		"verdict": "refused",
+		"next_step": "Fix the problems listed, then run the export again.",
+		"problems": [
+			"There is no table number 9999",
+			"segment_mb must be a whole number from 1 to 1024, not 0"
+		],
+		"cautions": [],
+		"failure": null,
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.37.32:Export 2026-10-01 16.37.32.txt",
+		"phases": [],
+		"blocked_tables": [],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Export: refused",
+		"txt_line_1_ok": true,
+		"json_verdict": "refused",
+		"txt": [
+			"Export: refused",
+			"Next step: Fix the problems listed, then run the export again.",
+			"",
+			"Problems:",
+			"  - There is no table number 9999",
+			"  - segment_mb must be a whole number from 1 to 1024, not 0",
+			"Cautions:  (none)",
+			"",
+			"Export set: Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.37.32:",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 16:37:32   Ended: 16:37:32   Elapsed: 00:00:00",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    segment_mb 0; tables [9999]",
+			"",
+			"Phases",
+			"",
+			"Tables: 0 of 27 in the structure",
+			"  No  Table  Records  Segments  Bytes  Sequence number  Elapsed",
+			""
+		],
+		"log": [
+			"2026-10-01 16:37:32  Export started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:37:32  options: {\"segment_mb\":0,\"tables\":[9999]}",
+			"2026-10-01 16:37:32  problem: There is no table number 9999",
+			"2026-10-01 16:37:32  problem: segment_mb must be a whole number from 1 to 1024, not 0",
+			"2026-10-01 16:37:32  ended: refused",
+			""
+		],
+		"ok": true
+	},
+	"blocked": {
+		"verdict": "refused",
+		"next_step": "Fix the problems listed, then run the export again.",
+		"problems": [
+			"The gate found blockers in [Spike_TextKey], listed in this set's health check run report. Fix them on the source copy, or leave those tables out."
+		],
+		"cautions": [
+			"26 tables with records left out of this export: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys]"
+		],
+		"failure": null,
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.37.33:Export 2026-10-01 16.37.33.txt",
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T22:37:33.263Z",
+				"ended": "2026-10-01T22:37:34.330Z"
+			}
+		],
+		"blocked_tables": [],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Export: refused",
+		"txt_line_1_ok": true,
+		"json_verdict": "refused",
+		"txt": [
+			"Export: refused",
+			"Next step: Fix the problems listed, then run the export again.",
+			"",
+			"Problems:",
+			"  - The gate found blockers in [Spike_TextKey], listed in this set's health check run report. Fix them on the source copy, or leave those tables out.",
+			"Cautions:",
+			"  - 26 tables with records left out of this export: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys]",
+			"",
+			"Export set: Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.37.33:",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 16:37:33   Ended: 16:37:34   Elapsed: 00:00:01",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    tables [27]",
+			"",
+			"Phases",
+			"  gate              00:00:01",
+			"",
+			"Tables: 0 of 27 in the structure",
+			"  No  Table  Records  Segments  Bytes  Sequence number  Elapsed",
+			""
+		],
+		"log": [
+			"2026-10-01 16:37:33  Export started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:37:33  options: {\"tables\":[27]}",
+			"2026-10-01 16:37:33  caution: 26 tables with records left out of this export: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys]",
+			"2026-10-01 16:37:33  phase 1 of 3: gate",
+			"2026-10-01 16:37:33  Health check started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:37:33  options: {\"tables\":[27]}",
+			"2026-10-01 16:37:33  phase 1 of 1: gate",
+			"2026-10-01 16:37:33  [Spike_TextKey] started",
+			"2026-10-01 16:37:33  [Spike_TextKey] done: 2 records, 00:00:00",
+			"2026-10-01 16:37:34  ended: blocked",
+			"2026-10-01 16:37:34  problem: The gate found blockers in [Spike_TextKey], listed in this set's health check run report. Fix them on the source copy, or leave those tables out.",
+			"2026-10-01 16:37:34  ended: refused",
+			""
+		],
+		"health_check": {
+			"verdict": "blocked",
+			"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.37.33:Health check 2026-10-01 16.37.33.txt",
+			"phases": [
+				{
+					"name": "gate",
+					"started": "2026-10-01T22:37:33.265Z",
+					"ended": "2026-10-01T22:37:34.323Z"
+				}
+			]
+		},
+		"ok": true
+	},
+	"at_key": {
+		"verdict": "refused",
+		"next_step": "Fix the problems listed, then run the export again.",
+		"problems": [
+			"[Spike_TextKey]PK: the record key \"c07_at@\" contains @, which import and Compare can't match. Leave the table out, or run the health check to list every such key."
+		],
+		"cautions": [
+			"26 tables with records left out of this export: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys]"
+		],
+		"failure": null,
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.37.35:Export 2026-10-01 16.37.35.txt",
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T22:37:35.546Z",
+				"ended": "2026-10-01T22:37:36.616Z"
+			},
+			{
+				"name": "export",
+				"started": "2026-10-01T22:37:36.616Z",
+				"ended": "2026-10-01T22:37:37.730Z"
+			}
+		],
+		"blocked_tables": [],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Export: refused",
+		"txt_line_1_ok": true,
+		"json_verdict": "refused",
+		"txt": [
+			"Export: refused",
+			"Next step: Fix the problems listed, then run the export again.",
+			"",
+			"Problems:",
+			"  - [Spike_TextKey]PK: the record key \"c07_at@\" contains @, which import and Compare can't match. Leave the table out, or run the health check to list every such key.",
+			"Cautions:",
+			"  - 26 tables with records left out of this export: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys]",
+			"",
+			"Export set: Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.37.35:",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 16:37:35   Ended: 16:37:37   Elapsed: 00:00:02",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    tables [27]",
+			"",
+			"Phases",
+			"  gate              00:00:01",
+			"  export            00:00:01",
+			"",
+			"Tables: 0 of 27 in the structure",
+			"  No  Table  Records  Segments  Bytes  Sequence number  Elapsed",
+			""
+		],
+		"log": [
+			"2026-10-01 16:37:35  Export started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:37:35  options: {\"tables\":[27]}",
+			"2026-10-01 16:37:35  caution: 26 tables with records left out of this export: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys]",
+			"2026-10-01 16:37:35  phase 1 of 3: gate",
+			"2026-10-01 16:37:35  Health check started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:37:35  options: {\"tables\":[27]}",
+			"2026-10-01 16:37:35  phase 1 of 1: gate",
+			"2026-10-01 16:37:35  [Spike_TextKey] started",
+			"2026-10-01 16:37:35  [Spike_TextKey] done: 2 records, 00:00:00",
+			"2026-10-01 16:37:36  ended: passed",
+			"2026-10-01 16:37:36  phase 2 of 3: export",
+			"2026-10-01 16:37:36  [Spike_TextKey] started",
+			"2026-10-01 16:37:37  problem: [Spike_TextKey]PK: the record key \"c07_at@\" contains @, which import and Compare can't match. Leave the table out, or run the health check to list every such key.",
+			"2026-10-01 16:37:37  ended: refused",
+			""
+		],
+		"ok": true
+	},
+	"surrogate": {
+		"verdict": "refused",
+		"next_step": "Fix the problems listed, then run the export again.",
+		"problems": [
+			"[Spike_TextKey] record key c07_surrogate: F_Text: a lone surrogate, which UTF-8 can't hold. Remove it with the fixer (which leaves record keys alone), or leave the table out. The health check lists every one."
+		],
+		"cautions": [
+			"26 tables with records left out of this export: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys]"
+		],
+		"failure": null,
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.37.38:Export 2026-10-01 16.37.38.txt",
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T22:37:38.938Z",
+				"ended": "2026-10-01T22:37:40.017Z"
+			},
+			{
+				"name": "export",
+				"started": "2026-10-01T22:37:40.017Z",
+				"ended": "2026-10-01T22:37:41.097Z"
+			}
+		],
+		"blocked_tables": [],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Export: refused",
+		"txt_line_1_ok": true,
+		"json_verdict": "refused",
+		"txt": [
+			"Export: refused",
+			"Next step: Fix the problems listed, then run the export again.",
+			"",
+			"Problems:",
+			"  - [Spike_TextKey] record key c07_surrogate: F_Text: a lone surrogate, which UTF-8 can't hold. Remove it with the fixer (which leaves record keys alone), or leave the table out. The health check lists every one.",
+			"Cautions:",
+			"  - 26 tables with records left out of this export: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys]",
+			"",
+			"Export set: Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.37.38:",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 16:37:38   Ended: 16:37:41   Elapsed: 00:00:02",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    tables [27]",
+			"",
+			"Phases",
+			"  gate              00:00:01",
+			"  export            00:00:01",
+			"",
+			"Tables: 0 of 27 in the structure",
+			"  No  Table  Records  Segments  Bytes  Sequence number  Elapsed",
+			""
+		],
+		"log": [
+			"2026-10-01 16:37:38  Export started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:37:38  options: {\"tables\":[27]}",
+			"2026-10-01 16:37:38  caution: 26 tables with records left out of this export: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys]",
+			"2026-10-01 16:37:38  phase 1 of 3: gate",
+			"2026-10-01 16:37:38  Health check started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:37:38  options: {\"tables\":[27]}",
+			"2026-10-01 16:37:38  phase 1 of 1: gate",
+			"2026-10-01 16:37:38  [Spike_TextKey] started",
+			"2026-10-01 16:37:39  [Spike_TextKey] done: 2 records, 00:00:00",
+			"2026-10-01 16:37:40  ended: passed",
+			"2026-10-01 16:37:40  phase 2 of 3: export",
+			"2026-10-01 16:37:40  [Spike_TextKey] started",
+			"2026-10-01 16:37:41  problem: [Spike_TextKey] record key c07_surrogate: F_Text: a lone surrogate, which UTF-8 can't hold. Remove it with the fixer (which leaves record keys alone), or leave the table out. The health check lists every one.",
+			"2026-10-01 16:37:41  ended: refused",
+			""
+		],
+		"ok": true
+	},
+	"subset": {
+		"verdict": "exported",
+		"next_step": "The export set is complete. Switch to a new target datafile, then run the import.",
+		"problems": [],
+		"cautions": [
+			"25 tables with records left out of this export: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys]"
+		],
+		"failure": null,
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.37.42:Export 2026-10-01 16.37.42.txt",
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T22:37:42.313Z",
+				"ended": "2026-10-01T22:37:43.395Z"
+			},
+			{
+				"name": "export",
+				"started": "2026-10-01T22:37:43.395Z",
+				"ended": "2026-10-01T22:37:44.511Z"
+			},
+			{
+				"name": "manifest",
+				"started": "2026-10-01T22:37:44.511Z",
+				"ended": "2026-10-01T22:37:44.515Z"
+			}
+		],
+		"blocked_tables": [],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Export: exported",
+		"txt_line_1_ok": true,
+		"json_verdict": "exported",
+		"txt": [
+			"Export: exported",
+			"Next step: The export set is complete. Switch to a new target datafile, then run the import.",
+			"",
+			"Problems:  (none)",
+			"Cautions:",
+			"  - 25 tables with records left out of this export: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys]",
+			"",
+			"Export set: Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.37.42:",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 16:37:42   Ended: 16:37:44   Elapsed: 00:00:02",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    tables [6,27]",
+			"",
+			"Phases",
+			"  gate              00:00:01",
+			"  export            00:00:01",
+			"  manifest          00:00:00",
+			"",
+			"Tables: 2 of 27 in the structure",
+			"  No  Table           Records  Segments  Bytes  Sequence number   Elapsed",
+			"   6  Bench_Small_01     1000         1  66454             1000  00:00:00",
+			"  27  Spike_TextKey         0         0      0                0  00:00:00",
+			""
+		],
+		"log": [
+			"2026-10-01 16:37:42  Export started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:37:42  options: {\"tables\":[6,27]}",
+			"2026-10-01 16:37:42  caution: 25 tables with records left out of this export: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys]",
+			"2026-10-01 16:37:42  phase 1 of 3: gate",
+			"2026-10-01 16:37:42  Health check started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:37:42  options: {\"tables\":[6,27]}",
+			"2026-10-01 16:37:42  phase 1 of 1: gate",
+			"2026-10-01 16:37:42  [Bench_Small_01] started",
+			"2026-10-01 16:37:42  [Spike_TextKey] started",
+			"2026-10-01 16:37:42  [Spike_TextKey] done: 0 records, 00:00:00",
+			"2026-10-01 16:37:42  [Bench_Small_01] done: 1000 records, 00:00:00",
+			"2026-10-01 16:37:43  ended: passed",
+			"2026-10-01 16:37:43  phase 2 of 3: export",
+			"2026-10-01 16:37:43  [Bench_Small_01] started",
+			"2026-10-01 16:37:43  [Spike_TextKey] started",
+			"2026-10-01 16:37:43  [Spike_TextKey] done: 0 records, 00:00:00",
+			"2026-10-01 16:37:43  [Bench_Small_01] done: 1000 records, 00:00:00",
+			"2026-10-01 16:37:44  phase 3 of 3: manifest",
+			"2026-10-01 16:37:44  ended: exported",
+			""
+		],
+		"set": {
+			"manifest": true,
+			"tables": [
+				{
+					"name": "Bench_Small_01",
+					"records": 1000,
+					"in_datafile": 1000,
+					"sequence_number": 1000,
+					"segments": 1,
+					"bytes": 66454,
+					"files": 1
+				},
+				{
+					"name": "Spike_TextKey",
+					"records": 0,
+					"in_datafile": 1,
+					"sequence_number": 0,
+					"segments": 0,
+					"bytes": 0,
+					"files": 0
+				}
+			],
+			"problems": [
+				"[Spike_TextKey] counts: {\"name\":\"Spike_TextKey\",\"records\":0,\"in_datafile\":1,\"sequence_number\":0,\"segments\":0,\"bytes\":0,\"files\":0}"
+			],
+			"ok": false,
+			"content": {
+				"component_version": "2026.r4 (build 20261001)",
+				"app_version": "2102 (build 100579)",
+				"started": "2026-10-01T22:37:42.266Z",
+				"ended": "2026-10-01T22:37:44.515Z",
+				"settings": {
+					"segment_mb": 100,
+					"tables": [
+						6,
+						27
+					]
+				},
+				"source": {
+					"datafile": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+					"size": 5689770496,
+					"modified": "2026-10-01T22:37:24Z",
+					"structure": "ExportImport"
+				},
+				"language": "en",
+				"signature": "113a32046875df58c9c310f5114ea80c035e5564815cb56c5936ae28b42480f8",
+				"structure_tables": 27,
+				"tables": 2
+			},
+			"shasum": {
+				"segments": 1,
+				"ok": 1,
+				"not_ok": [],
+				"error": ""
+			}
+		},
+		"empty": {
+			"records": 0,
+			"segments": [],
+			"sequence_number": 0,
+			"datafile_sequence_number": 0,
+			"folder": false
+		},
+		"ok": false
+	},
+	"stopped": {
+		"verdict": "failed",
+		"next_step": "See the failure, then run the export again.",
+		"problems": [],
+		"cautions": [],
+		"failure": {
+			"phase": "export",
+			"table": null,
+			"key": null,
+			"reason": "stopped by operator",
+			"errors": [],
+			"call_chain": null
+		},
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.37.45:Export 2026-10-01 16.37.45.txt",
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T22:37:45.799Z",
+				"ended": "2026-10-01T22:37:50.853Z"
+			},
+			{
+				"name": "export",
+				"started": "2026-10-01T22:37:50.853Z",
+				"ended": "2026-10-01T22:38:02.027Z"
+			}
+		],
+		"blocked_tables": [],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Export: failed",
+		"txt_line_1_ok": true,
+		"json_verdict": "failed",
+		"txt": [
+			"Export: failed",
+			"Next step: See the failure, then run the export again.",
+			"",
+			"Problems:  (none)",
+			"Cautions:  (none)",
+			"",
+			"Export set: Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.37.45:",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 16:37:45   Ended: 16:38:02   Elapsed: 00:00:16",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    (defaults)",
+			"",
+			"Phases",
+			"  gate              00:00:05",
+			"  export            00:00:11",
+			"",
+			"Tables: 0 of 27 in the structure",
+			"  No  Table  Records  Segments  Bytes  Sequence number  Elapsed",
+			"",
+			"Failure",
+			"  Phase:  export",
+			"  Table:  none",
+			"  Key:    none",
+			"  Reason: stopped by operator",
+			""
+		],
+		"log": [
+			"2026-10-01 16:37:45  Export started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:37:45  options: {}",
+			"2026-10-01 16:37:45  phase 1 of 3: gate",
+			"2026-10-01 16:37:45  Health check started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:37:45  options: {}",
+			"2026-10-01 16:37:45  phase 1 of 1: gate",
+			"2026-10-01 16:37:45  [Bench_Wide] started",
+			"2026-10-01 16:37:45  [Bench_Text] started",
+			"2026-10-01 16:37:45  [Bench_Small_20] started",
+			"2026-10-01 16:37:45  [Bench_Small_19] started",
+			"2026-10-01 16:37:45  [Bench_Small_18] started",
+			"2026-10-01 16:37:45  [Bench_Small_17] started",
+			"2026-10-01 16:37:45  [Bench_Small_16] started",
+			"2026-10-01 16:37:45  [Table_1] started",
+			"2026-10-01 16:37:45  [Bench_Small_15] started",
+			"2026-10-01 16:37:45  [Bench_Small_14] started",
+			"2026-10-01 16:37:45  [Bench_Small_16] done: 16000 records, 00:00:00",
+			"2026-10-01 16:37:45  [Bench_Small_15] done: 15000 records, 00:00:00",
+			"2026-10-01 16:37:45  [Bench_Small_14] done: 14000 records, 00:00:00",
+			"2026-10-01 16:37:45  [Bench_Small_18] done: 18000 records, 00:00:00",
+			"2026-10-01 16:37:45  [Bench_Small_19] done: 19000 records, 00:00:00",
+			"2026-10-01 16:37:45  [Bench_Small_20] done: 20000 records, 00:00:00",
+			"2026-10-01 16:37:45  [Table_1] done: 8000 records, 00:00:00",
+			"2026-10-01 16:37:45  [Bench_Small_17] done: 17000 records, 00:00:00",
+			"2026-10-01 16:37:45  [Bench_Small_13] started",
+			"2026-10-01 16:37:45  [Bench_Small_12] started",
+			"2026-10-01 16:37:45  [Bench_Small_11] started",
+			"2026-10-01 16:37:45  [Bench_Small_10] started",
+			"2026-10-01 16:37:45  [Bench_Small_09] started",
+			"2026-10-01 16:37:45  [Bench_Small_08] started",
+			"2026-10-01 16:37:45  [Bench_Blob] started",
+			"2026-10-01 16:37:45  [Bench_Small_07] started",
+			"2026-10-01 16:37:46  [Bench_Small_07] done: 7000 records, 00:00:00",
+			"2026-10-01 16:37:46  [Bench_Small_13] done: 13000 records, 00:00:00",
+			"2026-10-01 16:37:46  [Bench_Small_09] done: 9000 records, 00:00:00",
+			"2026-10-01 16:37:46  [Bench_Small_08] done: 8000 records, 00:00:00",
+			"2026-10-01 16:37:46  [Bench_Blob] done: 10000 records, 00:00:00",
+			"2026-10-01 16:37:46  [Bench_Small_10] done: 10000 records, 00:00:00",
+			"2026-10-01 16:37:46  [Bench_Small_11] done: 11000 records, 00:00:00",
+			"2026-10-01 16:37:46  [Bench_Small_12] done: 12000 records, 00:00:00",
+			"2026-10-01 16:37:46  [Bench_Small_06] started",
+			"2026-10-01 16:37:46  [Bench_Small_05] started",
+			"2026-10-01 16:37:46  [Table_2] started",
+			"2026-10-01 16:37:46  [Bench_Small_04] started",
+			"2026-10-01 16:37:46  [Bench_Small_03] started",
+			"2026-10-01 16:37:46  [Bench_Small_02] started",
+			"2026-10-01 16:37:46  [Bench_Small_01] started",
+			"2026-10-01 16:37:46  [Spike_Keys] started",
+			"2026-10-01 16:37:46  [Bench_Small_01] done: 1000 records, 00:00:00",
+			"2026-10-01 16:37:46  [Spike_Keys] done: 14 records, 00:00:00",
+			"2026-10-01 16:37:46  [Bench_Small_02] done: 2000 records, 00:00:00",
+			"2026-10-01 16:37:46  [Bench_Small_03] done: 3000 records, 00:00:00",
+			"2026-10-01 16:37:46  [Bench_Small_04] done: 4000 records, 00:00:00",
+			"2026-10-01 16:37:46  [Bench_Small_05] done: 5000 records, 00:00:00",
+			"2026-10-01 16:37:46  [Table_2] done: 6000 records, 00:00:00",
+			"2026-10-01 16:37:46  [Bench_Small_06] done: 6000 records, 00:00:00",
+			"2026-10-01 16:37:46  [Spike_TextKey] started",
+			"2026-10-01 16:37:46  [Spike_TextKey] done: 1 records, 00:00:00",
+			"2026-10-01 16:37:47  [Bench_Text] done: 1000000 records, 00:00:01",
+			"2026-10-01 16:37:49  [Bench_Wide] done: 1997994 records, 00:00:04",
+			"2026-10-01 16:37:50  ended: passed",
+			"2026-10-01 16:37:50  phase 2 of 3: export",
+			"2026-10-01 16:37:51  [Bench_Wide] started",
+			"2026-10-01 16:37:51  [Bench_Text] started",
+			"2026-10-01 16:38:02  stopped by operator",
+			"2026-10-01 16:38:02  ended: failed",
+			""
+		],
+		"ok": true
+	},
+	"every_table": {
+		"verdict": "exported",
+		"next_step": "The export set is complete. Switch to a new target datafile, then run the import.",
+		"problems": [],
+		"cautions": [],
+		"failure": null,
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.38.03:Export 2026-10-01 16.38.03.txt",
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T22:38:03.266Z",
+				"ended": "2026-10-01T22:38:09.919Z"
+			},
+			{
+				"name": "export",
+				"started": "2026-10-01T22:38:09.919Z",
+				"ended": "2026-10-01T22:39:54.829Z"
+			},
+			{
+				"name": "manifest",
+				"started": "2026-10-01T22:39:54.829Z",
+				"ended": "2026-10-01T22:39:54.832Z"
+			}
+		],
+		"blocked_tables": [],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Export: exported",
+		"txt_line_1_ok": true,
+		"json_verdict": "exported",
+		"txt": [
+			"Export: exported",
+			"Next step: The export set is complete. Switch to a new target datafile, then run the import.",
+			"",
+			"Problems:  (none)",
+			"Cautions:  (none)",
+			"",
+			"Export set: Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.38.03:",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 16:38:03   Ended: 16:39:54   Elapsed: 00:01:52",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    (defaults)",
+			"",
+			"Phases",
+			"  gate              00:00:07",
+			"  export            00:01:45",
+			"  manifest          00:00:00",
+			"",
+			"Tables: 27 of 27 in the structure",
+			"  No  Table           Records  Segments       Bytes  Sequence number   Elapsed",
+			"   1  Table_1            8000         1     1373786           135400  00:00:02",
+			"   2  Table_2            6000         1    36379572            86102  00:00:01",
+			"   3  Bench_Wide      1997994        18  1028801147          2000000  00:01:31",
+			"   4  Bench_Text      1000000         8   790609757                0  00:01:40",
+			"   5  Bench_Blob        10000        19  1935054711            10000  00:00:11",
+			"   6  Bench_Small_01     1000         1       66454             1000  00:00:00",
+			"   7  Bench_Small_02     2000         1      135954             2000  00:00:00",
+			"   8  Bench_Small_03     3000         1      205454             3000  00:00:00",
+			"   9  Bench_Small_04     4000         1      274954             4000  00:00:01",
+			"  10  Bench_Small_05     5000         1      344454             5000  00:00:01",
+			"  11  Bench_Small_06     6000         1      413954             6000  00:00:01",
+			"  12  Bench_Small_07     7000         1      483454          1007000  00:00:01",
+			"  13  Bench_Small_08     8000         1      552954             8000  00:00:01",
+			"  14  Bench_Small_09     9000         1      622454             9000  00:00:02",
+			"  15  Bench_Small_10    10000         1      691956            10000  00:00:02",
+			"  16  Bench_Small_11    11000         1      764206            11000  00:00:02",
+			"  17  Bench_Small_12    12000         1      836456            12000  00:00:02",
+			"  18  Bench_Small_13    13000         1      908706            13000  00:00:02",
+			"  19  Bench_Small_14    14000         1      980956            14000  00:00:02",
+			"  20  Bench_Small_15    15000         1     1053206            15000  00:00:02",
+			"  21  Bench_Small_16    16000         1     1125456            16000  00:00:02",
+			"  22  Bench_Small_17    17000         1     1197706            17000  00:00:02",
+			"  23  Bench_Small_18    18000         1     1269956            18000  00:00:03",
+			"  24  Bench_Small_19    19000         1     1342206            19000  00:00:03",
+			"  25  Bench_Small_20    20000         1     1414456            20000  00:00:03",
+			"  26  Spike_Keys           14         1        1119               76  00:00:00",
+			"  27  Spike_TextKey         1         1          24                0  00:00:00",
+			""
+		],
+		"log": [
+			"2026-10-01 16:38:03  Export started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:38:03  options: {}",
+			"2026-10-01 16:38:03  phase 1 of 3: gate",
+			"2026-10-01 16:38:03  Health check started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 16:38:03  options: {}",
+			"2026-10-01 16:38:03  phase 1 of 1: gate",
+			"2026-10-01 16:38:03  [Bench_Wide] started",
+			"2026-10-01 16:38:03  [Bench_Text] started",
+			"2026-10-01 16:38:03  [Bench_Small_20] started",
+			"2026-10-01 16:38:03  [Bench_Small_19] started",
+			"2026-10-01 16:38:03  [Bench_Small_18] started",
+			"2026-10-01 16:38:03  [Bench_Small_17] started",
+			"2026-10-01 16:38:03  [Bench_Small_16] started",
+			"2026-10-01 16:38:03  [Table_1] started",
+			"2026-10-01 16:38:03  [Bench_Small_15] started",
+			"2026-10-01 16:38:03  [Bench_Small_14] started",
+			"2026-10-01 16:38:03  [Table_1] done: 8000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_18] done: 18000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_14] done: 14000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_16] done: 16000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_20] done: 20000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_15] done: 15000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_17] done: 17000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_19] done: 19000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_13] started",
+			"2026-10-01 16:38:03  [Bench_Small_12] started",
+			"2026-10-01 16:38:03  [Bench_Small_11] started",
+			"2026-10-01 16:38:03  [Bench_Small_10] started",
+			"2026-10-01 16:38:03  [Bench_Small_09] started",
+			"2026-10-01 16:38:03  [Bench_Small_08] started",
+			"2026-10-01 16:38:03  [Bench_Blob] started",
+			"2026-10-01 16:38:03  [Bench_Small_07] started",
+			"2026-10-01 16:38:03  [Bench_Small_08] done: 8000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_07] done: 7000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_10] done: 10000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_12] done: 12000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_13] done: 13000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_11] done: 11000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_09] done: 9000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Blob] done: 10000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_06] started",
+			"2026-10-01 16:38:03  [Bench_Small_05] started",
+			"2026-10-01 16:38:03  [Table_2] started",
+			"2026-10-01 16:38:03  [Bench_Small_04] started",
+			"2026-10-01 16:38:03  [Bench_Small_03] started",
+			"2026-10-01 16:38:03  [Bench_Small_02] started",
+			"2026-10-01 16:38:03  [Bench_Small_01] started",
+			"2026-10-01 16:38:03  [Spike_Keys] started",
+			"2026-10-01 16:38:03  [Bench_Small_02] done: 2000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_01] done: 1000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Spike_Keys] done: 14 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_05] done: 5000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_03] done: 3000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_04] done: 4000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Bench_Small_06] done: 6000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Table_2] done: 6000 records, 00:00:00",
+			"2026-10-01 16:38:03  [Spike_TextKey] started",
+			"2026-10-01 16:38:03  [Spike_TextKey] done: 1 records, 00:00:00",
+			"2026-10-01 16:38:04  [Bench_Text] done: 1000000 records, 00:00:01",
+			"2026-10-01 16:38:08  [Bench_Wide] done: 1997994 records, 00:00:06",
+			"2026-10-01 16:38:09  ended: passed",
+			"2026-10-01 16:38:09  phase 2 of 3: export",
+			"2026-10-01 16:38:10  [Bench_Wide] started",
+			"2026-10-01 16:38:10  [Bench_Text] started",
+			"2026-10-01 16:39:40  [Bench_Small_20] started",
+			"2026-10-01 16:39:40  [Bench_Small_19] started",
+			"2026-10-01 16:39:40  [Bench_Small_18] started",
+			"2026-10-01 16:39:40  [Bench_Small_17] started",
+			"2026-10-01 16:39:40  [Bench_Small_16] started",
+			"2026-10-01 16:39:40  [Bench_Wide] done: 1997994 records, 00:01:31",
+			"2026-10-01 16:39:40  [Table_1] started",
+			"2026-10-01 16:39:40  [Bench_Small_15] started",
+			"2026-10-01 16:39:40  [Bench_Small_14] started",
+			"2026-10-01 16:39:40  [Bench_Small_13] started",
+			"2026-10-01 16:39:42  [Table_1] done: 8000 records, 00:00:02",
+			"2026-10-01 16:39:42  [Bench_Small_12] started",
+			"2026-10-01 16:39:42  [Bench_Small_13] done: 13000 records, 00:00:02",
+			"2026-10-01 16:39:42  [Bench_Small_20] done: 20000 records, 00:00:03",
+			"2026-10-01 16:39:42  [Bench_Small_17] done: 17000 records, 00:00:02",
+			"2026-10-01 16:39:42  [Bench_Small_14] done: 14000 records, 00:00:02",
+			"2026-10-01 16:39:42  [Bench_Small_11] started",
+			"2026-10-01 16:39:42  [Bench_Small_10] started",
+			"2026-10-01 16:39:42  [Bench_Small_09] started",
+			"2026-10-01 16:39:42  [Bench_Small_08] started",
+			"2026-10-01 16:39:42  [Bench_Small_16] done: 16000 records, 00:00:02",
+			"2026-10-01 16:39:42  [Bench_Small_18] done: 18000 records, 00:00:03",
+			"2026-10-01 16:39:42  [Bench_Blob] started",
+			"2026-10-01 16:39:42  [Bench_Small_07] started",
+			"2026-10-01 16:39:42  [Bench_Small_19] done: 19000 records, 00:00:03",
+			"2026-10-01 16:39:42  [Bench_Small_15] done: 15000 records, 00:00:02",
+			"2026-10-01 16:39:42  [Bench_Small_06] started",
+			"2026-10-01 16:39:42  [Bench_Small_05] started",
+			"2026-10-01 16:39:44  [Bench_Small_05] done: 5000 records, 00:00:01",
+			"2026-10-01 16:39:44  [Table_2] started",
+			"2026-10-01 16:39:44  [Bench_Small_06] done: 6000 records, 00:00:01",
+			"2026-10-01 16:39:44  [Bench_Small_07] done: 7000 records, 00:00:01",
+			"2026-10-01 16:39:44  [Bench_Small_08] done: 8000 records, 00:00:01",
+			"2026-10-01 16:39:44  [Bench_Small_04] started",
+			"2026-10-01 16:39:44  [Bench_Small_03] started",
+			"2026-10-01 16:39:44  [Bench_Small_02] started",
+			"2026-10-01 16:39:44  [Bench_Small_09] done: 9000 records, 00:00:02",
+			"2026-10-01 16:39:44  [Bench_Small_01] started",
+			"2026-10-01 16:39:44  [Bench_Small_10] done: 10000 records, 00:00:02",
+			"2026-10-01 16:39:44  [Bench_Small_02] done: 2000 records, 00:00:00",
+			"2026-10-01 16:39:44  [Spike_Keys] started",
+			"2026-10-01 16:39:44  [Spike_TextKey] started",
+			"2026-10-01 16:39:44  [Spike_TextKey] done: 1 records, 00:00:00",
+			"2026-10-01 16:39:44  [Spike_Keys] done: 14 records, 00:00:00",
+			"2026-10-01 16:39:44  [Bench_Small_01] done: 1000 records, 00:00:00",
+			"2026-10-01 16:39:44  [Bench_Small_12] done: 12000 records, 00:00:02",
+			"2026-10-01 16:39:44  [Bench_Small_03] done: 3000 records, 00:00:00",
+			"2026-10-01 16:39:44  [Bench_Small_11] done: 11000 records, 00:00:02",
+			"2026-10-01 16:39:44  [Bench_Small_04] done: 4000 records, 00:00:01",
+			"2026-10-01 16:39:45  [Table_2] done: 6000 records, 00:00:01",
+			"2026-10-01 16:39:50  [Bench_Text] done: 1000000 records, 00:01:40",
+			"2026-10-01 16:39:53  [Bench_Blob] done: 10000 records, 00:00:11",
+			"2026-10-01 16:39:54  phase 3 of 3: manifest",
+			"2026-10-01 16:39:54  ended: exported",
+			""
+		],
+		"set": {
+			"manifest": true,
+			"tables": [
+				{
+					"name": "Table_1",
+					"records": 8000,
+					"in_datafile": 8000,
+					"sequence_number": 135400,
+					"segments": 1,
+					"bytes": 1373786,
+					"files": 1
+				},
+				{
+					"name": "Table_2",
+					"records": 6000,
+					"in_datafile": 6000,
+					"sequence_number": 86102,
+					"segments": 1,
+					"bytes": 36379572,
+					"files": 1
+				},
+				{
+					"name": "Bench_Wide",
+					"records": 1997994,
+					"in_datafile": 1997994,
+					"sequence_number": 2000000,
+					"segments": 18,
+					"bytes": 1028801147,
+					"files": 18
+				},
+				{
+					"name": "Bench_Text",
+					"records": 1000000,
+					"in_datafile": 1000000,
+					"sequence_number": 0,
+					"segments": 8,
+					"bytes": 790609757,
+					"files": 8
+				},
+				{
+					"name": "Bench_Blob",
+					"records": 10000,
+					"in_datafile": 10000,
+					"sequence_number": 10000,
+					"segments": 19,
+					"bytes": 1935054711,
+					"files": 19
+				},
+				{
+					"name": "Bench_Small_01",
+					"records": 1000,
+					"in_datafile": 1000,
+					"sequence_number": 1000,
+					"segments": 1,
+					"bytes": 66454,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_02",
+					"records": 2000,
+					"in_datafile": 2000,
+					"sequence_number": 2000,
+					"segments": 1,
+					"bytes": 135954,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_03",
+					"records": 3000,
+					"in_datafile": 3000,
+					"sequence_number": 3000,
+					"segments": 1,
+					"bytes": 205454,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_04",
+					"records": 4000,
+					"in_datafile": 4000,
+					"sequence_number": 4000,
+					"segments": 1,
+					"bytes": 274954,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_05",
+					"records": 5000,
+					"in_datafile": 5000,
+					"sequence_number": 5000,
+					"segments": 1,
+					"bytes": 344454,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_06",
+					"records": 6000,
+					"in_datafile": 6000,
+					"sequence_number": 6000,
+					"segments": 1,
+					"bytes": 413954,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_07",
+					"records": 7000,
+					"in_datafile": 7000,
+					"sequence_number": 1007000,
+					"segments": 1,
+					"bytes": 483454,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_08",
+					"records": 8000,
+					"in_datafile": 8000,
+					"sequence_number": 8000,
+					"segments": 1,
+					"bytes": 552954,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_09",
+					"records": 9000,
+					"in_datafile": 9000,
+					"sequence_number": 9000,
+					"segments": 1,
+					"bytes": 622454,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_10",
+					"records": 10000,
+					"in_datafile": 10000,
+					"sequence_number": 10000,
+					"segments": 1,
+					"bytes": 691956,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_11",
+					"records": 11000,
+					"in_datafile": 11000,
+					"sequence_number": 11000,
+					"segments": 1,
+					"bytes": 764206,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_12",
+					"records": 12000,
+					"in_datafile": 12000,
+					"sequence_number": 12000,
+					"segments": 1,
+					"bytes": 836456,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_13",
+					"records": 13000,
+					"in_datafile": 13000,
+					"sequence_number": 13000,
+					"segments": 1,
+					"bytes": 908706,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_14",
+					"records": 14000,
+					"in_datafile": 14000,
+					"sequence_number": 14000,
+					"segments": 1,
+					"bytes": 980956,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_15",
+					"records": 15000,
+					"in_datafile": 15000,
+					"sequence_number": 15000,
+					"segments": 1,
+					"bytes": 1053206,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_16",
+					"records": 16000,
+					"in_datafile": 16000,
+					"sequence_number": 16000,
+					"segments": 1,
+					"bytes": 1125456,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_17",
+					"records": 17000,
+					"in_datafile": 17000,
+					"sequence_number": 17000,
+					"segments": 1,
+					"bytes": 1197706,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_18",
+					"records": 18000,
+					"in_datafile": 18000,
+					"sequence_number": 18000,
+					"segments": 1,
+					"bytes": 1269956,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_19",
+					"records": 19000,
+					"in_datafile": 19000,
+					"sequence_number": 19000,
+					"segments": 1,
+					"bytes": 1342206,
+					"files": 1
+				},
+				{
+					"name": "Bench_Small_20",
+					"records": 20000,
+					"in_datafile": 20000,
+					"sequence_number": 20000,
+					"segments": 1,
+					"bytes": 1414456,
+					"files": 1
+				},
+				{
+					"name": "Spike_Keys",
+					"records": 14,
+					"in_datafile": 14,
+					"sequence_number": 76,
+					"segments": 1,
+					"bytes": 1119,
+					"files": 1
+				},
+				{
+					"name": "Spike_TextKey",
+					"records": 1,
+					"in_datafile": 1,
+					"sequence_number": 0,
+					"segments": 1,
+					"bytes": 24,
+					"files": 1
+				}
+			],
+			"problems": [],
+			"ok": true,
+			"content": {
+				"component_version": "2026.r4 (build 20261001)",
+				"app_version": "2102 (build 100579)",
+				"started": "2026-10-01T22:38:03.210Z",
+				"ended": "2026-10-01T22:39:54.831Z",
+				"settings": {
+					"segment_mb": 100
+				},
+				"source": {
+					"datafile": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+					"size": 5689770496,
+					"modified": "2026-10-01T22:37:44Z",
+					"structure": "ExportImport"
+				},
+				"language": "en",
+				"signature": "113a32046875df58c9c310f5114ea80c035e5564815cb56c5936ae28b42480f8",
+				"structure_tables": 27,
+				"tables": 27
+			},
+			"shasum": {
+				"segments": 69,
+				"ok": 69,
+				"not_ok": [],
+				"error": ""
+			}
+		},
+		"ok": true
+	},
+	"bench": {
+		"run_s": 111.625,
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T22:38:03.266Z",
+				"ended": "2026-10-01T22:38:09.919Z"
+			},
+			{
+				"name": "export",
+				"started": "2026-10-01T22:38:09.919Z",
+				"ended": "2026-10-01T22:39:54.829Z"
+			},
+			{
+				"name": "manifest",
+				"started": "2026-10-01T22:39:54.829Z",
+				"ended": "2026-10-01T22:39:54.832Z"
+			}
+		],
+		"bytes": 3806905468,
+		"baseline_export_all_s": 3003.17,
+		"baseline_serial_export_s": 4450.2,
+		"baseline_bytes": 4674191047,
+		"tables": [
+			{
+				"name": "Table_1",
+				"records": 8000,
+				"segments": 1,
+				"bytes": 1373786,
+				"elapsed": 1.912,
+				"baseline_export_s": 1.864
+			},
+			{
+				"name": "Table_2",
+				"records": 6000,
+				"segments": 1,
+				"bytes": 36379572,
+				"elapsed": 1.01,
+				"baseline_export_s": 18.257
+			},
+			{
+				"name": "Bench_Wide",
+				"records": 1997994,
+				"segments": 18,
+				"bytes": 1028801147,
+				"elapsed": 90.5,
+				"baseline_export_s": 2818.786
+			},
+			{
+				"name": "Bench_Text",
+				"records": 1000000,
+				"segments": 8,
+				"bytes": 790609757,
+				"elapsed": 100.173,
+				"baseline_export_s": 1501.266
+			},
+			{
+				"name": "Bench_Blob",
+				"records": 10000,
+				"segments": 19,
+				"bytes": 1935054711,
+				"elapsed": 10.914,
+				"baseline_export_s": 68.509
+			},
+			{
+				"name": "Bench_Small_01",
+				"records": 1000,
+				"segments": 1,
+				"bytes": 66454,
+				"elapsed": 0.117,
+				"baseline_export_s": 0.044
+			},
+			{
+				"name": "Bench_Small_02",
+				"records": 2000,
+				"segments": 1,
+				"bytes": 135954,
+				"elapsed": 0.275,
+				"baseline_export_s": 0.12
+			},
+			{
+				"name": "Bench_Small_03",
+				"records": 3000,
+				"segments": 1,
+				"bytes": 205454,
+				"elapsed": 0.406,
+				"baseline_export_s": 0.181
+			},
+			{
+				"name": "Bench_Small_04",
+				"records": 4000,
+				"segments": 1,
+				"bytes": 274954,
+				"elapsed": 0.525,
+				"baseline_export_s": 0.273
+			},
+			{
+				"name": "Bench_Small_05",
+				"records": 5000,
+				"segments": 1,
+				"bytes": 344454,
+				"elapsed": 0.918,
+				"baseline_export_s": 0.384
+			},
+			{
+				"name": "Bench_Small_06",
+				"records": 6000,
+				"segments": 1,
+				"bytes": 413954,
+				"elapsed": 1.137,
+				"baseline_export_s": 0.555
+			},
+			{
+				"name": "Bench_Small_07",
+				"records": 7000,
+				"segments": 1,
+				"bytes": 483454,
+				"elapsed": 1.28,
+				"baseline_export_s": 0.716
+			},
+			{
+				"name": "Bench_Small_08",
+				"records": 8000,
+				"segments": 1,
+				"bytes": 552954,
+				"elapsed": 1.407,
+				"baseline_export_s": 0.896
+			},
+			{
+				"name": "Bench_Small_09",
+				"records": 9000,
+				"segments": 1,
+				"bytes": 622454,
+				"elapsed": 1.559,
+				"baseline_export_s": 1.387
+			},
+			{
+				"name": "Bench_Small_10",
+				"records": 10000,
+				"segments": 1,
+				"bytes": 691956,
+				"elapsed": 1.686,
+				"baseline_export_s": 1.459
+			},
+			{
+				"name": "Bench_Small_11",
+				"records": 11000,
+				"segments": 1,
+				"bytes": 764206,
+				"elapsed": 1.84,
+				"baseline_export_s": 1.722
+			},
+			{
+				"name": "Bench_Small_12",
+				"records": 12000,
+				"segments": 1,
+				"bytes": 836456,
+				"elapsed": 1.873,
+				"baseline_export_s": 2.016
+			},
+			{
+				"name": "Bench_Small_13",
+				"records": 13000,
+				"segments": 1,
+				"bytes": 908706,
+				"elapsed": 2.017,
+				"baseline_export_s": 3.151
+			},
+			{
+				"name": "Bench_Small_14",
+				"records": 14000,
+				"segments": 1,
+				"bytes": 980956,
+				"elapsed": 2.103,
+				"baseline_export_s": 2.899
+			},
+			{
+				"name": "Bench_Small_15",
+				"records": 15000,
+				"segments": 1,
+				"bytes": 1053206,
+				"elapsed": 2.234,
+				"baseline_export_s": 3.496
+			},
+			{
+				"name": "Bench_Small_16",
+				"records": 16000,
+				"segments": 1,
+				"bytes": 1125456,
+				"elapsed": 2.319,
+				"baseline_export_s": 3.6
+			},
+			{
+				"name": "Bench_Small_17",
+				"records": 17000,
+				"segments": 1,
+				"bytes": 1197706,
+				"elapsed": 2.451,
+				"baseline_export_s": 4.014
+			},
+			{
+				"name": "Bench_Small_18",
+				"records": 18000,
+				"segments": 1,
+				"bytes": 1269956,
+				"elapsed": 2.529,
+				"baseline_export_s": 4.373
+			},
+			{
+				"name": "Bench_Small_19",
+				"records": 19000,
+				"segments": 1,
+				"bytes": 1342206,
+				"elapsed": 2.632,
+				"baseline_export_s": 4.93
+			},
+			{
+				"name": "Bench_Small_20",
+				"records": 20000,
+				"segments": 1,
+				"bytes": 1414456,
+				"elapsed": 2.653,
+				"baseline_export_s": 5.302
+			},
+			{
+				"name": "Spike_Keys",
+				"records": 14,
+				"segments": 1,
+				"bytes": 1119,
+				"elapsed": 0.002,
+				"baseline_export_s": null
+			},
+			{
+				"name": "Spike_TextKey",
+				"records": 1,
+				"segments": 1,
+				"bytes": 24,
+				"elapsed": 0.001,
+				"baseline_export_s": null
+			}
+		]
+	},
+	"preemptive": {
+		"jobs": 10,
+		"preemptive": true,
+		"failure": null,
+		"records": 14,
+		"files": [
+			"000000000000.seg",
+			"000000000001.seg",
+			"000000000002.seg",
+			"000000000004.seg",
+			"000000000005.seg",
+			"000000000007.seg",
+			"000000000008.seg",
+			"000000000009.seg",
+			"000000000011.seg",
+			"000000000012.seg"
+		]
+	},
+	"free_space": {
+		"volume": "Macintosh HD",
+		"mount_point": "/",
+		"available": 41275260,
+		"capacity": 1948455240,
+		"datafile_bytes": 5689770496,
+		"df_k": [
+			"Filesystem     1024-blocks       Used Available Capacity iused     ifree %iused  Mounted on",
+			"/dev/disk3s1s1  1948455240   12341940  41275112    24%  458732 412751120    0%   /"
+		],
+		"error": ""
+	},
+	"summary": {
+		"options": "refused, 2 problems",
+		"blocked": "refused, by the gate",
+		"at_key": "refused, c07_at@ named",
+		"surrogate": "refused, c07_surrogate named",
+		"subset": "exported, NOT as expected",
+		"stopped": "failed, in phase export, no manifest",
+		"every_table": "exported, set read back, every segment matches shasum, 112 s",
+		"preemptive": "10 jobs, preemptive True"
+	}
+}

@@ -1,0 +1,545 @@
+{
+	"method": "__Check_Compare",
+	"when": "2026-10-02T00:33:08.440Z",
+	"compiled": true,
+	"cores": 10,
+	"refused": {
+		"verdict": "refused",
+		"next_step": "Fix the problems listed, then run the compare again.",
+		"problems": [
+			"There is no export set at \"\""
+		],
+		"cautions": [],
+		"failure": null,
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Compare 2026-10-01 18.33.08.txt",
+		"phases": [],
+		"blocked_tables": [],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Compare: refused",
+		"txt_line_1_ok": true,
+		"json_verdict": "refused",
+		"txt": [
+			"Compare: refused",
+			"Next step: Fix the problems listed, then run the compare again.",
+			"",
+			"Problems:",
+			"  - There is no export set at \"\"",
+			"Cautions:  (none)",
+			"",
+			"Export set: ",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 18:33:08   Ended: 18:33:08   Elapsed: 00:00:00",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    (defaults)",
+			"",
+			"Phases",
+			"",
+			"Tables: 0 of 27 in the structure",
+			"  No  Table  Expected  Actual  Matched  Missing  Extra  Changed  Duplicate  Unverified  Sequence expected  Sequence actual  Elapsed",
+			""
+		],
+		"log": [
+			"2026-10-01 18:33:08  Compare started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 18:33:08  options: {}",
+			"2026-10-01 18:33:08  problem: There is no export set at \"\"",
+			"2026-10-01 18:33:08  ended: refused",
+			""
+		],
+		"ok": true
+	},
+	"export": {
+		"verdict": "exported",
+		"export_set": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 18.33.09:",
+		"run_s": 221.357
+	},
+	"self_check": {
+		"verdict": "exact",
+		"next_step": "The copy is verified. Make a full backup and turn the log file back on.",
+		"problems": [],
+		"cautions": [],
+		"failure": null,
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 18.33.09:Compare 2026-10-01 18.36.51.txt",
+		"phases": [
+			{
+				"name": "compare",
+				"started": "2026-10-02T00:36:51.025Z",
+				"ended": "2026-10-02T00:44:12.458Z"
+			}
+		],
+		"blocked_tables": [],
+		"files": {
+			".txt": true,
+			".json": true,
+			".log": true
+		},
+		"bom": [],
+		"missing_keys": [],
+		"txt_line_1": "Compare: exact",
+		"txt_line_1_ok": true,
+		"json_verdict": "exact",
+		"txt": [
+			"Compare: exact",
+			"Next step: The copy is verified. Make a full backup and turn the log file back on.",
+			"",
+			"Problems:  (none)",
+			"Cautions:  (none)",
+			"",
+			"Export set: Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 18.33.09:",
+			"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"Started:    2026-10-01 18:36:51   Ended: 18:44:12   Elapsed: 00:07:21",
+			"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+			"Run by:     Dani Beaubien on Dani's Mac Studio",
+			"Options:    (defaults)",
+			"",
+			"Phases",
+			"  compare           00:07:21",
+			"",
+			"Tables: 27 of 27 in the structure",
+			"  No  Table           Expected   Actual  Matched  Missing  Extra  Changed  Duplicate  Unverified  Sequence expected  Sequence actual   Elapsed",
+			"   1  Table_1             8000     8000     8000        0      0        0          0           0             135400           135400  00:00:13",
+			"   2  Table_2             6000     6000     6000        0      0        0          0           0              86102            86102  00:00:06",
+			"   3  Bench_Wide       1997994  1997994  1997994        0      0        0          0           0            2000000          2000000  00:05:52",
+			"   4  Bench_Text       1000000  1000000  1000000        0      0        0          0           0                  0                0  00:07:20",
+			"   5  Bench_Blob         10000    10000    10000        0      0        0          0           0              10000            10000  00:00:33",
+			"   6  Bench_Small_01      1000     1000     1000        0      0        0          0           0               1000             1000  00:00:01",
+			"   7  Bench_Small_02      2000     2000     2000        0      0        0          0           0               2000             2000  00:00:02",
+			"   8  Bench_Small_03      3000     3000     3000        0      0        0          0           0               3000             3000  00:00:03",
+			"   9  Bench_Small_04      4000     4000     4000        0      0        0          0           0               4000             4000  00:00:04",
+			"  10  Bench_Small_05      5000     5000     5000        0      0        0          0           0               5000             5000  00:00:06",
+			"  11  Bench_Small_06      6000     6000     6000        0      0        0          0           0               6000             6000  00:00:06",
+			"  12  Bench_Small_07      7000     7000     7000        0      0        0          0           0            1007000          1007000  00:00:10",
+			"  13  Bench_Small_08      8000     8000     8000        0      0        0          0           0               8000             8000  00:00:11",
+			"  14  Bench_Small_09      9000     9000     9000        0      0        0          0           0               9000             9000  00:00:12",
+			"  15  Bench_Small_10     10000    10000    10000        0      0        0          0           0              10000            10000  00:00:13",
+			"  16  Bench_Small_11     11000    11000    11000        0      0        0          0           0              11000            11000  00:00:14",
+			"  17  Bench_Small_12     12000    12000    12000        0      0        0          0           0              12000            12000  00:00:15",
+			"  18  Bench_Small_13     13000    13000    13000        0      0        0          0           0              13000            13000  00:00:16",
+			"  19  Bench_Small_14     14000    14000    14000        0      0        0          0           0              14000            14000  00:00:16",
+			"  20  Bench_Small_15     15000    15000    15000        0      0        0          0           0              15000            15000  00:00:17",
+			"  21  Bench_Small_16     16000    16000    16000        0      0        0          0           0              16000            16000  00:00:18",
+			"  22  Bench_Small_17     17000    17000    17000        0      0        0          0           0              17000            17000  00:00:19",
+			"  23  Bench_Small_18     18000    18000    18000        0      0        0          0           0              18000            18000  00:00:20",
+			"  24  Bench_Small_19     19000    19000    19000        0      0        0          0           0              19000            19000  00:00:21",
+			"  25  Bench_Small_20     20000    20000    20000        0      0        0          0           0              20000            20000  00:00:22",
+			"  26  Spike_Keys            14       14       14        0      0        0          0           0                 76               76  00:00:00",
+			"  27  Spike_TextKey          1        1        1        0      0        0          0           0                  0                0  00:00:00",
+			""
+		],
+		"log": [
+			"2026-10-01 18:36:51  Compare started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+			"2026-10-01 18:36:51  options: {}",
+			"2026-10-01 18:36:51  phase 1 of 1: compare",
+			"2026-10-01 18:36:51  [Bench_Wide] started",
+			"2026-10-01 18:36:51  [Bench_Text] started",
+			"2026-10-01 18:42:36  [Bench_Small_20] started",
+			"2026-10-01 18:42:38  [Bench_Small_19] started",
+			"2026-10-01 18:42:39  [Bench_Small_18] started",
+			"2026-10-01 18:42:39  [Bench_Small_17] started",
+			"2026-10-01 18:42:39  [Bench_Small_16] started",
+			"2026-10-01 18:42:40  [Table_1] started",
+			"2026-10-01 18:42:41  [Bench_Small_15] started",
+			"2026-10-01 18:42:43  [Bench_Wide] done: 1997994 records, 00:05:52",
+			"2026-10-01 18:42:43  [Bench_Small_14] started",
+			"2026-10-01 18:42:53  [Table_1] done: 8000 records, 00:00:13",
+			"2026-10-01 18:42:53  [Bench_Small_13] started",
+			"2026-10-01 18:42:57  [Bench_Small_16] done: 16000 records, 00:00:18",
+			"2026-10-01 18:42:57  [Bench_Small_12] started",
+			"2026-10-01 18:42:58  [Bench_Small_15] done: 15000 records, 00:00:17",
+			"2026-10-01 18:42:58  [Bench_Small_11] started",
+			"2026-10-01 18:42:58  [Bench_Small_17] done: 17000 records, 00:00:19",
+			"2026-10-01 18:42:58  [Bench_Small_10] started",
+			"2026-10-01 18:42:58  [Bench_Small_20] done: 20000 records, 00:00:22",
+			"2026-10-01 18:42:58  [Bench_Small_09] started",
+			"2026-10-01 18:42:59  [Bench_Small_19] done: 19000 records, 00:00:21",
+			"2026-10-01 18:42:59  [Bench_Small_08] started",
+			"2026-10-01 18:42:59  [Bench_Small_14] done: 14000 records, 00:00:16",
+			"2026-10-01 18:42:59  [Bench_Small_18] done: 18000 records, 00:00:20",
+			"2026-10-01 18:42:59  [Bench_Blob] started",
+			"2026-10-01 18:42:59  [Bench_Small_07] started",
+			"2026-10-01 18:43:08  [Bench_Small_07] done: 7000 records, 00:00:10",
+			"2026-10-01 18:43:08  [Bench_Small_06] started",
+			"2026-10-01 18:43:09  [Bench_Small_13] done: 13000 records, 00:00:16",
+			"2026-10-01 18:43:09  [Bench_Small_05] started",
+			"2026-10-01 18:43:09  [Bench_Small_08] done: 8000 records, 00:00:11",
+			"2026-10-01 18:43:09  [Table_2] started",
+			"2026-10-01 18:43:10  [Bench_Small_09] done: 9000 records, 00:00:12",
+			"2026-10-01 18:43:10  [Bench_Small_04] started",
+			"2026-10-01 18:43:11  [Bench_Small_10] done: 10000 records, 00:00:13",
+			"2026-10-01 18:43:11  [Bench_Small_03] started",
+			"2026-10-01 18:43:12  [Bench_Small_11] done: 11000 records, 00:00:14",
+			"2026-10-01 18:43:12  [Bench_Small_02] started",
+			"2026-10-01 18:43:13  [Bench_Small_12] done: 12000 records, 00:00:15",
+			"2026-10-01 18:43:13  [Bench_Small_01] started",
+			"2026-10-01 18:43:14  [Bench_Small_01] done: 1000 records, 00:00:01",
+			"2026-10-01 18:43:14  [Spike_Keys] started",
+			"2026-10-01 18:43:14  [Spike_Keys] done: 14 records, 00:00:00",
+			"2026-10-01 18:43:14  [Spike_TextKey] started",
+			"2026-10-01 18:43:14  [Spike_TextKey] done: 1 records, 00:00:00",
+			"2026-10-01 18:43:15  [Bench_Small_03] done: 3000 records, 00:00:03",
+			"2026-10-01 18:43:15  [Bench_Small_05] done: 5000 records, 00:00:06",
+			"2026-10-01 18:43:15  [Bench_Small_02] done: 2000 records, 00:00:02",
+			"2026-10-01 18:43:15  [Bench_Small_04] done: 4000 records, 00:00:04",
+			"2026-10-01 18:43:15  [Bench_Small_06] done: 6000 records, 00:00:06",
+			"2026-10-01 18:43:15  [Table_2] done: 6000 records, 00:00:06",
+			"2026-10-01 18:43:32  [Bench_Blob] done: 10000 records, 00:00:33",
+			"2026-10-01 18:44:11  [Bench_Text] done: 1000000 records, 00:07:20",
+			"2026-10-01 18:44:12  ended: exact",
+			""
+		],
+		"discrepancies": [],
+		"ok": true
+	},
+	"bench": {
+		"run_s": 441.476,
+		"phases": [
+			{
+				"name": "compare",
+				"started": "2026-10-02T00:36:51.025Z",
+				"ended": "2026-10-02T00:44:12.458Z"
+			}
+		],
+		"baseline_serial_checksum_s": 379.503,
+		"tables": [
+			{
+				"name": "Table_1",
+				"records": 8000,
+				"elapsed": 12.806,
+				"baseline_checksum_s": 0.577
+			},
+			{
+				"name": "Table_2",
+				"records": 6000,
+				"elapsed": 5.76,
+				"baseline_checksum_s": 1.283
+			},
+			{
+				"name": "Bench_Wide",
+				"records": 1997994,
+				"elapsed": 352.137,
+				"baseline_checksum_s": 253.674
+			},
+			{
+				"name": "Bench_Text",
+				"records": 1000000,
+				"elapsed": 440.337,
+				"baseline_checksum_s": 110.482
+			},
+			{
+				"name": "Bench_Blob",
+				"records": 10000,
+				"elapsed": 33.16,
+				"baseline_checksum_s": 5.383
+			},
+			{
+				"name": "Bench_Small_01",
+				"records": 1000,
+				"elapsed": 1.269,
+				"baseline_checksum_s": 0.044
+			},
+			{
+				"name": "Bench_Small_02",
+				"records": 2000,
+				"elapsed": 2.148,
+				"baseline_checksum_s": 0.077
+			},
+			{
+				"name": "Bench_Small_03",
+				"records": 3000,
+				"elapsed": 3.293,
+				"baseline_checksum_s": 0.106
+			},
+			{
+				"name": "Bench_Small_04",
+				"records": 4000,
+				"elapsed": 4.247,
+				"baseline_checksum_s": 0.14
+			},
+			{
+				"name": "Bench_Small_05",
+				"records": 5000,
+				"elapsed": 5.595,
+				"baseline_checksum_s": 0.182
+			},
+			{
+				"name": "Bench_Small_06",
+				"records": 6000,
+				"elapsed": 6.335,
+				"baseline_checksum_s": 0.225
+			},
+			{
+				"name": "Bench_Small_07",
+				"records": 7000,
+				"elapsed": 9.623,
+				"baseline_checksum_s": 0.267
+			},
+			{
+				"name": "Bench_Small_08",
+				"records": 8000,
+				"elapsed": 10.796,
+				"baseline_checksum_s": 0.304
+			},
+			{
+				"name": "Bench_Small_09",
+				"records": 9000,
+				"elapsed": 11.888,
+				"baseline_checksum_s": 0.41
+			},
+			{
+				"name": "Bench_Small_10",
+				"records": 10000,
+				"elapsed": 12.972,
+				"baseline_checksum_s": 0.383
+			},
+			{
+				"name": "Bench_Small_11",
+				"records": 11000,
+				"elapsed": 14.317,
+				"baseline_checksum_s": 0.412
+			},
+			{
+				"name": "Bench_Small_12",
+				"records": 12000,
+				"elapsed": 15.311,
+				"baseline_checksum_s": 0.435
+			},
+			{
+				"name": "Bench_Small_13",
+				"records": 13000,
+				"elapsed": 16.215,
+				"baseline_checksum_s": 0.468
+			},
+			{
+				"name": "Bench_Small_14",
+				"records": 14000,
+				"elapsed": 15.852,
+				"baseline_checksum_s": 0.577
+			},
+			{
+				"name": "Bench_Small_15",
+				"records": 15000,
+				"elapsed": 16.772,
+				"baseline_checksum_s": 0.582
+			},
+			{
+				"name": "Bench_Small_16",
+				"records": 16000,
+				"elapsed": 17.754,
+				"baseline_checksum_s": 0.785
+			},
+			{
+				"name": "Bench_Small_17",
+				"records": 17000,
+				"elapsed": 18.913,
+				"baseline_checksum_s": 0.666
+			},
+			{
+				"name": "Bench_Small_18",
+				"records": 18000,
+				"elapsed": 19.82,
+				"baseline_checksum_s": 0.632
+			},
+			{
+				"name": "Bench_Small_19",
+				"records": 19000,
+				"elapsed": 21.033,
+				"baseline_checksum_s": 0.672
+			},
+			{
+				"name": "Bench_Small_20",
+				"records": 20000,
+				"elapsed": 22.03,
+				"baseline_checksum_s": 0.737
+			},
+			{
+				"name": "Spike_Keys",
+				"records": 14,
+				"elapsed": 0.018,
+				"baseline_checksum_s": null
+			},
+			{
+				"name": "Spike_TextKey",
+				"records": 1,
+				"elapsed": 0.002,
+				"baseline_checksum_s": null
+			}
+		]
+	},
+	"preemptive": {
+		"jobs": 10,
+		"preemptive": true,
+		"failure": null,
+		"row": {
+			"number": 5,
+			"name": "Bench_Blob",
+			"elapsed": 5.29,
+			"records": 10000,
+			"matched": 10000,
+			"missing": 0,
+			"extra": 0,
+			"changed": 0,
+			"duplicate": 0,
+			"unverified": 0
+		},
+		"discrepancies": 0,
+		"ok": true
+	},
+	"planted": {
+		"export": "exported",
+		"problems": [],
+		"errors": [],
+		"compare": {
+			"verdict": "notExact",
+			"next_step": "The target is unusable. Recreate it, then run the import again.",
+			"problems": [],
+			"cautions": [
+				"26 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_TextKey]"
+			],
+			"failure": null,
+			"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 18.44.19:Compare 2026-10-01 18.44.22.txt",
+			"phases": [
+				{
+					"name": "compare",
+					"started": "2026-10-02T00:44:22.189Z",
+					"ended": "2026-10-02T00:44:23.278Z"
+				}
+			],
+			"blocked_tables": [],
+			"files": {
+				".txt": true,
+				".json": true,
+				".log": true
+			},
+			"bom": [],
+			"missing_keys": [],
+			"txt_line_1": "Compare: notExact",
+			"txt_line_1_ok": true,
+			"json_verdict": "notExact",
+			"txt": [
+				"Compare: notExact",
+				"Next step: The target is unusable. Recreate it, then run the import again.",
+				"",
+				"Problems:  (none)",
+				"Cautions:",
+				"  - 26 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_TextKey]",
+				"",
+				"Export set: Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 18.44.19:",
+				"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+				"Started:    2026-10-01 18:44:22   Ended: 18:44:23   Elapsed: 00:00:01",
+				"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+				"Run by:     Dani Beaubien on Dani's Mac Studio",
+				"Options:    (defaults)",
+				"",
+				"Phases",
+				"  compare           00:00:01",
+				"",
+				"Tables: 1 of 27 in the structure",
+				"  No  Table       Expected  Actual  Matched  Missing  Extra  Changed  Duplicate  Unverified  Sequence expected  Sequence actual   Elapsed",
+				"  26  Spike_Keys        18      19       17        1      1        2          1           0                 80             1080  00:00:00",
+				""
+			],
+			"log": [
+				"2026-10-01 18:44:22  Compare started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+				"2026-10-01 18:44:22  options: {}",
+				"2026-10-01 18:44:22  caution: 26 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_01], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_TextKey]",
+				"2026-10-01 18:44:22  phase 1 of 1: compare",
+				"2026-10-01 18:44:22  [Spike_Keys] started",
+				"2026-10-01 18:44:22  [Spike_Keys] done: 19 records, 00:00:00",
+				"2026-10-01 18:44:23  ended: notExact",
+				""
+			]
+		},
+		"row": {
+			"number": 26,
+			"name": "Spike_Keys",
+			"elapsed": 0.001,
+			"matched": 17,
+			"missing": 1,
+			"extra": 1,
+			"changed": 2,
+			"duplicate": 1,
+			"unverified": 0,
+			"expected": 18,
+			"actual": 19,
+			"sequence_expected": 80,
+			"sequence_actual": 1080
+		},
+		"discrepancies": [
+			{
+				"table": "Spike_Keys",
+				"kind": "changed",
+				"key": "c09_case",
+				"fields": [
+					{
+						"number": 1,
+						"name": "PK"
+					}
+				]
+			},
+			{
+				"table": "Spike_Keys",
+				"kind": "changed",
+				"key": "c09_changed",
+				"fields": [
+					{
+						"number": 5,
+						"name": "F_Text"
+					}
+				]
+			},
+			{
+				"table": "Spike_Keys",
+				"kind": "duplicate",
+				"key": "c09_dup",
+				"records": 2
+			},
+			{
+				"table": "Spike_Keys",
+				"kind": "extra",
+				"key": "c09_extra"
+			},
+			{
+				"table": "Spike_Keys",
+				"kind": "missing",
+				"key": "c09_missing",
+				"segment": "000000000000.seg",
+				"position": 13
+			},
+			{
+				"table": "Spike_Keys",
+				"kind": "record_count",
+				"expected": 18,
+				"actual": 19
+			},
+			{
+				"table": "Spike_Keys",
+				"kind": "sequence_number",
+				"expected": 80,
+				"actual": 1080
+			}
+		],
+		"kinds": {
+			"missing": 1,
+			"extra": 1,
+			"changed": 2,
+			"duplicate": 1,
+			"record_count": 1,
+			"sequence_number": 1
+		},
+		"ok": false,
+		"restored": true
+	},
+	"summary": {
+		"refused": "refused, run report next to the datafile",
+		"self_check": "exact, every table, run report in the set, 441 s against 380 s for MD5",
+		"preemptive": "10 jobs, preemptive True, every record matched",
+		"planted": "notExact, NOT as expected: {\"missing\":1,\"extra\":1,\"changed\":2,\"duplicate\":1,\"record_count\":1,\"sequence_number\":1}",
+		"restored": true
+	}
+}

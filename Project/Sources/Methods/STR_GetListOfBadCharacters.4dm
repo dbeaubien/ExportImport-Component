@@ -4,32 +4,23 @@
 // as per: https://www.w3.org/TR/xml/#charsets
 // Valid Chars ::= #x9 | #xA | #xD | [#x20-#xD7FF] | [#xE000-#xFFFD] | [#x10000-#x10FFFF]
 //
+// So a bad character (spec 09) is a control character other than tab, LF
+// and CR, U+FFFE, U+FFFF, or an unpaired surrogate: ICU reads a surrogate
+// pair as one code point, so [\x{D800}-\x{DFFF}] matches only an unpaired
+// one (ticket 02). Each is {pos; char_code}, in order, where pos counts
+// characters as Length does.
+//
 #DECLARE($input : Text)->$bad_character_list : Collection
 // ----------------------------------------------------
 ASSERT:C1129(Count parameters:C259=1)
 $bad_character_list:=[]
 
-var $is_bad : Boolean
-var $i; $char_code : Integer
-For ($i; 1; Length:C16($input))
-	$char_code:=Character code:C91($input[[$i]])
-	$is_bad:=False:C215
-	
-	Case of 
-		: ($char_code=65534)  // bad character for sure
-			$is_bad:=True:C214
-		: ($char_code>=Space:K15:42)  // 0x20 or above
-		: ($char_code=Tab:K15:37)
-		: ($char_code=Carriage return:K15:38)
-		: ($char_code=Line feed:K15:40)
-		Else 
-			$is_bad:=True:C214
-	End case 
-	
-	If ($is_bad)
-		$bad_character_list.push({\
-			pos: $i; \
-			char_code: $char_code\
-			})
-	End if 
-End for 
+var $start; $pos; $len : Integer
+$start:=1
+While (Match regex("[\\x{0}-\\x{8}\\x{B}\\x{C}\\x{E}-\\x{1F}\\x{D800}-\\x{DFFF}\\x{FFFE}\\x{FFFF}]"; $input; $start; $pos; $len))
+	$bad_character_list.push({\
+		pos: $pos; \
+		char_code: Character code($input[[$pos]])\
+		})
+	$start:=$pos+$len
+End while

@@ -1,0 +1,666 @@
+{
+	"method": "__Check_Planner",
+	"when": "2026-10-01T20:42:12.930Z",
+	"compiled": true,
+	"checks": [
+		{
+			"name": "spec 10's example: 30%, 25%, 20% and 25% of the cost on 10 workers",
+			"expected": [
+				3,
+				3,
+				2,
+				3
+			],
+			"actual": [
+				3,
+				3,
+				2,
+				3
+			],
+			"pass": true
+		},
+		{
+			"name": "a table under 100,000 records",
+			"expected": [
+				1
+			],
+			"actual": [
+				1
+			],
+			"pass": true
+		},
+		{
+			"name": "the segment count caps the job count",
+			"expected": [
+				2
+			],
+			"actual": [
+				2
+			],
+			"pass": true
+		},
+		{
+			"name": "segments(): runs of segments by record count, and one job for a table with none",
+			"expected": [
+				{
+					"start": 0,
+					"expected": 300,
+					"low": null,
+					"high": 301,
+					"segments": 3
+				},
+				{
+					"start": 300,
+					"expected": 400,
+					"low": 301,
+					"high": 701,
+					"segments": 4
+				},
+				{
+					"start": 700,
+					"expected": 300,
+					"low": 701,
+					"high": null,
+					"segments": 3
+				},
+				{
+					"start": 0,
+					"expected": 0,
+					"low": null,
+					"high": null,
+					"segments": 0
+				}
+			],
+			"actual": [
+				{
+					"start": 0,
+					"expected": 300,
+					"low": null,
+					"high": 301,
+					"segments": 3
+				},
+				{
+					"start": 300,
+					"expected": 400,
+					"low": 301,
+					"high": 701,
+					"segments": 4
+				},
+				{
+					"start": 700,
+					"expected": 300,
+					"low": 701,
+					"high": null,
+					"segments": 3
+				},
+				{
+					"start": 0,
+					"expected": 0,
+					"low": null,
+					"high": null,
+					"segments": 0
+				}
+			],
+			"pass": true
+		},
+		{
+			"name": "the merge: counts add up, findings in key order, elapsed from first start to last end",
+			"expected": {
+				"row": {
+					"number": 9,
+					"name": "Made up",
+					"elapsed": 3.5,
+					"records": 12,
+					"blockers": 3,
+					"checks": {
+						"a": 2,
+						"b": 1
+					}
+				},
+				"findings": [
+					{
+						"key": 1
+					},
+					{
+						"key": 6
+					}
+				]
+			},
+			"actual": {
+				"row": {
+					"number": 9,
+					"name": "Made up",
+					"elapsed": 3.5,
+					"records": 12,
+					"blockers": 3,
+					"checks": {
+						"a": 2,
+						"b": 1
+					}
+				},
+				"findings": [
+					{
+						"key": 1
+					},
+					{
+						"key": 6
+					}
+				]
+			},
+			"pass": true
+		},
+		{
+			"name": "source() on [Spike_Keys], cut into 2 to 12 jobs",
+			"keys": [
+				"c04_10",
+				"c04_11",
+				"c04_12",
+				"c04_12@",
+				"c04_13",
+				"c04_14",
+				"c04_15",
+				"c04_16",
+				"c04_17",
+				"c04_18",
+				"c04_19",
+				"c04_20",
+				"c04_21",
+				"c04_22",
+				"c04_23",
+				"c04_24",
+				"c04_25",
+				"c04_25@",
+				"c04_26",
+				"c04_27",
+				"c04_28",
+				"c04_29",
+				"c04_30",
+				"c04_31",
+				"c04_32",
+				"c04_33",
+				"c04_34",
+				"c04_35",
+				"c04_36",
+				"c04_37",
+				"c04_38",
+				"c04_38@",
+				"c04_39",
+				"c04_40",
+				"c04_41",
+				"c04_42",
+				"c04_43",
+				"c04_44",
+				"c04_45",
+				"c04_46",
+				"c04_47",
+				"c04_48",
+				"c04_49",
+				"w10_blank",
+				"w10_set",
+				"w11_off",
+				"w11_on",
+				"w12_only_key"
+			],
+			"runs": [
+				{
+					"n": 2,
+					"cut_has_at": false,
+					"jobs": 2,
+					"bounds": [
+						[
+							null,
+							"c04_32",
+							24
+						],
+						[
+							"c04_32",
+							null,
+							24
+						]
+					],
+					"at_inside": true,
+					"errors": [],
+					"same": true,
+					"pass": true
+				},
+				{
+					"n": 3,
+					"cut_has_at": false,
+					"jobs": 3,
+					"bounds": [
+						[
+							null,
+							"c04_25",
+							16
+						],
+						[
+							"c04_25",
+							"c04_39",
+							16
+						],
+						[
+							"c04_39",
+							null,
+							16
+						]
+					],
+					"at_inside": true,
+					"errors": [],
+					"same": true,
+					"pass": true
+				},
+				{
+					"n": 4,
+					"cut_has_at": false,
+					"jobs": 4,
+					"bounds": [
+						[
+							null,
+							"c04_21",
+							12
+						],
+						[
+							"c04_21",
+							"c04_32",
+							12
+						],
+						[
+							"c04_32",
+							"c04_43",
+							12
+						],
+						[
+							"c04_43",
+							null,
+							12
+						]
+					],
+					"at_inside": true,
+					"errors": [],
+					"same": true,
+					"pass": true
+				},
+				{
+					"n": 5,
+					"cut_has_at": false,
+					"jobs": 5,
+					"bounds": [
+						[
+							null,
+							"c04_18",
+							9
+						],
+						[
+							"c04_18",
+							"c04_27",
+							10
+						],
+						[
+							"c04_27",
+							"c04_36",
+							9
+						],
+						[
+							"c04_36",
+							"c04_45",
+							10
+						],
+						[
+							"c04_45",
+							null,
+							10
+						]
+					],
+					"at_inside": true,
+					"errors": [],
+					"same": true,
+					"pass": true
+				},
+				{
+					"n": 6,
+					"cut_has_at": false,
+					"jobs": 6,
+					"bounds": [
+						[
+							null,
+							"c04_17",
+							8
+						],
+						[
+							"c04_17",
+							"c04_25",
+							8
+						],
+						[
+							"c04_25",
+							"c04_32",
+							8
+						],
+						[
+							"c04_32",
+							"c04_39",
+							8
+						],
+						[
+							"c04_39",
+							"c04_47",
+							8
+						],
+						[
+							"c04_47",
+							null,
+							8
+						]
+					],
+					"at_inside": true,
+					"errors": [],
+					"same": true,
+					"pass": true
+				},
+				{
+					"n": 7,
+					"cut_has_at": false,
+					"jobs": 7,
+					"bounds": [
+						[
+							null,
+							"c04_15",
+							6
+						],
+						[
+							"c04_15",
+							"c04_22",
+							7
+						],
+						[
+							"c04_22",
+							"c04_28",
+							7
+						],
+						[
+							"c04_28",
+							"c04_35",
+							7
+						],
+						[
+							"c04_35",
+							"c04_41",
+							7
+						],
+						[
+							"c04_41",
+							"c04_48",
+							7
+						],
+						[
+							"c04_48",
+							null,
+							7
+						]
+					],
+					"at_inside": true,
+					"errors": [],
+					"same": true,
+					"pass": true
+				},
+				{
+					"n": 8,
+					"cut_has_at": false,
+					"jobs": 8,
+					"bounds": [
+						[
+							null,
+							"c04_15",
+							6
+						],
+						[
+							"c04_15",
+							"c04_21",
+							6
+						],
+						[
+							"c04_21",
+							"c04_26",
+							6
+						],
+						[
+							"c04_26",
+							"c04_32",
+							6
+						],
+						[
+							"c04_32",
+							"c04_38",
+							6
+						],
+						[
+							"c04_38",
+							"c04_43",
+							6
+						],
+						[
+							"c04_43",
+							"c04_49",
+							6
+						],
+						[
+							"c04_49",
+							null,
+							6
+						]
+					],
+					"at_inside": true,
+					"errors": [],
+					"same": true,
+					"pass": true
+				},
+				{
+					"n": 9,
+					"cut_has_at": false,
+					"jobs": 9,
+					"bounds": [
+						[
+							null,
+							"c04_14",
+							5
+						],
+						[
+							"c04_14",
+							"c04_19",
+							5
+						],
+						[
+							"c04_19",
+							"c04_25",
+							6
+						],
+						[
+							"c04_25",
+							"c04_29",
+							5
+						],
+						[
+							"c04_29",
+							"c04_34",
+							5
+						],
+						[
+							"c04_34",
+							"c04_39",
+							6
+						],
+						[
+							"c04_39",
+							"c04_44",
+							5
+						],
+						[
+							"c04_44",
+							"c04_49",
+							5
+						],
+						[
+							"c04_49",
+							null,
+							6
+						]
+					],
+					"at_inside": true,
+					"errors": [],
+					"same": true,
+					"pass": true
+				},
+				{
+					"n": 10,
+					"cut_has_at": false,
+					"jobs": 10,
+					"bounds": [
+						[
+							null,
+							"c04_13",
+							4
+						],
+						[
+							"c04_13",
+							"c04_18",
+							5
+						],
+						[
+							"c04_18",
+							"c04_23",
+							5
+						],
+						[
+							"c04_23",
+							"c04_27",
+							5
+						],
+						[
+							"c04_27",
+							"c04_32",
+							5
+						],
+						[
+							"c04_32",
+							"c04_36",
+							4
+						],
+						[
+							"c04_36",
+							"c04_40",
+							5
+						],
+						[
+							"c04_40",
+							"c04_45",
+							5
+						],
+						[
+							"c04_45",
+							"w10_blank",
+							5
+						],
+						[
+							"w10_blank",
+							null,
+							5
+						]
+					],
+					"at_inside": true,
+					"errors": [],
+					"same": true,
+					"pass": true
+				},
+				{
+					"n": 11,
+					"cut_has_at": true,
+					"jobs": 1,
+					"bounds": [
+						[
+							null,
+							null,
+							48
+						]
+					],
+					"at_inside": false,
+					"errors": [],
+					"same": true,
+					"pass": true
+				},
+				{
+					"n": 12,
+					"cut_has_at": false,
+					"jobs": 12,
+					"bounds": [
+						[
+							null,
+							"c04_13",
+							4
+						],
+						[
+							"c04_13",
+							"c04_17",
+							4
+						],
+						[
+							"c04_17",
+							"c04_21",
+							4
+						],
+						[
+							"c04_21",
+							"c04_25",
+							4
+						],
+						[
+							"c04_25",
+							"c04_28",
+							4
+						],
+						[
+							"c04_28",
+							"c04_32",
+							4
+						],
+						[
+							"c04_32",
+							"c04_36",
+							4
+						],
+						[
+							"c04_36",
+							"c04_39",
+							4
+						],
+						[
+							"c04_39",
+							"c04_43",
+							4
+						],
+						[
+							"c04_43",
+							"c04_47",
+							4
+						],
+						[
+							"c04_47",
+							"w10_set",
+							4
+						],
+						[
+							"w10_set",
+							null,
+							4
+						]
+					],
+					"at_inside": true,
+					"errors": [],
+					"same": true,
+					"pass": true
+				}
+			],
+			"pass": true
+		}
+	],
+	"failed": []
+}

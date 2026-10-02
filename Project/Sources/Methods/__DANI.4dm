@@ -1,9 +1,16 @@
 //%attributes = {}
 // Export_Import_Dialog
-Progress QUIT(0)
+//Progress QUIT(0)
+
+If (Caps lock down:C547)
+	cs:C1710.ExportPass.new({tables: [Table:C252(->[Bench_Small_01:6])]}).run()
+End if 
+
+__Bench_Baseline
+
 
 // IMPORT
-If (True:C214)
+If (False:C215)
 	
 	var $importFromFolder_platformPath : Text
 	$importFromFolder_platformPath:=Select folder:C670("Select Folder that contains 'Data' Export folder"; 1234)

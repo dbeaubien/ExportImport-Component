@@ -1,0 +1,552 @@
+{
+	"pass": "export",
+	"verdict": "exported",
+	"next_step": "The export set is complete. Switch to a new target datafile, then run the import.",
+	"problems": [],
+	"cautions": [],
+	"datafile": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+	"export_set": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.38.03:",
+	"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.38.03:Export 2026-10-01 16.38.03.txt",
+	"started": "2026-10-01T22:38:03.210Z",
+	"ended": "2026-10-01T22:39:54.832Z",
+	"component_version": "2026.r4 (build 20261001)",
+	"app_version": "2102 (build 100579)",
+	"machine": "Dani's Mac Studio",
+	"os_user": "Dani Beaubien",
+	"options": {},
+	"phases": [
+		{
+			"name": "gate",
+			"started": "2026-10-01T22:38:03.266Z",
+			"ended": "2026-10-01T22:38:09.919Z"
+		},
+		{
+			"name": "export",
+			"started": "2026-10-01T22:38:09.919Z",
+			"ended": "2026-10-01T22:39:54.829Z"
+		},
+		{
+			"name": "manifest",
+			"started": "2026-10-01T22:39:54.829Z",
+			"ended": "2026-10-01T22:39:54.832Z"
+		}
+	],
+	"failure": null,
+	"tables": [
+		{
+			"number": 1,
+			"name": "Table_1",
+			"elapsed": 1.912,
+			"segments": 1,
+			"bytes": 1373786,
+			"records": 8000,
+			"sequence_number": 135400
+		},
+		{
+			"number": 2,
+			"name": "Table_2",
+			"elapsed": 1.01,
+			"segments": 1,
+			"bytes": 36379572,
+			"records": 6000,
+			"sequence_number": 86102
+		},
+		{
+			"number": 3,
+			"name": "Bench_Wide",
+			"elapsed": 90.5,
+			"segments": 18,
+			"bytes": 1028801147,
+			"records": 1997994,
+			"sequence_number": 2000000
+		},
+		{
+			"number": 4,
+			"name": "Bench_Text",
+			"elapsed": 100.173,
+			"segments": 8,
+			"bytes": 790609757,
+			"records": 1000000,
+			"sequence_number": 0
+		},
+		{
+			"number": 5,
+			"name": "Bench_Blob",
+			"elapsed": 10.914,
+			"segments": 19,
+			"bytes": 1935054711,
+			"records": 10000,
+			"sequence_number": 10000
+		},
+		{
+			"number": 6,
+			"name": "Bench_Small_01",
+			"elapsed": 0.117,
+			"segments": 1,
+			"bytes": 66454,
+			"records": 1000,
+			"sequence_number": 1000
+		},
+		{
+			"number": 7,
+			"name": "Bench_Small_02",
+			"elapsed": 0.275,
+			"segments": 1,
+			"bytes": 135954,
+			"records": 2000,
+			"sequence_number": 2000
+		},
+		{
+			"number": 8,
+			"name": "Bench_Small_03",
+			"elapsed": 0.406,
+			"segments": 1,
+			"bytes": 205454,
+			"records": 3000,
+			"sequence_number": 3000
+		},
+		{
+			"number": 9,
+			"name": "Bench_Small_04",
+			"elapsed": 0.525,
+			"segments": 1,
+			"bytes": 274954,
+			"records": 4000,
+			"sequence_number": 4000
+		},
+		{
+			"number": 10,
+			"name": "Bench_Small_05",
+			"elapsed": 0.918,
+			"segments": 1,
+			"bytes": 344454,
+			"records": 5000,
+			"sequence_number": 5000
+		},
+		{
+			"number": 11,
+			"name": "Bench_Small_06",
+			"elapsed": 1.137,
+			"segments": 1,
+			"bytes": 413954,
+			"records": 6000,
+			"sequence_number": 6000
+		},
+		{
+			"number": 12,
+			"name": "Bench_Small_07",
+			"elapsed": 1.28,
+			"segments": 1,
+			"bytes": 483454,
+			"records": 7000,
+			"sequence_number": 1007000
+		},
+		{
+			"number": 13,
+			"name": "Bench_Small_08",
+			"elapsed": 1.407,
+			"segments": 1,
+			"bytes": 552954,
+			"records": 8000,
+			"sequence_number": 8000
+		},
+		{
+			"number": 14,
+			"name": "Bench_Small_09",
+			"elapsed": 1.559,
+			"segments": 1,
+			"bytes": 622454,
+			"records": 9000,
+			"sequence_number": 9000
+		},
+		{
+			"number": 15,
+			"name": "Bench_Small_10",
+			"elapsed": 1.686,
+			"segments": 1,
+			"bytes": 691956,
+			"records": 10000,
+			"sequence_number": 10000
+		},
+		{
+			"number": 16,
+			"name": "Bench_Small_11",
+			"elapsed": 1.84,
+			"segments": 1,
+			"bytes": 764206,
+			"records": 11000,
+			"sequence_number": 11000
+		},
+		{
+			"number": 17,
+			"name": "Bench_Small_12",
+			"elapsed": 1.873,
+			"segments": 1,
+			"bytes": 836456,
+			"records": 12000,
+			"sequence_number": 12000
+		},
+		{
+			"number": 18,
+			"name": "Bench_Small_13",
+			"elapsed": 2.017,
+			"segments": 1,
+			"bytes": 908706,
+			"records": 13000,
+			"sequence_number": 13000
+		},
+		{
+			"number": 19,
+			"name": "Bench_Small_14",
+			"elapsed": 2.103,
+			"segments": 1,
+			"bytes": 980956,
+			"records": 14000,
+			"sequence_number": 14000
+		},
+		{
+			"number": 20,
+			"name": "Bench_Small_15",
+			"elapsed": 2.234,
+			"segments": 1,
+			"bytes": 1053206,
+			"records": 15000,
+			"sequence_number": 15000
+		},
+		{
+			"number": 21,
+			"name": "Bench_Small_16",
+			"elapsed": 2.319,
+			"segments": 1,
+			"bytes": 1125456,
+			"records": 16000,
+			"sequence_number": 16000
+		},
+		{
+			"number": 22,
+			"name": "Bench_Small_17",
+			"elapsed": 2.451,
+			"segments": 1,
+			"bytes": 1197706,
+			"records": 17000,
+			"sequence_number": 17000
+		},
+		{
+			"number": 23,
+			"name": "Bench_Small_18",
+			"elapsed": 2.529,
+			"segments": 1,
+			"bytes": 1269956,
+			"records": 18000,
+			"sequence_number": 18000
+		},
+		{
+			"number": 24,
+			"name": "Bench_Small_19",
+			"elapsed": 2.632,
+			"segments": 1,
+			"bytes": 1342206,
+			"records": 19000,
+			"sequence_number": 19000
+		},
+		{
+			"number": 25,
+			"name": "Bench_Small_20",
+			"elapsed": 2.653,
+			"segments": 1,
+			"bytes": 1414456,
+			"records": 20000,
+			"sequence_number": 20000
+		},
+		{
+			"number": 26,
+			"name": "Spike_Keys",
+			"elapsed": 0.002,
+			"segments": 1,
+			"bytes": 1119,
+			"records": 14,
+			"sequence_number": 76
+		},
+		{
+			"number": 27,
+			"name": "Spike_TextKey",
+			"elapsed": 0.001,
+			"segments": 1,
+			"bytes": 24,
+			"records": 1,
+			"sequence_number": 0
+		}
+	],
+	"health_check": {
+		"pass": "healthCheck",
+		"verdict": "passed",
+		"next_step": "No blockers found. Run the export.",
+		"problems": [],
+		"cautions": [],
+		"datafile": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+		"export_set": null,
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.38.03:Health check 2026-10-01 16.38.03.txt",
+		"started": "2026-10-01T22:38:03.267Z",
+		"ended": "2026-10-01T22:38:09.915Z",
+		"component_version": "2026.r4 (build 20261001)",
+		"app_version": "2102 (build 100579)",
+		"machine": "Dani's Mac Studio",
+		"os_user": "Dani Beaubien",
+		"options": {},
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T22:38:03.269Z",
+				"ended": "2026-10-01T22:38:09.915Z"
+			}
+		],
+		"failure": null,
+		"tables": [
+			{
+				"number": 1,
+				"name": "Table_1",
+				"elapsed": 0.076,
+				"records": 8000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 2,
+				"name": "Table_2",
+				"elapsed": 0.029,
+				"records": 6000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 3,
+				"name": "Bench_Wide",
+				"elapsed": 5.579,
+				"records": 1997994,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 4,
+				"name": "Bench_Text",
+				"elapsed": 1.4,
+				"records": 1000000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 5,
+				"name": "Bench_Blob",
+				"elapsed": 0.04,
+				"records": 10000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 6,
+				"name": "Bench_Small_01",
+				"elapsed": 0.008,
+				"records": 1000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 7,
+				"name": "Bench_Small_02",
+				"elapsed": 0.007,
+				"records": 2000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 8,
+				"name": "Bench_Small_03",
+				"elapsed": 0.015,
+				"records": 3000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 9,
+				"name": "Bench_Small_04",
+				"elapsed": 0.015,
+				"records": 4000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 10,
+				"name": "Bench_Small_05",
+				"elapsed": 0.014,
+				"records": 5000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 11,
+				"name": "Bench_Small_06",
+				"elapsed": 0.019,
+				"records": 6000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 12,
+				"name": "Bench_Small_07",
+				"elapsed": 0.019,
+				"records": 7000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 13,
+				"name": "Bench_Small_08",
+				"elapsed": 0.019,
+				"records": 8000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 14,
+				"name": "Bench_Small_09",
+				"elapsed": 0.041,
+				"records": 9000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 15,
+				"name": "Bench_Small_10",
+				"elapsed": 0.024,
+				"records": 10000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 16,
+				"name": "Bench_Small_11",
+				"elapsed": 0.029,
+				"records": 11000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 17,
+				"name": "Bench_Small_12",
+				"elapsed": 0.027,
+				"records": 12000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 18,
+				"name": "Bench_Small_13",
+				"elapsed": 0.028,
+				"records": 13000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 19,
+				"name": "Bench_Small_14",
+				"elapsed": 0.09,
+				"records": 14000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 20,
+				"name": "Bench_Small_15",
+				"elapsed": 0.098,
+				"records": 15000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 21,
+				"name": "Bench_Small_16",
+				"elapsed": 0.094,
+				"records": 16000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 22,
+				"name": "Bench_Small_17",
+				"elapsed": 0.098,
+				"records": 17000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 23,
+				"name": "Bench_Small_18",
+				"elapsed": 0.09,
+				"records": 18000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 24,
+				"name": "Bench_Small_19",
+				"elapsed": 0.103,
+				"records": 19000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 25,
+				"name": "Bench_Small_20",
+				"elapsed": 0.098,
+				"records": 20000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 26,
+				"name": "Spike_Keys",
+				"elapsed": 0.007,
+				"records": 14,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 27,
+				"name": "Spike_TextKey",
+				"elapsed": 0,
+				"records": 1,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			}
+		],
+		"findings": [],
+		"removals": []
+	}
+}

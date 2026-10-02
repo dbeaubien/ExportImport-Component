@@ -1,0 +1,965 @@
+{
+	"method": "__Check_Scan",
+	"when": "2026-10-01T21:47:33.434Z",
+	"compiled": true,
+	"cores": 10,
+	"planted": [
+		{
+			"key": "c05_control",
+			"field": "F_Text",
+			"length": 3,
+			"codes": [
+				97,
+				1,
+				98
+			],
+			"stored_codes": [
+				97,
+				1,
+				98
+			]
+		},
+		{
+			"key": "c05_fffe",
+			"field": "F_Text",
+			"length": 3,
+			"codes": [
+				97,
+				65534,
+				98
+			],
+			"stored_codes": [
+				97,
+				65534,
+				98
+			]
+		},
+		{
+			"key": "c05_ffff",
+			"field": "F_Text",
+			"length": 2,
+			"codes": [
+				97,
+				65535
+			],
+			"stored_codes": [
+				97,
+				65535
+			]
+		},
+		{
+			"key": "c05_high",
+			"field": "F_Text",
+			"length": 3,
+			"codes": [
+				97,
+				55296,
+				98
+			],
+			"stored_codes": [
+				97,
+				55296,
+				98
+			]
+		},
+		{
+			"key": "c05_low",
+			"field": "F_Text",
+			"length": 3,
+			"codes": [
+				97,
+				56320,
+				98
+			],
+			"stored_codes": [
+				97,
+				56320,
+				98
+			]
+		},
+		{
+			"key": "c05_after_pair",
+			"field": "F_Text",
+			"length": 5,
+			"codes": [
+				55357,
+				56832,
+				31,
+				120,
+				11
+			],
+			"stored_codes": [
+				55357,
+				56832,
+				31,
+				120,
+				11
+			]
+		},
+		{
+			"key": "c05_alpha",
+			"field": "Alt_Code",
+			"length": 10,
+			"codes": [
+				99,
+				48,
+				53,
+				95,
+				97,
+				108,
+				112,
+				104,
+				97,
+				27
+			],
+			"stored_codes": [
+				99,
+				48,
+				53,
+				95,
+				97,
+				108,
+				112,
+				104,
+				97,
+				27
+			]
+		},
+		{
+			"key": "c05_space_uuid",
+			"field": "Auto_UUID",
+			"length": 0,
+			"codes": [],
+			"stored_codes": [
+				50,
+				48,
+				50,
+				48,
+				50,
+				48,
+				50,
+				48,
+				50,
+				48,
+				50,
+				48,
+				50,
+				48,
+				50,
+				48,
+				50,
+				48,
+				50,
+				48,
+				50,
+				48,
+				50,
+				48,
+				50,
+				48,
+				50,
+				48,
+				50,
+				48,
+				50,
+				48
+			]
+		},
+		{
+			"key": "c05_clean",
+			"field": "F_Text",
+			"length": 14,
+			"codes": [
+				116,
+				97,
+				98,
+				9,
+				108,
+				102,
+				10,
+				99,
+				114,
+				13,
+				55357,
+				56832,
+				233,
+				65533
+			],
+			"stored_codes": [
+				116,
+				97,
+				98,
+				9,
+				108,
+				102,
+				10,
+				99,
+				114,
+				13,
+				55357,
+				56832,
+				233,
+				65533
+			]
+		}
+	],
+	"scan": {
+		"verdict": "warnings",
+		"next_step": "Remove the bad characters with the fixer, then run the export: it refuses a lone surrogate.",
+		"cautions": [
+			"2 values hold a lone surrogate, which the export refuses until the fixer removes it"
+		],
+		"failure": null,
+		"rows": [
+			{
+				"number": 26,
+				"name": "Spike_Keys",
+				"elapsed": 0,
+				"records": 14,
+				"blockers": 0,
+				"damage": 10,
+				"checks": {
+					"bad_character": 5,
+					"lone_surrogate": 2,
+					"space_uuid": 3
+				}
+			}
+		],
+		"planted": [
+			{
+				"key": "c05_control",
+				"expected": "bad_character",
+				"found": [
+					{
+						"table": "Spike_Keys",
+						"key": "c05_control",
+						"field": "F_Text",
+						"kind": "bad_character",
+						"value": "\"a\\u0001b\"",
+						"characters": [
+							{
+								"pos": 2,
+								"char_code": 1
+							}
+						]
+					}
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_fffe",
+				"expected": "bad_character",
+				"found": [
+					{
+						"table": "Spike_Keys",
+						"key": "c05_fffe",
+						"field": "F_Text",
+						"kind": "bad_character",
+						"value": "\"a\\uFFFEb\"",
+						"characters": [
+							{
+								"pos": 2,
+								"char_code": 65534
+							}
+						]
+					}
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_ffff",
+				"expected": "bad_character",
+				"found": [
+					{
+						"table": "Spike_Keys",
+						"key": "c05_ffff",
+						"field": "F_Text",
+						"kind": "bad_character",
+						"value": "\"a\\uFFFF\"",
+						"characters": [
+							{
+								"pos": 2,
+								"char_code": 65535
+							}
+						]
+					}
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_high",
+				"expected": "lone_surrogate",
+				"found": [
+					{
+						"table": "Spike_Keys",
+						"key": "c05_high",
+						"field": "F_Text",
+						"kind": "lone_surrogate",
+						"value": "\"a\\uD800b\"",
+						"characters": [
+							{
+								"pos": 2,
+								"char_code": 55296
+							}
+						]
+					}
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_low",
+				"expected": "lone_surrogate",
+				"found": [
+					{
+						"table": "Spike_Keys",
+						"key": "c05_low",
+						"field": "F_Text",
+						"kind": "lone_surrogate",
+						"value": "\"a\\uDC00b\"",
+						"characters": [
+							{
+								"pos": 2,
+								"char_code": 56320
+							}
+						]
+					}
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_after_pair",
+				"expected": "bad_character",
+				"found": [
+					{
+						"table": "Spike_Keys",
+						"key": "c05_after_pair",
+						"field": "F_Text",
+						"kind": "bad_character",
+						"value": "\"😀\\u001Fx\\u000B\"",
+						"characters": [
+							{
+								"pos": 3,
+								"char_code": 31
+							},
+							{
+								"pos": 5,
+								"char_code": 11
+							}
+						]
+					}
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_alpha",
+				"expected": "bad_character",
+				"found": [
+					{
+						"table": "Spike_Keys",
+						"key": "c05_alpha",
+						"field": "Alt_Code",
+						"kind": "bad_character",
+						"value": "\"c05_alpha\\u001B\"",
+						"characters": [
+							{
+								"pos": 10,
+								"char_code": 27
+							}
+						]
+					}
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_space_uuid",
+				"expected": "space_uuid",
+				"found": [
+					{
+						"table": "Spike_Keys",
+						"key": "c05_space_uuid",
+						"field": "Auto_UUID",
+						"kind": "space_uuid"
+					}
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_clean",
+				"expected": null,
+				"found": [],
+				"ok": true
+			}
+		],
+		"ok": true,
+		"others": [
+			{
+				"table": "Spike_Keys",
+				"key": "w10_blank",
+				"field": "Auto_UUID",
+				"kind": "space_uuid"
+			},
+			{
+				"table": "Spike_Keys",
+				"key": "w12_only_key",
+				"field": "Auto_UUID",
+				"kind": "space_uuid"
+			}
+		],
+		"files": {
+			"verdict": "warnings",
+			"next_step": "Remove the bad characters with the fixer, then run the export: it refuses a lone surrogate.",
+			"problems": [],
+			"cautions": [
+				"2 values hold a lone surrogate, which the export refuses until the fixer removes it"
+			],
+			"failure": null,
+			"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Health check 2026-10-01 15.47.33.txt",
+			"phases": [
+				{
+					"name": "gate",
+					"started": "2026-10-01T21:47:33.482Z",
+					"ended": "2026-10-01T21:47:34.541Z"
+				},
+				{
+					"name": "scan",
+					"started": "2026-10-01T21:47:34.541Z",
+					"ended": "2026-10-01T21:47:35.632Z"
+				}
+			],
+			"blocked_tables": [],
+			"findings": 10,
+			"first_findings": [
+				{
+					"table": "Spike_Keys",
+					"key": "c05_after_pair",
+					"field": "F_Text",
+					"kind": "bad_character",
+					"value": "\"😀\\u001Fx\\u000B\"",
+					"characters": [
+						{
+							"pos": 3,
+							"char_code": 31
+						},
+						{
+							"pos": 5,
+							"char_code": 11
+						}
+					]
+				},
+				{
+					"table": "Spike_Keys",
+					"key": "c05_alpha",
+					"field": "Alt_Code",
+					"kind": "bad_character",
+					"value": "\"c05_alpha\\u001B\"",
+					"characters": [
+						{
+							"pos": 10,
+							"char_code": 27
+						}
+					]
+				},
+				{
+					"table": "Spike_Keys",
+					"key": "c05_control",
+					"field": "F_Text",
+					"kind": "bad_character",
+					"value": "\"a\\u0001b\"",
+					"characters": [
+						{
+							"pos": 2,
+							"char_code": 1
+						}
+					]
+				},
+				{
+					"table": "Spike_Keys",
+					"key": "c05_fffe",
+					"field": "F_Text",
+					"kind": "bad_character",
+					"value": "\"a\\uFFFEb\"",
+					"characters": [
+						{
+							"pos": 2,
+							"char_code": 65534
+						}
+					]
+				},
+				{
+					"table": "Spike_Keys",
+					"key": "c05_ffff",
+					"field": "F_Text",
+					"kind": "bad_character",
+					"value": "\"a\\uFFFF\"",
+					"characters": [
+						{
+							"pos": 2,
+							"char_code": 65535
+						}
+					]
+				},
+				{
+					"table": "Spike_Keys",
+					"key": "c05_high",
+					"field": "F_Text",
+					"kind": "lone_surrogate",
+					"value": "\"a\\uD800b\"",
+					"characters": [
+						{
+							"pos": 2,
+							"char_code": 55296
+						}
+					]
+				},
+				{
+					"table": "Spike_Keys",
+					"key": "c05_low",
+					"field": "F_Text",
+					"kind": "lone_surrogate",
+					"value": "\"a\\uDC00b\"",
+					"characters": [
+						{
+							"pos": 2,
+							"char_code": 56320
+						}
+					]
+				},
+				{
+					"table": "Spike_Keys",
+					"key": "c05_space_uuid",
+					"field": "Auto_UUID",
+					"kind": "space_uuid"
+				},
+				{
+					"table": "Spike_Keys",
+					"key": "w10_blank",
+					"field": "Auto_UUID",
+					"kind": "space_uuid"
+				},
+				{
+					"table": "Spike_Keys",
+					"key": "w12_only_key",
+					"field": "Auto_UUID",
+					"kind": "space_uuid"
+				}
+			],
+			"files": {
+				".txt": true,
+				".json": true,
+				".log": true
+			},
+			"bom": [],
+			"missing_keys": [],
+			"txt_line_1": "Health check: warnings",
+			"txt_line_1_ok": true,
+			"json_verdict": "warnings",
+			"txt": [
+				"Health check: warnings",
+				"Next step: Remove the bad characters with the fixer, then run the export: it refuses a lone surrogate.",
+				"",
+				"Problems:  (none)",
+				"Cautions:",
+				"  - 2 values hold a lone surrogate, which the export refuses until the fixer removes it",
+				"",
+				"Datafile:   Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+				"Started:    2026-10-01 15:47:33   Ended: 15:47:35   Elapsed: 00:00:02",
+				"Component:  2026.r4 (build 20261001)   4D: 2102 (build 100579)",
+				"Run by:     Dani Beaubien on Dani's Mac Studio",
+				"Options:    tables [26]",
+				"",
+				"Phases",
+				"  gate              00:00:01",
+				"  scan              00:00:01",
+				"",
+				"Tables: 1 of 27 in the structure",
+				"  No  Table       Records  Blockers  Damage   Elapsed                                           Checks",
+				"  26  Spike_Keys       14         0      10  00:00:00  bad_character 5, lone_surrogate 2, space_uuid 3",
+				""
+			],
+			"log": [
+				"2026-10-01 15:47:33  Health check started on Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data.4DD",
+				"2026-10-01 15:47:33  options: {\"tables\":[26]}",
+				"2026-10-01 15:47:33  phase 1 of 2: gate",
+				"2026-10-01 15:47:33  [Spike_Keys] started",
+				"2026-10-01 15:47:33  [Spike_Keys] done: 14 records, 00:00:00",
+				"2026-10-01 15:47:34  phase 2 of 2: scan",
+				"2026-10-01 15:47:34  [Spike_Keys] started",
+				"2026-10-01 15:47:34  [Spike_Keys] done: 14 records, 00:00:00",
+				"2026-10-01 15:47:35  caution: 2 values hold a lone surrogate, which the export refuses until the fixer removes it",
+				"2026-10-01 15:47:35  ended: warnings",
+				""
+			]
+		}
+	},
+	"ignored": {
+		"verdict": "warnings",
+		"next_step": "Remove the bad characters with the fixer, then run the export: it refuses a lone surrogate.",
+		"cautions": [
+			"2 values hold a lone surrogate, which the export refuses until the fixer removes it"
+		],
+		"failure": null,
+		"rows": [
+			{
+				"number": 26,
+				"name": "Spike_Keys",
+				"elapsed": 0.001,
+				"records": 14,
+				"blockers": 0,
+				"damage": 9,
+				"checks": {
+					"bad_character": 4,
+					"lone_surrogate": 2,
+					"space_uuid": 3
+				}
+			}
+		],
+		"planted": [
+			{
+				"key": "c05_control",
+				"expected": "bad_character",
+				"found": [
+					{
+						"table": "Spike_Keys",
+						"key": "c05_control",
+						"field": "F_Text",
+						"kind": "bad_character",
+						"value": "\"a\\u0001b\"",
+						"characters": [
+							{
+								"pos": 2,
+								"char_code": 1
+							}
+						]
+					}
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_fffe",
+				"expected": "bad_character",
+				"found": [
+					{
+						"table": "Spike_Keys",
+						"key": "c05_fffe",
+						"field": "F_Text",
+						"kind": "bad_character",
+						"value": "\"a\\uFFFEb\"",
+						"characters": [
+							{
+								"pos": 2,
+								"char_code": 65534
+							}
+						]
+					}
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_ffff",
+				"expected": "bad_character",
+				"found": [
+					{
+						"table": "Spike_Keys",
+						"key": "c05_ffff",
+						"field": "F_Text",
+						"kind": "bad_character",
+						"value": "\"a\\uFFFF\"",
+						"characters": [
+							{
+								"pos": 2,
+								"char_code": 65535
+							}
+						]
+					}
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_high",
+				"expected": "lone_surrogate",
+				"found": [
+					{
+						"table": "Spike_Keys",
+						"key": "c05_high",
+						"field": "F_Text",
+						"kind": "lone_surrogate",
+						"value": "\"a\\uD800b\"",
+						"characters": [
+							{
+								"pos": 2,
+								"char_code": 55296
+							}
+						]
+					}
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_low",
+				"expected": "lone_surrogate",
+				"found": [
+					{
+						"table": "Spike_Keys",
+						"key": "c05_low",
+						"field": "F_Text",
+						"kind": "lone_surrogate",
+						"value": "\"a\\uDC00b\"",
+						"characters": [
+							{
+								"pos": 2,
+								"char_code": 56320
+							}
+						]
+					}
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_after_pair",
+				"expected": "bad_character",
+				"found": [
+					{
+						"table": "Spike_Keys",
+						"key": "c05_after_pair",
+						"field": "F_Text",
+						"kind": "bad_character",
+						"value": "\"😀\\u001Fx\\u000B\"",
+						"characters": [
+							{
+								"pos": 3,
+								"char_code": 31
+							},
+							{
+								"pos": 5,
+								"char_code": 11
+							}
+						]
+					}
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_alpha",
+				"expected": null,
+				"found": [],
+				"ok": true
+			},
+			{
+				"key": "c05_space_uuid",
+				"expected": "space_uuid",
+				"found": [
+					{
+						"table": "Spike_Keys",
+						"key": "c05_space_uuid",
+						"field": "Auto_UUID",
+						"kind": "space_uuid"
+					}
+				],
+				"ok": true
+			},
+			{
+				"key": "c05_clean",
+				"expected": null,
+				"found": [],
+				"ok": true
+			}
+		],
+		"ok": true,
+		"others": [
+			{
+				"table": "Spike_Keys",
+				"key": "w10_blank",
+				"field": "Auto_UUID",
+				"kind": "space_uuid"
+			},
+			{
+				"table": "Spike_Keys",
+				"key": "w12_only_key",
+				"field": "Auto_UUID",
+				"kind": "space_uuid"
+			}
+		]
+	},
+	"limit_2": {
+		"kinds": {
+			"at_in_key": {
+				"count": 0,
+				"keys": [],
+				"not_listed": 0
+			},
+			"bad_character": {
+				"count": 5,
+				"keys": [
+					"c05_after_pair",
+					"c05_alpha"
+				],
+				"not_listed": 3
+			},
+			"lone_surrogate": {
+				"count": 2,
+				"keys": [
+					"c05_high",
+					"c05_low"
+				],
+				"not_listed": 0
+			},
+			"space_uuid": {
+				"count": 3,
+				"keys": [
+					"c05_space_uuid",
+					"w10_blank"
+				],
+				"not_listed": 1
+			}
+		},
+		"ok": true,
+		"verdict": "warnings"
+	},
+	"split": {
+		"jobs": 10,
+		"preemptive": true,
+		"failure": null,
+		"kinds": {
+			"at_in_key": {
+				"count": 0,
+				"keys": [],
+				"not_listed": 0
+			},
+			"bad_character": {
+				"count": 5,
+				"keys": [
+					"c05_after_pair",
+					"c05_alpha"
+				],
+				"not_listed": 3
+			},
+			"lone_surrogate": {
+				"count": 2,
+				"keys": [
+					"c05_high",
+					"c05_low"
+				],
+				"not_listed": 0
+			},
+			"space_uuid": {
+				"count": 3,
+				"keys": [
+					"c05_space_uuid",
+					"w10_blank"
+				],
+				"not_listed": 1
+			}
+		},
+		"as_one_job": true
+	},
+	"at_key": {
+		"verdict": "blocked",
+		"next_step": "Fix the blockers on the source copy, or leave their tables out of the export. Then run the health check again.",
+		"found": [
+			{
+				"table": "Spike_Keys",
+				"key": "c05_at@",
+				"field": "PK",
+				"kind": "at_in_key"
+			}
+		],
+		"ok": true
+	},
+	"every_table": {
+		"ms": 64060,
+		"verdict": "warnings",
+		"next_step": "Remove the bad characters with the fixer, then run the export: it refuses a lone surrogate.",
+		"cautions": [
+			"2 values hold a lone surrogate, which the export refuses until the fixer removes it"
+		],
+		"failure": null,
+		"report": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Health check 2026-10-01 15.47.47.txt",
+		"phases": [
+			{
+				"name": "gate",
+				"started": "2026-10-01T21:47:47.808Z",
+				"ended": "2026-10-01T21:47:53.799Z"
+			},
+			{
+				"name": "scan",
+				"started": "2026-10-01T21:47:53.799Z",
+				"ended": "2026-10-01T21:48:51.861Z"
+			}
+		],
+		"tables": 27,
+		"records": 3232009,
+		"blockers": 0,
+		"damage": 10,
+		"findings": 10,
+		"damaged_tables": [
+			{
+				"number": 26,
+				"name": "Spike_Keys",
+				"elapsed": 0.003,
+				"records": 14,
+				"blockers": 0,
+				"damage": 10,
+				"checks": {
+					"bad_character": 5,
+					"lone_surrogate": 2,
+					"space_uuid": 3
+				}
+			}
+		],
+		"slowest": [
+			{
+				"number": 3,
+				"name": "Bench_Wide",
+				"elapsed": 61.771,
+				"records": 1997994,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 4,
+				"name": "Bench_Text",
+				"elapsed": 49.669,
+				"records": 1000000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 5,
+				"name": "Bench_Blob",
+				"elapsed": 1.705,
+				"records": 10000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 23,
+				"name": "Bench_Small_18",
+				"elapsed": 0.534,
+				"records": 18000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			},
+			{
+				"number": 24,
+				"name": "Bench_Small_19",
+				"elapsed": 0.527,
+				"records": 19000,
+				"blockers": 0,
+				"damage": 0,
+				"checks": {}
+			}
+		]
+	},
+	"summary": {
+		"scan": "warnings, each planted value found once",
+		"ignored": "Alt_Code skipped",
+		"limit_2": "2 listed per kind, then the rest counted",
+		"split": "10 jobs, preemptive True, as one job True",
+		"at_key": "blocked, c05_at@ listed",
+		"every_table": "warnings in 64 s"
+	}
+}

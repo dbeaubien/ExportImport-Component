@@ -1,0 +1,39 @@
+{
+	"method": "__Check_Preflight",
+	"when": "2026-10-01T22:59:38.666Z",
+	"compiled": true,
+	"place": "target",
+	"datafile": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:data-NEW.4DD",
+	"export_set": "Macintosh HD:Users:dbeaubien:Documents:Customers:ORD Components:Open Source:ExportImport Component:Data:Export 2026-10-01 16.59.21:",
+	"language": {
+		"here": "en",
+		"export_set": "en"
+	},
+	"empty": {
+		"import": {
+			"problems": [],
+			"cautions": [
+				"26 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys], [Spike_TextKey]"
+			]
+		},
+		"compare": {
+			"problems": [],
+			"cautions": [
+				"26 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys], [Spike_TextKey]"
+			]
+		},
+		"ok": true
+	},
+	"one_record": {
+		"problems": [],
+		"cautions": [
+			"26 tables not in this export set: [Table_1], [Table_2], [Bench_Wide], [Bench_Text], [Bench_Blob], [Bench_Small_02], [Bench_Small_03], [Bench_Small_04], [Bench_Small_05], [Bench_Small_06], [Bench_Small_07], [Bench_Small_08], [Bench_Small_09], [Bench_Small_10], [Bench_Small_11], [Bench_Small_12], [Bench_Small_13], [Bench_Small_14], [Bench_Small_15], [Bench_Small_16], [Bench_Small_17], [Bench_Small_18], [Bench_Small_19], [Bench_Small_20], [Spike_Keys], [Spike_TextKey]",
+			"1 tables already hold records, which the import removes first: [Bench_Small_01] 1"
+		],
+		"ok": true
+	},
+	"summary": {
+		"empty": "no problem, no records caution",
+		"one_record": "a caution, [Bench_Small_01] 1"
+	}
+}
