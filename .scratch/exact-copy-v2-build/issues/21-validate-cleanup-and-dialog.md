@@ -227,3 +227,15 @@ part 2 covers them too.
     what to do after an `Access denied` during the load.
   - **To run again after the compile:** steps a, c and d with the buttons, and the Stop in Run's
     place during bench step 1. Before that, exclude the data folder from Backblaze and Spotlight.
+- 2026-10-02, after the compile of `5ed8192` (the human), on `data-NEW target target.4DD`, in
+  `Export 2026-10-02 16.38.01`:
+  - Import at 16.56.19 with the set digest pasted: `exact`, its Compare `exact`, and the new
+    caution wording. So Paste fills the field, and the right digest passes.
+  - Import at 16.57.19 with the digest, stopped: `failed`, "stopped by operator", in resume
+    indexes. Triggers and constraints came back on, and the next step says the target is
+    unusable, as spec 13 says for a stop from the truncate through the flush. So Stop in Run's
+    place works on an import.
+  - **Not on disk:** step a's Copy (no export since 16.38.01), step c's separate Compare, and step
+    d's digest problem, which leaves no run report. The human confirms them. **Part 2's bench
+    steps haven't run** (no set from `data.4DD`, no `research/21-*.json`), so this ticket stays
+    claimed.
