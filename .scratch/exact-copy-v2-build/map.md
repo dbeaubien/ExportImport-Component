@@ -55,8 +55,9 @@ instead of restating it.
 | 17 | [Dialog: the Health check and Export steps](issues/17-dialog-health-check-and-export.md) | 16 | compile |
 | 18 | [Dialog: the Switch to target, Import and Compare steps](issues/18-dialog-switch-import-compare.md) | 17 | compile |
 | 19 | [README and docs](issues/19-readme-and-docs.md) | 14, 18 | — |
-| 20 | [Final check on a customer copy](issues/20-final-check-on-a-customer-copy.md) | 21 | bench |
+| 20 | [Final check on a customer copy](issues/20-final-check-on-a-customer-copy.md) | 21, 22 | bench |
 | 21 | [Validate the cleanup and the dialog together](issues/21-validate-cleanup-and-dialog.md) | 14, 15, 16, 17, 18 | — |
+| 22 | [Compare: extras before an order guard break](issues/22-compare-extras-before-an-order-break.md) | — | compile |
 
 The frontier is the open, unclaimed tickets whose blockers are all resolved. The lowest number wins.
 

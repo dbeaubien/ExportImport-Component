@@ -114,3 +114,7 @@ records them (below).
   totals peak at 2 to 4 workers. The cut rule stands, with a worker count that now defaults to 4
   (2 for Compare). The split-scaling run at 1, 2, 4 and 10 workers above is dropped: the bench runs
   once, at the defaults.
+- 2026-10-02, from [Extras before an order guard break](16-extras-before-an-order-break.md): a
+  break in one job makes every extra of its table unverified, in every job, except keys that
+  contain `@`. A late source key can sort into another job's target range, so the rule per job
+  above doesn't hold for extras.

@@ -195,6 +195,12 @@ Gates: compile
   compiled, as in step 2 above. Expect the summary of step 2.
 - 2026-10-01, the fourth run, compiled: every line as expected.
 
+- 2026-10-02, from spec [Extras before an order guard break](../../DONE/exact-copy-v2/issues/16-extras-before-an-order-break.md)
+  (resolved): the gap above is closed in
+  [Compare: extras before an order guard break](22-compare-extras-before-an-order-break.md). Once
+  any job of a table breaks its order guard, every extra of that table becomes unverified, except
+  keys that contain `@`.
+
 ## Answer
 
 Built and checked on 2026-10-01 on the bench datafile (27 tables, 3.2 million records), in 4D 21

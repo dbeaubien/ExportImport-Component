@@ -42,13 +42,14 @@ Used by `/wayfinder`. The **map** is a file with one **child** file per ticket.
 
 - ✅ **DONE**: [`.scratch/DONE/exact-copy-v2/`](../../.scratch/DONE/exact-copy-v2/map.md), a wayfinder
   map (**planning**). Destination reached: a locked spec for the fingerprint, the export set format,
-  import, the health check and the discrepancy report, split into build tickets. 15 tickets are
-  resolved; keys that contain @ and worker count came from the build. **Open: 16 extras before an
-  order guard break** (from building Compare), **17 probe: the codec without object operations**
-  and **18 rework the codec's per-record loops** (blocked by 17), both from worker count, and **19 the cut
-  rule's cost for text and BLOB tables** (from the bench). The build tickets are in
+  import, the health check and the discrepancy report, split into build tickets. 16 tickets are
+  resolved; keys that contain @, worker count and extras before an order guard break came from the
+  build. **Open: 17 probe: the codec without object operations** and **18 rework the codec's
+  per-record loops** (blocked by 17), both from worker count, and **19 the cut rule's cost for text
+  and BLOB tables** (from the bench). The build tickets are in
   `.scratch/exact-copy-v2-build/`.
 - 🔵 **OPEN**: [`.scratch/exact-copy-v2-build/`](../../.scratch/exact-copy-v2-build/map.md), the build tickets
-  (**build**) for the exact-copy-v2 spec: 21 tickets, from a 4D-fact spike through the codec, the
+  (**build**) for the exact-copy-v2 spec: 22 tickets, from a 4D-fact spike through the codec, the
   passes, the shared-method wrappers, deleting the old code and the dialog, then one validation of
-  14 to 18 (21) and a final check on a customer copy. **01 spike, 02 structure and record codec, 03 pass skeleton and gate, 04 worker pool and planner, 05 health check scan, 06 fixer, 07 export, 08 manifest checks and pre-flight, 09 Compare: the merge, 10 Compare: unverified records and readable detail, 11 Import, 12 shared methods and the ExportImport namespace and 13 bench on the new API resolved. Frontier: 14 delete the old code, and 15 dialog: step list, export sets and marks.** The spec ticket on keys that contain @ is resolved, so 04, 07, 09 and 10 no longer wait on it.
+  14 to 18 (21) and a final check on a customer copy. 22 Compare: extras before an order guard
+  break came from the spec map. **01 spike, 02 structure and record codec, 03 pass skeleton and gate, 04 worker pool and planner, 05 health check scan, 06 fixer, 07 export, 08 manifest checks and pre-flight, 09 Compare: the merge, 10 Compare: unverified records and readable detail, 11 Import, 12 shared methods and the ExportImport namespace and 13 bench on the new API resolved. Frontier: 14 delete the old code, 15 dialog: step list, export sets and marks, and 22 Compare: extras before an order guard break.** The spec ticket on keys that contain @ is resolved, so 04, 07, 09 and 10 no longer wait on it.

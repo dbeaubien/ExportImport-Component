@@ -2,7 +2,7 @@
 
 Status: open
 Type: task
-Blocked by: 21
+Blocked by: 21, 22
 Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/map.md (Notes: Scale, Benchmarking), .scratch/DONE/exact-copy-v2/issues/04-define-fingerprint.md (Build verification: subtables), .scratch/DONE/exact-copy-v2/issues/08-comparison-and-discrepancy-report.md (customer values in the reports), docs/agents/issue-tracker-rules.md
 Gates: bench
 
