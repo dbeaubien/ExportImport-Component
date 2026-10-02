@@ -30,10 +30,13 @@ jobs, becomes unverified. Extras whose key contains `@` stay extra.
 
 ## Acceptance
 
+- From 2026-10-02, the checks marked (21) run in
+  [Validate the cleanup and the dialog together](21-validate-cleanup-and-dialog.md), on its small
+  datafile. This ticket resolves once it is built and compiled.
 - [ ] `compile` passes.
-- [ ] `__Check_Order_Break`, compiled: the verdict is `inconclusive`, not `notExact`. The record
+- [ ] (21) `__Check_Order_Break`, compiled: the verdict is `inconclusive`, not `notExact`. The record
       that the old check reported as extra (the second of the swapped pair, `"c05_high"` on
       `[Spike_Keys]`) is listed under `unverified` with the new reason, and the table's `extra` is
       0. The unverified range after the break is as before.
 - The cross-job case isn't planted: the rule treats every job of the table alike.
-- [ ] `__Check_Order_Break` is deleted afterwards.
+- [ ] `__Check_Order_Break` is deleted once ticket 21 has run it.

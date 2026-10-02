@@ -15,8 +15,8 @@ instead of restating it.
   those steps, or with a note saying which step was not validated.
 - **From ticket 14 on, the run steps are batched** (the human's request, 2026-10-02):
   [Validate the cleanup and the dialog together](issues/21-validate-cleanup-and-dialog.md) holds
-  the run steps of tickets 14 to 18, marked (21) in their Acceptance. Those tickets resolve once
-  built and compiled. A ticket that needs a run of its own says why.
+  the run steps of tickets 14 to 18 and 22, marked (21) in their Acceptance. Those tickets
+  resolve once built and compiled. A ticket that needs a run of its own says why.
 - Every ticket leaves the project compiling. The old code keeps working until
   [Delete the old code](issues/14-delete-old-code.md).
 - A class function that isn't thread-safe fails only at runtime (spec 12), so every ticket that adds a
@@ -56,7 +56,7 @@ instead of restating it.
 | 18 | [Dialog: the Switch to target, Import and Compare steps](issues/18-dialog-switch-import-compare.md) | 17 | compile |
 | 19 | [README and docs](issues/19-readme-and-docs.md) | 14, 18 | — |
 | 20 | [Final check on a customer copy](issues/20-final-check-on-a-customer-copy.md) | 21, 22 | bench |
-| 21 | [Validate the cleanup and the dialog together](issues/21-validate-cleanup-and-dialog.md) | 14, 15, 16, 17, 18 | — |
+| 21 | [Validate the cleanup and the dialog together](issues/21-validate-cleanup-and-dialog.md) | 14, 15, 16, 17, 18, 22 | — |
 | 22 | [Compare: extras before an order guard break](issues/22-compare-extras-before-an-order-break.md) | — | compile |
 
 The frontier is the open, unclaimed tickets whose blockers are all resolved. The lowest number wins.
@@ -151,7 +151,7 @@ The frontier is the open, unclaimed tickets whose blockers are all resolved. The
   and health-check code and every `__Check_*` and `__Spike_*`, so 24 methods and 22 classes remain.
   4D Progress and Component IH_Log are out of the dependencies, and the spike tables are out of
   the catalog, so the bench's health check should give `passed` again. Commit `5bdc9ce` still
-  holds the dev code. `syntaxEN.json` still lists the deleted classes until 4D rewrites it.
+  holds the dev code.
 
 ## Why this order
 
@@ -167,5 +167,5 @@ The frontier is the open, unclaimed tickets whose blockers are all resolved. The
   API before the old code goes (spec 12).
 - **The dialog comes last.** It drives the finished public classes (spec 11, 12).
 - **One validation for the cleanup and the dialog (21).** Each export, import and Compare run costs
-  the human time, so the run steps of 14 to 18 share one session: a small datafile for behaviour,
-  then one guided run on the bench. The customer copy (20) comes after it.
+  the human time, so the run steps of 14 to 18 and 22 share one session: a small datafile for
+  behaviour, then one guided run on the bench. The customer copy (20) comes after it.

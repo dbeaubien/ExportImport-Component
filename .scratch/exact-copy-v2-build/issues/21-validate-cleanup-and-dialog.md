@@ -2,15 +2,15 @@
 
 Status: open
 Type: task
-Blocked by: 14, 15, 16, 17, 18
-Reads: .scratch/exact-copy-v2-build/map.md, the Acceptance of tickets 14 to 18, .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Switch to target), docs/agents/issue-tracker-rules.md
+Blocked by: 14, 15, 16, 17, 18, 22
+Reads: .scratch/exact-copy-v2-build/map.md, the Acceptance of tickets 14 to 18 and 22, .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Switch to target), docs/agents/issue-tracker-rules.md
 Gates: —
 
 ## What to do
 
-At the human's request (2026-10-02), one session covers the run steps of tickets 14 to 18, in
-place of one session each. Those tickets resolve once they are built and compiled, and point here.
-Run everything compiled. Each build session updates its own part below when it builds: 16 the Stop
+At the human's request (2026-10-02), one session covers the run steps of tickets 14 to 18 and
+22, in place of one session each. Those tickets resolve once they are built and compiled, and
+point here. Run everything compiled. Each build session updates its own part below when it builds: 16 the Stop
 steps, 17 how to plant bad characters and a blocker, and 18 the `CREATE DATA FILE` checks.
 
 **Part 1: a small datafile, where each pass takes seconds.** Create a new datafile in a folder of
@@ -30,14 +30,17 @@ its own, so its export sets stay apart from the bench's. Then run `__Bench_Gener
    on Compare (15), and Compare run again gives `exact` (18).
 7. Hand-edit the import's run report `.json` to `notExact`, then to `interrupted` with the load as
    its last phase. Each time, the dialog opens on Switch to target with the "unusable" banner (15).
+8. Back on the source, run `__Check_Order_Break`. Compare gives `inconclusive`, not `notExact`. The
+   second record of the swapped pair is listed under `unverified` with the reason "a source key
+   after the order guard break in this table may match it", and the table's `extra` is 0 (22).
+   The agent then deletes the check.
 
 **Part 2: one guided run on the bench datafile, about 15 minutes.**
 
 1. Start an export, then Stop it after about 10 s. It gives `failed`, "stopped by operator", and
    leaves no worker. Closing the window during a run asks first (16). Delete the stopped set.
 2. The health check gives `passed`: the bench's 3 `space_uuid` findings were in `[Spike_Keys]`,
-   which ticket 14 removed (17). Then export
-   (`exported`). The dialog stays responsive throughout, with the phase line, the bar and its ETA,
+   which ticket 14 removed (17). Then export (`exported`). The dialog stays responsive throughout, with the phase line, the bar and its ETA,
    and the table grid (16).
 3. Switch to target, reopen, import (`exact`), then run Compare again (`exact`) (18).
 4. Attach the `.json` run reports of steps 2 and 3 under `research/`, named `21-<pass>.json`.

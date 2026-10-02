@@ -123,8 +123,6 @@ shared methods still run) is in
 - **Catalog:** `Spike_Keys` and `Spike_TextKey`, their three indexes and their trigger are gone.
   The bench's 3 `space_uuid` findings lived in `[Spike_Keys]`, so its health check should give
   `passed` again (tickets 17 and 21).
-- **The search** finds no deleted name in `Project/Sources`, nor any 4D Progress or IH_Log call.
-  **Not met in `Resources`:** `en.lproj/syntaxEN.json` still lists the 10 deleted classes. The
-  compile didn't rewrite it: it was last written at 00:01 on 2026-10-02, before the deletes. It's
-  4D's generated file for host code completion, so it was left for 4D to rewrite, probably at
-  the next component build. Until then, a host's code completion still offers those classes.
+- **The search** finds no deleted name in `Project/Sources` or `Resources`, nor any 4D Progress or
+  IH_Log call. The compile didn't rewrite `en.lproj/syntaxEN.json`, 4D's generated file for host
+  code completion. The human's next 4D run did, at 00:35, and it no longer lists a deleted name.
