@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-02)
 Type: task
 Blocked by: 16
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Settings, Pre-flight checks, Health check results, MSC reminder), .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (Pre-flight), Project/Sources/Methods/Dialog_SelectTables.4dm, Project/Sources/Methods/Dialog_SelectFields.4dm, Project/Sources/Forms/Table_Selector/form.4DForm, Project/Sources/Forms/FIeld_Selector/form.4DForm
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Settings, Pre-flight checks, Health check results, MSC reminder), .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (Pre-flight), Project/Sources/Methods/Dialog_SelectTables.4dm, Project/Sources/Methods/Dialog_SelectFields.4dm, Project/Sources/Forms/Table_Selector/form.4DForm, Project/Sources/Forms/FIeld_Selector/form.4DForm
 Gates: compile
 
 ## What to build

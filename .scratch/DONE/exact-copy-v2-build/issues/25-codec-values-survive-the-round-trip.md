@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Claude (claimed 2026-10-02)
 Type: task
 Blocked by: —
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/23-trusting-the-export-set.md (Answer: codec fidelity), .scratch/DONE/exact-copy-v2/issues/04-define-fingerprint.md (Answer), Project/Sources/Classes/_Codec.4dm, Project/Sources/Classes/_Structure.4dm, and from commit 5bdc9ce: `git show 5bdc9ce:Project/Sources/Methods/__Check_Codec.4dm`, `git show 5bdc9ce:Project/Sources/Methods/__Check_Codec_Table.4dm` and `git show 5bdc9ce:Project/Sources/Methods/__Check_Codec_Cases.4dm`
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/23-trusting-the-export-set.md (Answer: codec fidelity), .scratch/DONE/exact-copy-v2/issues/04-define-fingerprint.md (Answer), Project/Sources/Classes/_Codec.4dm, Project/Sources/Classes/_Structure.4dm, and from commit 5bdc9ce: `git show 5bdc9ce:Project/Sources/Methods/__Check_Codec.4dm`, `git show 5bdc9ce:Project/Sources/Methods/__Check_Codec_Table.4dm` and `git show 5bdc9ce:Project/Sources/Methods/__Check_Codec_Cases.4dm`
 Gates: compile
 
 ## What to build
@@ -57,7 +57,7 @@ This ticket has its own run step. It doesn't depend on ticket 21's runs.
 - 2026-10-02, built (not yet compiled). Waiting on the compile and the bench run, then this ticket
   resolves. Four dev methods, not two: the per-record round trip is shared by the worker and the
   edge cases, and the value walk is recursive.
-  - **`__Check_Codec_Values({step})`** ([Methods/__Check_Codec_Values.4dm](../../../Project/Sources/Methods/__Check_Codec_Values.4dm)):
+  - **`__Check_Codec_Values({step})`** ([Methods/__Check_Codec_Values.4dm](../../../../Project/Sources/Methods/__Check_Codec_Values.4dm)):
     the coordinator, on the pattern of `__Check_Codec`. One preemptive worker per table of the
     structure (every table, so the same method runs on a customer copy), the sequence numbers
     restored at the end, the edge cases, then the JSON and an alert with the totals. The cases run

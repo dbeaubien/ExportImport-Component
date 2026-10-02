@@ -26,7 +26,7 @@ Decide:
 
 - whether the export ends with a self-check, always, as an option on by default, or not at all.
   It costs one Compare on the source, which is 141 s on the bench today and less after
-  [Compare: the lean merge loop](../../../exact-copy-v2-build/issues/23-compare-lean-merge-loop.md);
+  [Compare: the lean merge loop](../../exact-copy-v2-build/issues/23-compare-lean-merge-loop.md);
 - whether edits that also rewrite the manifest stay out of scope. The alternative: the export's
   result shows one fingerprint of the whole set (the manifest's SHA-256), and the import shows it
   too, for the operator to match.
@@ -34,8 +34,8 @@ Decide:
 ## Answer
 
 Decided with the human on 2026-10-02 in a grilling session. The glossary gained **Self-check** and
-**Set digest**. Built in [Export: self-check and set digest](../../../exact-copy-v2-build/issues/24-export-self-check-and-set-digest.md)
-and [Codec: values survive the round trip](../../../exact-copy-v2-build/issues/25-codec-values-survive-the-round-trip.md).
+**Set digest**. Built in [Export: self-check and set digest](../../exact-copy-v2-build/issues/24-export-self-check-and-set-digest.md)
+and [Codec: values survive the round trip](../../exact-copy-v2-build/issues/25-codec-values-survive-the-round-trip.md).
 
 **Every export ends with a self-check, and a set is complete only when its self-check is exact.
 The set digest, one SHA-256 of `manifest.json`, is shown at export and checked at import. A
@@ -54,7 +54,7 @@ time passes both. The value check below rules that out.
 - **The self-check (amends spec 06, where nothing ran it automatically):** the export's last phase
   is a Compare of the new set on the source. It always runs, with no option, like the blocker
   gate (spec 09). Its cost is one Compare on the source, about 1 to 1.5 times the export after
-  [Compare: the lean merge loop](../../../exact-copy-v2-build/issues/23-compare-lean-merge-loop.md).
+  [Compare: the lean merge loop](../../exact-copy-v2-build/issues/23-compare-lean-merge-loop.md).
   - It catches what the import's Compare can't: an export that writes wrong bytes, skips or doubles
     a record, or reads a source that changes during the export.
   - **The manifest:** written as `manifest.json.tmp`, so the self-check runs on that file. The
@@ -86,7 +86,7 @@ time passes both. The value check below rules that out.
   for the source.
 - **Codec fidelity:** a one-time development check decodes each record into a new record and
   compares every field with the source by value, without the codec. It runs on the bench and in
-  [Final check on a customer copy](../../../exact-copy-v2-build/issues/20-final-check-on-a-customer-copy.md).
+  [Final check on a customer copy](../../exact-copy-v2-build/issues/20-final-check-on-a-customer-copy.md).
   Build ticket 02's `__Check_Codec` compared re-encoded bytes, which has the same blind spot as the
   self-check. Its 11 edge cases compared values, but only those cases. Objects and pictures go
   through 4D's `VARIABLE TO BLOB`, which the spike proved stable, not faithful. A per-export value

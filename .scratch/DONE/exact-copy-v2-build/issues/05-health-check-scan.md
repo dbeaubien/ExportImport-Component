@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-01)
 Type: task
 Blocked by: 04
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/09-health-checks.md (Signs of damage, Where they run, Report), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md (Table rows, `.txt` layout), .scratch/DONE/exact-copy-v2/issues/10-split-large-tables-across-workers.md (Source side), Project/Sources/Methods/STR_GetListOfBadCharacters.4dm, Project/Sources/Methods/STR_CheckForIssues.4dm, Project/Sources/Methods/Worker_HealthCheck_OneTable.4dm
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/09-health-checks.md (Signs of damage, Where they run, Report), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md (Table rows, `.txt` layout), .scratch/DONE/exact-copy-v2/issues/10-split-large-tables-across-workers.md (Source side), Project/Sources/Methods/STR_GetListOfBadCharacters.4dm, Project/Sources/Methods/STR_CheckForIssues.4dm, Project/Sources/Methods/Worker_HealthCheck_OneTable.4dm
 Gates: compile
 
 ## What to build
@@ -36,7 +36,7 @@ Gates: compile
     value that holds one (ticket 07). An unpaired surrogate is still a sign of damage, not a blocker,
     but the scan's report should say that the export refuses it until the fixer removes it.
   - Fact 2: assigning `""` to a UUID field stores the all-`0x20` bytes that the scan looks for.
-- 2026-10-01, from [Keys that contain @](../../DONE/exact-copy-v2/issues/14-keys-that-contain-at.md) (resolved):
+- 2026-10-01, from [Keys that contain @](../../exact-copy-v2/issues/14-keys-that-contain-at.md) (resolved):
   - A record key that contains `@` (`Position`) is a blocker. List it by table, key field and key,
     capped by `detail_limit`. The standalone verdict is then `blocked`. The gate doesn't check for it.
 - 2026-10-01, from [Pass skeleton, run report and run log, with the blocker gate](03-pass-skeleton-and-gate.md):
@@ -58,13 +58,13 @@ Gates: compile
     `checks` merge as they are.
 - 2026-10-01, built (not yet compiled or run). Waiting on the human steps below. Then a session
   writes the `## Answer` from the JSON file.
-  - **`STR_GetListOfBadCharacters`** ([Methods/STR_GetListOfBadCharacters.4dm](../../../Project/Sources/Methods/STR_GetListOfBadCharacters.4dm)):
+  - **`STR_GetListOfBadCharacters`** ([Methods/STR_GetListOfBadCharacters.4dm](../../../../Project/Sources/Methods/STR_GetListOfBadCharacters.4dm)):
     one `Match regex` loop over the XML definition's invalid characters: controls other than tab,
     LF and CR, U+FFFE, U+FFFF, and unpaired surrogates (the codec's `[\x{D800}-\x{DFFF}]`, which
     matches only an unpaired one, ticket 02). It still returns `[{pos; char_code}]`, so the old
     `HealthCheckerWorker` keeps working. `pos` counts characters as `Length` does (UTF-16), which
     `__Check_Scan` checks with a value that has bad characters after a surrogate pair.
-  - **`_ScanJob`** ([Classes/_ScanJob.4dm](../../../Project/Sources/Classes/_ScanJob.4dm)), `extends
+  - **`_ScanJob`** ([Classes/_ScanJob.4dm](../../../../Project/Sources/Classes/_ScanJob.4dm)), `extends
     _Job`. The job contract gains `detail_limit` and `ignore` (the field numbers of
     `field_ptrs_to_ignore` in its table). `READ ONLY`, `_select()`, then `GOTO SELECTED RECORD`
     through the job's records, `_tick()` every 1,000. One finding per value, `{table; key; field;

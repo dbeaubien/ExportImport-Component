@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-02)
 Type: task
 Blocked by: —
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/21-rework-compare-per-record-path.md (Answer), .scratch/DONE/exact-copy-v2/issues/22-probe-compare-loop-step-by-step.md (Answer), Project/Sources/Classes/_CompareJob.4dm, Project/Sources/Classes/__ComparePath.4dm (`_lean()`, the form to follow, before deleting it), Project/Sources/Classes/_Codec.4dm, Project/Sources/Classes/_Job.4dm, Project/Sources/Classes/_Pass.4dm (`_workers()`), Project/Sources/Methods/__Bench_Baseline.4dm, Project/Sources/Methods/__Check_Order_Break.4dm, and from commit 5bdc9ce: `git show 5bdc9ce:Project/Sources/Methods/__Check_Compare.4dm` and `git show 5bdc9ce:Project/Sources/Methods/__Check_Compare_Detail.4dm`
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/21-rework-compare-per-record-path.md (Answer), .scratch/DONE/exact-copy-v2/issues/22-probe-compare-loop-step-by-step.md (Answer), Project/Sources/Classes/_CompareJob.4dm, Project/Sources/Classes/__ComparePath.4dm (`_lean()`, the form to follow, before deleting it), Project/Sources/Classes/_Codec.4dm, Project/Sources/Classes/_Job.4dm, Project/Sources/Classes/_Pass.4dm (`_workers()`), Project/Sources/Methods/__Bench_Baseline.4dm, Project/Sources/Methods/__Check_Order_Break.4dm, and from commit 5bdc9ce: `git show 5bdc9ce:Project/Sources/Methods/__Check_Compare.4dm` and `git show 5bdc9ce:Project/Sources/Methods/__Check_Compare_Detail.4dm`
 Gates: compile, bench
 
 ## What to build
@@ -67,7 +67,7 @@ ticket.
 - [x] `bench`: `__Bench_Baseline` with Compare at 2, 4 and 6 workers, each `exact`. Attach the three
       JSONs under `research/` as `23-Bench-Baseline-compare-<n>-compiled.json`, with Compare's
       time and `[Bench_Wide]`'s and `[Bench_Text]`'s against
-      [19-Bench-Baseline-compiled.json](../../DONE/exact-copy-v2/research/19-Bench-Baseline-compiled.json)
+      [19-Bench-Baseline-compiled.json](../../exact-copy-v2/research/19-Bench-Baseline-compiled.json)
       (141 s at 2 workers).
 - [x] The Compare default is set from those runs, and the README matches it.
 - [x] The two restored checks, `__Check_Order_Break` and `_Codec.key()` are deleted.
@@ -82,7 +82,7 @@ ticket.
   the primary key. Its Text field comes before the key, so the planted cases also run the merge's
   walk to the key, which no bench table has (each bench key is field 1).
 - 2026-10-02, built (not yet compiled or run). Waiting on the human steps below.
-  - **`_CompareJob._run()`** ([Classes/_CompareJob.4dm](../../../Project/Sources/Classes/_CompareJob.4dm))
+  - **`_CompareJob._run()`** ([Classes/_CompareJob.4dm](../../../../Project/Sources/Classes/_CompareJob.4dm))
     is one loop of probes: each source record, each damaged segment, then the end of the job.
     Before each, one inner loop takes the target records below it as extra or unverified, and the
     old `_next()` runs inlined there, once, only when the next target record is needed. So
@@ -96,7 +96,7 @@ ticket.
     A range's `target_records` is counted from the first target record past the extras, which is
     when the eager `_next()` read it before.
   - **`_Codec.key()` is deleted.** `__Check_Order_Break` reads the key with `readable()`.
-  - **[__Bench_Baseline](../../../Project/Sources/Methods/__Bench_Baseline.4dm)`({compare_workers})`:**
+  - **[__Bench_Baseline](../../../../Project/Sources/Methods/__Bench_Baseline.4dm)`({compare_workers})`:**
     Compare runs at `compare_workers` when it is 1 or more, else at its default. The JSON's
     `compare_workers` says which.
   - **Dev:** `__Check_Compare`, `__Check_Compare_Detail` and `__Check_Pass_Files` restored from
@@ -150,7 +150,7 @@ ticket.
     on the new export sets. Spotlight (`mds_store`) was indexing, and a second 4D, with another
     project, used 65%. The export, which this ticket doesn't change, took 165, 175 and 191 s at
     4 workers, against 62 s in
-    [19-Bench-Baseline-compiled.json](../../DONE/exact-copy-v2/research/19-Bench-Baseline-compiled.json),
+    [19-Bench-Baseline-compiled.json](../../exact-copy-v2/research/19-Bench-Baseline-compiled.json),
     getting slower with each run. Compare took 213, 182 and 254 s at 2, 4 and 6 workers (141 s
     at 2 in baseline 19), each `exact`. Kept as `research/23-Bench-Baseline-compare-<n>-compiled-loaded.json`.
     Free space fell from 44 to 17 GB, since the sets weren't deleted.
@@ -164,7 +164,7 @@ ticket.
 
   | Compare workers | Export | Compare | `[Bench_Wide]` | `[Bench_Text]` | `[Bench_Blob]` | `[Bench_Small_*]` |
   |---|---|---|---|---|---|---|
-  | 2, old loop ([baseline 19](../../DONE/exact-copy-v2/research/19-Bench-Baseline-compiled.json), its 3rd run) | 62 s | 141 s | 140 s | 73 s | 22 s | 11 s |
+  | 2, old loop ([baseline 19](../../exact-copy-v2/research/19-Bench-Baseline-compiled.json), its 3rd run) | 62 s | 141 s | 140 s | 73 s | 22 s | 11 s |
   | [2](../research/23-Bench-Baseline-compare-2-compiled.json), 1st | 146 s | 137 s | 136 s | 80 s | 23 s | 7 s |
   | [4](../research/23-Bench-Baseline-compare-4-compiled.json), 2nd | 84 s | **116 s** | 92 s | 96 s | 20 s | 14 s |
   | [6](../research/23-Bench-Baseline-compare-6-compiled.json), 3rd | 101 s | 138 s | 137 s | 96 s | 24 s | 33 s |

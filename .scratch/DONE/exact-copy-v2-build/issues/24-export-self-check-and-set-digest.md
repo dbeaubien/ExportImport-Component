@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Claude (claimed 2026-10-02)
 Type: task
 Blocked by: 23
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/23-trusting-the-export-set.md (Answer), Project/Sources/Classes/ExportPass.4dm, Project/Sources/Classes/_Manifest.4dm, Project/Sources/Classes/ComparePass.4dm, Project/Sources/Classes/ImportPass.4dm (`check()` and how it calls `ComparePass`), Project/Sources/Classes/_Pass.4dm (`_phase()`, `_workers()`), Project/Sources/Classes/_Dialog.4dm, Project/Sources/Forms/Main/form.4DForm, Project/Sources/Methods/__Bench_Baseline.4dm, README.md (the export set, the result, the dialog)
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/23-trusting-the-export-set.md (Answer), Project/Sources/Classes/ExportPass.4dm, Project/Sources/Classes/_Manifest.4dm, Project/Sources/Classes/ComparePass.4dm, Project/Sources/Classes/ImportPass.4dm (`check()` and how it calls `ComparePass`), Project/Sources/Classes/_Pass.4dm (`_phase()`, `_workers()`), Project/Sources/Classes/_Dialog.4dm, Project/Sources/Forms/Main/form.4DForm, Project/Sources/Methods/__Bench_Baseline.4dm, README.md (the export set, the result, the dialog)
 Gates: compile, bench
 
 ## What to build
@@ -101,13 +101,13 @@ part 2. The bench run is this ticket's own, because ticket 21's part 2 times dep
   resolves. The small-datafile checks, (21) or not, join ticket 21's part 2, as its comment
   expected ("Ticket 24's steps on the small datafile need part 1's datafile again"): the bench
   run is this ticket's own.
-  - **`_Manifest`** ([Classes/_Manifest.4dm](../../../Project/Sources/Classes/_Manifest.4dm)):
+  - **`_Manifest`** ([Classes/_Manifest.4dm](../../../../Project/Sources/Classes/_Manifest.4dm)):
     `name` is the file `check()` reads. `write()` leaves `manifest.json.tmp` and sets `name` to
     it. `complete()` renames it `manifest.json` and returns its set digest. `check($set_digest)`
     reads the file's bytes once, keeps their SHA-256 in `set_digest`, and adds the digest problem
     when `$set_digest` isn't "" and differs. The given digest is the left operand, so an `@` in
     it isn't a wildcard, and 4D's case-insensitive `#` accepts an uppercase paste.
-  - **`ExportPass`** ([Classes/ExportPass.4dm](../../../Project/Sources/Classes/ExportPass.4dm)):
+  - **`ExportPass`** ([Classes/ExportPass.4dm](../../../../Project/Sources/Classes/ExportPass.4dm)):
     four phases. `self_check` builds `ComparePass` with the export's options, gives it the
     export's `_Manifest` (the "`_` property the export sets": `_manifest`, so it reads the
     `.tmp`), nests it as the import does, and keeps its result in `compare`. Not `exact`: the

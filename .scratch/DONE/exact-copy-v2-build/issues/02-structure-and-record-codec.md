@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-01)
 Type: task
 Blocked by: 01
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/04-define-fingerprint.md, .scratch/DONE/exact-copy-v2/issues/05-define-export-set-format.md, .scratch/DONE/exact-copy-v2/issues/06-fingerprint-compute-and-storage.md, .scratch/DONE/exact-copy-v2/issues/10-split-large-tables-across-workers.md (Manifest), .scratch/DONE/exact-copy-v2/research/02-survey-v21-hashing-and-bulk-io.md, .scratch/DONE/exact-copy-v2/research/12-classes-4d-facts.md, Project/Sources/Methods/FriendlyFieldType.4dm
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/04-define-fingerprint.md, .scratch/DONE/exact-copy-v2/issues/05-define-export-set-format.md, .scratch/DONE/exact-copy-v2/issues/06-fingerprint-compute-and-storage.md, .scratch/DONE/exact-copy-v2/issues/10-split-large-tables-across-workers.md (Manifest), .scratch/DONE/exact-copy-v2/research/02-survey-v21-hashing-and-bulk-io.md, .scratch/DONE/exact-copy-v2/research/12-classes-4d-facts.md, Project/Sources/Methods/FriendlyFieldType.4dm
 Gates: compile
 
 ## What to build
@@ -58,14 +58,14 @@ Gates: compile
     round-trip through yyyymmdd, years 1–99 and over 9999 included.
 - 2026-10-01, built (not yet compiled or run). Waiting on the human steps below. Then a session
   writes the `## Answer` from the JSON files and the host check.
-  - **`_Structure`** ([Classes/_Structure.4dm](../../../Project/Sources/Classes/_Structure.4dm)):
+  - **`_Structure`** ([Classes/_Structure.4dm](../../../../Project/Sources/Classes/_Structure.4dm)):
     `tables` (the canonical list), `signature` (the SHA-256 of `JSON Stringify(tables)`), `language`,
     and `diff(other_tables)`, which returns one line per difference ("here" is this structure, "the
     other list" is the manifest's). Types are `FriendlyFieldType`'s names plus `UUID`. `length` is set
     for Alpha only. Type and length come from `GET FIELD PROPERTIES`. `never_null`, UUID and the
     primary key come from `EXPORT STRUCTURE`. When the XML doesn't describe a field (say, it
     described the component's structure), the constructor throws errCode 5.
-  - **`_Codec`** ([Classes/_Codec.4dm](../../../Project/Sources/Classes/_Codec.4dm)):
+  - **`_Codec`** ([Classes/_Codec.4dm](../../../../Project/Sources/Classes/_Codec.4dm)):
     `encode() : Blob`, `decode(->buffer; offset)`, `key(->buffer; offset)` (returns `{bytes; value}`,
     with `bytes` in Base64) and `slices(->buffer; offset)` (returns `[{start; size}]`, each slice with
     its length prefix). The buffer functions take a pointer, because a Blob parameter is passed by
@@ -135,12 +135,12 @@ Built and checked on 2026-10-01 on the bench datafile, in 4D 21 R2 (build 100579
 compiled every-record numbers are in Comments, because the re-run replaced that file.
 
 **What was built:**
-- [`_Structure`](../../../Project/Sources/Classes/_Structure.4dm): `tables` (the canonical list),
+- [`_Structure`](../../../../Project/Sources/Classes/_Structure.4dm): `tables` (the canonical list),
   `signature`, `language` and `diff(other_tables)`. Types and lengths come from
   `GET FIELD PROPERTIES`, named by `FriendlyFieldType` plus `UUID`. A type it doesn't name (Float,
   subtable) comes through as its number. `never_null`, UUID and the primary key come from
   `EXPORT STRUCTURE`, which describes the host's structure when called from the component.
-- [`_Codec`](../../../Project/Sources/Classes/_Codec.4dm): `encode() : Blob`,
+- [`_Codec`](../../../../Project/Sources/Classes/_Codec.4dm): `encode() : Blob`,
   `decode(->buffer; offset)`, `key(->buffer; offset)` (returns `{bytes; value}`, with `bytes` in Base64) and
   `slices(->buffer; offset)` (returns `[{start; size}]`, each with its length prefix). Errors are
   thrown with componentSignature `ExportImport`: 1 over 2 GB, 2 an Int64 beyond ±2^53, 3 a lone

@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-01)
 Type: task
 Blocked by: 11
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/03-benchmark-datafile-and-baseline.md, .scratch/DONE/exact-copy-v2/research/03-baseline-compiled.json, .scratch/DONE/exact-copy-v2/issues/10-split-large-tables-across-workers.md (Build verification), .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (Rewired), docs/agents/issue-tracker-rules.md (Gates), Project/Sources/Methods/__Bench_Baseline.4dm
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/03-benchmark-datafile-and-baseline.md, .scratch/DONE/exact-copy-v2/research/03-baseline-compiled.json, .scratch/DONE/exact-copy-v2/issues/10-split-large-tables-across-workers.md (Build verification), .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (Rewired), docs/agents/issue-tracker-rules.md (Gates), Project/Sources/Methods/__Bench_Baseline.4dm
 Gates: compile, bench
 
 ## What to build
@@ -36,7 +36,7 @@ Gates: compile, bench
 - 2026-10-01, from [Compare: the merge](09-compare-merge.md) (resolved): the Compare self-check took 441 s at 10 workers,
   against 380 s for the old MD5 pass, because preemptive workers contend: the total peaks at 2
   workers. Run the bench at several worker counts, and follow
-  [Worker count and contention between workers](../../DONE/exact-copy-v2/issues/15-worker-count-and-contention.md) for the default.
+  [Worker count and contention between workers](../../exact-copy-v2/issues/15-worker-count-and-contention.md) for the default.
 - 2026-10-01, from [Import](11-import.md) (resolved): the first import timing is
   [11-Import-compiled.json](../research/11-Import-compiled.json), at 10 workers: 559 s in all, the
   load 1:57 and Compare 6:32. Its rows hold each table's `elapsed` and `index_elapsed`.
@@ -45,8 +45,8 @@ Gates: compile, bench
   Each import needs a fresh target datafile: one interrupted during the load is damaged.
 - 2026-10-01, built (not yet compiled or run). Waiting on the human steps below. Then a session
   writes the `## Answer` from the two JSON files, and posts the scaling numbers to
-  [Worker count and contention between workers](../../DONE/exact-copy-v2/issues/15-worker-count-and-contention.md).
-  - **[__Bench_Baseline](../../../Project/Sources/Methods/__Bench_Baseline.4dm)** takes no
+  [Worker count and contention between workers](../../exact-copy-v2/issues/15-worker-count-and-contention.md).
+  - **[__Bench_Baseline](../../../../Project/Sources/Methods/__Bench_Baseline.4dm)** takes no
     parameter now, and calls only the pass classes.
     - **On the bench datafile:** every table at 1 worker and at the core count, each an
       `ExportPass` and then a `ComparePass` self-check of its set. Then `[Bench_Wide]` alone at 1,
@@ -76,7 +76,7 @@ Gates: compile, bench
   3. File ▸ New ▸ Data file, in the bench datafile's folder, with no log file. Run
      `__Bench_Baseline` there, compiled. Attach the JSON as `research/13-Bench-Import-compiled.json`.
   4. Delete the target datafile and the export sets.
-- 2026-10-01, from spec [Worker count and contention between workers](../../DONE/exact-copy-v2/issues/15-worker-count-and-contention.md) (resolved). This replaces the run at the core count and the split
+- 2026-10-01, from spec [Worker count and contention between workers](../../exact-copy-v2/issues/15-worker-count-and-contention.md) (resolved). This replaces the run at the core count and the split
   scaling above:
   - **First, give each pass its default.** In `_Pass._workers()`, a null `workers` gives
     `[System info.cores; <the pass's constant>].min()`: 4 for `HealthCheckPass`, `FixerPass`,
@@ -95,7 +95,7 @@ Gates: compile, bench
     `_default_workers` is 4, set in `_Pass`'s constructor, and `ComparePass`'s constructor sets 2.
     It is the only place that reads the default. The wrappers' and `Compare_ExportSet`'s comments
     now say 0 means the pass's default.
-  - **[__Bench_Baseline](../../../Project/Sources/Methods/__Bench_Baseline.4dm)** runs one
+  - **[__Bench_Baseline](../../../../Project/Sources/Methods/__Bench_Baseline.4dm)** runs one
     `ExportPass` and one `ComparePass` self-check of its set, both with `{}`. There is no target
     mode any more.
     - It records the counts they used, `export_workers` and `compare_workers`, from `_workers()`.
@@ -165,12 +165,12 @@ spec 03's export at 10 workers plus its checksum.** The JSON's `export_workers` 
   starts 38 s into the export phase and runs alone for 71 s, so the phase takes 111 s, against 76 s
   at 10 workers. This is ticket 07's "the cut rule underweights text", which spec 15 left with
   this ticket. It went to the spec map as
-  [The cut rule's cost for text and BLOB tables](../../DONE/exact-copy-v2/issues/19-cut-rule-cost.md).
+  [The cut rule's cost for text and BLOB tables](../../exact-copy-v2/issues/19-cut-rule-cost.md).
 - The import wasn't timed at the defaults (spec 15). Ticket 12's run imported every table at 3
   workers in 5:56, Compare included, against 9:19 at 10 workers in ticket 11.
 - `__Bench_Baseline` takes no parameter and calls only `ExportPass` and `ComparePass`. The
   `bench` gate's how-to in the rules card says so.
-- 2026-10-02, from spec [The cut rule's cost for text and BLOB tables](../../DONE/exact-copy-v2/issues/19-cut-rule-cost.md)
+- 2026-10-02, from spec [The cut rule's cost for text and BLOB tables](../../exact-copy-v2/issues/19-cut-rule-cost.md)
   (resolved): the cut rule now costs a table by its record count. The latest baseline for the
-  `bench` gate is [19-Bench-Baseline-compiled.json](../../DONE/exact-copy-v2/research/19-Bench-Baseline-compiled.json):
+  `bench` gate is [19-Bench-Baseline-compiled.json](../../exact-copy-v2/research/19-Bench-Baseline-compiled.json):
   the export phase takes 55 s and Compare 141 s at the defaults, against 111 s and 194 s above.

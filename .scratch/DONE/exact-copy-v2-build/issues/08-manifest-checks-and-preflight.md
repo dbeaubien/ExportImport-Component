@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-01)
 Type: task
 Blocked by: 07
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/07-import-strategy.md (Checks before writing), .scratch/DONE/exact-copy-v2/issues/08-comparison-and-discrepancy-report.md (Checks before reading), .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Pre-flight checks, Data language), .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (Pre-flight), .scratch/exact-copy-v2-build/issues/01-spike-4d-facts.md (fact 15)
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/07-import-strategy.md (Checks before writing), .scratch/DONE/exact-copy-v2/issues/08-comparison-and-discrepancy-report.md (Checks before reading), .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Pre-flight checks, Data language), .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (Pre-flight), .scratch/DONE/exact-copy-v2-build/issues/01-spike-4d-facts.md (fact 15)
 Gates: compile
 
 ## What to build
@@ -41,7 +41,7 @@ Gates: compile
   - Fact 15 not validated: the human uses English only and skipped it. Build the data-language
     check as spec 11 says. Whether the command returns the datafile's language or the Preferences
     value is unknown.
-- 2026-10-01, from [Keys that contain @](../../DONE/exact-copy-v2/issues/14-keys-that-contain-at.md) (resolved):
+- 2026-10-01, from [Keys that contain @](../../exact-copy-v2/issues/14-keys-that-contain-at.md) (resolved):
   - Research 14: 4D 21 ships ICU 77.1, which rebuilds every Alpha, Text and Object index, so key
     order can change between 4D versions. The pre-flight still checks only the component version. A
     source and target opened in different 4D versions show up as Compare's order guard
@@ -65,7 +65,7 @@ Gates: compile
     to the bench datafile.
 - 2026-10-01, built (not yet compiled or run). Waiting on the human steps below. Then a session
   writes the `## Answer` from the JSON files.
-  - **`_Manifest`** ([Classes/_Manifest.4dm](../../../Project/Sources/Classes/_Manifest.4dm)): the
+  - **`_Manifest`** ([Classes/_Manifest.4dm](../../../../Project/Sources/Classes/_Manifest.4dm)): the
     constructor now takes the set's platform path. `write(export result; settings; structure;
     tables)` is ticket 07's writing, moved out of the constructor (`ExportPass` changed to match).
     `check()` reads `manifest.json` into `content` and returns `{problems; cautions}`:
@@ -80,13 +80,13 @@ Gates: compile
       create a new target datafile (spec 11; fact 15 still unverified).
     - Caution: "K tables not in this export set: [A], [B]", from `structure` against `tables`
       (spec 13), for import and Compare alike.
-  - **`ImportPass(path; options)`** ([Classes/ImportPass.4dm](../../../Project/Sources/Classes/ImportPass.4dm)):
+  - **`ImportPass(path; options)`** ([Classes/ImportPass.4dm](../../../../Project/Sources/Classes/ImportPass.4dm)):
     `check()` is `_Pass`'s, plus the manifest's, plus "This datafile is the export set's source, and
     the import empties every table it loads." The source is matched by its path alone, because its
     size and modification time move while 4D has it open (ticket 07). With no problem, two
     cautions: "N tables already hold records, which the import removes first: [A] 12, [B] 3", and
     free space smaller than the manifest's `source.size`.
-  - **`ComparePass(path; options)`** ([Classes/ComparePass.4dm](../../../Project/Sources/Classes/ComparePass.4dm)):
+  - **`ComparePass(path; options)`** ([Classes/ComparePass.4dm](../../../../Project/Sources/Classes/ComparePass.4dm)):
     `check()` is `_Pass`'s plus the manifest's. It allows the source datafile.
   - **`_Pass._free_space(bytes; of)`**: ticket 07's free-space caution, moved out of
     `ExportPass.check()` so the import shares it. The export's wording is unchanged.

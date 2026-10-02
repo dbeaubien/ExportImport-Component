@@ -33,14 +33,14 @@ default. Decide:
 
 ## Comments
 
-- 2026-10-01, from [Import](../../../exact-copy-v2-build/issues/11-import.md) (resolved): the
+- 2026-10-01, from [Import](../../exact-copy-v2-build/issues/11-import.md) (resolved): the
   import's load of `[Bench_Wide]` alone (2.0 million records, 18 segments, `_ImportJob`) took
   150 s at 1 worker, 96 s at 2, 83 s at 4 and 106 s at 10, every job preemptive
-  ([11-__Check_Import-compiled.json](../../../exact-copy-v2-build/research/11-__Check_Import-compiled.json),
+  ([11-__Check_Import-compiled.json](../../exact-copy-v2-build/research/11-__Check_Import-compiled.json),
   `scaling`). So the load peaks near 4 workers, and 10 is slower than 2. The whole import at 10
   workers: load 1:57, Compare 6:32.
 
-- 2026-10-02, from [Bench on the new API](../../../exact-copy-v2-build/issues/13-bench-on-the-new-api.md)
+- 2026-10-02, from [Bench on the new API](../../exact-copy-v2-build/issues/13-bench-on-the-new-api.md)
   (resolved): the first numbers at and around the defaults, on the bench (compiled, 10 cores).
   - Every table: the export takes 3:33 at 1 worker, 1:58 at 4 and 1:23 at 10. Compare takes 3:39
     at 1, 3:14 at 2 and 6:47 at 10.
@@ -80,7 +80,7 @@ machine (10 cores), Compare's total peaks at 2 workers (37,157 records/s, agains
 - **Cut rule:** unchanged (spec 10). With 2 to 4 workers, a large table gets 2 to 4 jobs. Splitting
   still pays, because the contention doesn't come from jobs sharing a table (ticket 09's second
   probe). That the rule underweights text stays with the build ticket
-  [Bench on the new API](../../../exact-copy-v2-build/issues/13-bench-on-the-new-api.md).
+  [Bench on the new API](../../exact-copy-v2-build/issues/13-bench-on-the-new-api.md).
 - **Measurement:** none for the defaults. The bench runs once, at the defaults (the export, then the
   Compare self-check), and the human doesn't want a long run. Spec 10's split-scaling run at 1, 2, 4
   and 10 workers is dropped. The final check on a customer copy records its times at the defaults.
@@ -97,7 +97,7 @@ machine (10 cores), Compare's total peaks at 2 workers (37,157 records/s, agains
   - measuring every pass at 1, 2, 4, 6 and 10 workers before deciding;
   - reworking the codec with no probe.
 - 2026-10-02, from [Trusting the export set](23-trusting-the-export-set.md): the export passes its options to its self-check, as the import passes them to its Compare. A worker count given covers both. With none, each pass uses its own default.
-- 2026-10-02, from [Compare: the lean merge loop](../../../exact-copy-v2-build/issues/23-compare-lean-merge-loop.md)
+- 2026-10-02, from [Compare: the lean merge loop](../../exact-copy-v2-build/issues/23-compare-lean-merge-loop.md)
   (amends the answer): **Compare's default is 4, like every pass's**, so `_Pass._workers()` gives
   4, capped at the core count, and `_default_workers` is gone. With the lean loop, the bench's
   Compare took 137 s at 2 workers, 116 s at 4 and 138 s at 6, each `exact`. Under spec 21's rule,

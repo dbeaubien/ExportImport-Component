@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-02)
 Type: task
 Blocked by: 15
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Where a job runs, Progress, Stop and close), .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (Dialog hooks), .scratch/DONE/exact-copy-v2/research/11-dialog-4d-facts.md
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Where a job runs, Progress, Stop and close), .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (Dialog hooks), .scratch/DONE/exact-copy-v2/research/11-dialog-4d-facts.md
 Gates: compile
 
 ## What to build

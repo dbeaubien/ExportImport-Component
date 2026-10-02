@@ -1,9 +1,8 @@
 //%attributes = {}
 // Export_Import_Dialog
+cs:C1710.ExportPass.new({}).check()
+Export_HealthCheck_Scan({num_processes: 0; tables_to_scan: [58]})
 
-// __Bench_Generate(0.01)
-
-__Check_Codec_Values(1000000)
 
 BEEP:C151
 BEEP:C151

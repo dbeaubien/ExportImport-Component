@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-01)
 Type: task
 Blocked by: 08
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/08-comparison-and-discrepancy-report.md, .scratch/DONE/exact-copy-v2/issues/06-fingerprint-compute-and-storage.md, .scratch/DONE/exact-copy-v2/issues/10-split-large-tables-across-workers.md (Compare), .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (ComparePass), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/08-comparison-and-discrepancy-report.md, .scratch/DONE/exact-copy-v2/issues/06-fingerprint-compute-and-storage.md, .scratch/DONE/exact-copy-v2/issues/10-split-large-tables-across-workers.md (Compare), .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (ComparePass), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md
 Gates: compile, bench
 
 ## What to build
@@ -45,9 +45,9 @@ Gates: compile, bench
 - 2026-10-01, from [Spike: verify the 4D facts the spec relies on](01-spike-4d-facts.md):
   - Facts 5 and 6 failed: `<` treats `@` in its right operand as a wildcard (`"-a" < "@"` and
     `"a-b" < "a@"` are False, though the index orders them so), and the target's `QUERY` range does
-    too. Missing and extra are wrong for keys that contain `@`. Wait for [Keys that contain @](../../DONE/exact-copy-v2/issues/14-keys-that-contain-at.md). UUID keys are fine:
+    too. Missing and extra are wrong for keys that contain `@`. Wait for [Keys that contain @](../../exact-copy-v2/issues/14-keys-that-contain-at.md). UUID keys are fine:
     the 1,000,000 `Bench_Text` keys were in order.
-- 2026-10-01, from [Keys that contain @](../../DONE/exact-copy-v2/issues/14-keys-that-contain-at.md) (resolved):
+- 2026-10-01, from [Keys that contain @](../../exact-copy-v2/issues/14-keys-that-contain-at.md) (resolved):
   - A target key that contains `@` (`Position`) is reported as extra on sight. It never enters `<`,
     `=` or the duplicate check. Source keys can't contain `@` (the export refuses them), so every
     other comparison and the target's range `QUERY` are safe.
@@ -89,7 +89,7 @@ Gates: compile, bench
     self-check and the bench (about 2 minutes compiled, 3.8 GB).
 - 2026-10-01, built (not yet compiled or run). Waiting on the human steps below. Then a session
   writes the `## Answer` from the JSON files.
-  - **`_CompareJob`** ([Classes/_CompareJob.4dm](../../../Project/Sources/Classes/_CompareJob.4dm)):
+  - **`_CompareJob`** ([Classes/_CompareJob.4dm](../../../../Project/Sources/Classes/_CompareJob.4dm)):
     the target's key range (`_range()`), then the run's segments in position order, each read
     whole and checked for its size and SHA-256 before its records are used. Per source record:
     the target records before it under `<` are extra, equal key bytes or keys equal under `<`
@@ -97,7 +97,7 @@ Gates: compile, bench
     with each field whose slice differs named, the key field included. `_next()` hands the merge
     only target records that can match: a key with `@` is extra on sight, and a key `=` the one
     before is a duplicate.
-  - **`ComparePass.run()`** ([Classes/ComparePass.4dm](../../../Project/Sources/Classes/ComparePass.4dm)):
+  - **`ComparePass.run()`** ([Classes/ComparePass.4dm](../../../../Project/Sources/Classes/ComparePass.4dm)):
     one phase, `compare`. The run report and run log go into the set, or next to the datafile when
     there is no set. After the jobs, each row gets `expected` (the manifest), `actual`
     (`Records in table`), `sequence_expected` and `sequence_actual` (selector 31). Any discrepancy
@@ -220,7 +220,7 @@ Gates: compile, bench
     commands on Blobs and texts still don't.
   - So 4D's preemptive workers contend on record loading and on object and class operations,
     whatever the table. This is a decision for the spec map: [Worker count and contention between
-    workers](../../DONE/exact-copy-v2/issues/15-worker-count-and-contention.md).
+    workers](../../exact-copy-v2/issues/15-worker-count-and-contention.md).
 
 ## Answer
 
@@ -253,6 +253,6 @@ Comments ("built").
   workers, even with one table per worker. Record loading and object and class operations slow
   down about 30 times, while `Generate digest` and the other commands on Blobs and texts don't.
   The default worker count and the codec's design go back to the spec map: [Worker count and
-  contention between workers](../../DONE/exact-copy-v2/issues/15-worker-count-and-contention.md).
+  contention between workers](../../exact-copy-v2/issues/15-worker-count-and-contention.md).
 - **Not validated:** `__Check_Compare` again after its fix. Its planted case was checked by hand
   from the JSON, which holds every discrepancy.

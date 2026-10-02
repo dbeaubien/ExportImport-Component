@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-02)
 Type: task
 Blocked by: 17
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Switch to target, Pre-flight checks, Data language, Import and Compare results), .scratch/DONE/exact-copy-v2/research/11-dialog-4d-facts.md
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Switch to target, Pre-flight checks, Data language, Import and Compare results), .scratch/DONE/exact-copy-v2/research/11-dialog-4d-facts.md
 Gates: compile
 
 ## What to build

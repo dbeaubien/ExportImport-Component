@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-01)
 Type: task
 Blocked by: 02
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (Mode, Options, Result envelope, Verdicts), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md, .scratch/DONE/exact-copy-v2/issues/09-health-checks.md (Blockers, Report), .scratch/DONE/exact-copy-v2/research/12-classes-4d-facts.md, GLOSSARY.md (Run report, Run log, Verdict), Project/Sources/Methods/__Bench_Generate.4dm
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (Mode, Options, Result envelope, Verdicts), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md, .scratch/DONE/exact-copy-v2/issues/09-health-checks.md (Blockers, Report), .scratch/DONE/exact-copy-v2/research/12-classes-4d-facts.md, GLOSSARY.md (Run report, Run log, Verdict), Project/Sources/Methods/__Bench_Generate.4dm
 Gates: compile
 
 ## What to build
@@ -64,7 +64,7 @@ Gates: compile
   - Fact 5: the index compares keys without case or accents (`é`, `ü`, `ß` and `æ` were refused as
     duplicates of `e`, `u`, `ss` and `ae`) and keeps trailing spaces. The key-uniqueness blocker
     uses that comparison.
-- 2026-10-01, from [Keys that contain @](../../DONE/exact-copy-v2/issues/14-keys-that-contain-at.md) (resolved):
+- 2026-10-01, from [Keys that contain @](../../exact-copy-v2/issues/14-keys-that-contain-at.md) (resolved):
   - A key that contains `@` isn't a gate blocker: no engine query finds a literal `@`. Such a key now
     reaches the gate, so no gate check compares keys with the language `=` or `<`. A uniqueness walk
     with `=` would report `a-b` and `a@` as duplicates. The export refuses the key itself (ticket 07).
@@ -79,7 +79,7 @@ Gates: compile
     surrogate, 4 type, 5 structure) and name the table and record key, for the `failure` object.
 - 2026-10-01, built (not yet compiled or run). Waiting on the human steps below. Then a session
   writes the `## Answer` from the JSON files.
-  - **`_Pass`** ([Classes/_Pass.4dm](../../../Project/Sources/Classes/_Pass.4dm)): the constructor
+  - **`_Pass`** ([Classes/_Pass.4dm](../../../../Project/Sources/Classes/_Pass.4dm)): the constructor
     takes `(pass; name; options)` from the subclass. `check()` holds the shared checks. `run()` writes
     the early run report, refuses on any problem, calls `_run()` in a `Try`, and writes the final run
     report. A subclass sets `_phase_count`, overrides `_envelope()` (adds its keys), `_columns()` (the
@@ -88,16 +88,16 @@ Gates: compile
     `_end()` writes the next step of `refused` and `failed`. A parent nests a pass by setting its
     `_log` and `_folder` before `run()`. `_table` names the table for `failure`; `key` stays null
     until a pass reads records (07).
-  - **`_RunReport`** ([Classes/_RunReport.4dm](../../../Project/Sources/Classes/_RunReport.4dm)):
+  - **`_RunReport`** ([Classes/_RunReport.4dm](../../../../Project/Sources/Classes/_RunReport.4dm)):
     `name`, `path`, and `write(result; columns; sections)`, which returns "" or the error. 4D can't
     rename over a file (`rename()` and `moveTo()` refuse an existing name, and `moveTo()` has no
     overwrite), so each file is written to `.tmp`, the old file is deleted, then the `.tmp` is renamed.
     A crash in between leaves the `.tmp` and no `.json`, never a half-written one. Elapsed times show
     as `hh:mm:ss` (`HH MM SS`), so `00:00:42` where spec 13 shows `0:00:42`.
-  - **`_RunLog`** ([Classes/_RunLog.4dm](../../../Project/Sources/Classes/_RunLog.4dm)):
+  - **`_RunLog`** ([Classes/_RunLog.4dm](../../../../Project/Sources/Classes/_RunLog.4dm)):
     `write(text)` and `error`. `FileHandle` has no flush, so each line opens the file in append mode,
     writes UTF-8 bytes (no BOM) and lets the handle go, which closes the file.
-  - **`HealthCheckPass`** ([Classes/HealthCheckPass.4dm](../../../Project/Sources/Classes/HealthCheckPass.4dm)):
+  - **`HealthCheckPass`** ([Classes/HealthCheckPass.4dm](../../../../Project/Sources/Classes/HealthCheckPass.4dm)):
     one phase, `gate`, table by table in the coordinator. Engine queries are ORDA, with the field
     name as a placeholder (names with spaces). Finding kinds and what one finding is:
     `unreadable_field` (a type `_Structure` doesn't name, so the codec can't encode it) and

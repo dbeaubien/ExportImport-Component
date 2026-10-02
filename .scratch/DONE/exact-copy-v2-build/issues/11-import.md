@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-01)
 Type: task
 Blocked by: 10
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/07-import-strategy.md, .scratch/DONE/exact-copy-v2/issues/10-split-large-tables-across-workers.md (Import), .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (ImportPass, Verdicts), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md (Run report written early, Import and Compare, Table rows), .scratch/exact-copy-v2-build/issues/01-spike-4d-facts.md (facts 10–14), Project/Sources/Methods/Import_AllTables.4dm
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/07-import-strategy.md, .scratch/DONE/exact-copy-v2/issues/10-split-large-tables-across-workers.md (Import), .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (ImportPass, Verdicts), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md (Run report written early, Import and Compare, Table rows), .scratch/DONE/exact-copy-v2-build/issues/01-spike-4d-facts.md (facts 10–14), Project/Sources/Methods/Import_AllTables.4dm
 Gates: compile, bench
 
 ## What to build
@@ -117,7 +117,7 @@ There is no cache tuning (spec 07).
     override for its own phases.
   - `_Pass._limit()` gives `detail_limit` (default 1,000), to pass on to Compare.
   - Preemptive workers contend: the total peaks at 2 workers on the bench. Measure the import's
-    load at a few worker counts. The default may change: [Worker count and contention between workers](../../DONE/exact-copy-v2/issues/15-worker-count-and-contention.md).
+    load at a few worker counts. The default may change: [Worker count and contention between workers](../../exact-copy-v2/issues/15-worker-count-and-contention.md).
 - 2026-10-01, from [Compare: unverified records and readable detail](10-compare-unverified-and-detail.md) (resolved):
   - Compare's verdict can be `inconclusive`. The import's verdict is Compare's (spec 12), so the
     import can end `inconclusive` too, with Compare's next step.
@@ -131,7 +131,7 @@ There is no cache tuning (spec 07).
     build map's Notes).
 - 2026-10-01, built (not yet compiled or run). Waiting on the human steps below. Then a session
   writes the `## Answer` from the JSON files.
-  - **`ImportPass.run()`** ([Classes/ImportPass.4dm](../../../Project/Sources/Classes/ImportPass.4dm)),
+  - **`ImportPass.run()`** ([Classes/ImportPass.4dm](../../../../Project/Sources/Classes/ImportPass.4dm)),
     seven phases. The run report and run log go into the set, as Compare's:
     1. `segment check`: `_SegmentCheckJob`s on the planner's runs of segments
        (`_Planner.segments()`), which the load reuses. A missing segment, or a byte size or SHA-256
@@ -183,7 +183,7 @@ There is no cache tuning (spec 07).
   - **At resolution:** comment on 12 (`ImportPass(path; options).run()`, the host trigger check),
     13 (the import's first timing and the scaling numbers), 18 (the result's `log_file_closed`
     and `compare`, the phase names and next steps) and, with the scaling numbers, spec 15
-    [Worker count and contention between workers](../../DONE/exact-copy-v2/issues/15-worker-count-and-contention.md).
+    [Worker count and contention between workers](../../exact-copy-v2/issues/15-worker-count-and-contention.md).
 - **Human steps:**
   1. Reopen 4D on the project so it loads the new classes and methods. Design ▸ Compile. Report
      any compile error here.
@@ -276,7 +276,7 @@ built, and the choices made while building it, are in Comments ("built").
   leaves live and `TRUNCATE TABLE` doesn't repair (Comments). Recreating the target is required,
   as the next step says.
 - **The load peaks at about 4 workers** on a single table, and 10 is slower than 2. This adds the
-  import to [Worker count and contention between workers](../../DONE/exact-copy-v2/issues/15-worker-count-and-contention.md).
+  import to [Worker count and contention between workers](../../exact-copy-v2/issues/15-worker-count-and-contention.md).
 - **`enable and flush` takes 24 to 46 s**, in `ALTER DATABASE ENABLE TRIGGERS`/`CONSTRAINTS`, not
   `FLUSH CACHE`.
 - **Not validated:** closing an open log file (`SELECT LOG FILE(*)`, then `DISABLE CONSTRAINTS`

@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-02)
 Type: task
 Blocked by: 12, 13
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (Removed, rewritten and kept), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md (Component IH_Log), .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (4D Progress and IH_Log), Project/Sources/dependencies.json, Project/Sources/DatabaseMethods/onStartup.4dm, Project/Sources/Methods/__DANI.4dm, Project/Sources/catalog.4DCatalog, Resources/componentManifest.json
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (Removed, rewritten and kept), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md (Component IH_Log), .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (4D Progress and IH_Log), Project/Sources/dependencies.json, Project/Sources/DatabaseMethods/onStartup.4dm, Project/Sources/Methods/__DANI.4dm, Project/Sources/catalog.4DCatalog, Resources/componentManifest.json
 Gates: compile
 
 ## What to build
@@ -126,12 +126,12 @@ shared methods still run) is in
 - **The search** finds no deleted name in `Project/Sources` or `Resources`, nor any 4D Progress or
   IH_Log call. The compile didn't rewrite `en.lproj/syntaxEN.json`, 4D's generated file for host
   code completion. The human's next 4D run did, at 00:35, and it no longer lists a deleted name.
-- 2026-10-02, from spec [Probe: the codec without object operations](../../DONE/exact-copy-v2/issues/17-probe-codec-without-object-operations.md):
+- 2026-10-02, from spec [Probe: the codec without object operations](../../exact-copy-v2/issues/17-probe-codec-without-object-operations.md):
   it adds `__Spike_Codec_Cost`, `__Spike_Encode_Arrays` and the class `__CodecCost`. Don't
-  delete them here: the spec ticket [Rework the codec's per-record loops](../../DONE/exact-copy-v2/issues/18-rework-codec-per-record-loops.md)
+  delete them here: the spec ticket [Rework the codec's per-record loops](../../exact-copy-v2/issues/18-rework-codec-per-record-loops.md)
   deletes them. A search for `__Spike_` finds those three until then.
-- 2026-10-02, from spec [Probe: Compare's per-record path](../../DONE/exact-copy-v2/issues/20-probe-compare-per-record-path.md):
+- 2026-10-02, from spec [Probe: Compare's per-record path](../../exact-copy-v2/issues/20-probe-compare-per-record-path.md):
   those three are gone. It adds `__Spike_Compare_Path` and the class `__ComparePath` in their
-  place. Don't delete them here: the spec ticket [Rework Compare's per-record path](../../DONE/exact-copy-v2/issues/21-rework-compare-per-record-path.md),
+  place. Don't delete them here: the spec ticket [Rework Compare's per-record path](../../exact-copy-v2/issues/21-rework-compare-per-record-path.md),
   or the build ticket it becomes, deletes them. A search for `__Spike_` finds the method until
   then.

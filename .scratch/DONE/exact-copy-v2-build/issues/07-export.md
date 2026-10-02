@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-01)
 Type: task
 Blocked by: 04
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/05-define-export-set-format.md, .scratch/DONE/exact-copy-v2/issues/10-split-large-tables-across-workers.md (Source side, Manifest), .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Data language, Pre-flight checks: Export row), .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (ExportPass, Options, Verdicts, Where the export writes), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md, .scratch/DONE/exact-copy-v2/issues/09-health-checks.md (Where they run), .scratch/DONE/exact-copy-v2/research/03-baseline-compiled.json
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/05-define-export-set-format.md, .scratch/DONE/exact-copy-v2/issues/10-split-large-tables-across-workers.md (Source side, Manifest), .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Data language, Pre-flight checks: Export row), .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (ExportPass, Options, Verdicts, Where the export writes), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md, .scratch/DONE/exact-copy-v2/issues/09-health-checks.md (Where they run), .scratch/DONE/exact-copy-v2/research/03-baseline-compiled.json
 Gates: compile, bench
 
 ## What to build
@@ -52,8 +52,8 @@ Gates: compile, bench
 - 2026-10-01, from [Spike: verify the 4D facts the spec relies on](01-spike-4d-facts.md):
   - Fact 3 failed, so the encoder refuses a lone surrogate (ticket 02, spec 09).
   - Facts 5 and 6 failed: `_ExportJob`'s `QUERY` range is wrong when a bound contains `@`. Wait for
-    [Keys that contain @](../../DONE/exact-copy-v2/issues/14-keys-that-contain-at.md).
-- 2026-10-01, from [Keys that contain @](../../DONE/exact-copy-v2/issues/14-keys-that-contain-at.md) (resolved):
+    [Keys that contain @](../../exact-copy-v2/issues/14-keys-that-contain-at.md).
+- 2026-10-01, from [Keys that contain @](../../exact-copy-v2/issues/14-keys-that-contain-at.md) (resolved):
   - When the encoder meets a key that contains `@`, the run stops with the verdict `refused` (a
     blocker). The problem names the table, the key field and the key. The next step: leave the table
     out, or run the health check to list every such key. The set has no manifest. A table whose cut
@@ -85,7 +85,7 @@ Gates: compile, bench
   - The scan on the bench took about a minute (gate 6 s), compiled, on 10 cores.
 - 2026-10-01, built (not yet compiled or run). Waiting on the human steps below. Then a session
   writes the `## Answer` from the JSON files.
-  - **`ExportPass`** ([Classes/ExportPass.4dm](../../../Project/Sources/Classes/ExportPass.4dm)):
+  - **`ExportPass`** ([Classes/ExportPass.4dm](../../../../Project/Sources/Classes/ExportPass.4dm)):
     pass `export`, name `Export`, three phases: `gate`, `export`, `manifest`. `run()` creates
     `Export yyyy-mm-dd hh.mm.ss/` next to the datafile before anything else, so the run report and
     the run log are in it, even for a refused run. Every phase's next step is "This export set is
@@ -108,14 +108,14 @@ Gates: compile, bench
       gives `failed`, as in every pass.
     - `manifest`: `_Manifest`, then `exported`, with the next step "The export set is complete.
       Switch to a new target datafile, then run the import."
-  - **`_ExportJob`** ([Classes/_ExportJob.4dm](../../../Project/Sources/Classes/_ExportJob.4dm)):
+  - **`_ExportJob`** ([Classes/_ExportJob.4dm](../../../../Project/Sources/Classes/_ExportJob.4dm)):
     `_select()`, then each record's key, `_Codec.encode()`, its length and its bytes appended to the
     segment in memory. The segment's Blob grows by doubling up to the cap, so a worker holds at most
     one cap (100 MB) plus one record. The SHA-256 is `Generate digest` on the segment in memory,
     before `setContent()` writes it. A key with `@` (`Position`) throws errCode 10, naming the table,
     key field and key. `first_key` and `last_key` are the key as the language reads it: a number for
     integer keys, a text for Alpha, Text and UUID keys.
-  - **`_Manifest`** ([Classes/_Manifest.4dm](../../../Project/Sources/Classes/_Manifest.4dm)):
+  - **`_Manifest`** ([Classes/_Manifest.4dm](../../../../Project/Sources/Classes/_Manifest.4dm)):
     `new(export result; settings; structure; tables).write(folder)`. It writes `manifest.json.tmp`,
     then renames it, so a crash never leaves half a manifest. Keys: `component_version`,
     `app_version`, `started`, `ended`, `settings` (`segment_mb`; `tables`, null for every table),

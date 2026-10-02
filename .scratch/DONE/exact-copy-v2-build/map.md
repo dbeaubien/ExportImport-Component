@@ -1,6 +1,6 @@
 # Build: Exact copy v2
 
-The build tickets for the spec charted in [Map: Exact copy v2](../DONE/exact-copy-v2/map.md). This file is
+The build tickets for the spec charted in [Map: Exact copy v2](../exact-copy-v2/map.md). This file is
 an index, not a wayfinder map: every decision lives in a spec ticket, and a build ticket points at it
 instead of restating it.
 
@@ -68,7 +68,7 @@ The frontier is the open, unclaimed tickets whose blockers are all resolved. The
 
 - [Spike: verify the 4D facts the spec relies on](issues/01-spike-4d-facts.md): most facts hold. `@`
   acts as a wildcard in `<` and in `QUERY` ranges, which reopened the spec map with
-  [Keys that contain @](../DONE/exact-copy-v2/issues/14-keys-that-contain-at.md), since resolved: the
+  [Keys that contain @](../exact-copy-v2/issues/14-keys-that-contain-at.md), since resolved: the
   export refuses those keys. UTF-8 joins a lone surrogate with the next character, so the encoder refuses one. A
   duplicate in a unique field silently breaks the rebuilt index, so the gate blocks it. `""` in a UUID
   field stores `0x20` bytes. Constraints can't be disabled while a log file is open. The null Auto
@@ -118,7 +118,7 @@ The frontier is the open, unclaimed tickets whose blockers are all resolved. The
   with the changed fields named. A damaged segment or keys out of order fail the run until ticket
   10. It took 441 s at 10 workers, against 380 s for the old MD5 pass: preemptive workers contend
   on record loading and object operations, and the total peaks at 2 workers. That went back to the
-  spec map as [Worker count and contention between workers](../DONE/exact-copy-v2/issues/15-worker-count-and-contention.md).
+  spec map as [Worker count and contention between workers](../exact-copy-v2/issues/15-worker-count-and-contention.md).
 
 - [Compare: unverified records and readable detail](issues/10-compare-unverified-and-detail.md):
   a damaged segment makes only its keys unverified (`inconclusive`), with the rest of the table
@@ -127,7 +127,7 @@ The frontier is the open, unclaimed tickets whose blockers are all resolved. The
   each table lists its first `detail_limit` records, then "N more not listed". Changed fields
   carry their values: −0 against +0 in hex, texts with the first difference, and BLOBs as their
   length and SHA-256. Extras just before an order break can be false, which went back to the spec
-  map as [Extras before an order guard break](../DONE/exact-copy-v2/issues/16-extras-before-an-order-break.md).
+  map as [Extras before an order guard break](../exact-copy-v2/issues/16-extras-before-an-order-break.md).
 - [Import](issues/11-import.md): `ImportPass.run()` in seven phases, with `_SegmentCheckJob`,
   `_ImportJob` and `_IndexJob`. The bench imports `exact` in 559 s at 10 workers: the load takes
   1:57 and Compare 6:32. A damaged set is refused with every segment listed, and a wrong count
@@ -142,7 +142,7 @@ The frontier is the open, unclaimed tickets whose blockers are all resolved. The
   at 2, `exact`, against 50 min and 6 min for the old code. The export takes 1:23 at 10 workers,
   because at 4 the cut rule gives `[Bench_Text]` one job that queues behind `[Bench_Wide]`'s. That
   went to the spec map as
-  [The cut rule's cost for text and BLOB tables](../DONE/exact-copy-v2/issues/19-cut-rule-cost.md).
+  [The cut rule's cost for text and BLOB tables](../exact-copy-v2/issues/19-cut-rule-cost.md).
 - [Shared methods and the ExportImport namespace](issues/12-shared-methods-and-namespace.md): the
   five old shared methods are one-line wrappers over their pass, with the same names and
   parameters, and `Compare_ExportSet` is new. A worker count of 0 or below means the pass's
@@ -205,6 +205,12 @@ The frontier is the open, unclaimed tickets whose blockers are all resolved. The
   place, and added a README line on `Access denied` during the load. `CREATE DATA FILE` switches
   in about 1 s. The bench times weren't recorded, so ticket 20 gives the first quiet-machine
   times with the self-check.
+- [Final check on a customer copy](issues/20-final-check-on-a-customer-copy.md): accepted as
+  successful by the human, run on a secure machine, and nothing from it is in the repo. The host
+  also loaded the old GitHub release, whose `ExportImport` namespace hid the new classes: load one
+  copy only. The value check's methods are deleted. The times on a customer copy, legacy subtable
+  fields, a picture with two formats, an open log file and a host trigger that isn't thread-safe
+  stay unrecorded.
 
 ## Why this order
 

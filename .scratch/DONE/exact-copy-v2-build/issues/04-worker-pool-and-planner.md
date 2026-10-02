@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-01)
 Type: task
 Blocked by: 03
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/10-split-large-tables-across-workers.md, .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (Dialog hooks, Jobs), .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Progress), .scratch/DONE/exact-copy-v2/research/12-classes-4d-facts.md, Project/Sources/Methods/GenericWorker_init.4dm, Project/Sources/Methods/GenericWorker_GetOneWaiting.4dm, Project/Sources/Methods/Worker_ShutdownAndKillMyself.4dm
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/10-split-large-tables-across-workers.md, .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (Dialog hooks, Jobs), .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Progress), .scratch/DONE/exact-copy-v2/research/12-classes-4d-facts.md, Project/Sources/Methods/GenericWorker_init.4dm, Project/Sources/Methods/GenericWorker_GetOneWaiting.4dm, Project/Sources/Methods/Worker_ShutdownAndKillMyself.4dm
 Gates: compile
 
 ## What to build
@@ -50,10 +50,10 @@ Gates: compile
 - 2026-10-01, from [Spike: verify the 4D facts the spec relies on](01-spike-4d-facts.md):
   - Facts 5 and 6 failed: `QUERY` with `>=` and `<` treats `@` in a bound as a wildcard, so a key
     range with `@` in a bound selects the wrong records. Don't build the key-range jobs until
-    [Keys that contain @](../../DONE/exact-copy-v2/issues/14-keys-that-contain-at.md) is resolved.
+    [Keys that contain @](../../exact-copy-v2/issues/14-keys-that-contain-at.md) is resolved.
   - Fact 9 holds: a class instance keeps its class through `CALL WORKER`, and the worker of a
     capable method runs preemptive, compiled.
-- 2026-10-01, from [Keys that contain @](../../DONE/exact-copy-v2/issues/14-keys-that-contain-at.md) (resolved):
+- 2026-10-01, from [Keys that contain @](../../exact-copy-v2/issues/14-keys-that-contain-at.md) (resolved):
   - If any cut key of a table contains `@` (`Position`), the table runs as one job with no range
     `QUERY`, in every source-side pass. Bounds free of `@` are safe, because `@` is a wildcard only
     on the right. Check that `QUERY` `>=` and `<` with bounds free of `@` selects the right records
@@ -70,7 +70,7 @@ Gates: compile
     distinct values in memory. 2 million keys took 5 seconds on the bench.
 - 2026-10-01, built (not yet compiled or run). Waiting on the human steps below. Then a session
   writes the `## Answer` from the JSON files.
-  - **`_Job`** ([Classes/_Job.4dm](../../../Project/Sources/Classes/_Job.4dm)), the base of every
+  - **`_Job`** ([Classes/_Job.4dm](../../../../Project/Sources/Classes/_Job.4dm)), the base of every
     job class. `run()` returns the output `{index; table; start; started; ended; preemptive;
     stopped; failure; row; findings}` and never throws: it catches into `failure` (`{table; key;
     errors; call_chain}`, from the worker). A subclass overrides `_run()`, adds its counts to
@@ -79,10 +79,10 @@ Gates: compile
     as `stopped`), so a job must not catch around it. It also sends progress at most once a second.
     `_select()` is the source side of spec 10: `QUERY` low ≤ key < high, `ORDER BY` the key, and
     errCode 6 if the count isn't `expected`.
-  - **`_GateJob`** ([Classes/_GateJob.4dm](../../../Project/Sources/Classes/_GateJob.4dm)): ticket
+  - **`_GateJob`** ([Classes/_GateJob.4dm](../../../../Project/Sources/Classes/_GateJob.4dm)): ticket
     03's gate, moved from `HealthCheckPass` unchanged, one job per table. The job contract gains
     `detail_limit`. It ticks after each check.
-  - **`_WorkerPool`** ([Classes/_WorkerPool.4dm](../../../Project/Sources/Classes/_WorkerPool.4dm)):
+  - **`_WorkerPool`** ([Classes/_WorkerPool.4dm](../../../../Project/Sources/Classes/_WorkerPool.4dm)):
     `new(workers; window; stop; log).run(class; jobs)` returns `{tables; findings; failure; stopped;
     preemptive}`. Jobs are queued by `cost`, largest first. Workers are named
     `ExportImport_<coordinator process>_<n>`, at most one per job. On the first failure, or when the
@@ -101,7 +101,7 @@ Gates: compile
     The method pushes the output as JSON onto a shared collection, as `__Check_Codec` does. The
     shared stop goes as its own parameter, because only a shared object passed directly is
     documented to stay shared.
-  - **`_Planner`** ([Classes/_Planner.4dm](../../../Project/Sources/Classes/_Planner.4dm)):
+  - **`_Planner`** ([Classes/_Planner.4dm](../../../../Project/Sources/Classes/_Planner.4dm)):
     `counts(sizes)` is the cut rule, in one place. `whole(tables)` gives one job per table (the
     gate). `source(tables)` sorts a split table once with ORDA `orderBy` (not `ORDER BY`, which
     would change the current selection of the host's process) and reads the key at each cut

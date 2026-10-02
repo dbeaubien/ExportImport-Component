@@ -60,4 +60,4 @@ A key with `@` can never match, because the export refuses one (spec 14), so its
 - **Amends** spec 08's "Everything before the break stands" and spec 10's rule per job.
 - **Rejected:** only the extras of the job that broke (it misses the false extra in another job),
   and accepting the gap with documentation.
-- **Build:** [Compare: extras before an order guard break](../../../exact-copy-v2-build/issues/22-compare-extras-before-an-order-break.md).
+- **Build:** [Compare: extras before an order guard break](../../exact-copy-v2-build/issues/22-compare-extras-before-an-order-break.md).

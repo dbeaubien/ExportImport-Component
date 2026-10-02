@@ -13,7 +13,7 @@ Should the cut rule cost a table by something other than records × fields?
 The cost decides two things (spec 10, `_Planner.counts()`): how many jobs a table gets (its share
 of the run's total cost, with at least 50,000 records a job), and the order of the worker pool's
 queue (largest cost first). On the bench, the export at its default of 4 workers
-([Bench on the new API](../../../exact-copy-v2-build/issues/13-bench-on-the-new-api.md)) shows
+([Bench on the new API](../../exact-copy-v2-build/issues/13-bench-on-the-new-api.md)) shows
 both going wrong:
 
 - `[Bench_Text]` (1,000,000 records, 5 fields, 790 MB) costs 5 million and gets one job.
@@ -97,7 +97,7 @@ largest first. Bytes play no part in planning a run.**
      min). Attach the `Bench Baseline <date>.json` it writes next to the datafile as
      `research/19-Bench-Baseline-compiled.json` beside this map.
   3. Expect `exported` and `exact`, an export phase of about 71 s against 111 s in
-     [13-Bench-Baseline-compiled.json](../../../exact-copy-v2-build/research/13-Bench-Baseline-compiled.json),
+     [13-Bench-Baseline-compiled.json](../../exact-copy-v2-build/research/13-Bench-Baseline-compiled.json),
      and Compare at about 194 s, as before.
   4. Delete the export set it made (about 4 GB).
 - 2026-10-02, run by the human: steps 1 to 3, compiled, on the same machine, datafile and 4D build as

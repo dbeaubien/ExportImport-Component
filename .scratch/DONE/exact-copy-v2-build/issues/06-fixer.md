@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-01)
 Type: task
 Blocked by: 05
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/09-health-checks.md (The fixer, Report), .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (FixerPass, Verdicts), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md (Table rows), Project/Sources/Methods/Export_PreCheck_RemoveBadChars.4dm
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/09-health-checks.md (The fixer, Report), .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (FixerPass, Verdicts), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md (Table rows), Project/Sources/Methods/Export_PreCheck_RemoveBadChars.4dm
 Gates: compile
 
 ## What to build
@@ -30,7 +30,7 @@ Gates: compile
 
 ## Comments
 
-- 2026-10-01, from [Keys that contain @](../../DONE/exact-copy-v2/issues/14-keys-that-contain-at.md) (resolved):
+- 2026-10-01, from [Keys that contain @](../../exact-copy-v2/issues/14-keys-that-contain-at.md) (resolved):
   - `_FixJob` never finds a record with a classic `QUERY` `=` on a key value, because a key may
     contain `@`, a wildcard on the right. Walk the job's selection, or use ORDA `===`. A table whose
     cut key contains `@` runs as one job (ticket 04).
@@ -80,7 +80,7 @@ Gates: compile
   [06-__Check_Fixer-compiled.json](../research/06-__Check_Fixer-compiled.json) is this run's.
 
 ## Answer` from the JSON file.
-  - **`FixerPass`** ([Classes/FixerPass.4dm](../../../Project/Sources/Classes/FixerPass.4dm)),
+  - **`FixerPass`** ([Classes/FixerPass.4dm](../../../../Project/Sources/Classes/FixerPass.4dm)),
     `extends HealthCheckPass`, pass `fixer`, name `Fixer`. Three phases: `gate`, `fix`, `scan`.
     - A gate blocker gives `blocked` after the gate alone. Nothing is changed, and the next step
       says so.
@@ -97,7 +97,7 @@ Gates: compile
       char_code}]}`, at most `detail_limit` per table, then `{table; key: null; not_listed: N}`.
       `N` counts records. One entry per record, not per value, so `records_saved` gives the
       `not_listed` count.
-  - **`_FixJob`** ([Classes/_FixJob.4dm](../../../Project/Sources/Classes/_FixJob.4dm)), `extends
+  - **`_FixJob`** ([Classes/_FixJob.4dm](../../../../Project/Sources/Classes/_FixJob.4dm)), `extends
     _Job`. It walks `_select()` in `READ WRITE` mode and never finds a record by its key (spec 14).
     For each Alpha and Text value it calls `STR_GetListOfBadCharacters`, deletes the characters
     from the last `pos` back, and saves the record once.
@@ -114,7 +114,7 @@ Gates: compile
     every number and `{kind: count}` but `records`), `_verdict()` and `_limit()`, so `FixerPass`
     reuses them. Its behaviour is unchanged except one next step: `warnings` with no bad character
     left (only all-`0x20` UUIDs) now says "Run the export." and no longer suggests the fixer.
-  - **`Database_SetTriggers(on)`** ([Methods/Database_SetTriggers.4dm](../../../Project/Sources/Methods/Database_SetTriggers.4dm)):
+  - **`Database_SetTriggers(on)`** ([Methods/Database_SetTriggers.4dm](../../../../Project/Sources/Methods/Database_SetTriggers.4dm)):
     the `ALTER DATABASE` block lives in a method, because no source says whether `Begin SQL`
     compiles inside a class function, and this project has only run it in methods. Ticket 11's
     coordinator can use it too. `Trigger_DISABLE`/`ENABLE` stay for the old code until ticket 14.

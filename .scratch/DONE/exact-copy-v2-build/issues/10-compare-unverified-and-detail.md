@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-01)
 Type: task
 Blocked by: 09
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/08-comparison-and-discrepancy-report.md (Values of a changed field, Unverified records, Detail cap, Verdict), .scratch/DONE/exact-copy-v2/issues/10-split-large-tables-across-workers.md (Compare), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md (`.txt` layout)
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/08-comparison-and-discrepancy-report.md (Values of a changed field, Unverified records, Detail cap, Verdict), .scratch/DONE/exact-copy-v2/issues/10-split-large-tables-across-workers.md (Compare), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md (`.txt` layout)
 Gates: compile
 
 ## What to build
@@ -42,8 +42,8 @@ Gates: compile
 
 - 2026-10-01, from [Spike: verify the 4D facts the spec relies on](01-spike-4d-facts.md):
   - Facts 5 and 6 failed: the order guard uses `<`, which treats `@` as a wildcard, so a key that
-    contains `@` can raise a false order break. Wait for [Keys that contain @](../../DONE/exact-copy-v2/issues/14-keys-that-contain-at.md).
-- 2026-10-01, from [Keys that contain @](../../DONE/exact-copy-v2/issues/14-keys-that-contain-at.md) (resolved):
+    contains `@` can raise a false order break. Wait for [Keys that contain @](../../exact-copy-v2/issues/14-keys-that-contain-at.md).
+- 2026-10-01, from [Keys that contain @](../../exact-copy-v2/issues/14-keys-that-contain-at.md) (resolved):
   - Source keys can't contain `@`, so the order guard and the pre-dispatch segment check compare
     keys free of `@`. A target key with `@` is an extra (ticket 09).
 - 2026-10-01, from [Structure and record codec](02-structure-and-record-codec.md): `Convert to text` drops a leading BOM, so it loses a value's leading
@@ -64,7 +64,7 @@ Gates: compile
     can follow. Its every-table set `Export 2026-10-01 18.33.09` is next to the bench datafile.
 - 2026-10-01, built (not yet compiled or run). Waiting on the human steps below. Then a session
   writes the `## Answer` from the JSON files.
-  - **`_CompareJob`** ([Classes/_CompareJob.4dm](../../../Project/Sources/Classes/_CompareJob.4dm)):
+  - **`_CompareJob`** ([Classes/_CompareJob.4dm](../../../../Project/Sources/Classes/_CompareJob.4dm)):
     errors 12 and 13 are gone.
     - `_read()` returns the damage instead of throwing: the segment is missing, or its size,
       SHA-256 or record count isn't the manifest's. "Doesn't decode" means that its records'
@@ -92,7 +92,7 @@ Gates: compile
     - Row: `unverified` counts target records, and `found` counts the discrepancies, listed or
       not. The pass removes `found`. `actual` = matched + extra + duplicate + unverified. The
       source side of a range is the range's `source_records`.
-  - **`ComparePass`** ([Classes/ComparePass.4dm](../../../Project/Sources/Classes/ComparePass.4dm)):
+  - **`ComparePass`** ([Classes/ComparePass.4dm](../../../../Project/Sources/Classes/ComparePass.4dm)):
     - `_in_order()` is spec 10's check before dispatch. A table that fails it is planned with
       `_Planner.new(1)`, so it runs as one job.
     - The result gains `unverified` (`{table; kind: "unverified"; key; reason}`) and
@@ -113,7 +113,7 @@ Gates: compile
     guard only sees the break once the merge has passed it. With jobs, a late source key can even
     make another job report a false extra. That gives `notExact` where `inconclusive` was meant.
     The build follows the spec. The decision went to the spec map as [Extras before an order guard
-    break](../../DONE/exact-copy-v2/issues/16-extras-before-an-order-break.md). It doesn't block
+    break](../../exact-copy-v2/issues/16-extras-before-an-order-break.md). It doesn't block
     ticket 11.
   - **For ticket 11:** Compare's verdict can now be `inconclusive`, and the import's verdict is
     Compare's (spec 12).
@@ -195,7 +195,7 @@ Gates: compile
   compiled, as in step 2 above. Expect the summary of step 2.
 - 2026-10-01, the fourth run, compiled: every line as expected.
 
-- 2026-10-02, from spec [Extras before an order guard break](../../DONE/exact-copy-v2/issues/16-extras-before-an-order-break.md)
+- 2026-10-02, from spec [Extras before an order guard break](../../exact-copy-v2/issues/16-extras-before-an-order-break.md)
   (resolved): the gap above is closed in
   [Compare: extras before an order guard break](22-compare-extras-before-an-order-break.md). Once
   any job of a table breaks its order guard, every extra of that table becomes unverified, except
@@ -236,7 +236,7 @@ the rename of the third run's fix (`_unverified_range()`).
   the same.
 - **A gap in the spec:** extras reported just before an order guard break can be false, which
   gives `notExact` where `inconclusive` was meant. It went back to the spec map as [Extras before
-  an order guard break](../../DONE/exact-copy-v2/issues/16-extras-before-an-order-break.md).
+  an order guard break](../../exact-copy-v2/issues/16-extras-before-an-order-break.md).
 - **No 4D fact failed.** The error 85 of the first three runs was a helper named `_range()`, which
   overrode `_Job._range()`. The probes showed that a pointer dereferenced inside or after a `Try`
   block works, cooperative and preemptive. The build map's Notes now warn about such overrides.

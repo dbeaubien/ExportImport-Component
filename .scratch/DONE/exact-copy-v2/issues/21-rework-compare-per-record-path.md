@@ -23,7 +23,7 @@ From [Probe: Compare's per-record path](20-probe-compare-per-record-path.md), de
   changes.
 
 A rework becomes a build ticket, after
-[Compare: extras before an order guard break](../../../exact-copy-v2-build/issues/22-compare-extras-before-an-order-break.md),
+[Compare: extras before an order guard break](../../exact-copy-v2-build/issues/22-compare-extras-before-an-order-break.md),
 which changes the same loop. That build ticket, or this ticket if there is no rework, deletes the
 probe's harness: `__Spike_Compare_Path` and `__ComparePath`.
 
@@ -132,7 +132,7 @@ probe's harness: `__Spike_Compare_Path` and `__ComparePath`.
 Decided with the human on 2026-10-02, from
 [Probe: Compare's loop, step by step](22-probe-compare-loop-step-by-step.md) and this ticket's own
 run of its harness (Comments). No glossary change. Built in
-[Compare: the lean merge loop](../../../exact-copy-v2-build/issues/23-compare-lean-merge-loop.md).
+[Compare: the lean merge loop](../../exact-copy-v2-build/issues/23-compare-lean-merge-loop.md).
 
 **Rework `_CompareJob`'s merge loop into probe 22's `lean` form. Keys are compared without Base64
 or an object, and nothing in the per-record path goes through `This`. Matched records are still

@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-02)
 Type: task
 Blocked by: 14, 18
-Reads: .scratch/exact-copy-v2-build/map.md, README.md, .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md, .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md, .scratch/DONE/exact-copy-v2/issues/06-fingerprint-compute-and-storage.md (After import), docs/adr/0001-two-host-seams.md, docs/agents/issue-tracker.md
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, README.md, .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md, .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md, .scratch/DONE/exact-copy-v2/issues/06-fingerprint-compute-and-storage.md (After import), docs/adr/0001-two-host-seams.md, docs/agents/issue-tracker.md
 Gates: —
 
 ## What to build
@@ -33,7 +33,7 @@ Written on 2026-10-02, after ticket 18 compiled. Both Acceptance checks were run
 each of the 7 shared methods and 5 public classes appears in the README with its signature, and
 XML and MD5 appear only in the line that says they are gone.
 
-**[README.md](../../../README.md) is rewritten for the new component.** In order:
+**[README.md](../../../../README.md) is rewritten for the new component.** In order:
 
 - **How it works:** the five steps, the equality rule, and the export set's layout and manifest.
   It runs in 4D local mode only.

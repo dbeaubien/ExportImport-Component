@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Claude (claimed 2026-10-02)
 Type: task
 Blocked by: —
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/16-extras-before-an-order-break.md (Answer), .scratch/DONE/exact-copy-v2/issues/08-comparison-and-discrepancy-report.md (Unverified records, Verdict), .scratch/exact-copy-v2-build/issues/10-compare-unverified-and-detail.md (Comments from "built" on, Answer), Project/Sources/Classes/ComparePass.4dm, Project/Sources/Classes/_CompareJob.4dm, the `order` case of `__Check_Compare_Detail` in commit 5bdc9ce (`git show 5bdc9ce:Project/Sources/Methods/__Check_Compare_Detail.4dm`)
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/16-extras-before-an-order-break.md (Answer), .scratch/DONE/exact-copy-v2/issues/08-comparison-and-discrepancy-report.md (Unverified records, Verdict), .scratch/DONE/exact-copy-v2-build/issues/10-compare-unverified-and-detail.md (Comments from "built" on, Answer), Project/Sources/Classes/ComparePass.4dm, Project/Sources/Classes/_CompareJob.4dm, the `order` case of `__Check_Compare_Detail` in commit 5bdc9ce (`git show 5bdc9ce:Project/Sources/Methods/__Check_Compare_Detail.4dm`)
 Gates: compile
 
 ## What to build
@@ -46,11 +46,11 @@ jobs, becomes unverified. Extras whose key contains `@` stay extra.
 
 - 2026-10-02, built (not yet compiled). Waiting on the compile, then this ticket resolves (the run
   check is in ticket 21, part 1 step 8).
-  - **`_CompareJob`** ([Classes/_CompareJob.4dm](../../../Project/Sources/Classes/_CompareJob.4dm)):
+  - **`_CompareJob`** ([Classes/_CompareJob.4dm](../../../../Project/Sources/Classes/_CompareJob.4dm)):
     the row gains `broke` (1 when the order guard broke, set where the job's unverified range
     starts) and `extra_at` (each target key with `@` that `_next()` reports as extra). The pool
     adds both up across a table's jobs, as it does `found`.
-  - **`ComparePass._run()`** ([Classes/ComparePass.4dm](../../../Project/Sources/Classes/ComparePass.4dm)):
+  - **`ComparePass._run()`** ([Classes/ComparePass.4dm](../../../../Project/Sources/Classes/ComparePass.4dm)):
     when a table's `broke` is above 0, `extra - extra_at` moves from `extra` (and `found`) to
     `unverified`, so `actual` doesn't change. Each listed `extra` finding whose key isn't a text
     with `@` gets `kind: "unverified"` and the reason "a source key after the order guard break in

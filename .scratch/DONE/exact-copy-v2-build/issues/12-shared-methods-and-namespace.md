@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-01)
 Type: task
 Blocked by: 06, 11
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (Shared methods, Mode, Class seam, Options), docs/adr/0001-two-host-seams.md, Resources/componentManifest.json, Project/Sources/settings.4DSettings, Project/Sources/Methods/Export_AllTables.4dm, Project/Sources/Methods/Export_ListOfTables.4dm, Project/Sources/Methods/Import_AllTables.4dm, Project/Sources/Methods/Export_HealthCheck_Scan.4dm, Project/Sources/Methods/Export_PreCheck_RemoveBadChars.4dm
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/12-define-shared-api.md (Shared methods, Mode, Class seam, Options), docs/adr/0001-two-host-seams.md, Resources/componentManifest.json, Project/Sources/settings.4DSettings, Project/Sources/Methods/Export_AllTables.4dm, Project/Sources/Methods/Export_ListOfTables.4dm, Project/Sources/Methods/Import_AllTables.4dm, Project/Sources/Methods/Export_HealthCheck_Scan.4dm, Project/Sources/Methods/Export_PreCheck_RemoveBadChars.4dm
 Gates: compile
 
 ## What to build
@@ -62,16 +62,16 @@ Gates: compile
   - **The five old shared methods are wrappers** over their pass, with the same names and
     parameter lists. None of them asserts any more, and none calls `Log_OpenDisplayWindow`,
     `GenericWorker_*` or `Trigger_*` (ticket 14 deletes them).
-    - [Export_AllTables](../../../Project/Sources/Methods/Export_AllTables.4dm) and
-      [Export_ListOfTables](../../../Project/Sources/Methods/Export_ListOfTables.4dm) return
+    - [Export_AllTables](../../../../Project/Sources/Methods/Export_AllTables.4dm) and
+      [Export_ListOfTables](../../../../Project/Sources/Methods/Export_ListOfTables.4dm) return
       `ExportPass`'s `export_set`.
-    - [Import_AllTables](../../../Project/Sources/Methods/Import_AllTables.4dm) takes
+    - [Import_AllTables](../../../../Project/Sources/Methods/Import_AllTables.4dm) takes
       `options.export_set`, or asks with `Select folder` ("Select the export set to import"), and
       returns that path, or "" on a cancel.
-    - [Export_HealthCheck_Scan](../../../Project/Sources/Methods/Export_HealthCheck_Scan.4dm)
+    - [Export_HealthCheck_Scan](../../../../Project/Sources/Methods/Export_HealthCheck_Scan.4dm)
       builds `cs[FixerPass or HealthCheckPass]` from `remove_bad_characters` and returns
       `report`.
-      [Export_PreCheck_RemoveBadChars](../../../Project/Sources/Methods/Export_PreCheck_RemoveBadChars.4dm)
+      [Export_PreCheck_RemoveBadChars](../../../../Project/Sources/Methods/Export_PreCheck_RemoveBadChars.4dm)
       calls it with `remove_bad_characters: True`, so the translation lives in one place.
     - `num_workers` and `num_processes` of 0 **or below** become `workers: Null`, so the core
       count: the old code took any value of 0 or below as its default.
@@ -79,7 +79,7 @@ Gates: compile
       `HealthChecker.Set_Tables_to_Check()` did. The pass itself refuses an empty `tables`, so a
       host that passed `[]` would otherwise get `refused`.
     - The Execute on Server flags are gone, and every wrapper is "incapable".
-  - **[Compare_ExportSet](../../../Project/Sources/Methods/Compare_ExportSet.4dm)** passes its
+  - **[Compare_ExportSet](../../../../Project/Sources/Methods/Compare_ExportSet.4dm)** passes its
     path and options to `ComparePass` as they are. It is in the `methodList`.
   - **The namespace** was already set: `component_classStore_name="ExportImport"` in
     `settings.4DSettings`. On the five public classes and `_Pass`, only `check()` and `run()` lack
@@ -113,7 +113,7 @@ Gates: compile
        spec map.
   4. Attach the scratch host import's run report `.json` as `research/12-Import-scratch-host.json`,
      and say what each step gave.
-- 2026-10-01, from spec [Worker count and contention between workers](../../DONE/exact-copy-v2/issues/15-worker-count-and-contention.md) (resolved): a `workers` of 0 now means the pass's default (4, or 2
+- 2026-10-01, from spec [Worker count and contention between workers](../../exact-copy-v2/issues/15-worker-count-and-contention.md) (resolved): a `workers` of 0 now means the pass's default (4, or 2
   for Compare, capped at the core count), not the core count. Turning 0 into a null `workers`
   is still right. The change to `_Pass._workers()` lands in
   [Bench on the new API](13-bench-on-the-new-api.md), so until then the human step

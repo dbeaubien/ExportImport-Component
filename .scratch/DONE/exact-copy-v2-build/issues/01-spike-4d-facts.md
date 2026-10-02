@@ -4,14 +4,14 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-01)
 Type: task
 Blocked by: —
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/research/02-survey-v21-hashing-and-bulk-io.md, the "Build verification" lists in .scratch/DONE/exact-copy-v2/issues/04-define-fingerprint.md, 05-define-export-set-format.md, 07-import-strategy.md, 08-comparison-and-discrepancy-report.md, 09-health-checks.md, 10-split-large-tables-across-workers.md and 12-define-shared-api.md, Project/Sources/catalog.4DCatalog, Project/Sources/Methods/__Bench_Generate.4dm
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/research/02-survey-v21-hashing-and-bulk-io.md, the "Build verification" lists in .scratch/DONE/exact-copy-v2/issues/04-define-fingerprint.md, 05-define-export-set-format.md, 07-import-strategy.md, 08-comparison-and-discrepancy-report.md, 09-health-checks.md, 10-split-large-tables-across-workers.md and 12-define-shared-api.md, Project/Sources/catalog.4DCatalog, Project/Sources/Methods/__Bench_Generate.4dm
 Gates: compile
 
 ## What to build
 
 Two dev methods that test the facts below. Each writes one JSON file with one entry per fact
 (`fact`, `spec`, `expected`, `actual`, `pass`) to
-`.scratch/exact-copy-v2-build/research/01-<method>-<compiled|interpreted>.json`.
+`.scratch/DONE/exact-copy-v2-build/research/01-<method>-<compiled|interpreted>.json`.
 
 **Spike tables** in the dev catalog (prefix `Spike_`, beside the `Bench_*` tables; they stay for
 later tickets):
@@ -139,7 +139,7 @@ except that interpreted workers are cooperative and fact 7 loads a different gen
 What follows from it (each item is a comment on the build tickets named):
 
 - **`@` in Alpha and Text keys** (facts 5 and 6) breaks Compare's merge and order guard and every
-  key-range `QUERY`. This changes a decision: [Keys that contain @](../../DONE/exact-copy-v2/issues/14-keys-that-contain-at.md)
+  key-range `QUERY`. This changes a decision: [Keys that contain @](../../exact-copy-v2/issues/14-keys-that-contain-at.md)
   in the spec map. Tickets 04, 07, 09 and 10 wait for it.
 - **An empty UUID is written as the all-zero UUID, never `""`** (facts 2 and 10), which stores
   `0x20` bytes. Both encode as empty (spec 04). This is also where all-`0x20` UUIDs come from.

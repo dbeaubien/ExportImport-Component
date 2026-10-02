@@ -4,7 +4,7 @@ Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-02)
 Type: task
 Blocked by: 12
-Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Layout, Handover and the opening step, A report pair for every pass, Settings), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md (Run report written early), .scratch/DONE/exact-copy-v2/research/11-dialog-4d-facts.md, Project/Sources/Methods/Export_Import_Dialog.4dm, Project/Sources/Forms/Main/form.4DForm, Project/Sources/Forms/Main/method.4dm
+Reads: .scratch/DONE/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Layout, Handover and the opening step, A report pair for every pass, Settings), .scratch/DONE/exact-copy-v2/issues/13-logging-and-report-contents.md (Run report written early), .scratch/DONE/exact-copy-v2/research/11-dialog-4d-facts.md, Project/Sources/Methods/Export_Import_Dialog.4dm, Project/Sources/Forms/Main/form.4DForm, Project/Sources/Forms/Main/method.4dm
 Gates: compile
 
 ## What to build
@@ -45,7 +45,7 @@ Gates: compile
 
 ## Comments
 
-- 2026-10-01, from spec [Worker count and contention between workers](../../DONE/exact-copy-v2/issues/15-worker-count-and-contention.md) (resolved): "The Workers field" becomes one field per step (Health
+- 2026-10-01, from spec [Worker count and contention between workers](../../exact-copy-v2/issues/15-worker-count-and-contention.md) (resolved): "The Workers field" becomes one field per step (Health
   check, Export, Import, Compare), each in its step's pane (tickets 17 and 18). Each field is
   pre-filled with its pass's default (4, or 2 for Compare, capped at the core count), minimum 1,
   not remembered. Read the default from the pass, so the number lives in one place. The Health
