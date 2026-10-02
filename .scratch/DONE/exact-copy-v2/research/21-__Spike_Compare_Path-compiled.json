@@ -1,0 +1,398 @@
+{
+	"method": "__Spike_Compare_Path",
+	"when": "2026-10-02T16:12:29.100Z",
+	"compiled": true,
+	"cores": 10,
+	"export_set": "Export 2026-10-02 10.12.25",
+	"tables": [
+		"Bench_Small_11",
+		"Bench_Small_12",
+		"Bench_Small_13",
+		"Bench_Small_14",
+		"Bench_Small_15",
+		"Bench_Small_16"
+	],
+	"warmup": {
+		"workers": 6,
+		"variant": "warmup",
+		"preemptive": true,
+		"failure": null,
+		"records": 81000,
+		"matched": 81000,
+		"found": 0,
+		"unverified": 0,
+		"exact": true,
+		"ms": 5605
+	},
+	"runs": [
+		{
+			"workers": 1,
+			"variant": "lean",
+			"preemptive": true,
+			"failure": null,
+			"records": 11000,
+			"matched": 11000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				19.3
+			],
+			"us_per_record_mean": 19.3,
+			"records_per_s": 51887
+		},
+		{
+			"workers": 1,
+			"variant": "lean_bytes",
+			"preemptive": true,
+			"failure": null,
+			"records": 11000,
+			"matched": 11000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				16.5
+			],
+			"us_per_record_mean": 16.5,
+			"records_per_s": 60773
+		},
+		{
+			"workers": 1,
+			"variant": "lean_md5",
+			"preemptive": true,
+			"failure": null,
+			"records": 11000,
+			"matched": 11000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				18.3
+			],
+			"us_per_record_mean": 18.3,
+			"records_per_s": 54726
+		},
+		{
+			"workers": 1,
+			"variant": "lean_nocheck",
+			"preemptive": true,
+			"failure": null,
+			"records": 11000,
+			"matched": 11000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				16.1
+			],
+			"us_per_record_mean": 16.1,
+			"records_per_s": 62147
+		},
+		{
+			"workers": 2,
+			"variant": "lean",
+			"preemptive": true,
+			"failure": null,
+			"records": 23000,
+			"matched": 23000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				25.8,
+				25.3
+			],
+			"us_per_record_mean": 25.6,
+			"records_per_s": 75658
+		},
+		{
+			"workers": 2,
+			"variant": "lean_bytes",
+			"preemptive": true,
+			"failure": null,
+			"records": 23000,
+			"matched": 23000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				22.2,
+				21.8
+			],
+			"us_per_record_mean": 22,
+			"records_per_s": 88123
+		},
+		{
+			"workers": 2,
+			"variant": "lean_md5",
+			"preemptive": true,
+			"failure": null,
+			"records": 23000,
+			"matched": 23000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				25,
+				24.5
+			],
+			"us_per_record_mean": 24.8,
+			"records_per_s": 78231
+		},
+		{
+			"workers": 2,
+			"variant": "lean_nocheck",
+			"preemptive": true,
+			"failure": null,
+			"records": 23000,
+			"matched": 23000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				23.2,
+				22.4
+			],
+			"us_per_record_mean": 22.8,
+			"records_per_s": 85502
+		},
+		{
+			"workers": 4,
+			"variant": "lean",
+			"preemptive": true,
+			"failure": null,
+			"records": 50000,
+			"matched": 50000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				58.2,
+				56.2,
+				54.1,
+				51.3
+			],
+			"us_per_record_mean": 55,
+			"records_per_s": 69638
+		},
+		{
+			"workers": 4,
+			"variant": "lean_bytes",
+			"preemptive": true,
+			"failure": null,
+			"records": 50000,
+			"matched": 50000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				58.7,
+				56.9,
+				54.3,
+				51.5
+			],
+			"us_per_record_mean": 55.4,
+			"records_per_s": 69348
+		},
+		{
+			"workers": 4,
+			"variant": "lean_md5",
+			"preemptive": true,
+			"failure": null,
+			"records": 50000,
+			"matched": 50000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				56.1,
+				54.9,
+				52.5,
+				49.9
+			],
+			"us_per_record_mean": 53.4,
+			"records_per_s": 71633
+		},
+		{
+			"workers": 4,
+			"variant": "lean_nocheck",
+			"preemptive": true,
+			"failure": null,
+			"records": 50000,
+			"matched": 50000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				56.6,
+				54.7,
+				52.4,
+				49.6
+			],
+			"us_per_record_mean": 53.3,
+			"records_per_s": 72046
+		},
+		{
+			"workers": 6,
+			"variant": "lean",
+			"preemptive": true,
+			"failure": null,
+			"records": 81000,
+			"matched": 81000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				160.8,
+				157.3,
+				151.4,
+				143.4,
+				135,
+				127.5
+			],
+			"us_per_record_mean": 145.9,
+			"records_per_s": 39706
+		},
+		{
+			"workers": 6,
+			"variant": "lean_bytes",
+			"preemptive": true,
+			"failure": null,
+			"records": 81000,
+			"matched": 81000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				163.7,
+				160.9,
+				153,
+				145.2,
+				136.8,
+				129
+			],
+			"us_per_record_mean": 148.1,
+			"records_per_s": 39244
+		},
+		{
+			"workers": 6,
+			"variant": "lean_md5",
+			"preemptive": true,
+			"failure": null,
+			"records": 81000,
+			"matched": 81000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				158.6,
+				155.9,
+				149.7,
+				141.2,
+				133.7,
+				126.4
+			],
+			"us_per_record_mean": 144.3,
+			"records_per_s": 40059
+		},
+		{
+			"workers": 6,
+			"variant": "lean_nocheck",
+			"preemptive": true,
+			"failure": null,
+			"records": 81000,
+			"matched": 81000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				167.8,
+				161.7,
+				153.1,
+				144.9,
+				136.9,
+				129.1
+			],
+			"us_per_record_mean": 148.9,
+			"records_per_s": 39206
+		}
+	],
+	"summary": {
+		"us": {
+			"1": {
+				"lean": 19.3,
+				"lean_bytes": 16.5,
+				"lean_md5": 18.3,
+				"lean_nocheck": 16.1
+			},
+			"2": {
+				"lean": 25.6,
+				"lean_bytes": 22,
+				"lean_md5": 24.8,
+				"lean_nocheck": 22.8
+			},
+			"4": {
+				"lean": 55,
+				"lean_bytes": 55.4,
+				"lean_md5": 53.4,
+				"lean_nocheck": 53.3
+			},
+			"6": {
+				"lean": 145.9,
+				"lean_bytes": 148.1,
+				"lean_md5": 144.3,
+				"lean_nocheck": 148.9
+			}
+		},
+		"records_per_s": {
+			"1": {
+				"lean": 51887,
+				"lean_bytes": 60773,
+				"lean_md5": 54726,
+				"lean_nocheck": 62147
+			},
+			"2": {
+				"lean": 75658,
+				"lean_bytes": 88123,
+				"lean_md5": 78231,
+				"lean_nocheck": 85502
+			},
+			"4": {
+				"lean": 69638,
+				"lean_bytes": 69348,
+				"lean_md5": 71633,
+				"lean_nocheck": 72046
+			},
+			"6": {
+				"lean": 39706,
+				"lean_bytes": 39244,
+				"lean_md5": 40059,
+				"lean_nocheck": 39206
+			}
+		},
+		"saved_us": {
+			"1": {
+				"lean_bytes": 2.8,
+				"lean_md5": 1,
+				"lean_nocheck": 3.2
+			},
+			"2": {
+				"lean_bytes": 3.6,
+				"lean_md5": 0.8,
+				"lean_nocheck": 2.8
+			},
+			"4": {
+				"lean_bytes": -0.4,
+				"lean_md5": 1.6,
+				"lean_nocheck": 1.7
+			},
+			"6": {
+				"lean_bytes": -2.2,
+				"lean_md5": 1.6,
+				"lean_nocheck": -3
+			}
+		}
+	},
+	"ok": true
+}

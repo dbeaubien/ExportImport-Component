@@ -2,7 +2,7 @@
 
 Status: open
 Type: task
-Blocked by: 21, 22
+Blocked by: 21, 22, 25
 Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/map.md (Notes: Scale, Benchmarking), .scratch/DONE/exact-copy-v2/issues/04-define-fingerprint.md (Build verification: subtables), .scratch/DONE/exact-copy-v2/issues/08-comparison-and-discrepancy-report.md (customer values in the reports), docs/agents/issue-tracker-rules.md
 Gates: bench
 
@@ -50,3 +50,8 @@ end, compiled, on a copy of a customer datafile (30–40 GB):
   runs only after the bench run passes. Ticket 16's host check moves here too: in the customer
   host, the dialog shows progress from the preemptive jobs (`CALL FORM`), and closing the window
   during a run does no harm.
+- 2026-10-02, from spec [Trusting the export set](../../DONE/exact-copy-v2/issues/23-trusting-the-export-set.md)
+  (resolved): run `__Check_Codec_Values` on the customer copy, made shared for that run
+  ([Codec: values survive the round trip](25-codec-values-survive-the-round-trip.md)). Expect no
+  difference, record only its counts, and delete its JSON, which holds customer values. Then
+  delete both of its methods. Record the export's self-check time apart from the export's.

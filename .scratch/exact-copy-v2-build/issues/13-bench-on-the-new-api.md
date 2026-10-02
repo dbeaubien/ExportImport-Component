@@ -170,3 +170,7 @@ spec 03's export at 10 workers plus its checksum.** The JSON's `export_workers` 
   workers in 5:56, Compare included, against 9:19 at 10 workers in ticket 11.
 - `__Bench_Baseline` takes no parameter and calls only `ExportPass` and `ComparePass`. The
   `bench` gate's how-to in the rules card says so.
+- 2026-10-02, from spec [The cut rule's cost for text and BLOB tables](../../DONE/exact-copy-v2/issues/19-cut-rule-cost.md)
+  (resolved): the cut rule now costs a table by its record count. The latest baseline for the
+  `bench` gate is [19-Bench-Baseline-compiled.json](../../DONE/exact-copy-v2/research/19-Bench-Baseline-compiled.json):
+  the export phase takes 55 s and Compare 141 s at the defaults, against 111 s and 194 s above.

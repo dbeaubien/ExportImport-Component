@@ -15,8 +15,11 @@
 // order. Per table, discrepancies and unverified list the first
 // detail_limit records in key order between them. Each list then says how
 // many more it has, {table; key: Null; not_listed}, and discrepancies end
-// with the record count and the sequence number. Any discrepancy gives
-// notExact. Otherwise, anything unverified gives inconclusive, else exact.
+// with the record count and the sequence number. Once any job of a table
+// breaks its order guard, every extra of the table is unverified, except a
+// key that contains @ (spec 16): a source key past the break may match it.
+// Any discrepancy gives notExact. Otherwise, anything unverified gives
+// inconclusive, else exact.
 //
 // Options: workers (2 by default, spec 15) and detail_limit (spec 12).
 // Rows add expected, actual, matched, missing, extra, changed, duplicate,
@@ -88,8 +91,8 @@ Function _failed_step() : Text
 Function _run()
 	var $jobs; $ordered; $whole; $found; $listed; $records : Collection
 	var $set : 4D.Folder
-	var $entry; $job; $out; $row : Object
-	var $count : Integer
+	var $entry; $job; $out; $row; $extra : Object
+	var $count; $n : Integer
 	This._phase("compare"; "Run Compare again.")
 	$set:=Folder(This._manifest.path; fk platform path)
 	$ordered:=[]
@@ -110,6 +113,18 @@ Function _run()
 	For each ($entry; This._manifest.content.tables)
 		$row:=$out.tables.query("number = :1"; $entry.number).first()
 		$found:=$out.findings.query("table = :1"; $entry.name)
+		If ($row.broke>0)  // spec 16: the extras become unverified, those whose key contains @ aside
+			$n:=$row.extra-$row.extra_at
+			$row.extra-=$n
+			$row.found-=$n
+			$row.unverified+=$n
+			For each ($extra; $found.query("kind = :1"; "extra"))
+				If (Value type($extra.key)#Is text) || (Position("@"; $extra.key; 1; *)=0)
+					$extra.kind:="unverified"
+					$extra.reason:="a source key after the order guard break in this table may match it"
+				End if
+			End for each
+		End if
 		This.result.unverified_ranges.combine($found.query("kind = :1"; "range"))
 		$listed:=$found.query("kind # :1"; "range").slice(0; This._limit())  // the table's first records in key order, of both lists
 		$records:=$listed.query("kind = :1"; "unverified")
@@ -124,6 +139,8 @@ Function _run()
 		End if
 		OB REMOVE($row; "records")
 		OB REMOVE($row; "found")
+		OB REMOVE($row; "broke")
+		OB REMOVE($row; "extra_at")
 		$row.expected:=$entry.records
 		$row.actual:=Records in table(Table($entry.number)->)
 		$row.sequence_expected:=$entry.sequence_number  // after the pool: it would add up a table's jobs

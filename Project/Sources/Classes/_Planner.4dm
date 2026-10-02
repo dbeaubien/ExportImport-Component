@@ -1,17 +1,17 @@
 // cs._Planner
 //
 // Cuts each table into jobs for _WorkerPool (spec 10), in the coordinator.
-// The cut rule lives here and only here. A table's cost is records × fields,
-// and the target job cost is the run's total cost ÷ the worker count. A
-// table gets the smallest of ceil(cost ÷ target), floor(records ÷ 50,000),
-// the worker count and, for import and Compare, its segment count, and at
-// least 1 job. Its records are shared out as evenly as possible.
+// The cut rule lives here and only here. A table's cost is its record count
+// (spec 19), and the target job size is the run's total records ÷ the worker
+// count. A table gets the smallest of ceil(records ÷ target), floor(records
+// ÷ 50,000), the worker count and, for import and Compare, its segment
+// count, and at least 1 job. Its records are shared out as evenly as possible.
 //
-// A job is a plain object: {table; low; high; start; expected; cost}, plus
+// A job is a plain object: {table; low; high; start; expected}, plus
 // segments for import and Compare. table is the table's _Structure entry (or
 // manifest entry). low and high bound the keys, low <= key < high, and Null
 // is an open end. start is the position of the job's first record in key
-// order, and expected its record count. The pool queues jobs by cost.
+// order, and expected its record count. The pool queues jobs by expected.
 
 property workers : Integer
 property minimum : Integer  // records per job: 50,000. A constant, not an option
@@ -22,19 +22,17 @@ Class constructor($workers : Integer)
 
 
 Function counts($sizes : Collection) : Collection
-	// The job count of each table, from [{records; fields; segments}], where
-	// segments is the segment count, for import and Compare only.
+	// The job count of each table, from [{records; segments}], where segments
+	// is the segment count, for import and Compare only.
 	var $size : Object
 	var $counts; $n : Collection
 	var $total : Real
-	For each ($size; $sizes)
-		$total+=$size.records*$size.fields
-	End for each
+	$total:=$sizes.sum("records")
 	$counts:=[]
 	For each ($size; $sizes)
 		$n:=[This.workers; Int($size.records/This.minimum)]
 		If ($total>0)
-			$n.push(-Int(-($size.records*$size.fields*This.workers/$total)))  // ceil(cost ÷ target)
+			$n.push(-Int(-($size.records*This.workers/$total)))  // ceil(records ÷ target)
 		End if
 		If ($size.segments#Null)
 			$n.push($size.segments)
@@ -52,7 +50,7 @@ Function whole($tables : Collection) : Collection
 	$jobs:=[]
 	For each ($table; $tables)
 		$records:=Records in table(Table($table.number)->)
-		$jobs.push({table: $table; low: Null; high: Null; start: 0; expected: $records; cost: $records*$table.fields.length})
+		$jobs.push({table: $table; low: Null; high: Null; start: 0; expected: $records})
 	End for each
 	return $jobs
 
@@ -67,7 +65,7 @@ Function source($tables : Collection) : Collection
 	var $sel : 4D.EntitySelection
 	var $key : Text
 	var $t; $i; $n; $records; $start; $end : Integer
-	$sizes:=$tables.map(Formula($1.result:={records: Records in table(Table($1.value.number)->); fields: $1.value.fields.length}))
+	$sizes:=$tables.map(Formula($1.result:={records: Records in table(Table($1.value.number)->)}))
 	$counts:=This.counts($sizes)
 	$jobs:=[]
 	For ($t; 0; $tables.length-1)
@@ -88,7 +86,7 @@ Function source($tables : Collection) : Collection
 		For ($i; 0; $n-1)
 			$start:=Int($i*$records/$n)
 			$end:=Int(($i+1)*$records/$n)
-			$jobs.push({table: $table; low: ($i=0) ? Null : $keys[$i-1]; high: ($i=($n-1)) ? Null : $keys[$i]; start: $start; expected: $end-$start; cost: ($end-$start)*$table.fields.length})
+			$jobs.push({table: $table; low: ($i=0) ? Null : $keys[$i-1]; high: ($i=($n-1)) ? Null : $keys[$i]; start: $start; expected: $end-$start})
 		End for
 	End for
 	return $jobs
@@ -102,7 +100,7 @@ Function segments($tables : Collection) : Collection
 	var $table; $segment; $run : Object
 	var $jobs; $sizes; $counts; $runs : Collection
 	var $t; $i; $n; $records; $done; $last : Integer
-	$sizes:=$tables.map(Formula($1.result:={records: $1.value.segments.sum("records"); fields: $1.value.fields.length; segments: $1.value.segments.length}))
+	$sizes:=$tables.map(Formula($1.result:={records: $1.value.segments.sum("records"); segments: $1.value.segments.length}))
 	$counts:=This.counts($sizes)
 	$jobs:=[]
 	For ($t; 0; $tables.length-1)
@@ -127,7 +125,7 @@ Function segments($tables : Collection) : Collection
 		For ($i; 0; $runs.length-1)
 			$run:=$runs[$i]
 			$records:=$run.segments.sum("records")
-			$jobs.push({table: $table; segments: $run.segments; low: ($i=0) ? Null : $run.segments[0].first_key; high: ($i=($runs.length-1)) ? Null : $runs[$i+1].segments[0].first_key; start: $run.start; expected: $records; cost: $records*$table.fields.length})
+			$jobs.push({table: $table; segments: $run.segments; low: ($i=0) ? Null : $run.segments[0].first_key; high: ($i=($runs.length-1)) ? Null : $runs[$i+1].segments[0].first_key; start: $run.start; expected: $records})
 		End for
 	End for
 	return $jobs

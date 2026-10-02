@@ -48,3 +48,4 @@ lists source fingerprints.
 - **Cost:** one full target read, the export set re-read (about 0.8× the datafile) and the segment
   hashes (about 17 s per 40 GB). The old after-import MD5 pass took 6 min serial on the 5.7 GB bench
   datafile (03).
+- 2026-10-02, from [Trusting the export set](23-trusting-the-export-set.md): the self-check now runs automatically, as the export's last phase, with no option. A set whose self-check isn't `exact` has no `manifest.json`.

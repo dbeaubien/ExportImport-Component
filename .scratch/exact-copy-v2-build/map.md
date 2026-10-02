@@ -15,7 +15,7 @@ instead of restating it.
   those steps, or with a note saying which step was not validated.
 - **From ticket 14 on, the run steps are batched** (the human's request, 2026-10-02):
   [Validate the cleanup and the dialog together](issues/21-validate-cleanup-and-dialog.md) holds
-  the run steps of tickets 14 to 18 and 22, marked (21) in their Acceptance. Those tickets
+  the run steps of tickets 14 to 18, 22 and 24, marked (21) in their Acceptance. Those tickets
   resolve once built and compiled. A ticket that needs a run of its own says why.
 - Every ticket leaves the project compiling. The old code keeps working until
   [Delete the old code](issues/14-delete-old-code.md).
@@ -55,9 +55,12 @@ instead of restating it.
 | 17 | [Dialog: the Health check and Export steps](issues/17-dialog-health-check-and-export.md) | 16 | compile |
 | 18 | [Dialog: the Switch to target, Import and Compare steps](issues/18-dialog-switch-import-compare.md) | 17 | compile |
 | 19 | [README and docs](issues/19-readme-and-docs.md) | 14, 18 | — |
-| 20 | [Final check on a customer copy](issues/20-final-check-on-a-customer-copy.md) | 21, 22 | bench |
-| 21 | [Validate the cleanup and the dialog together](issues/21-validate-cleanup-and-dialog.md) | 14, 15, 16, 17, 18, 22 | — |
+| 20 | [Final check on a customer copy](issues/20-final-check-on-a-customer-copy.md) | 21, 22, 25 | bench |
+| 21 | [Validate the cleanup and the dialog together](issues/21-validate-cleanup-and-dialog.md) | 14, 15, 16, 17, 18, 22, 23 and 24 (part 2) | — |
 | 22 | [Compare: extras before an order guard break](issues/22-compare-extras-before-an-order-break.md) | — | compile |
+| 23 | [Compare: the lean merge loop](issues/23-compare-lean-merge-loop.md) | — | compile, bench |
+| 24 | [Export: self-check and set digest](issues/24-export-self-check-and-set-digest.md) | 23 | compile, bench |
+| 25 | [Codec: values survive the round trip](issues/25-codec-values-survive-the-round-trip.md) | — | compile |
 
 The frontier is the open, unclaimed tickets whose blockers are all resolved. The lowest number wins.
 
@@ -173,6 +176,11 @@ The frontier is the open, unclaimed tickets whose blockers are all resolved. The
 - [README and docs](issues/19-readme-and-docs.md): the README is rewritten for the passes, the
   namespace, the result and its verdicts, the run reports and run logs, the dialog, and each
   blocker and sign of damage with what to do. XML and MD5 appear only as gone.
+- [Compare: extras before an order guard break](issues/22-compare-extras-before-an-order-break.md):
+  once a job of a table breaks its order guard, the pass makes every extra of that table
+  unverified, except keys with `@`, from the rows' new `broke` and `extra_at`. The counts move
+  with them, so a table with no other discrepancy gives `inconclusive`. `__Check_Order_Break` runs
+  in ticket 21.
 
 ## Why this order
 

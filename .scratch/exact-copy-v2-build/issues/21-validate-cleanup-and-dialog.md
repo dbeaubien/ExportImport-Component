@@ -1,8 +1,9 @@
 # Validate the cleanup and the dialog together
 
-Status: open
+Status: claimed
+Assignee: Dani Beaubien (claimed 2026-10-02)
 Type: task
-Blocked by: 14, 15, 16, 17, 18, 22
+Blocked by: 14, 15, 16, 17, 18, 22, 23 and 24 (part 2)
 Reads: .scratch/exact-copy-v2-build/map.md, the Acceptance of tickets 14 to 18 and 22, .scratch/DONE/exact-copy-v2/issues/11-guided-dialog.md (Switch to target), docs/agents/issue-tracker-rules.md
 Gates: —
 
@@ -51,7 +52,9 @@ its own, so its export sets stay apart from the bench's. Then run `__Bench_Gener
 8. Back on the source, run `__Check_Order_Break`. Compare gives `inconclusive`, not `notExact`. The
    second record of the swapped pair is listed under `unverified` with the reason "a source key
    after the order guard break in this table may match it", and the table's `extra` is 0 (22).
-   The agent then deletes the check.
+   Its alert reads "inconclusive, the second of the swapped pair unverified, extra 0, the range as
+   before", and it writes `research/22-__Check_Order_Break-compiled.json`. The agent then deletes
+   the check.
 
 **Part 2: one guided run on the bench datafile, about 20 minutes.**
 
@@ -81,3 +84,35 @@ part 2 covers them too.
 - [ ] Every step gives what it says. A step that fails is fixed under this ticket, with a comment on
       its build ticket, and then runs again.
 - [ ] The answer records spec 11's `CREATE DATA FILE` checks and the bench run's times.
+
+## Comments
+
+- 2026-10-02, claimed. **Part 1 runs now, part 2 waits.** "Before this ticket" applies to part 2:
+  the spec map's [cut rule's cost](../../DONE/exact-copy-v2/issues/19-cut-rule-cost.md) (claimed)
+  and [Rework Compare's per-record path](../../DONE/exact-copy-v2/issues/21-rework-compare-per-record-path.md)
+  (after its probe, spec 20) may each add a build ticket that changes the export's or Compare's
+  speed. Part 2 runs once both resolve and their build tickets are built, so its times hold. Part 1
+  checks behaviour on a small datafile and doesn't depend on them.
+  - Desk check of part 1 against the code, no change needed. `__Bench_Generate(0.01)` gives
+    `[Bench_Small_01]` its 10 records (one segment, as `__Check_Order_Break` expects) and plants
+    nothing the health check finds. The gate takes `[Bench_Small_02]`'s key 0 as `blank_key`.
+  - "The dialog opens on …" (steps 5 and 6) means close the dialog and call
+    `Export_Import_Dialog` again: a run's end refreshes the marks but stays on its step.
+  - Step 3's "3 records saved" is the fixer run report's `records_saved`: the grid doesn't show it.
+  - Step 3's planted characters are in `Name`, so ticking `Note` in Fields to ignore… runs that
+    path but hides no finding.
+- 2026-10-02, from spec [Rework Compare's per-record path](../../DONE/exact-copy-v2/issues/21-rework-compare-per-record-path.md)
+  (grilled, still open): a second probe comes first,
+  [Probe: Compare's loop, step by step](../../DONE/exact-copy-v2/issues/22-probe-compare-loop-step-by-step.md).
+  Part 2 keeps waiting, as decided with the human, so its times and its import cover a reworked
+  Compare. If spec 21 adds a rework build ticket, that ticket runs `__Check_Order_Break` again
+  (restored from git if step 8 has deleted it).
+- 2026-10-02, from spec [Rework Compare's per-record path](../../DONE/exact-copy-v2/issues/21-rework-compare-per-record-path.md)
+  (resolved): its build ticket is [Compare: the lean merge loop](23-compare-lean-merge-loop.md),
+  with run steps of its own. Part 2 waits for it. That ticket runs `__Check_Order_Break` again
+  before deleting it, so step 8 can leave the check in place.
+- 2026-10-02, from spec [Trusting the export set](../../DONE/exact-copy-v2/issues/23-trusting-the-export-set.md)
+  (resolved): part 2 also waits for [Export: self-check and set digest](24-export-self-check-and-set-digest.md),
+  whose run steps marked (21) join this ticket. Every export now ends with a self-check, so part
+  2's export time includes it, and its import and Compare show the set digest. Ticket 24's steps
+  on the small datafile need part 1's datafile again.

@@ -1,0 +1,489 @@
+{
+	"method": "__Spike_Compare_Path",
+	"when": "2026-10-02T15:53:01.413Z",
+	"compiled": true,
+	"cores": 10,
+	"export_set": "Export 2026-10-02 09.52.58",
+	"tables": [
+		"Bench_Small_11",
+		"Bench_Small_12",
+		"Bench_Small_13",
+		"Bench_Small_14",
+		"Bench_Small_15",
+		"Bench_Small_16"
+	],
+	"warmup": {
+		"workers": 6,
+		"variant": "warmup",
+		"preemptive": true,
+		"failure": null,
+		"records": 81000,
+		"matched": 81000,
+		"found": 0,
+		"unverified": 0,
+		"exact": true,
+		"ms": 5989
+	},
+	"runs": [
+		{
+			"workers": 1,
+			"variant": "compare",
+			"preemptive": true,
+			"failure": null,
+			"records": 11000,
+			"matched": 11000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				27.6
+			],
+			"us_per_record_mean": 27.6,
+			"records_per_s": 36184
+		},
+		{
+			"workers": 1,
+			"variant": "no_digest",
+			"preemptive": true,
+			"failure": null,
+			"records": 11000,
+			"matched": 11000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				24.5
+			],
+			"us_per_record_mean": 24.5,
+			"records_per_s": 40741
+		},
+		{
+			"workers": 1,
+			"variant": "no_key",
+			"preemptive": true,
+			"failure": null,
+			"records": 11000,
+			"matched": 11000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				21.5
+			],
+			"us_per_record_mean": 21.5,
+			"records_per_s": 46414
+		},
+		{
+			"workers": 1,
+			"variant": "no_this",
+			"preemptive": true,
+			"failure": null,
+			"records": 11000,
+			"matched": 11000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				25.5
+			],
+			"us_per_record_mean": 25.5,
+			"records_per_s": 39286
+		},
+		{
+			"workers": 1,
+			"variant": "lean",
+			"preemptive": true,
+			"failure": null,
+			"records": 11000,
+			"matched": 11000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				19.1
+			],
+			"us_per_record_mean": 19.1,
+			"records_per_s": 52381
+		},
+		{
+			"workers": 2,
+			"variant": "compare",
+			"preemptive": true,
+			"failure": null,
+			"records": 23000,
+			"matched": 23000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				51.9,
+				50
+			],
+			"us_per_record_mean": 51,
+			"records_per_s": 38333
+		},
+		{
+			"workers": 2,
+			"variant": "no_digest",
+			"preemptive": true,
+			"failure": null,
+			"records": 23000,
+			"matched": 23000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				53.2,
+				50.3
+			],
+			"us_per_record_mean": 51.8,
+			"records_per_s": 38079
+		},
+		{
+			"workers": 2,
+			"variant": "no_key",
+			"preemptive": true,
+			"failure": null,
+			"records": 23000,
+			"matched": 23000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				39,
+				37.4
+			],
+			"us_per_record_mean": 38.2,
+			"records_per_s": 51225
+		},
+		{
+			"workers": 2,
+			"variant": "no_this",
+			"preemptive": true,
+			"failure": null,
+			"records": 23000,
+			"matched": 23000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				39.6,
+				38.6
+			],
+			"us_per_record_mean": 39.1,
+			"records_per_s": 49676
+		},
+		{
+			"workers": 2,
+			"variant": "lean",
+			"preemptive": true,
+			"failure": null,
+			"records": 23000,
+			"matched": 23000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				26.3,
+				25.8
+			],
+			"us_per_record_mean": 26.1,
+			"records_per_s": 74434
+		},
+		{
+			"workers": 4,
+			"variant": "compare",
+			"preemptive": true,
+			"failure": null,
+			"records": 50000,
+			"matched": 50000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				163.7,
+				158,
+				149.6,
+				141
+			],
+			"us_per_record_mean": 153.1,
+			"records_per_s": 25329
+		},
+		{
+			"workers": 4,
+			"variant": "no_digest",
+			"preemptive": true,
+			"failure": null,
+			"records": 50000,
+			"matched": 50000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				164.6,
+				159.6,
+				151.1,
+				142.1
+			],
+			"us_per_record_mean": 154.4,
+			"records_per_s": 25138
+		},
+		{
+			"workers": 4,
+			"variant": "no_key",
+			"preemptive": true,
+			"failure": null,
+			"records": 50000,
+			"matched": 50000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				114.9,
+				110.8,
+				105.1,
+				99.2
+			],
+			"us_per_record_mean": 107.5,
+			"records_per_s": 35997
+		},
+		{
+			"workers": 4,
+			"variant": "no_this",
+			"preemptive": true,
+			"failure": null,
+			"records": 50000,
+			"matched": 50000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				116,
+				111.4,
+				106.1,
+				99.9
+			],
+			"us_per_record_mean": 108.4,
+			"records_per_s": 35740
+		},
+		{
+			"workers": 4,
+			"variant": "lean",
+			"preemptive": true,
+			"failure": null,
+			"records": 50000,
+			"matched": 50000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				55.6,
+				54.1,
+				51.9,
+				49.5
+			],
+			"us_per_record_mean": 52.8,
+			"records_per_s": 72150
+		},
+		{
+			"workers": 6,
+			"variant": "compare",
+			"preemptive": true,
+			"failure": null,
+			"records": 81000,
+			"matched": 81000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				457.9,
+				449.8,
+				427.4,
+				404,
+				382.1,
+				359.7
+			],
+			"us_per_record_mean": 413.5,
+			"records_per_s": 14075
+		},
+		{
+			"workers": 6,
+			"variant": "no_digest",
+			"preemptive": true,
+			"failure": null,
+			"records": 81000,
+			"matched": 81000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				421.7,
+				414.3,
+				394.8,
+				372.8,
+				351.1,
+				330.6
+			],
+			"us_per_record_mean": 380.9,
+			"records_per_s": 15312
+		},
+		{
+			"workers": 6,
+			"variant": "no_key",
+			"preemptive": true,
+			"failure": null,
+			"records": 81000,
+			"matched": 81000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				320.5,
+				312.8,
+				297.5,
+				280.7,
+				264.2,
+				249.1
+			],
+			"us_per_record_mean": 287.5,
+			"records_per_s": 20326
+		},
+		{
+			"workers": 6,
+			"variant": "no_this",
+			"preemptive": true,
+			"failure": null,
+			"records": 81000,
+			"matched": 81000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				299.9,
+				293.3,
+				277.2,
+				262.1,
+				247.7,
+				233.8
+			],
+			"us_per_record_mean": 269,
+			"records_per_s": 21652
+		},
+		{
+			"workers": 6,
+			"variant": "lean",
+			"preemptive": true,
+			"failure": null,
+			"records": 81000,
+			"matched": 81000,
+			"found": 0,
+			"unverified": 0,
+			"exact": true,
+			"us_per_record": [
+				166,
+				162.1,
+				153.8,
+				145.8,
+				138,
+				130.5
+			],
+			"us_per_record_mean": 149.4,
+			"records_per_s": 38793
+		}
+	],
+	"summary": {
+		"us": {
+			"1": {
+				"compare": 27.6,
+				"no_digest": 24.5,
+				"no_key": 21.5,
+				"no_this": 25.5,
+				"lean": 19.1
+			},
+			"2": {
+				"compare": 51,
+				"no_digest": 51.8,
+				"no_key": 38.2,
+				"no_this": 39.1,
+				"lean": 26.1
+			},
+			"4": {
+				"compare": 153.1,
+				"no_digest": 154.4,
+				"no_key": 107.5,
+				"no_this": 108.4,
+				"lean": 52.8
+			},
+			"6": {
+				"compare": 413.5,
+				"no_digest": 380.9,
+				"no_key": 287.5,
+				"no_this": 269,
+				"lean": 149.4
+			}
+		},
+		"records_per_s": {
+			"1": {
+				"compare": 36184,
+				"no_digest": 40741,
+				"no_key": 46414,
+				"no_this": 39286,
+				"lean": 52381
+			},
+			"2": {
+				"compare": 38333,
+				"no_digest": 38079,
+				"no_key": 51225,
+				"no_this": 49676,
+				"lean": 74434
+			},
+			"4": {
+				"compare": 25329,
+				"no_digest": 25138,
+				"no_key": 35997,
+				"no_this": 35740,
+				"lean": 72150
+			},
+			"6": {
+				"compare": 14075,
+				"no_digest": 15312,
+				"no_key": 20326,
+				"no_this": 21652,
+				"lean": 38793
+			}
+		},
+		"saved_us": {
+			"1": {
+				"no_digest": 3.1,
+				"no_key": 6.1,
+				"no_this": 2.1,
+				"lean": 8.5
+			},
+			"2": {
+				"no_digest": -0.8,
+				"no_key": 12.8,
+				"no_this": 11.9,
+				"lean": 24.9
+			},
+			"4": {
+				"no_digest": -1.3,
+				"no_key": 45.6,
+				"no_this": 44.7,
+				"lean": 100.3
+			},
+			"6": {
+				"no_digest": 32.6,
+				"no_key": 126,
+				"no_this": 144.5,
+				"lean": 264.1
+			}
+		},
+		"lean_gain": {
+			"workers": 2,
+			"lean_records_per_s": 74434,
+			"compare_2_records_per_s": 38333,
+			"percent": 94.2
+		}
+	},
+	"ok": true
+}

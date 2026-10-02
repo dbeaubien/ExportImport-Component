@@ -30,8 +30,10 @@
 // Adds to the job contract folder, the platform path of the table's folder
 // in the set, and detail_limit. Its row adds matched (changed included),
 // missing, extra, changed, duplicate (each target record past a key's
-// first), unverified (target records) and found (the discrepancies listed
-// or not, for the pass's "N more not listed"). Its findings, in key order:
+// first), unverified (target records), and for the pass, which removes
+// them: found (the discrepancies listed or not, for "N more not listed"),
+// broke (1 when the order guard broke) and extra_at (the extras whose key
+// contains @, spec 16). Its findings, in key order:
 //   - one per discrepancy and one per unverified target record, at most
 //     detail_limit per job of the two together: {table; kind; key}, plus
 //     segment and position (missing: the record's place in its segment,
@@ -68,7 +70,7 @@ Function _run()
 	var $kind; $why; $problem : Text
 	var $o; $len; $k; $done; $n : Integer
 	var $same; $extra : Boolean
-	For each ($kind; ["records"; "found"; "matched"; "missing"; "extra"; "changed"; "duplicate"; "unverified"])
+	For each ($kind; ["records"; "found"; "broke"; "extra_at"; "matched"; "missing"; "extra"; "changed"; "duplicate"; "unverified"])
 		This.output.row[$kind]:=0
 	End for each
 	This._codec:=cs._Codec.new(This.job.table)
@@ -144,6 +146,7 @@ Function _run()
 	End for each
 
 	If ($why#"")  // the order guard broke: from the last good key to the end of the job's range
+		This.output.row.broke:=1
 		$n:=This.output.row.unverified
 		$tk:=This._unverified($table; ->$target; $tk; Null; $why)
 		This._unverified_range($prev; This.job.high; False; This.job.expected-$done; This.output.row.unverified-$n; $why)
@@ -180,6 +183,7 @@ Function _next($table : Pointer; $buffer : Pointer) : Object
 				This._found("unverified"; Null; {reason: $key.reason})
 			: (Value type($key.value)=Is text) && (Position("@"; $key.value; 1; *)>0)
 				This._found("extra"; $key.value)
+				This.output.row.extra_at+=1
 			: (This._last#Null) && ($key.value=This._last)
 				If (This._in_group)
 					This.output.row.duplicate+=1

@@ -37,7 +37,7 @@ Function run($class : Text; $jobs : Collection) : Object
 
 	$results:=New shared collection
 	$halt:=New shared object("requested"; False)  // the jobs' stop
-	$queue:=$jobs.orderBy("cost desc")
+	$queue:=$jobs.orderBy("expected desc")
 	$tables:={}
 	$list:=[]
 	For ($i; 0; $queue.length-1)

@@ -166,3 +166,4 @@ log.**
   one) never leaves a half-written `.json` after a crash.
 - The README's dependency line (4D Progress and Component IH_Log) goes, and it documents the run
   report, the run log and the `interrupted` verdict.
+- 2026-10-02, from [Trusting the export set](23-trusting-the-export-set.md): the `.txt` of the export, the import and Compare shows the set digest. The export's `.txt` points at its self-check's run report, as the import's points at its Compare's. The self-check writes into the export's run log.

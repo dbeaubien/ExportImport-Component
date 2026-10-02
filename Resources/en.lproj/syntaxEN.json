@@ -134,6 +134,44 @@
 		}
 	},
 	"cs.ExportImport": {
+		"_ExportJob": {
+			"new()": {
+				"Syntax": "**.new**( *job* : Object )",
+				"Params": [
+					[
+						"job",
+						"Object",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"_Dialog": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"ComparePass": {
+			"new()": {
+				"Syntax": "**.new**( *path* : Text; *options* : Object )",
+				"Params": [
+					[
+						"path",
+						"Text",
+						"->"
+					],
+					[
+						"options",
+						"Object",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
 		"_IndexJob": {
 			"new()": {
 				"Syntax": "**.new**( *job* : Object )",
@@ -173,6 +211,24 @@
 				"Summary": ""
 			}
 		},
+		"ImportPass": {
+			"new()": {
+				"Syntax": "**.new**( *path* : Text; *options* : Object )",
+				"Params": [
+					[
+						"path",
+						"Text",
+						"->"
+					],
+					[
+						"options",
+						"Object",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
 		"_RunReport": {
 			"new()": {
 				"Syntax": "**.new**( *folder* : 4D.Folder; *pass* : Text )",
@@ -204,6 +260,65 @@
 				"Summary": ""
 			}
 		},
+		"_Structure": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"_ImportJob": {
+			"new()": {
+				"Syntax": "**.new**( *job* : Object )",
+				"Params": [
+					[
+						"job",
+						"Object",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"_SegmentCheckJob": {
+			"new()": {
+				"Syntax": "**.new**( *job* : Object )",
+				"Params": [
+					[
+						"job",
+						"Object",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"__ComparePath": {
+			"new()": {
+				"Syntax": "**.new**( *job* : Object )",
+				"Params": [
+					[
+						"job",
+						"Object",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"_ScanJob": {
+			"new()": {
+				"Syntax": "**.new**( *job* : Object )",
+				"Params": [
+					[
+						"job",
+						"Object",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
 		"_Planner": {
 			"new()": {
 				"Syntax": "**.new**( *workers* : Integer )",
@@ -211,76 +326,6 @@
 					[
 						"workers",
 						"Integer",
-						"->"
-					]
-				],
-				"Summary": ""
-			}
-		},
-		"ComparePass": {
-			"new()": {
-				"Syntax": "**.new**( *path* : Text; *options* : Object )",
-				"Params": [
-					[
-						"path",
-						"Text",
-						"->"
-					],
-					[
-						"options",
-						"Object",
-						"->"
-					]
-				],
-				"Summary": ""
-			}
-		},
-		"_RunLog": {
-			"new()": {
-				"Syntax": "**.new**( *file* : 4D.File )",
-				"Params": [
-					[
-						"file",
-						"4D.File",
-						"->"
-					]
-				],
-				"Summary": ""
-			}
-		},
-		"ExportPass": {
-			"new()": {
-				"Syntax": "**.new**( *options* : Object )",
-				"Params": [
-					[
-						"options",
-						"Object",
-						"->"
-					]
-				],
-				"Summary": ""
-			}
-		},
-		"_FixJob": {
-			"new()": {
-				"Syntax": "**.new**( *job* : Object )",
-				"Params": [
-					[
-						"job",
-						"Object",
-						"->"
-					]
-				],
-				"Summary": ""
-			}
-		},
-		"_ExportJob": {
-			"new()": {
-				"Syntax": "**.new**( *job* : Object )",
-				"Params": [
-					[
-						"job",
-						"Object",
 						"->"
 					]
 				],
@@ -315,6 +360,32 @@
 				"Summary": ""
 			}
 		},
+		"FixerPass": {
+			"new()": {
+				"Syntax": "**.new**( *options* : Object )",
+				"Params": [
+					[
+						"options",
+						"Object",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"_CompareJob": {
+			"new()": {
+				"Syntax": "**.new**( *job* : Object )",
+				"Params": [
+					[
+						"job",
+						"Object",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
 		"_Pass": {
 			"new()": {
 				"Syntax": "**.new**( *pass* : Text; *name* : Text; *options* : Object )",
@@ -338,77 +409,13 @@
 				"Summary": ""
 			}
 		},
-		"_CompareJob": {
+		"_RunLog": {
 			"new()": {
-				"Syntax": "**.new**( *job* : Object )",
+				"Syntax": "**.new**( *file* : 4D.File )",
 				"Params": [
 					[
-						"job",
-						"Object",
-						"->"
-					]
-				],
-				"Summary": ""
-			}
-		},
-		"_ScanJob": {
-			"new()": {
-				"Syntax": "**.new**( *job* : Object )",
-				"Params": [
-					[
-						"job",
-						"Object",
-						"->"
-					]
-				],
-				"Summary": ""
-			}
-		},
-		"_Structure": {
-			"new()": {
-				"Syntax": "**.new**()",
-				"Params": [],
-				"Summary": ""
-			}
-		},
-		"_Codec": {
-			"new()": {
-				"Syntax": "**.new**( *table* : Object )",
-				"Params": [
-					[
-						"table",
-						"Object",
-						"->"
-					]
-				],
-				"Summary": ""
-			}
-		},
-		"FixerPass": {
-			"new()": {
-				"Syntax": "**.new**( *options* : Object )",
-				"Params": [
-					[
-						"options",
-						"Object",
-						"->"
-					]
-				],
-				"Summary": ""
-			}
-		},
-		"ImportPass": {
-			"new()": {
-				"Syntax": "**.new**( *path* : Text; *options* : Object )",
-				"Params": [
-					[
-						"path",
-						"Text",
-						"->"
-					],
-					[
-						"options",
-						"Object",
+						"file",
+						"4D.File",
 						"->"
 					]
 				],
@@ -428,12 +435,12 @@
 				"Summary": ""
 			}
 		},
-		"_ImportJob": {
+		"ExportPass": {
 			"new()": {
-				"Syntax": "**.new**( *job* : Object )",
+				"Syntax": "**.new**( *options* : Object )",
 				"Params": [
 					[
-						"job",
+						"options",
 						"Object",
 						"->"
 					]
@@ -441,7 +448,20 @@
 				"Summary": ""
 			}
 		},
-		"_SegmentCheckJob": {
+		"_Codec": {
+			"new()": {
+				"Syntax": "**.new**( *table* : Object )",
+				"Params": [
+					[
+						"table",
+						"Object",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"_FixJob": {
 			"new()": {
 				"Syntax": "**.new**( *job* : Object )",
 				"Params": [
@@ -455,6 +475,145 @@
 			}
 		}
 	},
+	"_ExportJob": {
+		"_inheritedFrom_": "_Job"
+	},
+	"_Dialog": {
+		"event()": {
+			"Syntax": "**.event**( *e* : Object )",
+			"Params": [
+				[
+					"e",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"progress()": {
+			"Syntax": "**.progress**( *message* : Object )",
+			"Params": [
+				[
+					"message",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"closing": {
+			"Syntax": "closing : Boolean"
+		},
+		"view": {
+			"Syntax": "view : Object"
+		},
+		"fields_label": {
+			"Syntax": "fields_label : Text"
+		},
+		"tables_label": {
+			"Syntax": "tables_label : Text"
+		},
+		"stop": {
+			"Syntax": "stop : Object"
+		},
+		"field_list": {
+			"Syntax": "field_list : Collection"
+		},
+		"table_list": {
+			"Syntax": "table_list : Collection"
+		},
+		"chosen": {
+			"Syntax": "chosen : Object"
+		},
+		"reports": {
+			"Syntax": "reports : Object"
+		},
+		"run": {
+			"Syntax": "run : Object"
+		},
+		"summary": {
+			"Syntax": "summary : Text"
+		},
+		"on_source": {
+			"Syntax": "on_source : Boolean"
+		},
+		"check": {
+			"Syntax": "check : Object"
+		},
+		"workers": {
+			"Syntax": "workers : Object"
+		},
+		"data_folder": {
+			"Syntax": "data_folder : Text"
+		},
+		"last_export": {
+			"Syntax": "last_export : Object"
+		},
+		"language_line": {
+			"Syntax": "language_line : Text"
+		},
+		"datafile_line": {
+			"Syntax": "datafile_line : Text"
+		},
+		"step": {
+			"Syntax": "step : Object"
+		},
+		"set_line": {
+			"Syntax": "set_line : Text"
+		},
+		"check_text": {
+			"Syntax": "check_text : Text"
+		},
+		"steps": {
+			"Syntax": "steps : Collection"
+		},
+		"set_list": {
+			"Syntax": "set_list : Object"
+		},
+		"unusable": {
+			"Syntax": "unusable : Boolean"
+		},
+		"elsewhere": {
+			"Syntax": "elsewhere : Text"
+		},
+		"target_name": {
+			"Syntax": "target_name : Text"
+		},
+		"manifest": {
+			"Syntax": "manifest : Object"
+		},
+		"running": {
+			"Syntax": "running : Boolean"
+		},
+		"sets": {
+			"Syntax": "sets : Collection"
+		}
+	},
+	"ComparePass": {
+		"run()": {
+			"Syntax": "**.run**() : Object",
+			"Params": [
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"check()": {
+			"Syntax": "**.check**() : Object",
+			"Params": [
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_Pass"
+	},
 	"_IndexJob": {
 		"_inheritedFrom_": "_Job"
 	},
@@ -463,6 +622,31 @@
 	},
 	"_GateJob": {
 		"_inheritedFrom_": "_Job"
+	},
+	"ImportPass": {
+		"run()": {
+			"Syntax": "**.run**() : Object",
+			"Params": [
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"check()": {
+			"Syntax": "**.check**() : Object",
+			"Params": [
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_Pass"
 	},
 	"_RunReport": {
 		"write()": {
@@ -516,6 +700,45 @@
 		"output": {
 			"Syntax": "output : Object"
 		}
+	},
+	"_Structure": {
+		"diff()": {
+			"Syntax": "**.diff**( *other* : Collection ) : Collection",
+			"Params": [
+				[
+					"other",
+					"Collection",
+					"->"
+				],
+				[
+					"",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"signature": {
+			"Syntax": "signature : Text"
+		},
+		"language": {
+			"Syntax": "language : Text"
+		},
+		"tables": {
+			"Syntax": "tables : Collection"
+		}
+	},
+	"_ImportJob": {
+		"_inheritedFrom_": "_Job"
+	},
+	"_SegmentCheckJob": {
+		"_inheritedFrom_": "_Job"
+	},
+	"__ComparePath": {
+		"_inheritedFrom_": "_CompareJob"
+	},
+	"_ScanJob": {
+		"_inheritedFrom_": "_Job"
 	},
 	"_Planner": {
 		"source()": {
@@ -589,78 +812,6 @@
 			"Syntax": "workers : Integer"
 		}
 	},
-	"ComparePass": {
-		"run()": {
-			"Syntax": "**.run**() : Object",
-			"Params": [
-				[
-					"",
-					"Object",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"check()": {
-			"Syntax": "**.check**() : Object",
-			"Params": [
-				[
-					"",
-					"Object",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"_inheritedFrom_": "_Pass"
-	},
-	"_RunLog": {
-		"write()": {
-			"Syntax": "**.write**( *text* : Text )",
-			"Params": [
-				[
-					"text",
-					"Text",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"error": {
-			"Syntax": "error : Text"
-		}
-	},
-	"ExportPass": {
-		"run()": {
-			"Syntax": "**.run**() : Object",
-			"Params": [
-				[
-					"",
-					"Object",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"check()": {
-			"Syntax": "**.check**() : Object",
-			"Params": [
-				[
-					"",
-					"Object",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"_inheritedFrom_": "_Pass"
-	},
-	"_FixJob": {
-		"_inheritedFrom_": "_Job"
-	},
-	"_ExportJob": {
-		"_inheritedFrom_": "_Job"
-	},
 	"_WorkerPool": {
 		"run()": {
 			"Syntax": "**.run**( *class* : Text; *jobs* : Collection ) : Object",
@@ -683,6 +834,12 @@
 			],
 			"Summary": ""
 		}
+	},
+	"FixerPass": {
+		"_inheritedFrom_": "HealthCheckPass"
+	},
+	"_CompareJob": {
+		"_inheritedFrom_": "_Job"
 	},
 	"_Pass": {
 		"check()": {
@@ -714,38 +871,91 @@
 			"Syntax": "options : Object"
 		}
 	},
-	"_CompareJob": {
-		"_inheritedFrom_": "_Job"
-	},
-	"_ScanJob": {
-		"_inheritedFrom_": "_Job"
-	},
-	"_Structure": {
-		"diff()": {
-			"Syntax": "**.diff**( *other* : Collection ) : Collection",
+	"_RunLog": {
+		"write()": {
+			"Syntax": "**.write**( *text* : Text )",
 			"Params": [
 				[
-					"other",
-					"Collection",
+					"text",
+					"Text",
 					"->"
-				],
+				]
+			],
+			"Summary": ""
+		},
+		"error": {
+			"Syntax": "error : Text"
+		}
+	},
+	"_Manifest": {
+		"check()": {
+			"Syntax": "**.check**() : Object",
+			"Params": [
 				[
 					"",
-					"Collection",
+					"Object",
 					"<-"
 				]
 			],
 			"Summary": ""
 		},
-		"signature": {
-			"Syntax": "signature : Text"
+		"write()": {
+			"Syntax": "**.write**( *export* : Object; *settings* : Object; *structure* : cs.ExportImport._Structure; *tables* : Collection )",
+			"Params": [
+				[
+					"export",
+					"Object",
+					"->"
+				],
+				[
+					"settings",
+					"Object",
+					"->"
+				],
+				[
+					"structure",
+					"cs.ExportImport._Structure",
+					"->"
+				],
+				[
+					"tables",
+					"Collection",
+					"->"
+				]
+			],
+			"Summary": ""
 		},
-		"language": {
-			"Syntax": "language : Text"
+		"content": {
+			"Syntax": "content : Object"
 		},
-		"tables": {
-			"Syntax": "tables : Collection"
+		"path": {
+			"Syntax": "path : Text"
 		}
+	},
+	"ExportPass": {
+		"run()": {
+			"Syntax": "**.run**() : Object",
+			"Params": [
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"check()": {
+			"Syntax": "**.check**() : Object",
+			"Params": [
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_Pass"
 	},
 	"_Codec": {
 		"readable()": {
@@ -847,83 +1057,7 @@
 			"Syntax": "table : Text"
 		}
 	},
-	"FixerPass": {
-		"_inheritedFrom_": "HealthCheckPass"
-	},
-	"ImportPass": {
-		"run()": {
-			"Syntax": "**.run**() : Object",
-			"Params": [
-				[
-					"",
-					"Object",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"check()": {
-			"Syntax": "**.check**() : Object",
-			"Params": [
-				[
-					"",
-					"Object",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"_inheritedFrom_": "_Pass"
-	},
-	"_Manifest": {
-		"check()": {
-			"Syntax": "**.check**() : Object",
-			"Params": [
-				[
-					"",
-					"Object",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"write()": {
-			"Syntax": "**.write**( *export* : Object; *settings* : Object; *structure* : cs.ExportImport._Structure; *tables* : Collection )",
-			"Params": [
-				[
-					"export",
-					"Object",
-					"->"
-				],
-				[
-					"settings",
-					"Object",
-					"->"
-				],
-				[
-					"structure",
-					"cs.ExportImport._Structure",
-					"->"
-				],
-				[
-					"tables",
-					"Collection",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"content": {
-			"Syntax": "content : Object"
-		},
-		"path": {
-			"Syntax": "path : Text"
-		}
-	},
-	"_ImportJob": {
-		"_inheritedFrom_": "_Job"
-	},
-	"_SegmentCheckJob": {
+	"_FixJob": {
 		"_inheritedFrom_": "_Job"
 	}
 }

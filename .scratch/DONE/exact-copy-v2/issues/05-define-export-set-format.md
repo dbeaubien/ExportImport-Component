@@ -83,3 +83,4 @@ component, returns the host's structure, and whether it always writes `never_nul
 to false, so it may be omitted). If not, find another source for those properties. A `4D.Blob` over 2 GB
 silently becomes empty when converted to a scalar blob, so read segments in one piece only below that.
 - 2026-10-01, from [Define the shared API](12-define-shared-api.md): the segment cap is the `segment_mb` option of `ExportPass`, with a default of 100. `Export_SetMaxFileSizeMB` and `Storage.export` go. The manifest records the cap in its settings, as before.
+- 2026-10-02, from [Trusting the export set](23-trusting-the-export-set.md): the manifest is written as `manifest.json.tmp` and renamed `manifest.json` only when the export's self-check is `exact`. Its SHA-256 is the set digest. It can't hold its own digest, and it is never rewritten after the export.

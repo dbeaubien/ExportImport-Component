@@ -96,3 +96,4 @@ machine (10 cores), Compare's total peaks at 2 workers (37,157 records/s, agains
     third;
   - measuring every pass at 1, 2, 4, 6 and 10 workers before deciding;
   - reworking the codec with no probe.
+- 2026-10-02, from [Trusting the export set](23-trusting-the-export-set.md): the export passes its options to its self-check, as the import passes them to its Compare. A worker count given covers both. With none, each pass uses its own default.

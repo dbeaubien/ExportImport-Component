@@ -34,6 +34,10 @@ _Avoid_: chunk, export file, part
 The hash of a structure's tables and fields. The source and target signatures must be equal before anything is imported.
 _Avoid_: schema hash, structure checksum
 
+**Set digest**:
+The hash that identifies one export set's whole content. It is shown when the set is exported and again when it is imported or compared, so the operator can confirm the set did not change in between.
+_Avoid_: set fingerprint, checksum
+
 **Health check**:
 A scan of the source datafile, before export, for blockers and for signs of damage such as bad characters.
 _Avoid_: pre-check, scan
@@ -67,6 +71,10 @@ _Avoid_: mismatch, diff
 **Unverified record**:
 A record whose equality could not be decided, because its part of the export set is damaged, the two datafiles order record keys differently, or the record cannot be read.
 _Avoid_: inconclusive record, skipped record
+
+**Self-check**:
+The comparison that ends every export: the new export set against its own source datafile, proving the set holds exactly the source's records.
+_Avoid_: export verification, export check
 
 **Discrepancy report**:
 The output of comparing an export set with a datafile: every discrepancy, down to the field, and every unverified record.

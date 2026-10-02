@@ -118,3 +118,7 @@ records them (below).
   break in one job makes every extra of its table unverified, in every job, except keys that
   contain `@`. A late source key can sort into another job's target range, so the rule per job
   above doesn't hold for extras.
+- 2026-10-02, from [The cut rule's cost for text and BLOB tables](19-cut-rule-cost.md): a table's
+  cost is its record count, not records × fields, in every pass, and bytes play no part. A job has
+  no `cost` any more: the pool queues jobs by `expected`, largest first. The rest of the cut rule
+  stands.
