@@ -55,3 +55,14 @@ end, compiled, on a copy of a customer datafile (30–40 GB):
   ([Codec: values survive the round trip](25-codec-values-survive-the-round-trip.md)). Expect no
   difference, record only its counts, and delete its JSON, which holds customer values. Then
   delete both of its methods. Record the export's self-check time apart from the export's.
+- 2026-10-02, from [Codec: values survive the round trip](25-codec-values-survive-the-round-trip.md)
+  (built): the value check is four methods, `__Check_Codec_Values` and its `_Table`, `_Record` and
+  `_Same`, so "delete both of its methods" above means every `__Check_Codec_Values*` method. On the
+  customer copy it checks every table of the structure and skips its edge cases (no `Bench_Wide`).
+  It writes its JSON under the host package's `.scratch/exact-copy-v2-build/research/`: delete that
+  folder there too.
+- 2026-10-02, from [Codec: values survive the round trip](25-codec-values-survive-the-round-trip.md)
+  (resolved): the bench gave no difference. A picture with two formats couldn't be built from
+  code, so the customer copy's run is its only check. Pictures pasted into the host's app may hold
+  several formats. If the customer copy stores none, say a picture with two formats is still
+  unverified.

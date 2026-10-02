@@ -55,6 +55,9 @@ Function _text($r : Object; $columns : Collection; $sections : Text) : Text
 	If ($r.export_set#Null)
 		$t+="Export set: "+$r.export_set+"\n"
 	End if
+	If ($r.set_digest#Null)  // the export's, the import's and Compare's (spec 23)
+		$t+="Set digest: "+(($r.set_digest="") ? "none" : $r.set_digest)+"\n"
+	End if
 	$t+="Datafile:   "+$r.datafile+"\n"
 	$t+="Started:    "+This._started+(($r.ended=Null) ? "" : ("   Ended: "+Substring(This._now(); 12)+"   Elapsed: "+This._elapsed($r.started; $r.ended)))+"\n"
 	$t+="Component:  "+$r.component_version+"   4D: "+$r.app_version+"\n"

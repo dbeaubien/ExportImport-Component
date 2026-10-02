@@ -187,6 +187,18 @@ The frontier is the open, unclaimed tickets whose blockers are all resolved. The
   checks pass on the bench, with an Alpha key in a throw-away table, since deleted. Compare took
   137, 116 and 138 s at 2, 4 and 6 workers, against 141 s at 2 for the old loop, so its default is
   4, like every pass's.
+- [Export: self-check and set digest](issues/24-export-self-check-and-set-digest.md): the export's
+  last phase is `self_check`, a nested Compare of the set on the source, and only an `exact` one
+  renames `manifest.json.tmp` to `manifest.json` and gives `exported`, with the set digest (the
+  SHA-256 of `manifest.json`). Import and Compare refuse a `set_digest` that differs, and show
+  theirs. Compare on the source gives the source's next steps. The bench gives `exported`, self-check
+  `exact`, but its times ran under load (Backblaze), so ticket 21's part 2 gives them.
+- [Codec: values survive the round trip](issues/25-codec-values-survive-the-round-trip.md):
+  `__Check_Codec_Values` round-trips each of the bench's 3.2 million records into a new record and
+  compares every field with its source by value, without the codec: no difference. Every edge case
+  passes, −0 in a Real field and in an object included. A picture with two formats can't be built
+  from code, so ticket 20's customer copy covers it. Its four methods stay for ticket 20, which
+  deletes them.
 
 ## Why this order
 

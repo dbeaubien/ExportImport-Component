@@ -1,9 +1,10 @@
 // cs.ComparePass
 //
 // Compare (specs 08 and 10): an export set against this datafile, in one
-// phase. check() is the manifest's pre-flight (_Manifest). It allows the
-// set's source datafile, so a self-check of an export set works (spec 06).
-// The run report and run log go into the set, or next to the datafile when
+// phase. check() is the manifest's pre-flight (_Manifest), with the set
+// digest. It allows the set's source datafile, where the export's
+// self-check runs it (spec 23): its next steps are then for the source. The
+// run report and run log go into the set, or next to the datafile when
 // there is no set.
 //   compare: each table's segment order is checked under this datafile's <
 //     (spec 10), then the _CompareJobs, each a run of one table's segments
@@ -21,9 +22,10 @@
 // Any discrepancy gives notExact. Otherwise, anything unverified gives
 // inconclusive, else exact.
 //
-// Options: workers and detail_limit (spec 12).
-// Rows add expected, actual, matched, missing, extra, changed, duplicate,
-// unverified, sequence_expected and sequence_actual.
+// Options: workers, detail_limit and set_digest (specs 12 and 23). The
+// result adds set_digest. Rows add expected, actual, matched, missing,
+// extra, changed, duplicate, unverified, sequence_expected and
+// sequence_actual.
 
 Class extends _Pass
 
@@ -39,9 +41,12 @@ Class constructor($path : Text; $options : Object)
 Function check() : Object
 	var $check; $manifest : Object
 	$check:=Super.check()
-	$manifest:=This._manifest.check()
+	$manifest:=This._manifest.check(String(This.options.set_digest))
 	$check.problems.combine($manifest.problems)
 	$check.cautions.combine($manifest.cautions)
+	If (This.result#Null)  // in run(), not the dialog's pre-flight
+		This.result.set_digest:=This._manifest.set_digest
+	End if
 	return $check
 
 
@@ -58,6 +63,7 @@ Function _envelope() : Object
 	var $result : Object
 	$result:=Super._envelope()
 	$result.export_set:=This._manifest.path
+	$result.set_digest:=""
 	$result.discrepancies:=[]
 	$result.unverified:=[]
 	$result.unverified_ranges:=[]
@@ -84,7 +90,12 @@ Function _sections() : Text
 
 
 Function _failed_step() : Text
-	return "See the failure, then run Compare again. If it fails again, treat the target as unusable."
+	return This._on_source() ? Super._failed_step() : "See the failure, then run Compare again. If it fails again, treat the target as unusable."
+
+
+Function _on_source() : Boolean
+	// This datafile is the set's source, matched by its path as in ImportPass.check().
+	return (This._manifest.content#Null) && (String(This._manifest.content.source.datafile)=Data file)
 
 
 Function _run()
@@ -158,13 +169,13 @@ Function _run()
 	Case of
 		: ($count>0)
 			This.result.verdict:="notExact"
-			This.result.next_step:="The target is unusable. Recreate it, then run the import again."
+			This.result.next_step:=This._on_source() ? "The export set doesn't match this datafile. Run the export again." : "The target is unusable. Recreate it, then run the import again."
 		: (This.result.unverified_ranges.length>0) || (This.result.tables.sum("unverified")>0)
 			This.result.verdict:="inconclusive"
-			This.result.next_step:="Some records are unverified: see the unverified ranges and records. Fix their cause (a damaged export set, keys that the two datafiles order differently, or target records that can't be read), then run Compare again."
+			This.result.next_step:=This._on_source() ? "Some source records couldn't be verified. Check the source copy with the MSC (records and indexes), then run the export again." : "Some records are unverified: see the unverified ranges and records. Fix their cause (a damaged export set, keys that the two datafiles order differently, or target records that can't be read), then run Compare again."
 		Else
 			This.result.verdict:="exact"
-			This.result.next_step:="The copy is verified. Make a full backup and turn the log file back on."
+			This.result.next_step:=This._on_source() ? "The export set matches this datafile." : "The copy is verified. Make a full backup and turn the log file back on."
 	End case
 
 

@@ -2,10 +2,10 @@
 //
 // The import (specs 07 and 10): an export set loaded into this datafile,
 // the target, in seven phases. check() is the manifest's pre-flight
-// (_Manifest), and refuses the set's source datafile, because the import
-// empties every table it loads. The source is matched by its path alone:
-// its size and modification time move while 4D has it open (ticket 07).
-// The run report and run log go into the set.
+// (_Manifest), with the set digest, and refuses the set's source datafile,
+// because the import empties every table it loads. The source is matched
+// by its path alone: its size and modification time move while 4D has it
+// open (ticket 07). The run report and run log go into the set.
 //   segment check: _SegmentCheckJobs, cut by the planner. A missing or
 //     damaged segment refuses the import, listing every one.
 //   truncate: an open log file is closed, then triggers and constraints go
@@ -22,10 +22,10 @@
 // Triggers and constraints go back on, and the paused indexes stay paused:
 // 4D rebuilds them at the next startup (spec 07).
 //
-// Options: workers and detail_limit, which it passes to Compare (spec 12).
-// The result adds log_file_closed (its path, or "") and compare (Compare's
-// result, once the load has finished). Rows add removed, loaded,
-// sequence_number and index_elapsed.
+// Options: workers, detail_limit and set_digest, which it passes to Compare
+// (specs 12 and 23). The result adds set_digest, log_file_closed (its path,
+// or "") and compare (Compare's result, once the load has finished). Rows
+// add removed, loaded, sequence_number and index_elapsed.
 //
 // Errors thrown (errCode, componentSignature "ExportImport"):
 //   15 the log file is still open after SELECT LOG FILE(*), 16 a table
@@ -52,9 +52,12 @@ Function check() : Object
 	var $space : Text
 	var $n : Integer
 	$check:=Super.check()
-	$manifest:=This._manifest.check()
+	$manifest:=This._manifest.check(String(This.options.set_digest))
 	$check.problems.combine($manifest.problems)
 	$check.cautions.combine($manifest.cautions)
+	If (This.result#Null)  // in run(), not the dialog's pre-flight
+		This.result.set_digest:=This._manifest.set_digest
+	End if
 	If (This._manifest.content#Null) && (String(This._manifest.content.source.datafile)=Data file)
 		$check.problems.push("This datafile is the export set's source, and the import empties every table it loads. Switch to a new target datafile, then run the import.")
 	End if
@@ -90,6 +93,7 @@ Function _envelope() : Object
 	var $result : Object
 	$result:=Super._envelope()
 	$result.export_set:=This._manifest.path
+	$result.set_digest:=""
 	$result.log_file_closed:=""
 	$result.compare:=Null
 	return $result
@@ -100,11 +104,7 @@ Function _columns() : Collection
 
 
 Function _sections() : Text
-	// Compare's verdict and run report, whose table this doesn't repeat (spec 13).
-	If (This.result.compare=Null)
-		return ""
-	End if
-	return "Compare: "+This.result.compare.verdict+", "+((This.result.compare.report="") ? "its run report wasn't written" : ("see "+File(This.result.compare.report; fk platform path).fullName))+"\n"
+	return This._nested_line("Compare"; This.result.compare)
 
 
 Function _failed_step() : Text

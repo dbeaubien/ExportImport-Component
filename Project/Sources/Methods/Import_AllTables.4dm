@@ -4,7 +4,8 @@
 // DESCRIPTION
 //   A wrapper over ImportPass (spec 12): the export set at
 //   options.export_set, or else the folder the operator selects. num_workers
-//   0 means the pass's default (spec 15). options.truncation_before_import
+//   0 means the pass's default (spec 15). options.set_digest, when given,
+//   is checked against the set's (spec 23). options.truncation_before_import
 //   is ignored: the import always empties the tables it loads. Returns the
 //   set's path, or "" if Select folder is cancelled. A refused or failed
 //   import still returns it: its run report says why.
@@ -16,5 +17,5 @@ If ($importFromFolder_platformPath="")
 	$importFromFolder_platformPath:=Select folder("Select the export set to import"; 1234)
 End if
 If ($importFromFolder_platformPath#"")
-	cs.ImportPass.new($importFromFolder_platformPath; {workers: ($num_workers<=0) ? Null : $num_workers}).run()
+	cs.ImportPass.new($importFromFolder_platformPath; {workers: ($num_workers<=0) ? Null : $num_workers; set_digest: $options.set_digest}).run()
 End if

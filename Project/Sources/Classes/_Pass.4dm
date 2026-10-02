@@ -204,6 +204,15 @@ Function _failed_step() : Text
 	return "See the failure, then run the "+Lowercase(This._name)+" again."
 
 
+Function _nested_line($label : Text; $result : Object) : Text
+	// A nested run's verdict and run report, as a line of the .txt, whose
+	// table this doesn't repeat (spec 13). "" before it has run.
+	If ($result=Null)
+		return ""
+	End if
+	return $label+": "+$result.verdict+", "+(($result.report="") ? "its run report wasn't written" : ("see "+File($result.report; fk platform path).fullName))+"\n"
+
+
 Function _envelope() : Object
 	// Every envelope key of specs 12 and 13, filled in as the run goes.
 	var $build : Integer
@@ -269,7 +278,7 @@ Function _phase($name : Text; $next_step : Text)
 	This._log.write("phase "+String(This.result.phases.length)+" of "+String(This._phase_count)+": "+$name)
 	This._report.write(This.result; This._columns(); This._sections())
 	If (This._window#0)
-		CALL FORM(This._window; "Dialog_Progress"; {phase: $name; number: This.result.phases.length; count: This._phase_count})
+		CALL FORM(This._window; "Dialog_Progress"; {pass: This._name; phase: $name; number: This.result.phases.length; count: This._phase_count})
 	End if
 
 

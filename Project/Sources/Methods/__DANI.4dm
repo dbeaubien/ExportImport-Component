@@ -3,6 +3,7 @@
 
 // __Bench_Generate(0.01)
 
+__Check_Codec_Values(1000000)
 
 BEEP:C151
 BEEP:C151

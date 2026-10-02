@@ -58,17 +58,44 @@ its own, so its export sets stay apart from the bench's. Then run `__Bench_Gener
 
 **Part 2: one guided run on the bench datafile, about 20 minutes.**
 
+First, [Export: self-check and set digest](24-export-self-check-and-set-digest.md) on part 1's
+small datafile, its source and its target (24):
+
+- a. On the source, export every table in the dialog. The phase line reaches "phase 4 of 4:
+  self_check", then the grid fills again. It gives `exported`, and the Export step shows the set
+  digest, which can be selected and copied, with "Keep this digest outside the export set, to
+  check it at the import." The set has `manifest.json` and no `manifest.json.tmp`. Its
+  `Export … .txt` has a `Set digest:` line and "Self-check: exact, see Compare … .txt".
+- b. Still on the source, Compare of that set gives `exact` and "The export set matches this
+  datafile."
+- c. On the target, the Import step's summary shows the same set digest. Paste it in Set digest
+  and import: `exact`. On the Compare step, paste the digest with one character changed: the
+  pre-flight shows "This export set's digest is …, not …", and Run is off. Paste the right one:
+  Run is on, and Compare runs.
+- d. Copy step a's set. In the copy, change one byte of a segment and put the segment's new
+  SHA-256 (`shasum -a 256`) in the copy's `manifest.json`. On the target, choose the copy, and
+  paste step a's digest: the Import step's pre-flight shows the digest problem, so the import
+  refuses. Delete the copy.
+- e. Delete step a's set too, before 4D opens `data.4DD`: the small datafile shares the bench's
+  data folder, so the dialog would choose that set and treat the bench as its target.
+
+Then the bench:
+
 1. Start an export, then Stop it after about 10 s and confirm. It gives `failed`, "stopped by
    operator", and the Runtime Explorer shows no `ExportImport_*` worker left. Start it again and
    close the window with the close box: it asks "Stop export?". Keep running keeps it open. Press
    Cmd-W and choose Stop: the window closes once the run has ended. Then reopen the dialog, start
    a third export, and abort the dialog's process (`Export_Import_Dialog`) in the Runtime
    Explorer: no error shows, so the messages sent to the closed window do no harm, and the run
-   report in that set ends `exported` (16). Delete the three sets.
+   report in that set ends `exported` (16). Start a fourth export, and press Stop once the phase
+   line says self_check: `failed`, "stopped by operator". That set has `manifest.json.tmp` and no
+   `manifest.json`, so the export set drop-down doesn't list it (24). Delete the four sets.
 2. The health check gives `passed`: the bench's 3 `space_uuid` findings were in `[Spike_Keys]`,
-   which ticket 14 removed (17). Then export (`exported`). The dialog stays responsive throughout, with the phase line, the bar and its ETA,
-   and the table grid (16).
-3. Switch to target, reopen, import (`exact`), then run Compare again (`exact`) (18).
+   which ticket 14 removed (17). Then export (`exported`), which now ends with its self-check. The
+   dialog stays responsive throughout, with the phase line, the bar and its ETA, and the table grid
+   (16). Copy the set digest it shows (24).
+3. Switch to target, reopen, import (`exact`) with the set digest pasted, then run Compare again
+   (`exact`) (18, 24).
 4. Attach the `.json` run reports of steps 2 and 3 under `research/`, named `21-<pass>.json`.
 
 **Moved elsewhere:** ticket 16's `CALL FORM` check in a scratch host goes to
@@ -144,3 +171,37 @@ part 2 covers them too.
   now waits only for [Export: self-check and set digest](24-export-self-check-and-set-digest.md).
   Compare's default is 4 workers now, so the dialog's Compare and Import steps fill in 4. That
   ticket ran `__Check_Order_Break` on the bench and then deleted it, with the other checks.
+- 2026-10-02, from [Export: self-check and set digest](24-export-self-check-and-set-digest.md)
+  (built, waiting on the compile and its bench run): its run steps are now in part 2, marked (24):
+  a to d on part 1's small datafile, the Stop during the self-check in step 1 (on the bench, where
+  the phase lasts long enough to press Stop), and the digest in steps 2 and 3. Part 2 waits for
+  that ticket's compile and bench run.
+- 2026-10-02, from [Export: self-check and set digest](24-export-self-check-and-set-digest.md)
+  (resolved): **part 2 is unblocked.** That ticket's bench run gave `exported` with the self-check
+  `exact`, but under load: Backblaze (`bztransmit`) used 97% CPU, likely on the new 3.8 GB set.
+  So part 2's step 2 export, with its self-check, gives the times that ticket couldn't. Before
+  part 2: pause Backblaze and exclude the data folder from it and from Spotlight, quit any other
+  4D, and delete `Export 2026-10-02 14.58.26` (that ticket's set) from the data folder. A quiet
+  machine exports the bench in about 62 to 84 s at 4 workers (tickets 19 and 23): if step 2's
+  export phase is far above that, the machine is still loaded. Record the export phase's and the
+  self-check's times from the Export run report's phases.
+- 2026-10-02, desk check of part 2 against the code (a wayfinder session, nothing run). One step
+  added, e; the rest matches the code.
+  - **Added e:** step a's set has `data-NEW.4DD` as its source and lands in the bench's data
+    folder. Left there, `data.4DD`'s dialog chooses it as the newest set, so it calls the bench a
+    target, opens on Import, and proposes `data-NEW target.4DD` as the target's name, which
+    exists. Part 1's three sets are already gone. `Export 2026-10-02 14.58.26` (ticket 24's set)
+    is still there: delete it before step a, as the comment above says.
+  - Step c: 4D's `#` ignores case, so a digest with one letter's case changed still matches.
+    Change a digit to another digit. The Set digest field reruns the pre-flight when it loses
+    focus (On Data Change), so press Tab after pasting.
+  - Step 1's Stop during self_check gives `failed` and "stopped by operator": the nested Compare's
+    pool sets the Stop as its failure, and the export takes that failure. The failure's `phase`
+    is Compare's own, `compare`, not `self_check`. Two exports at once don't share workers: a
+    worker's name holds its coordinator's process number (`ExportImport_<process>_<n>`).
+  - Step 1's third export now runs to its end with its self-check, about 4 minutes on a quiet
+    machine. Wait for it to end before you check its run report and start the fourth. Part 2 will
+    likely take 30 to 40 minutes, not 20: steps a to e switch datafiles three times, and the bench
+    runs three full exports, an import and two Compares.
+  - Disk: the volume has 26 GB free. Part 2 needs about 12 GB at most at once: in step 1, up to
+    three 3.8 GB sets before they are deleted; then step 2's set plus step 3's 5.7 GB target.

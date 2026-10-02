@@ -1,29 +1,37 @@
 // cs.ExportPass
 //
-// The export (specs 05 and 10), in three phases. It writes the export set,
-// "Export yyyy-mm-dd hh.mm.ss/", next to the datafile, with its run report
-// and run log in it.
+// The export (specs 05, 10 and 23), in four phases. It writes the export
+// set, "Export yyyy-mm-dd hh.mm.ss/", next to the datafile, with its run
+// report and run log in it.
 //   gate: the health check's blocker gate, as a nested HealthCheckPass with
 //     no scan (spec 09), which writes its own run report into the set. A
 //     blocker refuses the export, with the gate's result under health_check.
 //   export: each table's sequence number, read here (selector 31), then the
 //     _ExportJobs, cut by the planner.
-//   manifest: manifest.json, last. A set without one is incomplete.
+//   manifest: manifest.json.tmp (_Manifest).
+//   self_check: a nested ComparePass of the set on the source, with the
+//     export's options, which reads manifest.json.tmp and writes its own
+//     run report. Only an exact self-check renames it manifest.json, so a
+//     set without one is incomplete or unproven. Any other verdict fails
+//     the export.
 // A key that contains @ (spec 14) or a lone surrogate (ticket 01's fact 3)
 // refuses the export too: the first job to meet one stops the run.
 //
-// Options: workers, tables and segment_mb (spec 12). Rows add records,
+// Options: workers, tables and segment_mb (spec 12). The result adds
+// health_check (the gate's result), compare (the self-check's) and
+// set_digest (manifest.json's, once the set is complete). Rows add records,
 // segments, bytes and sequence_number. An empty table is exported as its
 // count and sequence number, with no segment and no folder.
 //
 // Errors thrown (errCode, componentSignature "ExportImport"):
 //   11 the nested gate neither passed nor blocked: it failed or was stopped.
+//   12 the self-check isn't exact.
 
 Class extends _Pass
 
 Class constructor($options : Object)
 	Super("export"; "Export"; $options)
-	This._phase_count:=3
+	This._phase_count:=4
 
 
 Function check() : Object
@@ -69,6 +77,8 @@ Function _envelope() : Object
 	$result:=Super._envelope()
 	$result.export_set:=This._folder.platformPath
 	$result.health_check:=Null
+	$result.compare:=Null
+	$result.set_digest:=""
 	return $result
 
 
@@ -76,12 +86,30 @@ Function _columns() : Collection
 	return ["records"; "segments"; "bytes"; "sequence_number"; "elapsed"]
 
 
+Function _sections() : Text
+	return This._nested_line("Self-check"; This.result.compare)
+
+
+Function _failed_step() : Text
+	// A self-check that is notExact or inconclusive has its own next step (spec 23).
+	Case of
+		: (This.result.compare=Null)
+		: (This.result.compare.verdict="notExact")
+			return "The export set doesn't match the source. Run the export again."
+		: (This.result.compare.verdict="inconclusive")
+			return "Some source records couldn't be verified. Check the source copy with the MSC (records and indexes), then run the export again."
+	End case
+	return Super._failed_step()
+
+
 Function _run()
 	var $structure : cs._Structure
 	var $tables; $entries; $jobs; $errors : Collection
 	var $table; $entry; $job; $out; $row; $error; $gate : Object
+	var $manifest : cs._Manifest
+	var $compare : cs.ComparePass
 	var $rerun : Text
-	$rerun:="This export set is incomplete: it has no manifest. Delete it and run the export again."
+	$rerun:="This export set is incomplete: it has no manifest.json. Delete it and run the export again."
 
 	This._phase("gate"; $rerun)
 	$gate:=cs.HealthCheckPass.new(This.options)
@@ -145,9 +173,22 @@ Function _run()
 	This.result.tables:=$out.tables
 
 	This._phase("manifest"; $rerun)
-	cs._Manifest.new(This._folder.platformPath).write(This.result; {segment_mb: This._segment_mb(); tables: This.options.tables}; $structure; $entries)
+	$manifest:=cs._Manifest.new(This._folder.platformPath)
+	$manifest.write(This.result; {segment_mb: This._segment_mb(); tables: This.options.tables}; $structure; $entries)
+
+	This._phase("self_check"; $rerun)
+	$compare:=cs.ComparePass.new($manifest.path; This.options)
+	$compare._manifest:=$manifest  // it reads manifest.json.tmp
+	$compare._log:=This._log
+	$compare._attach(This._window; This._stop)
+	This.result.compare:=$compare.run()
+	If (This.result.compare.verdict#"exact")
+		This.result.failure:=This.result.compare.failure  // a failure or a Stop; else run() sets it from the error
+		throw({errCode: 12; componentSignature: "ExportImport"; message: "the self-check gave "+This.result.compare.verdict})
+	End if
+	This.result.set_digest:=$manifest.complete()
 	This.result.verdict:="exported"
-	This.result.next_step:="The export set is complete. Switch to a new target datafile, then run the import."
+	This.result.next_step:="The export set is complete. Keep its set digest outside the set, switch to a new target datafile, then run the import."
 
 
 Function _segment_mb() : Integer

@@ -786,14 +786,44 @@
 					"scrollbarVertical": "automatic",
 					"sizingX": "grow"
 				},
+				"ex_res_digest_label": {
+					"type": "text",
+					"text": "Set digest:",
+					"top": 384,
+					"left": 205,
+					"width": 75,
+					"height": 17
+				},
+				"ex_res_digest": {
+					"type": "input",
+					"top": 384,
+					"left": 285,
+					"width": 605,
+					"height": 17,
+					"dataSource": "Form.view.digest",
+					"dataSourceTypeHint": "text",
+					"enterable": false,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"sizingX": "grow"
+				},
+				"ex_res_digest_note": {
+					"type": "text",
+					"text": "Keep this digest outside the export set, to check it at the import.",
+					"top": 402,
+					"left": 205,
+					"width": 685,
+					"height": 17,
+					"sizingX": "grow"
+				},
 				"ex_res_grid": {
 					"type": "listbox",
 					"listboxType": "collection",
 					"dataSource": "Form.view.rows",
-					"top": 382,
+					"top": 424,
 					"left": 205,
 					"width": 685,
-					"height": 178,
+					"height": 136,
 					"selectionMode": "none",
 					"focusable": false,
 					"sortable": false,
@@ -1032,7 +1062,7 @@
 					"top": 136,
 					"left": 205,
 					"width": 685,
-					"height": 48,
+					"height": 64,
 					"dataSource": "Form.summary",
 					"dataSourceTypeHint": "text",
 					"enterable": false,
@@ -1045,14 +1075,14 @@
 				"im_workers_label": {
 					"type": "text",
 					"text": "Workers:",
-					"top": 193,
+					"top": 209,
 					"left": 205,
 					"width": 60,
 					"height": 17
 				},
 				"im_workers": {
 					"type": "input",
-					"top": 190,
+					"top": 206,
 					"left": 270,
 					"width": 50,
 					"height": 22,
@@ -1062,12 +1092,34 @@
 					"numberFormat": "#0",
 					"textAlign": "center"
 				},
+				"im_set_digest_label": {
+					"type": "text",
+					"text": "Set digest:",
+					"top": 209,
+					"left": 335,
+					"width": 70,
+					"height": 17
+				},
+				"im_set_digest": {
+					"type": "input",
+					"top": 206,
+					"left": 410,
+					"width": 355,
+					"height": 22,
+					"dataSource": "Form.given_digest",
+					"dataSourceTypeHint": "text",
+					"placeholder": "Not checked when empty",
+					"events": [
+						"onDataChange"
+					],
+					"method": "Dialog_Event"
+				},
 				"im_check": {
 					"type": "input",
-					"top": 220,
+					"top": 236,
 					"left": 205,
 					"width": 560,
-					"height": 82,
+					"height": 66,
 					"dataSource": "Form.check_text",
 					"dataSourceTypeHint": "text",
 					"enterable": false,
@@ -1381,6 +1433,28 @@
 					"min": 1,
 					"numberFormat": "#0",
 					"textAlign": "center"
+				},
+				"cp_set_digest_label": {
+					"type": "text",
+					"text": "Set digest:",
+					"top": 179,
+					"left": 335,
+					"width": 70,
+					"height": 17
+				},
+				"cp_set_digest": {
+					"type": "input",
+					"top": 176,
+					"left": 410,
+					"width": 355,
+					"height": 22,
+					"dataSource": "Form.given_digest",
+					"dataSourceTypeHint": "text",
+					"placeholder": "Not checked when empty",
+					"events": [
+						"onDataChange"
+					],
+					"method": "Dialog_Event"
 				},
 				"cp_check": {
 					"type": "input",

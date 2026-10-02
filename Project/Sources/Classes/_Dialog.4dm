@@ -25,6 +25,8 @@ property data_folder : Text  // this datafile's folder, where Switch to target c
 property target_name : Text  // Switch to target's file name
 property language_line : Text  // Switch to target's data language reminder
 property manifest : Object  // the chosen set's manifest, as Import's or Compare's check() read it, or Null
+property set_digest : Text  // the chosen set's set digest, as Import's or Compare's check() computed it, or ""
+property given_digest : Text  // the Import and Compare steps' Set digest field: their set_digest option unless ""
 property summary : Text  // the Import step's manifest summary
 property on_source : Boolean  // this datafile is the chosen set's source, or there is no set
 property unusable : Boolean  // this target's newest import failed from the truncate through the flush, or came out notExact
@@ -37,7 +39,7 @@ property fields_label : Text
 property workers : Object  // by step key: its Workers field
 property check : Object  // the selected step's pre-flight: {problems; cautions}
 property check_text : Text
-property view : Object  // the selected step's result: {banner; notes; rows; report; blocked; fixable; recreate}
+property view : Object  // the selected step's result: {banner; notes; rows; report; digest; blocked; fixable; recreate}
 property running : Boolean
 property run : Object  // the running pass: see _start()
 property stop : Object  // shared: the running pass's Stop
@@ -79,10 +81,12 @@ Class constructor()
 	This.elsewhere:=""
 	This.last_export:=Null
 	This.manifest:=Null
+	This.set_digest:=""
+	This.given_digest:=""
 	This.summary:=""
 	This.check:={problems: []; cautions: []}
 	This.check_text:=""
-	This.view:={banner: ""; notes: ""; rows: []; report: ""; blocked: False; fixable: False; recreate: False}
+	This.view:={banner: ""; notes: ""; rows: []; report: ""; digest: ""; blocked: False; fixable: False; recreate: False}
 	This.running:=False
 	This.run:={name: ""; started: 0; phase: ""; phase_started: 0; fresh: False; line: ""; bar: 0; times: ""; rows: []}
 	This.stop:=New shared object("requested"; False)
@@ -131,7 +135,7 @@ Function event($e : Object)
 			End if
 		: ($e.objectName="ex_run")
 			This._start("Export"; "ExportPass"; ""; This._options("export"); This._tables())
-		: ($e.objectName="sw_name")
+		: ($e.objectName="sw_name") || ($e.objectName="@_set_digest")
 			This._show()
 		: ($e.objectName="sw_run")
 			This._switch()
@@ -154,7 +158,7 @@ Function event($e : Object)
 
 Function progress($message : Object)
 	// A message from the running pass, through Dialog_Progress: a phase
-	// {phase; number; count}, a job's {table; job; state; done; total}, or
+	// {pass; phase; number; count}, a job's {table; job; state; done; total}, or
 	// {result}, which Dialog_RunPass sends last.
 	Case of
 		: ($message.result#Null)
@@ -163,7 +167,7 @@ Function progress($message : Object)
 		: (Not(This.running))  // a late message
 			return
 		: ($message.phase#Null)
-			If ($message.phase#This.run.phase)  // a nested pass's phase of the same name is part of this one (ticket 07)
+			If ($message.pass=This.run.name)  // a nested pass's phases (the export's gate and self-check, the import's Compare) are part of its parent's
 				This.run.phase:=$message.phase
 				This.run.line:=This.run.name+", phase "+String($message.number)+" of "+String($message.count)+": "+$message.phase
 				This.run.phase_started:=Milliseconds
@@ -313,6 +317,7 @@ Function _check() : Object
 	// Import's and Compare's also read the chosen set's manifest.
 	var $pass; $check : Object
 	This.manifest:=Null
+	This.set_digest:=""
 	Case of
 		: (This.step.key="healthCheck")
 			return cs.HealthCheckPass.new(This._options("healthCheck")).check()
@@ -324,6 +329,7 @@ Function _check() : Object
 	$pass:=(This.step.key="import") ? cs.ImportPass.new(This._path(); This._options("import")) : cs.ComparePass.new(This._path(); This._options("compare"))
 	$check:=$pass.check()
 	This.manifest:=$pass._manifest.content  // the summary and the grid (ticket 08)
+	This.set_digest:=$pass._manifest.set_digest
 	return $check
 
 
@@ -371,7 +377,8 @@ Function _switch()
 
 Function _summary() : Text
 	// The Import step's manifest summary (spec 11): the source, the export's
-	// start (UTC), the component version, the records and the set's size.
+	// start (UTC), the component version, the records, the set's size and
+	// its set digest (spec 23).
 	var $m; $t : Object
 	var $bytes : Real
 	$m:=This.manifest
@@ -383,13 +390,15 @@ Function _summary() : Text
 	End for each
 	return "Source: "+String($m.source.datafile)+"\r"+\
 		"Exported "+Replace string(Substring(String($m.started); 1; 19); "T"; " ")+" UTC, by ExportImport "+String($m.component_version)+"\r"+\
-		String($m.tables.sum("records"); "###,###,###,##0")+" records in "+String($m.tables.length)+" tables, "+String(Round($bytes/1048576; 0); "###,###,##0")+" MB"
+		String($m.tables.sum("records"); "###,###,###,##0")+" records in "+String($m.tables.length)+" tables, "+String(Round($bytes/1048576; 0); "###,###,##0")+" MB\r"+\
+		"Set digest: "+This.set_digest
 
 
 Function _options($key : Text) : Object
 	// A step's options for its pass (spec 12): its workers, the shared table
 	// subset for the health check, the fixer and the export, unless every
-	// table is ticked, and the fields the health check and the fixer ignore.
+	// table is ticked, the fields the health check and the fixer ignore, and
+	// the Set digest field for import and Compare, unless it is empty.
 	var $options : Object
 	var $tables; $fields : Collection
 	$options:={workers: This.workers[$key]}
@@ -400,6 +409,9 @@ Function _options($key : Text) : Object
 	$fields:=This.field_list.query("is_selected = :1"; True).extract("field_ptr")
 	If ($key="healthCheck") && ($fields.length>0)
 		$options.field_ptrs_to_ignore:=$fields
+	End if
+	If (($key="import") || ($key="compare")) && (This.given_digest#"")
+		$options.set_digest:=This.given_digest
 	End if
 	return $options
 
@@ -420,7 +432,7 @@ Function _view()
 	// tables for import and Compare (spec 11).
 	var $r; $grid; $row : Object
 	$r:=((This.step.key="export") && (This.last_export#Null)) ? This.last_export : This.reports[This.step.key]
-	This.view:={banner: ""; notes: ""; rows: []; report: ""; blocked: False; fixable: False; recreate: False}
+	This.view:={banner: ""; notes: ""; rows: []; report: ""; digest: ""; blocked: False; fixable: False; recreate: False}
 	If (This.step.key="import") || (This.step.key="compare")
 		This.view.rows:=This._set_rows($r)
 	End if
@@ -430,6 +442,7 @@ Function _view()
 	This.view.banner:=This._mark($r)+" "+(($r.pass="fixer") ? "Fixer" : This.step.name)+": "+$r.verdict+"\r"+$r.next_step
 	This.view.notes:=This._lines($r.problems; $r.cautions)
 	This.view.report:=$r.report
+	This.view.digest:=String($r.set_digest)  // shown on the Export step only
 	This.view.recreate:=(["notExact"; "failed"].indexOf($r.verdict)>=0)  // Go to Switch to target
 	Case of
 		: ($r.pass="healthCheck") || ($r.pass="fixer")
@@ -494,6 +507,7 @@ Function _objects()
 	OBJECT SET VISIBLE(*; "unusable"; This.unusable)
 	OBJECT SET VISIBLE(*; "prog_@"; This.running)
 	OBJECT SET VISIBLE(*; "@_res_@"; $idle)
+	OBJECT SET VISIBLE(*; "ex_res_digest@"; $idle && (This.view.digest#""))
 	OBJECT SET ENABLED(*; "prog_stop"; This.running && Not(Bool(This.stop.requested)))
 	OBJECT SET ENABLED(*; "@_run"; $idle && (This.check.problems.length=0))
 	OBJECT SET ENABLED(*; "set_@"; $idle)

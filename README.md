@@ -20,7 +20,8 @@ Originally based on a 4D Tech Note (<https://kb.4d.com/assetid=41862>). The curr
    are. The **fixer** removes bad characters, if you choose to.
 2. **Export.** The export runs the health check's blocker gate first, then writes an **export set**
    next to the source datafile: one folder holding the records in binary **segments** and a
-   `manifest.json` that describes them.
+   `manifest.json` that describes them. It ends with a **self-check**, a Compare of the set on the
+   source, and gives the **set digest**: keep it outside the set, to check it at the import.
 3. **Switch to target.** 4D closes the source datafile and reopens on a new, empty **target
    datafile** (`CREATE DATA FILE`).
 4. **Import.** On the target: empty the exported tables, load the segments, rebuild the indexes, set
@@ -44,7 +45,8 @@ unique and non-blank (the health check's blockers enforce that).
 
 ```
 Export yyyy-mm-dd hh.mm.ss/                  <- next to the source datafile
-├── manifest.json                            <- written last: a set without one is incomplete
+├── manifest.json                            <- written last, renamed from manifest.json.tmp once
+│                                               the self-check is exact: a set without one is incomplete
 ├── 0003 Customers/
 │   ├── 000000000001.seg                     <- named by the position of its first record
 │   └── 000000412877.seg
@@ -52,7 +54,8 @@ Export yyyy-mm-dd hh.mm.ss/                  <- next to the source datafile
 ├── Export yyyy-mm-dd hh.mm.ss.txt/.json/.log
 ├── Health check yyyy-mm-dd hh.mm.ss.txt/.json   <- the export's gate
 ├── Import yyyy-mm-dd hh.mm.ss.txt/.json/.log    <- each import of this set
-└── Compare yyyy-mm-dd hh.mm.ss.txt/.json/.log   <- each Compare of this set (an import's has no .log)
+└── Compare yyyy-mm-dd hh.mm.ss.txt/.json/.log   <- each Compare of this set (the export's self-check
+                                                    and an import's have no .log)
 ```
 
 - A segment holds a run of one table's records in record-key order, each one encoded in binary
@@ -61,8 +64,34 @@ Export yyyy-mm-dd hh.mm.ss/                  <- next to the source datafile
   structure and its signature, the data language, and for each exported table its record count,
   sequence number and segments (each with its records, bytes, SHA-256 and first and last keys).
 - An empty table is exported as its record count and sequence number, with no folder.
+- The **set digest** is the SHA-256 of `manifest.json`, in hex. The manifest holds every segment's
+  SHA-256, so the set digest covers the whole set. `manifest.json` is never rewritten after the
+  export.
 - Import and Compare refuse a set written by another version or build of the component, for a
   structure that differs (field by field), or in another data language.
+
+### Trusting the export set
+
+The copy is proven by a chain with no trusted link:
+
+1. **The self-check is exact:** the set holds the source's records. The export's last phase is a
+   Compare of the new set on the source. It always runs, and only an exact self-check renames
+   `manifest.json.tmp` to `manifest.json`. It catches an export that writes wrong bytes, skips or
+   doubles a record, or reads a source that changes during the export. Its cost is about one more
+   Compare on the source.
+2. **The set digest matches:** the set hasn't changed since the export. The export shows the set
+   digest. Keep it outside the set, for example in a ticket, and give it to the import as
+   `set_digest` (or paste it in the dialog): a different digest refuses the run. Compare all of it,
+   not its first few characters. It detects a change only: the set is neither signed nor
+   encrypted.
+3. **Every segment's SHA-256 matches the manifest:** no segment changed. The import checks them
+   before it writes anything.
+4. **The import's Compare is exact:** the target holds the set's records.
+
+The self-check and Compare compare encoded bytes. A one-time development check proves that the
+encoding keeps every value. Outside the proof: whether the source copy is a faithful copy of
+production (verify it with the MSC first), and the target after the import's session (see
+[After the import](#after-the-import)).
 
 The XML export files and the MD5 checksum folders of earlier versions are gone. The component can't
 read an export made by an earlier version.
@@ -125,16 +154,22 @@ The steps:
   blocked tables. **Remove bad characters** asks first, then runs the fixer on the same tables and
   fields.
 - **Export:** Tables… and the cautions: free space smaller than the datafile, and tables with records
-  left out. When the gate refuses, the step shows the gate's grid.
+  left out. When the gate refuses, the step shows the gate's grid. Once exported, the step shows the
+  set digest, which can be selected and copied: keep it outside the export set, to check it at the
+  import.
 - **Switch to target:** the set's data language, with a reminder to check 4D Preferences ▸ General
   (a new datafile takes its data language from there). The target's file name starts as
   `<source name> target.4DD` in this datafile's folder, so the export sets stay in sight. A name
   that already exists is refused. Create target… asks first, then calls `CREATE DATA FILE`: 4D
   closes this datafile, ends every process and reopens on the new one. **Then open the dialog
   again**, the same way as before.
-- **Import:** the set's summary (source, export time, component version, records and size), the
-  pre-flight (including the records the import will remove from the target first) and Run.
-- **Compare:** Run, to compare the chosen set with this datafile.
+- **Import:** the set's summary (source, export time, component version, records, size and set
+  digest), the pre-flight (including the records the import will remove from the target first) and
+  Run.
+- **Compare:** Run, to compare the chosen set with this datafile. On the set's source, its next
+  steps are for the source.
+- **Set digest** (Import and Compare): paste the digest kept from the export. When it isn't empty,
+  a different set digest is a pre-flight problem, so Run is off. Empty means not checked.
 - **Import and Compare results:** a grid with each table's records in the set and in this datafile,
   the records the import removed and loaded, then Compare's matched, missing, extra, changed,
   duplicate and unverified counts and the sequence number check (✓ or ✗). On `notExact` or `failed`,
@@ -194,10 +229,10 @@ Import_AllTables({num_workers : Integer{; options : Object}}) -> export_set : Te
 ```
 
 Imports the export set at `options.export_set` into this datafile. Without it, it asks for the
-folder with `Select folder`.
+folder with `Select folder`. `options.set_digest`, when given, is checked against the set's.
 
 ```4d
-$path:=Import_AllTables(0; {export_set: $path})
+$path:=Import_AllTables(0; {export_set: $path; set_digest: $digest})
 ```
 
 ### `Export_HealthCheck_Scan`
@@ -279,11 +314,12 @@ $import:=cs.ExportImport.ImportPass.new($export.export_set).run()
 
 | Option | Passes | Default |
 |---|---|---|
-| `workers` | all | 4, capped at the core count; at least 1. The import's Compare uses the import's |
+| `workers` | all | 4, capped at the core count; at least 1. The export's self-check and the import's Compare use their parent's |
 | `tables` | health check, fixer, export | every table, empty ones included (a collection of table numbers) |
 | `field_ptrs_to_ignore` | health check, fixer | none (a collection of field pointers) |
 | `detail_limit` | health check, fixer, import, Compare | 1,000: the records listed per table (per table and check in the health check) |
 | `segment_mb` | export | 100, from 1 to 1024 |
+| `set_digest` | import, Compare | none: not checked. When given, a set digest that differs refuses the run |
 
 A bad option (an unknown table number, `workers` below 1, a wrong type) gives `refused`, with the
 problem listed.
@@ -315,9 +351,9 @@ Each pass adds its own keys and counts:
 |---|---|---|
 | health check | `findings` (each finding's table, key, field and kind) | `records`, `blockers`, `damage`, `checks` (`{kind: count}`) |
 | fixer | `findings`, and `removals` (each saved record's key and the characters removed) | the health check's, plus `characters_removed`, `records_saved` |
-| export | `health_check` (its gate's result) | `records`, `segments`, `bytes`, `sequence_number` |
-| import | `log_file_closed` (the log file's path, or ""), `compare` (Compare's result, once the load has finished) | `removed`, `loaded`, `sequence_number`, `index_elapsed` |
-| Compare | `discrepancies`, `unverified`, `unverified_ranges` | `expected`, `actual`, `matched`, `missing`, `extra`, `changed`, `duplicate`, `unverified`, `sequence_expected`, `sequence_actual` |
+| export | `health_check` (its gate's result), `compare` (its self-check's result), `set_digest` (once the set is complete, else "") | `records`, `segments`, `bytes`, `sequence_number` |
+| import | `set_digest`, `log_file_closed` (the log file's path, or ""), `compare` (Compare's result, once the load has finished) | `removed`, `loaded`, `sequence_number`, `index_elapsed` |
+| Compare | `set_digest`, `discrepancies`, `unverified`, `unverified_ranges` | `expected`, `actual`, `matched`, `missing`, `extra`, `changed`, `duplicate`, `unverified`, `sequence_expected`, `sequence_actual` |
 
 Compare's `discrepancies` and `unverified` list the first `detail_limit` records per table in key
 order, then `{table; key: null; not_listed: N}`. A changed record names each field that differs with
@@ -329,7 +365,7 @@ its two values. Discrepancies end with any table whose record count or sequence 
 |---|---|
 | health check | `passed`, `warnings` (signs of damage only), `blocked` (at least one blocker) |
 | fixer | the health check's, for the fixed data. `blocked` when its gate finds a blocker, with nothing changed |
-| export | `exported`. A blocker in its gate gives `refused`, with the gate's result under `health_check` |
+| export | `exported`, only when its self-check is `exact`. A blocker in its gate gives `refused`, with the gate's result under `health_check`. A self-check that isn't `exact` gives `failed` |
 | import | Compare's (`exact`, `notExact`, `inconclusive` or `failed`) once the load has finished. Before that, `refused` or `failed` |
 | Compare | `exact` (every record equal), `notExact` (at least one discrepancy), `inconclusive` (no discrepancy, but some records unverified) |
 
@@ -337,6 +373,11 @@ Every pass can also give `refused` (nothing was done: see `problems`) and `faile
 or Stop: see `failure`). **`interrupted`** is never returned: it is the verdict a run report is
 written with when the run starts, so a run report that still says `interrupted` means 4D quit or
 crashed during that run. Its `next_step` and its last phase say what to do.
+
+An export whose self-check is `notExact` gives "The export set doesn't match the source. Run the
+export again." One that is `inconclusive` gives "Some source records couldn't be verified. Check the
+source copy with the MSC (records and indexes), then run the export again." Either way, the set has
+no `manifest.json`, so import and Compare refuse it.
 
 The import succeeds only on `exact`. After `notExact`, or a failure from the truncate on, the target
 is **unusable**: create a new target and run the import again. After an import that failed during
@@ -350,18 +391,19 @@ Every run writes three files with the same name, `<Pass> yyyy-mm-dd hh.mm.ss` (l
 `<Pass>` is `Health check`, `Fixer`, `Export`, `Import` or `Compare`:
 
 - **`.txt`**, the readable run report. Its first line is `<Pass>: <verdict>`, then the next step,
-  the problems and cautions, the datafile, the times, the options, the phases and a table of counts.
-  Counts only.
+  the problems and cautions, the export set and its set digest, the datafile, the times, the
+  options, the phases and a table of counts. Counts only. The export's and the import's point at
+  their self-check's and Compare's run reports.
 - **`.json`**, the full run report: the result envelope above, with every detail.
 - **`.log`**, the run log: one line per event as the run goes (its start and options, each phase,
   each table's start and finish, cautions, a failure or a Stop, and the verdict), flushed line by
-  line, so `tail -f` can follow a run started from code. A nested run (the export's gate, the
-  import's Compare) writes into its parent's run log.
+  line, so `tail -f` can follow a run started from code. A nested run (the export's gate and
+  self-check, the import's Compare) writes into its parent's run log.
 
 | Pass | Where |
 |---|---|
 | health check, fixer | next to the datafile |
-| export, and its gate's run report | in the export set |
+| export, and its gate's and self-check's run reports | in the export set |
 | import, and its Compare's run report | in the export set |
 | Compare | in the export set |
 
@@ -430,14 +472,15 @@ path from the cache to the disk is beyond this component.
 var $check; $export; $import; $compare : Object
 $check:=cs.ExportImport.HealthCheckPass.new().run()     // review $check.report
 $export:=cs.ExportImport.ExportPass.new().run()         // $export.verdict = "exported"
+// keep $export.set_digest outside the export set
 
 // 2. Create the target: CREATE DATA FILE, or the dialog's Switch to target
 
 // 3. On the new, empty target datafile
-$import:=cs.ExportImport.ImportPass.new($export.export_set).run()   // $import.verdict = "exact"
+$import:=cs.ExportImport.ImportPass.new($export.export_set; {set_digest: $digest}).run()   // $import.verdict = "exact"
 
 // 4. Optional: reopen the target, then
-$compare:=Compare_ExportSet($export.export_set)
+$compare:=Compare_ExportSet($export.export_set; {set_digest: $digest})
 ```
 
 ## Repository layout

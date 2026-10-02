@@ -835,11 +835,27 @@
 	},
 	"_Manifest": {
 		"check()": {
-			"Syntax": "**.check**() : Object",
+			"Syntax": "**.check**( *set_digest* : Text ) : Object",
 			"Params": [
+				[
+					"set_digest",
+					"Text",
+					"->"
+				],
 				[
 					"",
 					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"complete()": {
+			"Syntax": "**.complete**() : Text",
+			"Params": [
+				[
+					"",
+					"Text",
 					"<-"
 				]
 			],
@@ -870,6 +886,12 @@
 				]
 			],
 			"Summary": ""
+		},
+		"name": {
+			"Syntax": "name : Text"
+		},
+		"set_digest": {
+			"Syntax": "set_digest : Text"
 		},
 		"content": {
 			"Syntax": "content : Object"
@@ -934,14 +956,11 @@
 		"summary": {
 			"Syntax": "summary : Text"
 		},
-		"on_source": {
-			"Syntax": "on_source : Boolean"
+		"given_digest": {
+			"Syntax": "given_digest : Text"
 		},
-		"check": {
-			"Syntax": "check : Object"
-		},
-		"workers": {
-			"Syntax": "workers : Object"
+		"set_digest": {
+			"Syntax": "set_digest : Text"
 		},
 		"data_folder": {
 			"Syntax": "data_folder : Text"
@@ -987,6 +1006,15 @@
 		},
 		"sets": {
 			"Syntax": "sets : Collection"
+		},
+		"check": {
+			"Syntax": "check : Object"
+		},
+		"workers": {
+			"Syntax": "workers : Object"
+		},
+		"on_source": {
+			"Syntax": "on_source : Boolean"
 		}
 	},
 	"_FixJob": {
