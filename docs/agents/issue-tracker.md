@@ -42,11 +42,11 @@ Used by `/wayfinder`. The **map** is a file with one **child** file per ticket.
 
 - ✅ **DONE**: [`.scratch/DONE/exact-copy-v2/`](../../.scratch/DONE/exact-copy-v2/map.md), a wayfinder
   map (**planning**). Destination reached: a locked spec for the fingerprint, the export set format,
-  import, the health check and the discrepancy report, split into build tickets. 16 tickets are
-  resolved; keys that contain @, worker count and extras before an order guard break came from the
-  build. **Open: 17 probe: the codec without object operations** and **18 rework the codec's
-  per-record loops** (blocked by 17), both from worker count, and **19 the cut rule's cost for text
-  and BLOB tables** (from the bench). The build tickets are in
+  import, the health check and the discrepancy report, split into build tickets. 18 tickets are
+  resolved; keys that contain @, worker count, extras before an order guard break, the codec probe
+  and the codec rework came from the build. **Open: 19 the cut rule's cost for text and BLOB
+  tables** (from the bench), **20 probe: Compare's per-record path** (frontier, from the codec
+  rework) and **21 rework Compare's per-record path** (blocked by 20). The build tickets are in
   `.scratch/exact-copy-v2-build/`.
 - 🔵 **OPEN**: [`.scratch/exact-copy-v2-build/`](../../.scratch/exact-copy-v2-build/map.md), the build tickets
   (**build**) for the exact-copy-v2 spec: 22 tickets, from a 4D-fact spike through the codec, the
