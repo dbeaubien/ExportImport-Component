@@ -13,6 +13,10 @@ instead of restating it.
 - **An agent can't run 4D.** Each ticket's Acceptance ends with steps for a human: compile, run the
   named method or pass, and attach the output under `research/`. A ticket is resolved only after
   those steps, or with a note saying which step was not validated.
+- **From ticket 14 on, the run steps are batched** (the human's request, 2026-10-02):
+  [Validate the cleanup and the dialog together](issues/21-validate-cleanup-and-dialog.md) holds
+  the run steps of tickets 14 to 18, marked (21) in their Acceptance. Those tickets resolve once
+  built and compiled. A ticket that needs a run of its own says why.
 - Every ticket leaves the project compiling. The old code keeps working until
   [Delete the old code](issues/14-delete-old-code.md).
 - A class function that isn't thread-safe fails only at runtime (spec 12), so every ticket that adds a
@@ -51,7 +55,8 @@ instead of restating it.
 | 17 | [Dialog: the Health check and Export steps](issues/17-dialog-health-check-and-export.md) | 16 | compile |
 | 18 | [Dialog: the Switch to target, Import and Compare steps](issues/18-dialog-switch-import-compare.md) | 17 | compile |
 | 19 | [README and docs](issues/19-readme-and-docs.md) | 14, 18 | — |
-| 20 | [Final check on a customer copy](issues/20-final-check-on-a-customer-copy.md) | 14, 18 | bench |
+| 20 | [Final check on a customer copy](issues/20-final-check-on-a-customer-copy.md) | 21 | bench |
+| 21 | [Validate the cleanup and the dialog together](issues/21-validate-cleanup-and-dialog.md) | 14, 15, 16, 17, 18 | — |
 
 The frontier is the open, unclaimed tickets whose blockers are all resolved. The lowest number wins.
 
@@ -155,3 +160,6 @@ The frontier is the open, unclaimed tickets whose blockers are all resolved. The
 - **The seams before the delete:** the shared-method wrappers (12) and the bench (13) move to the new
   API before the old code goes (spec 12).
 - **The dialog comes last.** It drives the finished public classes (spec 11, 12).
+- **One validation for the cleanup and the dialog (21).** Each export, import and Compare run costs
+  the human time, so the run steps of 14 to 18 share one session: a small datafile for behaviour,
+  then one guided run on the bench. The customer copy (20) comes after it.

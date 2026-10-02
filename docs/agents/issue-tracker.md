@@ -49,6 +49,6 @@ Used by `/wayfinder`. The **map** is a file with one **child** file per ticket.
   rule's cost for text and BLOB tables** (from the bench). The build tickets are in
   `.scratch/exact-copy-v2-build/`.
 - 🔵 **OPEN**: [`.scratch/exact-copy-v2-build/`](../../.scratch/exact-copy-v2-build/map.md), the build tickets
-  (**build**) for the exact-copy-v2 spec: 20 tickets, from a 4D-fact spike through the codec, the
-  passes, the shared-method wrappers, deleting the old code and the dialog, to a final check on a
-  customer copy. **01 spike, 02 structure and record codec, 03 pass skeleton and gate, 04 worker pool and planner, 05 health check scan, 06 fixer, 07 export, 08 manifest checks and pre-flight, 09 Compare: the merge, 10 Compare: unverified records and readable detail, 11 Import, 12 shared methods and the ExportImport namespace and 13 bench on the new API resolved. Frontier: 14 delete the old code, and 15 dialog: step list, export sets and marks.** The spec ticket on keys that contain @ is resolved, so 04, 07, 09 and 10 no longer wait on it.
+  (**build**) for the exact-copy-v2 spec: 21 tickets, from a 4D-fact spike through the codec, the
+  passes, the shared-method wrappers, deleting the old code and the dialog, then one validation of
+  14 to 18 (21) and a final check on a customer copy. **01 spike, 02 structure and record codec, 03 pass skeleton and gate, 04 worker pool and planner, 05 health check scan, 06 fixer, 07 export, 08 manifest checks and pre-flight, 09 Compare: the merge, 10 Compare: unverified records and readable detail, 11 Import, 12 shared methods and the ExportImport namespace and 13 bench on the new API resolved. Frontier: 14 delete the old code, and 15 dialog: step list, export sets and marks.** The spec ticket on keys that contain @ is resolved, so 04, 07, 09 and 10 no longer wait on it.

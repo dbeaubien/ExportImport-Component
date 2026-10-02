@@ -25,6 +25,10 @@ Gates: <gate>, …                   <- build tickets only; which gates the chan
   (an index, so it stays small).
 - **Claim, frontier, resolve**: follow "Wayfinding operations" in
   [`issue-tracker.md`](issue-tracker.md).
+- **Batched validation**: when several build tickets share run steps (export, import, Compare,
+  the dialog), a validation ticket holds them, and each build ticket marks those steps with its
+  number. The build tickets resolve once built and compiled. In the exact-copy-v2 build, that's
+  ticket 21 for tickets 14 to 18.
 
 ## Gates: what a ticket's `Gates:` header can name
 

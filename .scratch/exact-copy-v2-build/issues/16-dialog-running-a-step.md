@@ -23,12 +23,15 @@ Gates: compile
 
 ## Acceptance
 
+- From 2026-10-02, the checks marked (21) run in
+  [Validate the cleanup and the dialog together](21-validate-cleanup-and-dialog.md). This ticket
+  resolves once it is built and compiled.
 - [ ] `compile` passes.
-- [ ] In the dev project and in a scratch host, `CALL FORM` from the preemptive jobs reaches the
-      dialog, and a message sent after the window closed does no harm (spec 11 check).
-- [ ] The dialog stays responsive during a bench export.
+- [ ] In the dev project (21) and in a host (ticket 20), `CALL FORM` from the preemptive jobs
+      reaches the dialog, and a message sent after the window closed does no harm (spec 11 check).
+- [ ] The dialog stays responsive during a bench export (21).
 - [ ] Stop during an export gives `failed`, "stopped by operator", and leaves no worker. Closing
-      during a run asks first.
+      during a run asks first (21).
 
 ## Comments
 

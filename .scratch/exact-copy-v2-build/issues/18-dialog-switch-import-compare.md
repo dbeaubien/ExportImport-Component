@@ -27,10 +27,13 @@ Gates: compile
 
 ## Acceptance
 
+- From 2026-10-02, the checks marked (21) run in
+  [Validate the cleanup and the dialog together](21-validate-cleanup-and-dialog.md). This ticket
+  resolves once it is built and compiled.
 - [ ] `compile` passes.
 - [ ] A full guided run on the bench datafile works: health check, export, switch, reopen the
-      dialog, import (`exact`), then Compare again (`exact`).
-- [ ] The answer records spec 11's `CREATE DATA FILE` checks: the reopen, On Exit and On Startup,
+      dialog, import (`exact`), then Compare again (`exact`) (21).
+- [ ] The answer of ticket 21 records spec 11's `CREATE DATA FILE` checks: the reopen, On Exit and On Startup,
       and a file name that already exists.
 
 ## Comments

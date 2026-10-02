@@ -27,6 +27,10 @@ Gates: compile
 
 ## Acceptance
 
+- From 2026-10-02, the checks marked (21) run in
+  [Validate the cleanup and the dialog together](21-validate-cleanup-and-dialog.md). This ticket
+  resolves once it is built and compiled.
 - [ ] `compile` passes with no missing reference.
 - [ ] A search of `Project/Sources` and `Resources` finds none of the deleted names.
-- [ ] The old `Main` dialog still opens and runs an export through the wrappers.
+- [ ] The old shared methods still run (21). Ticket 15 replaces the old `Main`, so its export
+      isn't checked on its own.

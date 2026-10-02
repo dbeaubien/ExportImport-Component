@@ -2,7 +2,7 @@
 
 Status: open
 Type: task
-Blocked by: 14, 18
+Blocked by: 21
 Reads: .scratch/exact-copy-v2-build/map.md, .scratch/DONE/exact-copy-v2/map.md (Notes: Scale, Benchmarking), .scratch/DONE/exact-copy-v2/issues/04-define-fingerprint.md (Build verification: subtables), .scratch/DONE/exact-copy-v2/issues/08-comparison-and-discrepancy-report.md (customer values in the reports), docs/agents/issue-tracker-rules.md
 Gates: bench
 
@@ -45,3 +45,8 @@ end, compiled, on a copy of a customer datafile (30–40 GB):
     isn't thread-safe (one that uses interprocess variables, or calls a method that isn't). If 4D
     refuses a save into one of them, open a grilling ticket in the spec map: that table can't load
     preemptively. If the host has no such trigger, say the fact is still unverified.
+- 2026-10-02, from [Validate the cleanup and the dialog together](21-validate-cleanup-and-dialog.md):
+  this ticket now waits on ticket 21, the validation of tickets 14 to 18, so the customer copy
+  runs only after the bench run passes. Ticket 16's host check moves here too: in the customer
+  host, the dialog shows progress from the preemptive jobs (`CALL FORM`), and closing the window
+  during a run does no harm.

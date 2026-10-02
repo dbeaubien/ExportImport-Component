@@ -30,8 +30,11 @@ Gates: compile
 
 ## Acceptance
 
+- From 2026-10-02, the checks marked (21) run in
+  [Validate the cleanup and the dialog together](21-validate-cleanup-and-dialog.md). This ticket
+  resolves once it is built and compiled.
 - [ ] `compile` passes.
-- [ ] Each opening rule holds:
+- [ ] Each opening rule holds (21):
   - on a source with no set, it opens on Health check;
   - on a source with a set, Switch to target;
   - on a target with no import, Import;

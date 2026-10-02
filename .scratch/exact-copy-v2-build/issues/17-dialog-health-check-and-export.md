@@ -27,11 +27,15 @@ Gates: compile
 
 ## Acceptance
 
+- From 2026-10-02, the checks marked (21) run in
+  [Validate the cleanup and the dialog together](21-validate-cleanup-and-dialog.md). This ticket
+  resolves once it is built and compiled.
 - [ ] `compile` passes.
-- [ ] On the bench datafile, the health check gives `passed`.
-- [ ] Planted bad characters give `warnings`. Remove bad characters then gives `passed`.
-- [ ] Leave blocked tables out unticks the blocked tables.
-- [ ] The export runs and shows `exported`. A tiny subset shows the "tables left out" caution.
+- [ ] On the bench datafile, the health check gives `passed` (21).
+- [ ] Planted bad characters give `warnings`. Remove bad characters then gives `passed` (21).
+- [ ] Leave blocked tables out unticks the blocked tables (21).
+- [ ] The export runs and shows `exported`. A tiny subset shows the "tables left out" caution
+      (21).
 
 ## Comments
 
@@ -61,3 +65,10 @@ Gates: compile
     `health_check` (its `.txt` path is `health_check.report`).
   - The export's caution texts: "Only N MB free on <volume>, less than the datafile's M MB" and "N
     tables with records left out of this export: [A], [B]".
+- 2026-10-02, from [Validate the cleanup and the dialog together](21-validate-cleanup-and-dialog.md):
+  - Part 1 of ticket 21 needs a way to plant bad characters and a blocker in a `Bench_*` table.
+    `__Check_Scan_Plant` writes into `[Spike_Keys]`, and ticket 14 deletes both, while
+    `__Bench_Generate` plants no bad character. Write the way into ticket 21 when building this
+    ticket, for example a `__Bench_*` method, which ticket 14 keeps.
+  - The bench's health check gives `warnings`, not `passed`, because of its 3 `space_uuid`
+    findings (ticket 12's run).
