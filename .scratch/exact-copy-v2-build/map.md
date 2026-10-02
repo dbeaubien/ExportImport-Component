@@ -152,6 +152,27 @@ The frontier is the open, unclaimed tickets whose blockers are all resolved. The
   4D Progress and Component IH_Log are out of the dependencies, and the spike tables are out of
   the catalog, so the bench's health check should give `passed` again. Commit `5bdc9ce` still
   holds the dev code.
+- [Dialog: step list, export sets and marks](issues/15-dialog-step-list-and-marks.md): a new
+  `Main` form, driven by `cs._Dialog`, with the step list, the export set drop-down and Choose…,
+  and a page per step. Marks, source or target, the opening step and the "unusable" banner come
+  from the export sets and run reports on disk. `Export_SetMaxFileSizeMB` and the old tabs are gone.
+- [Dialog: running a step, progress and Stop](issues/16-dialog-running-a-step.md): Run starts
+  `Dialog_RunPass`, a cooperative coordinator, whose messages reach `Dialog_Progress`. The dialog
+  shows the phase line, a weighted bar with its ETA and a table grid. Stop and closing during a
+  run ask first. The run checks are in ticket 21.
+- [Dialog: the Health check and Export steps](issues/17-dialog-health-check-and-export.md): each
+  page has its settings, the pass's own pre-flight, Run, and a result grid with blocked rows in
+  red, Leave blocked tables out and Remove bad characters. A refused export shows the gate's grid.
+  `__Bench_Plant` plants what ticket 21 checks them with.
+- [Dialog: the Switch to target, Import and Compare steps](issues/18-dialog-switch-import-compare.md):
+  Switch to target refuses an empty, non-`.4DD` or existing name, asks, then calls
+  `CREATE DATA FILE`. Import shows the manifest summary. Import and Compare share one grid per
+  manifest table: in the set, in this datafile now, removed and loaded, then Compare's counts. Go
+  to Switch to target is on for `notExact` or `failed`. Ticket 21 checks the reopen with throw-away
+  On Exit and On Startup markers, then deletes them.
+- [README and docs](issues/19-readme-and-docs.md): the README is rewritten for the passes, the
+  namespace, the result and its verdicts, the run reports and run logs, the dialog, and each
+  blocker and sign of damage with what to do. XML and MD5 appear only as gone.
 
 ## Why this order
 

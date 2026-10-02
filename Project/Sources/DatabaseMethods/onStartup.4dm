@@ -1,3 +1,4 @@
+File(Data file; fk platform path).parent.file("On Startup ran.txt").setText(Timestamp+" "+Data file)  // throw-away: ticket 21, part 1 step 5, deletes this line
 
 If (Not:C34(Is compiled mode:C492)) && (Structure file:C489(*)=Structure file:C489)
 	

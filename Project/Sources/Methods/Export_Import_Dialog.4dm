@@ -1,25 +1,22 @@
 //%attributes = {"shared":true,"preemptive":"incapable"}
-// Export_Import_Dialog () 
+// Export_Import_Dialog ()
+//
+// DESCRIPTION
+//   Opens the Main dialog (spec 11) in its own process, once: a second call
+//   brings it to the front. Its form data is a cs._Dialog.
 //
 // ----------------------------------------------------
-ASSERT:C1129(Count parameters:C259=0)
+ASSERT(Count parameters=0)
 
-var $proc_id : Integer
-$proc_id:=Process number:C372(Current method name:C684)
-If ($proc_id=0)
-	$proc_id:=New process:C317(Current method name:C684; 0; Current method name:C684)
-	return 
-End if 
-If ($proc_id#0) && ($proc_id#Current process:C322)
-	BRING TO FRONT:C326($proc_id)
-	return 
-End if 
-
-var $form_data : Object
-$form_data:={}
-
-var $window_ref
-$window_ref:=Open form window:C675("Main"; Plain form window:K39:10; *)
-BRING TO FRONT:C326($window_ref)
-DIALOG:C40("Main"; $form_data)
-CLOSE WINDOW:C154($window_ref)
+var $process; $window : Integer
+$process:=Process number(Current method name)
+Case of
+	: ($process=0)
+		$process:=New process(Current method name; 0; Current method name)
+	: ($process#Current process)
+		BRING TO FRONT($process)
+	Else
+		$window:=Open form window("Main"; Plain form window; *)
+		DIALOG("Main"; cs._Dialog.new())
+		CLOSE WINDOW($window)
+End case
