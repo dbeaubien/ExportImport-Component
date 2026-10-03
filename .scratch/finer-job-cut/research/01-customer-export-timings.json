@@ -1,0 +1,552 @@
+{
+ "what": "The export phase of a customer datafile (45 GB, 83 tables), compiled, 4 workers, 4D 21 R2 build 100579, on an NVMe SSD. Tables are anonymized and listed by record count. elapsed is the table's first job start to its last job end, in seconds (the run report's row). jobs is what the planner gave it: only T01 was split, and its 2 jobs ran side by side.",
+ "workers": 4,
+ "export_phase_s": 2788,
+ "busy_workers_s": {
+  "4": 2297,
+  "2": 12,
+  "1": 478,
+  "0": 1
+ },
+ "tables": [
+  {
+   "table": "T01",
+   "records": 13497822,
+   "bytes": 6097228401,
+   "elapsed": 458.642,
+   "jobs": 2
+  },
+  {
+   "table": "T02",
+   "records": 4907964,
+   "bytes": 3656934156,
+   "elapsed": 1437.846,
+   "jobs": 1
+  },
+  {
+   "table": "T03",
+   "records": 4813370,
+   "bytes": 805257331,
+   "elapsed": 795.491,
+   "jobs": 1
+  },
+  {
+   "table": "T04",
+   "records": 3596643,
+   "bytes": 339649809,
+   "elapsed": 445.089,
+   "jobs": 1
+  },
+  {
+   "table": "T05",
+   "records": 3020896,
+   "bytes": 643420542,
+   "elapsed": 439.155,
+   "jobs": 1
+  },
+  {
+   "table": "T06",
+   "records": 2986540,
+   "bytes": 2258060895,
+   "elapsed": 1990.929,
+   "jobs": 1
+  },
+  {
+   "table": "T07",
+   "records": 2385590,
+   "bytes": 610202260,
+   "elapsed": 1017.403,
+   "jobs": 1
+  },
+  {
+   "table": "T08",
+   "records": 1276037,
+   "bytes": 784508065,
+   "elapsed": 385.535,
+   "jobs": 1
+  },
+  {
+   "table": "T09",
+   "records": 993362,
+   "bytes": 163915140,
+   "elapsed": 93.025,
+   "jobs": 1
+  },
+  {
+   "table": "T10",
+   "records": 738257,
+   "bytes": 37546644,
+   "elapsed": 24.765,
+   "jobs": 1
+  },
+  {
+   "table": "T11",
+   "records": 727790,
+   "bytes": 87334800,
+   "elapsed": 51.729,
+   "jobs": 1
+  },
+  {
+   "table": "T12",
+   "records": 726200,
+   "bytes": 111108600,
+   "elapsed": 409.65,
+   "jobs": 1
+  },
+  {
+   "table": "T13",
+   "records": 398907,
+   "bytes": 21481006,
+   "elapsed": 21.572,
+   "jobs": 1
+  },
+  {
+   "table": "T14",
+   "records": 335046,
+   "bytes": 91446698,
+   "elapsed": 408.727,
+   "jobs": 1
+  },
+  {
+   "table": "T15",
+   "records": 318932,
+   "bytes": 17196673,
+   "elapsed": 13.957,
+   "jobs": 1
+  },
+  {
+   "table": "T16",
+   "records": 315975,
+   "bytes": 125911953,
+   "elapsed": 93.834,
+   "jobs": 1
+  },
+  {
+   "table": "T17",
+   "records": 287092,
+   "bytes": 48290423,
+   "elapsed": 34.048,
+   "jobs": 1
+  },
+  {
+   "table": "T18",
+   "records": 281992,
+   "bytes": 27054999,
+   "elapsed": 26.793,
+   "jobs": 1
+  },
+  {
+   "table": "T19",
+   "records": 217531,
+   "bytes": 14482245,
+   "elapsed": 10.006,
+   "jobs": 1
+  },
+  {
+   "table": "T20",
+   "records": 191497,
+   "bytes": 8617509,
+   "elapsed": 8.362,
+   "jobs": 1
+  },
+  {
+   "table": "T21",
+   "records": 122239,
+   "bytes": 7789705,
+   "elapsed": 10.938,
+   "jobs": 1
+  },
+  {
+   "table": "T22",
+   "records": 116870,
+   "bytes": 6141659,
+   "elapsed": 6.943,
+   "jobs": 1
+  },
+  {
+   "table": "T23",
+   "records": 97589,
+   "bytes": 49039221,
+   "elapsed": 11.483,
+   "jobs": 1
+  },
+  {
+   "table": "T24",
+   "records": 75128,
+   "bytes": 5749900,
+   "elapsed": 3.792,
+   "jobs": 1
+  },
+  {
+   "table": "T25",
+   "records": 42627,
+   "bytes": 2514206318,
+   "elapsed": 355.712,
+   "jobs": 1
+  },
+  {
+   "table": "T26",
+   "records": 40201,
+   "bytes": 964824,
+   "elapsed": 1.336,
+   "jobs": 1
+  },
+  {
+   "table": "T27",
+   "records": 28034,
+   "bytes": 15127296,
+   "elapsed": 3.399,
+   "jobs": 1
+  },
+  {
+   "table": "T28",
+   "records": 23925,
+   "bytes": 3094682,
+   "elapsed": 2.22,
+   "jobs": 1
+  },
+  {
+   "table": "T29",
+   "records": 19614,
+   "bytes": 902244,
+   "elapsed": 1.041,
+   "jobs": 1
+  },
+  {
+   "table": "T30",
+   "records": 17848,
+   "bytes": 12144572,
+   "elapsed": 331.905,
+   "jobs": 1
+  },
+  {
+   "table": "T31",
+   "records": 16572,
+   "bytes": 1168888,
+   "elapsed": 325.387,
+   "jobs": 1
+  },
+  {
+   "table": "T32",
+   "records": 12429,
+   "bytes": 9465049,
+   "elapsed": 3.903,
+   "jobs": 1
+  },
+  {
+   "table": "T33",
+   "records": 9277,
+   "bytes": 325294,
+   "elapsed": 0.169,
+   "jobs": 1
+  },
+  {
+   "table": "T34",
+   "records": 8440,
+   "bytes": 1016716,
+   "elapsed": 0.668,
+   "jobs": 1
+  },
+  {
+   "table": "T35",
+   "records": 4265,
+   "bytes": 348930,
+   "elapsed": 0.27,
+   "jobs": 1
+  },
+  {
+   "table": "T36",
+   "records": 3802,
+   "bytes": 199243,
+   "elapsed": 0.138,
+   "jobs": 1
+  },
+  {
+   "table": "T37",
+   "records": 3459,
+   "bytes": 411892,
+   "elapsed": 0.311,
+   "jobs": 1
+  },
+  {
+   "table": "T38",
+   "records": 3434,
+   "bytes": 166548,
+   "elapsed": 0.212,
+   "jobs": 1
+  },
+  {
+   "table": "T39",
+   "records": 2799,
+   "bytes": 44784,
+   "elapsed": 0.069,
+   "jobs": 1
+  },
+  {
+   "table": "T40",
+   "records": 2714,
+   "bytes": 250536,
+   "elapsed": 0.146,
+   "jobs": 1
+  },
+  {
+   "table": "T41",
+   "records": 2594,
+   "bytes": 181580,
+   "elapsed": 0.192,
+   "jobs": 1
+  },
+  {
+   "table": "T42",
+   "records": 2272,
+   "bytes": 6205279,
+   "elapsed": 0.621,
+   "jobs": 1
+  },
+  {
+   "table": "T43",
+   "records": 1778,
+   "bytes": 91800,
+   "elapsed": 0.187,
+   "jobs": 1
+  },
+  {
+   "table": "T44",
+   "records": 1673,
+   "bytes": 159728,
+   "elapsed": 0.117,
+   "jobs": 1
+  },
+  {
+   "table": "T45",
+   "records": 1530,
+   "bytes": 267547,
+   "elapsed": 0.129,
+   "jobs": 1
+  },
+  {
+   "table": "T46",
+   "records": 962,
+   "bytes": 43869,
+   "elapsed": 0.135,
+   "jobs": 1
+  },
+  {
+   "table": "T47",
+   "records": 704,
+   "bytes": 1230887,
+   "elapsed": 0.276,
+   "jobs": 1
+  },
+  {
+   "table": "T48",
+   "records": 681,
+   "bytes": 38136,
+   "elapsed": 0.084,
+   "jobs": 1
+  },
+  {
+   "table": "T49",
+   "records": 621,
+   "bytes": 39774,
+   "elapsed": 0.034,
+   "jobs": 1
+  },
+  {
+   "table": "T50",
+   "records": 502,
+   "bytes": 41106,
+   "elapsed": 0.03,
+   "jobs": 1
+  },
+  {
+   "table": "T51",
+   "records": 475,
+   "bytes": 421550,
+   "elapsed": 0.029,
+   "jobs": 1
+  },
+  {
+   "table": "T52",
+   "records": 365,
+   "bytes": 41602,
+   "elapsed": 0.015,
+   "jobs": 1
+  },
+  {
+   "table": "T53",
+   "records": 350,
+   "bytes": 29158,
+   "elapsed": 0.013,
+   "jobs": 1
+  },
+  {
+   "table": "T54",
+   "records": 327,
+   "bytes": 32143,
+   "elapsed": 0.013,
+   "jobs": 1
+  },
+  {
+   "table": "T55",
+   "records": 285,
+   "bytes": 32256,
+   "elapsed": 0.037,
+   "jobs": 1
+  },
+  {
+   "table": "T56",
+   "records": 281,
+   "bytes": 21497,
+   "elapsed": 0.036,
+   "jobs": 1
+  },
+  {
+   "table": "T57",
+   "records": 277,
+   "bytes": 110035,
+   "elapsed": 0.025,
+   "jobs": 1
+  },
+  {
+   "table": "T58",
+   "records": 271,
+   "bytes": 15925,
+   "elapsed": 0.02,
+   "jobs": 1
+  },
+  {
+   "table": "T59",
+   "records": 184,
+   "bytes": 24651,
+   "elapsed": 0.052,
+   "jobs": 1
+  },
+  {
+   "table": "T60",
+   "records": 158,
+   "bytes": 39196,
+   "elapsed": 0.053,
+   "jobs": 1
+  },
+  {
+   "table": "T61",
+   "records": 81,
+   "bytes": 5232,
+   "elapsed": 0.012,
+   "jobs": 1
+  },
+  {
+   "table": "T62",
+   "records": 76,
+   "bytes": 7429,
+   "elapsed": 0.012,
+   "jobs": 1
+  },
+  {
+   "table": "T63",
+   "records": 48,
+   "bytes": 4878,
+   "elapsed": 0.009,
+   "jobs": 1
+  },
+  {
+   "table": "T64",
+   "records": 26,
+   "bytes": 1695,
+   "elapsed": 0.006,
+   "jobs": 1
+  },
+  {
+   "table": "T65",
+   "records": 20,
+   "bytes": 23072,
+   "elapsed": 0.023,
+   "jobs": 1
+  },
+  {
+   "table": "T66",
+   "records": 17,
+   "bytes": 1138,
+   "elapsed": 0.008,
+   "jobs": 1
+  },
+  {
+   "table": "T67",
+   "records": 15,
+   "bytes": 8760,
+   "elapsed": 0.003,
+   "jobs": 1
+  },
+  {
+   "table": "T68",
+   "records": 14,
+   "bytes": 10664,
+   "elapsed": 0.003,
+   "jobs": 1
+  },
+  {
+   "table": "T69",
+   "records": 14,
+   "bytes": 1573,
+   "elapsed": 0.003,
+   "jobs": 1
+  },
+  {
+   "table": "T70",
+   "records": 12,
+   "bytes": 1686,
+   "elapsed": 0.004,
+   "jobs": 1
+  },
+  {
+   "table": "T71",
+   "records": 8,
+   "bytes": 904,
+   "elapsed": 0.003,
+   "jobs": 1
+  },
+  {
+   "table": "T72",
+   "records": 5,
+   "bytes": 604,
+   "elapsed": 0.001,
+   "jobs": 1
+  },
+  {
+   "table": "T73",
+   "records": 5,
+   "bytes": 1691,
+   "elapsed": 0.003,
+   "jobs": 1
+  },
+  {
+   "table": "T74",
+   "records": 1,
+   "bytes": 44,
+   "elapsed": 0.001,
+   "jobs": 1
+  },
+  {
+   "table": "T75",
+   "records": 1,
+   "bytes": 135,
+   "elapsed": 0.002,
+   "jobs": 1
+  },
+  {
+   "table": "T76",
+   "records": 1,
+   "bytes": 410850,
+   "elapsed": 0.005,
+   "jobs": 1
+  },
+  {
+   "table": "T77",
+   "records": 1,
+   "bytes": 716,
+   "elapsed": 0.001,
+   "jobs": 1
+  }
+ ]
+}

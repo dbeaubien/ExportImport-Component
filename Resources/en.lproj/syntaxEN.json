@@ -633,6 +633,9 @@
 			],
 			"Summary": ""
 		},
+		"worker_log": {
+			"Syntax": "worker_log : Text"
+		},
 		"error": {
 			"Syntax": "error : Text"
 		}

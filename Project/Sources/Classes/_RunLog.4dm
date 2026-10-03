@@ -5,13 +5,17 @@
 // Each line opens the file, appends and lets the handle go, which closes
 // the file, so the line is on disk at once and tail -f follows the run.
 // The first failed write sets error, and later lines are skipped.
+// worker_log names the worker log beside it, which _WorkerPool and its
+// workers write (WorkerPool_Log).
 
 property error : Text  // the first failed write's error, or ""
+property worker_log : Text  // the worker log's platform path: "<name> workers.log"
 property _file : 4D.File
 
 Class constructor($file : 4D.File)
 	This._file:=$file
 	This.error:=""
+	This.worker_log:=$file.parent.file($file.name+" workers.log").platformPath
 
 
 Function write($text : Text)

@@ -393,7 +393,7 @@ data folder from them, recreate the target and run the import again.
 
 ## Run reports and run logs
 
-Every run writes three files with the same name, `<Pass> yyyy-mm-dd hh.mm.ss` (local time), where
+Every run writes these files with the same name, `<Pass> yyyy-mm-dd hh.mm.ss` (local time), where
 `<Pass>` is `Health check`, `Fixer`, `Export`, `Import` or `Compare`:
 
 - **`.txt`**, the readable run report. Its first line is `<Pass>: <verdict>`, then the next step,
@@ -407,6 +407,9 @@ Every run writes three files with the same name, `<Pass> yyyy-mm-dd hh.mm.ss` (l
   each table's start and finish, cautions, a failure or a Stop, and the verdict), flushed line by
   line, so `tail -f` can follow a run started from code. A nested run (the export's gate and
   self-check, the import's Compare) writes into its parent's run log.
+- **` workers.log`**, the worker log, beside the run log: for diagnosing idle workers, each job
+  sent by the coordinator, then received and completed by its worker, in UTC with milliseconds. A
+  nested run writes into its parent's.
 
 | Pass | Where |
 |---|---|

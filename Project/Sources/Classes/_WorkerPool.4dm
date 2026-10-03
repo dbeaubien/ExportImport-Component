@@ -10,6 +10,8 @@
 // jobs and sets the jobs' own stop, then waits for the running jobs and ends
 // its workers. It logs each table's start and finish, and merges each table's
 // job outputs into one row: tables only, never jobs. It has no 4D Progress.
+// The worker log (WorkerPool_Log) has the jobs: the pool's start and end,
+// and each job sent, then received and completed by its worker.
 
 property _workers : Integer
 property _window : Integer  // the dialog's window, or 0
@@ -30,7 +32,7 @@ Function run($class : Text; $jobs : Collection) : Object
 	// first failed job's, stopped is True after a Stop, and preemptive is
 	// True if every job ran preemptive.
 	var $results; $queue; $names; $free; $list; $rows; $findings : Collection
-	var $halt; $tables; $busy; $t; $job; $output; $merged; $failure : Object
+	var $halt; $tables; $busy; $t; $job; $output; $merged; $failure; $wlog : Object
 	var $name : Text
 	var $i; $next; $read; $running : Integer
 	var $stopped; $preemptive : Boolean
@@ -59,6 +61,8 @@ Function run($class : Text; $jobs : Collection) : Object
 	$free:=$names.copy()
 	$busy:={}  // job index: worker name
 	$preemptive:=True
+	$wlog:=New shared object("path"; This._log.worker_log)
+	WorkerPool_Log($wlog; "coordinator  started "+$class+": "+String($queue.length)+" jobs on "+String($names.length)+" workers")
 
 	While ((($next<$queue.length) & ($failure=Null) & Not($stopped)) | ($running>0))
 		While ($read<$results.length)
@@ -102,13 +106,16 @@ Function run($class : Text; $jobs : Collection) : Object
 				$t.started:=True
 				This._log.write("["+$t.table.name+"] started")
 			End if
-			CALL WORKER($name; "WorkerPool_RunJob"; $class; $job; $halt; $results)
+			$job.worker:=$names.indexOf($name)+1
+			WorkerPool_Log($wlog; "coordinator  sent job "+String($job.index)+" ["+$job.table.name+"] "+String($job.expected)+" records to worker "+String($job.worker))
+			CALL WORKER($name; "WorkerPool_RunJob"; $class; $job; $halt; $results; $wlog)
 			$running+=1
 		End while
 		If ($running>0)
 			DELAY PROCESS(Current process; 6)
 		End if
 	End while
+	WorkerPool_Log($wlog; "coordinator  ended "+$class)
 
 	For each ($name; $names)
 		KILL WORKER($name)
