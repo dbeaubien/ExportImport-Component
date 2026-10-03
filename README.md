@@ -351,7 +351,7 @@ Each pass adds its own keys and counts:
 
 | Pass | Adds | Table rows add |
 |---|---|---|
-| health check | `findings` (each finding's table, key, field and kind) | `records`, `blockers`, `damage`, `checks` (`{kind: count}`) |
+| health check | `findings` (each finding's table, key, field and kind) | `records`, `blockers`, `damage`, `checks` (`{kind: count}`), `space_uuid_fields` (`{field: count}`) |
 | fixer | `findings`, and `removals` (each saved record's key and the characters removed) | the health check's, plus `characters_removed`, `records_saved` |
 | export | `health_check` (its gate's result), `compare` (its self-check's result), `set_digest` (once the set is complete, else "") | `records`, `segments`, `bytes`, `sequence_number` |
 | import | `set_digest`, `log_file_closed` (the log file's path, or ""), `compare` (Compare's result, once the load has finished) | `removed`, `loaded`, `sequence_number`, `index_elapsed` |
@@ -393,18 +393,23 @@ data folder from them, recreate the target and run the import again.
 
 ## Run reports and run logs
 
-Every run writes three files with the same name, `<Pass> yyyy-mm-dd hh.mm.ss` (local time), where
+Every run writes these files with the same name, `<Pass> yyyy-mm-dd hh.mm.ss` (local time), where
 `<Pass>` is `Health check`, `Fixer`, `Export`, `Import` or `Compare`:
 
 - **`.txt`**, the readable run report. Its first line is `<Pass>: <verdict>`, then the next step,
   the problems and cautions, the export set and its set digest, the datafile, the times, the
-  options, the phases and a table of counts. Counts only. The export's and the import's point at
-  their self-check's and Compare's run reports.
+  options, the phases and a table of counts. The export's and the import's point at their
+  self-check's and Compare's run reports. The health check's and the fixer's add the signs of
+  damage: each bad character's table, field and record key (up to `detail_limit` per table and
+  kind), and each UUID field that holds spaces, by table and field, with its count.
 - **`.json`**, the full run report: the result envelope above, with every detail.
 - **`.log`**, the run log: one line per event as the run goes (its start and options, each phase,
   each table's start and finish, cautions, a failure or a Stop, and the verdict), flushed line by
   line, so `tail -f` can follow a run started from code. A nested run (the export's gate and
   self-check, the import's Compare) writes into its parent's run log.
+- **` workers.log`**, the worker log, beside the run log: for diagnosing idle workers, each job
+  sent by the coordinator, then received and completed by its worker, in UTC with milliseconds. A
+  nested run writes into its parent's.
 
 | Pass | Where |
 |---|---|
