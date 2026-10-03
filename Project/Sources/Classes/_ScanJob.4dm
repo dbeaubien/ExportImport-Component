@@ -15,7 +15,9 @@
 // bad_character, lone_surrogate (a value that holds one, which the export
 // refuses: ticket 01's fact 3), key_bad_character (either, in the record
 // key, which the fixer leaves), space_uuid and at_in_key. Each job lists at
-// most detail_limit findings per kind. The pass caps the table's again.
+// most detail_limit findings per kind. The pass caps the table's again. The
+// row's space_uuid_fields counts space_uuid by field ({field: count}), which
+// the capped findings can't: a field past the cap would go unnamed.
 
 Class extends _Job
 
@@ -34,6 +36,7 @@ Function _run()
 	$row.blockers:=0
 	$row.damage:=0
 	$row.checks:={}
+	$row.space_uuid_fields:={}
 	$fields:=[]
 	For each ($field; This.job.table.fields)
 		$type:=String($field.type)  // String(): an unreadable type is a number
@@ -70,6 +73,7 @@ Function _run()
 			If ($f.uuid)
 				If ($value=("20"*16))
 					This._found("space_uuid"; $f.name)
+					$row.space_uuid_fields[$f.name]:=Num($row.space_uuid_fields[$f.name])+1
 				End if
 			Else
 				$bad:=STR_GetListOfBadCharacters($value)

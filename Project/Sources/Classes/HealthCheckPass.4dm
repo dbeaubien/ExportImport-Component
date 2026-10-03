@@ -31,12 +31,27 @@ Function _columns() : Collection
 
 Function _sections() : Text
 	// The table-level blockers, named by table and field: they aren't records.
-	var $finding : Object
-	var $text : Text
+	// Then the signs of damage: each listed bad character by table, field and
+	// record key, and each UUID field that holds spaces, with its count.
+	var $finding; $row : Object
+	var $text; $damage; $field : Text
 	For each ($finding; This.result.findings.query("kind in :1"; ["no_primary_key"; "unreadable_field"]))
 		$text+="  ["+$finding.table+"]"+(($finding.field=Null) ? "" : $finding.field)+"  "+$finding.kind+"\n"
 	End for each
-	return ($text="") ? "" : ("Structural blockers\n"+$text)
+	For each ($finding; This.result.findings.query("kind in :1"; ["bad_character"; "lone_surrogate"; "key_bad_character"]))
+		If ($finding.not_listed=Null)
+			$damage+="  ["+$finding.table+"]"+$finding.field+"  "+$finding.kind+"  key "+JSON Stringify($finding.key)+"\n"
+		Else
+			$damage+="  ["+$finding.table+"]  "+$finding.kind+"  "+String($finding.not_listed)+" more not listed\n"
+		End if
+	End for each
+	For each ($row; This.result.tables.query("checks.space_uuid > 0"))
+		For each ($field; $row.space_uuid_fields)
+			$damage+="  ["+$row.name+"]"+$field+"  space_uuid  "+String($row.space_uuid_fields[$field])+" records\n"
+		End for each
+	End for each
+	$text:=($text="") ? "" : ("Structural blockers\n"+$text)
+	return ($damage="") ? $text : ($text+(($text="") ? "" : "\n")+"Signs of damage\n"+$damage)
 
 
 Function _run()
@@ -116,7 +131,8 @@ Function _add($rows : Collection)
 		For each ($key; $row)
 			Case of
 				: ($key="number") | ($key="name") | ($key="records")
-				: (Value type($row[$key])=Is object)  // checks: {kind: count}
+				: (Value type($row[$key])=Is object)  // checks: {kind: count}, space_uuid_fields: {field: count}
+					$into[$key]:=($into[$key]=Null) ? {} : $into[$key]  // the gate's row has no space_uuid_fields
 					For each ($kind; $row[$key])
 						$into[$key][$kind]:=Num($into[$key][$kind])+$row[$key][$kind]
 					End for each
