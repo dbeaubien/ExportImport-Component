@@ -1,6 +1,7 @@
 # Cut jobs finer, so no phase ends with one worker on a long job
 
-Status: open
+Status: claimed
+Assignee: Dani Beaubien (claimed 2026-10-03)
 Type: task
 Blocked by: 02
 Reads: .scratch/finer-job-cut/map.md, .scratch/finer-job-cut/research/01-customer-export-timings.json, .scratch/finer-job-cut/research/01-simulate-cut.py, .scratch/DONE/exact-copy-v2/issues/10-split-large-tables-across-workers.md (Answer: Cut rule), .scratch/DONE/exact-copy-v2/issues/19-cut-rule-cost.md (Answer), .scratch/DONE/exact-copy-v2-build/research/23-Bench-Baseline-compare-4-compiled.json, Project/Sources/Classes/_Planner.4dm, Project/Sources/Classes/_WorkerPool.4dm (the queue order only)
@@ -28,38 +29,43 @@ and three waiting, then all four busy again.
 per-table speeds ([01-customer-export-timings.json](../research/01-customer-export-timings.json),
 anonymized). Today's rule reproduces the run: 46.4 min and 13.1% idle.
 
-| Jobs per worker | Jobs | Export phase | Idle |
-|---|---|---|---|
-| 1 (today) | 78 | 46.4 min | 13.1% |
-| 2 | 79 | 45.7 min | 11.7% |
-| 4 | 87 | 41.6 min | 3.0% |
-| 8 | 100 | 41.3 min | 2.4% |
-| no tail at all | | 40.4 min | 0% |
+| Jobs per worker | Most jobs per table | Jobs | Export phase | Idle |
+|---|---|---|---|---|
+| 1 (the old rule) | 4 | 78 | 46.4 min | 13.1% |
+| 2 | 4 | 79 | 45.7 min | 11.7% |
+| **4 (built)** | **4** | **85** | **41.9 min** | **3.6%** |
+| 8 | 4 | 93 | 41.0 min | 1.5% |
+| 4 | 16 | 87 | 41.6 min | 3.0% |
+| no tail at all | | | 40.4 min | 0% |
 
 ## What to build
 
 Amend the cut rule (spec 10, as amended by spec 19) in `_Planner` alone. It covers every pass that
 cuts tables: the scan, the fixer, export, import and Compare.
 
-- **Jobs per worker: 4**, a constant like `minimum`, not an option. 4 is the knee in the table
-  above, and 8 adds 13 jobs for 0.3 min.
+- **Jobs per worker: 4** (`per_worker`), a constant like `minimum`, not an option. The human chose
+  4 in round 1. With the cap below, 8 would save another 0.9 min on the customer run.
 - **`counts()`:** the target job is the run's records ÷ (workers × 4). A table gets the smallest of
-  ceil(records ÷ target), floor(records ÷ 50,000), workers × 4 and, for import and Compare, its
-  segment count, and at least 1 job. In code, the third term becomes
-  `-Int(-($size.records*This.workers*4/$total))`, and the cap becomes `This.workers*4`.
+  ceil(records ÷ target), floor(records ÷ 50,000), the worker count and, for import and Compare,
+  its segment count, and at least 1 job. In code, only the third term changes, to
+  `-Int(-($size.records*This.workers*This.per_worker/$total))`.
+- **The cap stays the worker count** (changed while building; the plan had workers × 4).
+  `ComparePass` plans its tables whose segments are out of order with `_Planner.new(1)`, so each is
+  one job whose order guard finds the break (spec 10). A cap of workers × 4 would cut those into 4
+  jobs. Keeping the cap costs 0.3 min on the customer run (41.9 against 41.6).
 - **Unchanged:** records as the cost, the queue by `expected`, largest first (spec 19), the 50,000
   records a job, the segment cap, and the gate's one job per table (`whole()`).
 - Update `_Planner`'s header comment. Add a dated note under the Answers of spec 10 and spec 19
   saying the rule is amended here. The README doesn't describe the cut rule.
 
 **What else it changes (check, don't build):**
-- **Export:** each job's last segment can be under `segment_mb`, so a table can have up to
-  workers × 4 − 1 more short segments. Segment names stay unique (they come from the job's start
-  position).
+- **Export:** each job's last segment can be under `segment_mb`. A table still has at most workers
+  − 1 more short segments, but more tables are cut. Segment names stay unique (they come from the
+  job's start position).
 - **Coordinator:** `source()` sorts a table on its key once when it gets more than one job. More
   tables now qualify: here, each table above 2.67 million records.
-- **Bench:** at 4 workers, the export gives `[Bench_Wide]` 10 jobs (3 today) and `[Bench_Text]` 5
-  (2 today). Import and Compare get the same counts unless a table has fewer segments.
+- **Bench:** at 4 workers, the export gives `[Bench_Wide]` 4 jobs (3 before) and `[Bench_Text]` 4
+  (2 before). Import and Compare get the same counts unless a table has fewer segments.
 
 ## Acceptance
 
@@ -97,3 +103,23 @@ cuts tables: the scan, the fixer, export, import and Compare.
        rework how the self-check gets its tables (spec 23). [no, out of scope]
   - Round 1 restarts once ticket 02 has its numbers. If they show idle time with work queued, the
     pool is fixed first and the questions above may change.
+- 2026-10-03, decided with the human: round 1's five recommendations, all accepted (jobs per worker
+  4, every pass that cuts, the five things kept, the bench plus the next real customer export, no
+  overlapping phases). Built the same day (not yet compiled), with one change from the plan:
+  the cap per table stays the worker count (What to build). Then:
+  - [_Planner](../../../Project/Sources/Classes/_Planner.4dm): `per_worker`, 4, in the target's
+    term of `counts()`, and the header comment. No other class changes.
+  - [01-simulate-cut.py](../research/01-simulate-cut.py) models the per-table cap, and the table
+    under Why shows the rule as built.
+  - Dated notes under the Answers of spec 10 and spec 19.
+- 2026-10-03, compiled and benched by the human, twice:
+  [01-Bench-Baseline-compiled-loaded.json](../research/01-Bench-Baseline-compiled-loaded.json)
+  (the second run). The compile passed, since the bench ran compiled.
+  - **Behaviour:** `exported`, and the self-check `exact`, in both runs.
+  - **The times don't count: the machine was loaded.** Another 4D, running a health check of a
+    customer datafile, used 70% CPU and 19 GB. Swap was 27.7 of 28.7 GB used, and the load average
+    was 27 to 33 on 10 cores. The gate, which this ticket doesn't change, took 29 s and 19 s
+    against the baseline's 8 s. The second run took 158 s to export and 222 s for the
+    self-check, against 76 and 116.
+  - **Still to do:** the bench again on a quiet machine, then delete the two export sets
+    (`Export 2026-10-03 10.26.56` and `10.35.45`, next to the bench datafile).

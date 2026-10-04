@@ -84,6 +84,11 @@ largest first. Bytes play no part in planning a run.**
     [Rework Compare's per-record path](21-rework-compare-per-record-path.md) may change Compare's
     worker count.
 
+- 2026-10-03, from [Cut jobs finer, so no phase ends with one worker on a long job](../../../finer-job-cut/issues/01-finer-job-cut.md):
+  smaller jobs, rejected above as beyond this ticket, are built there. The target job size is the
+  run's total ÷ (the worker count × 4). Records stay the cost: with smaller jobs, a table whose
+  records cost more than their count says ends a phase with a short tail, not a long one.
+
 ## Comments
 
 - 2026-10-02, built (not yet compiled or run). Waiting on the human steps below. Then a session adds

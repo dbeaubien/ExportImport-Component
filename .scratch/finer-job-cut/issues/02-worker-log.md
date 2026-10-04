@@ -1,6 +1,6 @@
 # Worker log: when each worker receives and completes a job
 
-Status: claimed
+Status: resolved
 Assignee: Dani Beaubien (claimed 2026-10-03)
 Type: task
 Blocked by: —
@@ -48,14 +48,14 @@ run log.
 
 ## Acceptance
 
-- [ ] `compile` passes.
-- [ ] Run, compiled, by the human on a production copy: an export of every table at 4 workers, as
+- [x] `compile` passes.
+- [x] Run, compiled, by the human on a production copy: an export of every table at 4 workers, as
       in production. Keep the worker log on the secure machine. The repo is public, so it, its
       table names and its paths never go into the repo.
-- [ ] An agent reads the worker log in place and records here, as numbers only and per phase: each
+- [x] An agent reads the worker log in place and records here, as numbers only and per phase: each
       worker's busy and idle time, the idle time with work queued, the tail, the coordinator's lag
       and the message-queue lag (largest and total).
-- [ ] With the human: keep the worker log (glossary, a dated note under spec 13's Answer) or
+- [x] With the human: keep the worker log (glossary, a dated note under spec 13's Answer) or
       delete it, with its README bullet.
 
 ## Comments
@@ -72,3 +72,46 @@ run log.
   - README: one bullet under Run reports and run logs.
   - **To check in the run:** `Timestamp` and `File().open("append")` in a preemptive worker. A
     compile error there means one of them isn't thread-safe.
+- 2026-10-03, first run, compiled, by the human: a health check of every table of a second
+  customer datafile at 4 workers, read in place by an agent while the scan ran. Numbers only.
+  - **The pool hands work out at once.** Gate (83 jobs): every job was received within 1 ms of
+    being sent. The 79 hand-offs to a freed worker took 0.28 s at most, 7.0 s in all, which is the
+    coordinator's 0.1 s loop. Scan: its first 4 jobs went out within 3 ms.
+  - **Then 3 of 4 workers stopped using CPU** (the human, from 4D's process list). A 5 s `sample`
+    of 4D, 30 minutes into the scan, showed **all four** workers inside `GOTO SELECTED RECORD`:
+    37 to 86% of samples waiting on 4D's internal locks (`VCriticalSection::Lock`), 4 to 48% in
+    `pread` on the datafile, and 5 to 14% on CPU. One 4D function locks, reads the datafile, then
+    unlocks, so one worker reads at a time.
+  - **The Mac was out of memory.** 4D's footprint was 41 GB, all heap (`MALLOC_SMALL`, 11 GB of
+    it compressed), against a 4D cache of 5 GB. Swap was 26.6 of 27.6 GB used, about 100 MB was
+    free, and the internal SSD did about 3,000 page-ins a second while the datafile's SSD was idle.
+    A worker that holds 4D's lock and takes a page fault holds up the others.
+  - Not yet known: what fills the other 36 GB, and in which phase. The gate's
+    `all().distinct(key; dk count values)` builds a collection with one object per record,
+    perhaps 3 GB for an 11.5-million-record table, with four tables at once. That's a guess.
+
+## Answer
+
+Decided with the human on 2026-10-03. **Worker log** is a new glossary term.
+
+**The worker pool isn't the cause, and stays as it is. Workers sit idle inside 4D, waiting on its
+lock around datafile reads, and swapping made those waits long. The worker log stays, always on.**
+
+- **The pool:** each job reached its worker within 1 ms of being sent. A freed worker got its next
+  job within 0.28 s, which is the coordinator's 0.1 s loop (Comments, first run).
+- **The idle workers:** a 5 s `sample` showed every worker in `GOTO SELECTED RECORD`, mostly
+  waiting on 4D's lock around reading the datafile, so one worker reads at a time. 4D's footprint
+  was 41 GB against a 5 GB cache, with swap full. A worker that holds the lock and takes a page
+  fault holds up the others.
+- **No 4D Server route:** the passes run only in 4D local mode (`_Pass.check()`). 4D Server 21.2's
+  `DB4D.framework` is byte-identical to 4D 21.2's, apart from the code signatures, so it has the
+  same lock.
+- **`NEXT RECORD`:** not tried. It loads the whole record as `GOTO SELECTED RECORD` does, and the
+  time is in that load.
+- **Kept:** the worker log, with its README bullet, a glossary entry and a dated note under spec
+  13's Answer.
+- **Not recorded:** the scan's per-worker times past its first jobs, and what fills 4D's memory
+  beyond its cache. The human leaves both: free RAM before a big run.
+- **Unblocks** [Cut jobs finer, so no phase ends with one worker on a long job](01-finer-job-cut.md):
+  its tail is a separate cause (a long job queued late, with nothing left to share out), and the
+  human wants it fixed.

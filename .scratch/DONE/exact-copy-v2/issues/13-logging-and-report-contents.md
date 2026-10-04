@@ -167,3 +167,4 @@ log.**
 - The README's dependency line (4D Progress and Component IH_Log) goes, and it documents the run
   report, the run log and the `interrupted` verdict.
 - 2026-10-02, from [Trusting the export set](23-trusting-the-export-set.md): the `.txt` of the export, the import and Compare shows the set digest. The export's `.txt` points at its self-check's run report, as the import's points at its Compare's. The self-check writes into the export's run log.
+- 2026-10-03, from [Worker log: when each worker receives and completes a job](../../../finer-job-cut/issues/02-worker-log.md): every run also writes a **worker log**, `<run report name> workers.log`, beside its run log, and a nested run writes into its parent's. It has one line per job sent, received and completed, in UTC with milliseconds. The workers write it too, each line inside `Use` of one shared object. That doesn't break this answer's rule for the run log, which only the coordinator writes.

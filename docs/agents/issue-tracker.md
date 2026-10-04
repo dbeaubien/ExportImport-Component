@@ -41,9 +41,10 @@ Used by `/wayfinder`. The **map** is a file with one **child** file per ticket.
 ## Existing features
 
 - 🔧 **Open**: [`.scratch/finer-job-cut/`](../../.scratch/finer-job-cut/map.md) (**build**): cut
-  jobs finer, so no phase ends with one worker on a long job. 02 (the worker log, to measure idle
-  workers first) is claimed and built, waiting on a production run; 01 (the cut rule) waits for
-  it. Stalls inside 4D seen in the same run are under Not yet specified.
+  jobs finer, so no phase ends with one worker on a long job. 02 (the worker log) is resolved:
+  the pool hands out work at once, and the log stays. 01 (the cut rule: jobs a quarter of a
+  worker's share) is decided and built, waiting on the compile, the bench and the next real export.
+  Stalls inside 4D are out of scope.
 - ✅ **DONE**: [`.scratch/DONE/exact-copy-v2/`](../../.scratch/DONE/exact-copy-v2/map.md), a wayfinder
   map (**planning**). Destination reached: a locked spec for the fingerprint, the export set format,
   import, the health check and the discrepancy report, split into build tickets. All 23 tickets

@@ -88,6 +88,10 @@ _Avoid_: pair, results, log
 The timeline a run writes line by line as it goes: its phases, its tables, any failure and its verdict. It sits beside the run's report.
 _Avoid_: log file (that is 4D's journal), trace
 
+**Worker log**:
+The timeline of a run's jobs: each job sent to a worker, then received and completed by that worker. It sits beside the run log, and shows when workers sit idle.
+_Avoid_: job log, thread log
+
 **Verdict**:
 The one-word outcome of a health check, export, import or comparison, such as passed, exact or refused. Each kind of run has its own set. A run that never finished, because 4D quit or crashed, is left as interrupted.
 _Avoid_: status, result

@@ -122,3 +122,8 @@ records them (below).
   cost is its record count, not records × fields, in every pass, and bytes play no part. A job has
   no `cost` any more: the pool queues jobs by `expected`, largest first. The rest of the cut rule
   stands.
+- 2026-10-03, from [Cut jobs finer, so no phase ends with one worker on a long job](../../../finer-job-cut/issues/01-finer-job-cut.md):
+  the target job size is the run's total ÷ (the worker count × 4), not ÷ the worker count. A table
+  still gets at most one job per worker, at least 50,000 records a job, and for import and Compare
+  at most its segment count. On a customer export at 4 workers, the old target left one 33-minute
+  job running alone for the phase's last 8 minutes.

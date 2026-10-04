@@ -2,10 +2,12 @@
 //
 // Cuts each table into jobs for _WorkerPool (spec 10), in the coordinator.
 // The cut rule lives here and only here. A table's cost is its record count
-// (spec 19), and the target job size is the run's total records ÷ the worker
-// count. A table gets the smallest of ceil(records ÷ target), floor(records
-// ÷ 50,000), the worker count and, for import and Compare, its segment
-// count, and at least 1 job. Its records are shared out as evenly as possible.
+// (spec 19), and the target job size is the run's total records ÷ (the
+// worker count × per_worker), so a phase doesn't end with one long job
+// running alone (finer-job-cut ticket 01). A table gets the smallest of
+// ceil(records ÷ target), floor(records ÷ 50,000), the worker count and, for
+// import and Compare, its segment count, and at least 1 job. Its records are
+// shared out as evenly as possible.
 //
 // A job is a plain object: {table; low; high; start; expected}, plus
 // segments for import and Compare. table is the table's _Structure entry (or
@@ -15,10 +17,12 @@
 
 property workers : Integer
 property minimum : Integer  // records per job: 50,000. A constant, not an option
+property per_worker : Integer  // target jobs per worker in a run: 4. A constant, not an option
 
 Class constructor($workers : Integer)
 	This.workers:=$workers
 	This.minimum:=50000
+	This.per_worker:=4
 
 
 Function counts($sizes : Collection) : Collection
@@ -32,7 +36,7 @@ Function counts($sizes : Collection) : Collection
 	For each ($size; $sizes)
 		$n:=[This.workers; Int($size.records/This.minimum)]
 		If ($total>0)
-			$n.push(-Int(-($size.records*This.workers/$total)))  // ceil(records ÷ target)
+			$n.push(-Int(-($size.records*This.workers*This.per_worker/$total)))  // ceil(records ÷ target)
 		End if
 		If ($size.segments#Null)
 			$n.push($size.segments)

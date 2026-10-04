@@ -2,8 +2,9 @@
 
 Reads 01-customer-export-timings.json beside it. Each table's cost per record per job is its
 measured elapsed x jobs / records, so contention measured in the run stays in. The pool queues
-jobs by record count, largest first, and hands each one to the first free worker. k = 1 is
-today's rule and reproduces the run: 46.4 min, 13.1% idle.
+jobs by record count, largest first, and hands each one to the first free worker. A table gets at
+most `cap` jobs: the worker count, as built. k = 1 is the old rule and reproduces the run: 46.4
+min, 13.1% idle. k = 4 is the rule built in ticket 01.
 
     python3 01-simulate-cut.py
 """
@@ -18,12 +19,12 @@ workers = run["workers"]
 total = sum(t["records"] for t in tables)
 
 
-def phase(k):
+def phase(k, cap):
     jobs = []
     for t in tables:
         records = t["records"]
         cost = t["elapsed"] * t["jobs"] / records
-        n = max(1, min(workers * k, records // 50000, math.ceil(records * workers * k / total)))
+        n = max(1, min(cap, records // 50000, math.ceil(records * workers * k / total)))
         for i in range(n):
             expected = int((i + 1) * records / n) - int(i * records / n)
             jobs.append((expected, expected * cost))
@@ -38,7 +39,7 @@ def phase(k):
     return len(jobs), end, 1 - busy / (workers * end)
 
 
-for k in (1, 2, 4, 8):
-    n, end, idle = phase(k)
-    print(f"k={k}: {n:3} jobs, export phase {end / 60:5.1f} min, idle {idle * 100:4.1f}%")
+for k, cap in ((1, workers), (2, workers), (4, workers), (8, workers), (4, workers * 4)):
+    n, end, idle = phase(k, cap)
+    print(f"k={k}, cap {cap:2}: {n:3} jobs, export phase {end / 60:5.1f} min, idle {idle * 100:4.1f}%")
 print(f"no tail at all: {sum(t['elapsed'] * t['jobs'] for t in tables) / workers / 60:5.1f} min")

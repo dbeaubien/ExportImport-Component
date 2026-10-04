@@ -1,8 +1,7 @@
 //%attributes = {}
 // Export_Import_Dialog
-cs:C1710.ExportPass.new({}).check()
-Export_HealthCheck_Scan({num_processes: 0; tables_to_scan: [58]})
 
+__Bench_Baseline
 
 BEEP:C151
 BEEP:C151

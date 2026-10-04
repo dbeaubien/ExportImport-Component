@@ -21,31 +21,27 @@ while the other workers wait.
 |---|---|---|---|
 | 01 | [Cut jobs finer, so no phase ends with one worker on a long job](issues/01-finer-job-cut.md) | 02 | compile, bench |
 | 02 | [Worker log: when each worker receives and completes a job](issues/02-worker-log.md) | — | compile |
+| 03 | [Probe: does `NEXT RECORD` wait on the same lock as `GOTO SELECTED RECORD`?](issues/03-probe-next-record-lock.md) | — | compile |
 
 The frontier is the open, unclaimed tickets whose blockers are all resolved. The lowest number wins.
 
 ## Decisions so far
 
-(none yet)
+- [Worker log: when each worker receives and completes a job](issues/02-worker-log.md): the pool
+  hands out work at once, so it stays as it is. Idle workers wait inside 4D on its lock around
+  datafile reads, made long by swapping. The worker log stays.
 
 ## Not yet specified
 
-- **Stalls inside 4D.** In the same export, two small tables (about 17,000 records each, 1 and 12
-  MB) each took about 330 s, about 20 ms a record. They ran beside a table of 57 KB records, and
-  finished within seconds of each other near its end. Right after, about 50 small tables ran in 10 s.
-  - The datafile is on an NVMe SSD, and encoding a 100-byte record takes microseconds. So the jobs
-    were waiting inside 4D. Spec 15 already found contention inside 4D ("a record read takes internal
-    micro locks").
-  - Suspected, not proven: the host's 4D cache is 5 GB (`cache_max_size`), against a 45 GB datafile
-    and an 8 GB index.
-  - A test for the human, on the customer copy:
-    1. Export the two small tables alone. If it takes seconds, the 330 s was contention.
-    2. Export them with the 57 KB table. If they crawl again, the stall is reproduced.
-    3. Raise the cache (for example to 24 GB) and repeat step 2.
-  - Nothing in the component can change 4D's locks. If the cache explains the stalls, the README
-    can advise a cache size for a run.
+(none)
 
 ## Out of scope
 
 - The cost of a table (spec 19): records stay the cost, and bytes play no part in planning.
 - The worker count defaults (spec 15).
+- **Stalls inside 4D**, ruled out by the human on 2026-10-03 (see the Answer of
+  [Worker log: when each worker receives and completes a job](issues/02-worker-log.md)). 4D lets
+  one worker read the datafile at a time, swapping made those waits long, and 4D Server has the same
+  engine. What fills 4D's memory beyond its cache isn't pursued. Free RAM before a big run instead.
+  One exception: whether `NEXT RECORD` waits on the same lock is
+  [Probe: does `NEXT RECORD` wait on the same lock as `GOTO SELECTED RECORD`?](issues/03-probe-next-record-lock.md).

@@ -614,6 +614,9 @@
 			],
 			"Summary": ""
 		},
+		"per_worker": {
+			"Syntax": "per_worker : Integer"
+		},
 		"minimum": {
 			"Syntax": "minimum : Integer"
 		},
