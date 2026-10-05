@@ -13,6 +13,15 @@ Originally based on a 4D Tech Note (<https://kb.4d.com/assetid=41862>). The curr
 **4D v21** (see [Resources/componentManifest.json](Resources/componentManifest.json)). It runs in
 **4D local mode only**: every run refuses 4D Remote, 4D Server, tool4d and 4D Volume Desktop.
 
+## Documentation
+
+- [Overview](docs/overview.md): what the component does, and the goals behind its design.
+- [How ExportImport works](docs/how-it-works.md): the class diagrams, the passes and their phases,
+  and the worker pool.
+- [Export set and run file formats](docs/file-formats.md): the segments, the manifest, the run
+  reports, the run logs and the worker logs.
+- [Glossary](GLOSSARY.md): the terms these pages use.
+
 ## How it works
 
 1. **Health check** (optional, recommended). On a copy of the source datafile, look for
@@ -30,8 +39,8 @@ Originally based on a 4D Tech Note (<https://kb.4d.com/assetid=41862>). The curr
 5. **Compare.** Read every target record and compare it with the export set, record by record. For
    extra assurance, reopen the target and run Compare again (see [After the import](#after-the-import)).
 
-Each pass runs its record work on a pool of preemptive worker processes, and splits large tables
-across workers. Each pass writes a **run report** and a **run log** (see
+Each pass runs its record work on a pool of worker processes, preemptive when compiled, and splits
+large tables across workers. Each pass writes a **run report** and a **run log** (see
 [Run reports and run logs](#run-reports-and-run-logs)).
 
 ### When two records are equal
@@ -48,18 +57,20 @@ Export yyyy-mm-dd hh.mm.ss/                  <- next to the source datafile
 ├── manifest.json                            <- written last, renamed from manifest.json.tmp once
 │                                               the self-check is exact: a set without one is incomplete
 ├── 0003 Customers/
-│   ├── 000000000001.seg                     <- named by the position of its first record
-│   └── 000000412877.seg
+│   ├── 000000000000.seg                     <- named by the position of its first record, from 0
+│   └── 000000103219.seg
 ├── …                                        <- one folder per exported table with records
 ├── Export yyyy-mm-dd hh.mm.ss.txt/.json/.log
 ├── Health check yyyy-mm-dd hh.mm.ss.txt/.json   <- the export's gate
 ├── Import yyyy-mm-dd hh.mm.ss.txt/.json/.log    <- each import of this set
-└── Compare yyyy-mm-dd hh.mm.ss.txt/.json/.log   <- each Compare of this set (the export's self-check
-                                                    and an import's have no .log)
+├── Compare yyyy-mm-dd hh.mm.ss.txt/.json/.log   <- each Compare of this set (the export's self-check
+│                                                   and an import's have no .log)
+└── <run report name> workers.log                <- a worker log beside each .log
 ```
 
 - A segment holds a run of one table's records in record-key order, each one encoded in binary
-  behind its 4-byte length. Segments are at most `segment_mb` (100 MB by default).
+  behind its 4-byte length. Segments are at most `segment_mb` (100 MB by default), except that a
+  record bigger than that gets a segment of its own.
 - The manifest holds the component version and build, the source datafile's path, the whole
   structure and its signature, the data language, and for each exported table its record count,
   sequence number and segments (each with its records, bytes, SHA-256 and first and last keys).
@@ -69,6 +80,9 @@ Export yyyy-mm-dd hh.mm.ss/                  <- next to the source datafile
   export.
 - Import and Compare refuse a set written by another version or build of the component, for a
   structure that differs (field by field), or in another data language.
+
+The byte layout of segments and the keys of `manifest.json` are in
+[Export set and run file formats](docs/file-formats.md).
 
 ### Trusting the export set
 
@@ -111,8 +125,9 @@ Add the component to the host's `Project/Sources/dependencies.json`:
 or place the built component in the host's `Components` folder.
 
 The component no longer depends on **4D Progress** or **Component IH_Log**. The other entries in its
-[dependencies.json](Project/Sources/dependencies.json) are tools for developing this project: only
-its On Startup calls them, when the project is opened on its own and interpreted.
+[dependencies.json](Project/Sources/dependencies.json) are for developing this project, and the
+component's code never calls them. Its On Startup calls the development tools only when the project
+is opened on its own and interpreted.
 
 The host has two ways in: the [shared methods](#shared-methods), and the
 [`ExportImport` namespace](#the-exportimport-namespace) of public classes. Both stay compatible from
@@ -129,15 +144,16 @@ way to use the component is to call it from a menu item or a developer method in
 
 The dialog has a step list on the left: **Health check**, **Export**, **Switch to target**,
 **Import** and **Compare**. Each step shows a mark from its newest run report for this datafile: ✓,
-⚠, ✗, or nothing when it hasn't run. Any step can be selected at any time.
+⚠, ✗, or nothing when it hasn't run. Switch to target shows ✓ on a target. Any step can be selected
+at any time.
 
 - **The export set** drop-down lists the complete export sets in this datafile's folder, newest
   first. Choose… picks one stored elsewhere. The dialog is on the **source** when this datafile is
   the chosen set's source, and on a **target** otherwise.
 - **It opens on:** Health check when there is no complete set; Switch to target on the source with
-  a complete set; Import on a target; Compare once the target's import finished; and Switch to
-  target, with "This target is unusable", when the target's import failed from the truncate on, or
-  came out `notExact`.
+  a complete set; Import on a target; Compare once the target's import finished or stopped during
+  its Compare; and Switch to target, with "This target is unusable", when the target's import came
+  out `notExact`, or failed or was interrupted from its truncate phase through its flush.
 - **Each step** shows its settings, its pre-flight checks (the pass's own `check()`: a problem turns
   Run off), Run, then its result: the verdict with the next step to take, the problems and cautions,
   a grid, Open report and Show on disk.
@@ -152,16 +168,17 @@ The steps:
 - **Health check:** a reminder to verify the source copy with the MSC (Verify ▸ Records and
   indexes) and Open MSC, Tables… (shared with Export) and Fields to ignore…. Its grid shows each
   table's records, blockers (in red) and signs of damage. **Leave blocked tables out** unticks the
-  blocked tables. **Remove bad characters** asks first, then runs the fixer on the same tables and
-  fields.
+  blocked tables. **Remove bad characters**, on when the verdict is `warnings` with bad characters
+  outside the record keys, asks first, then runs the fixer on the same tables and fields.
 - **Export:** Tables… and the cautions: free space smaller than the datafile, and tables with records
-  left out. When the gate refuses, the step shows the gate's grid. Once exported, the step shows the
-  set digest with Copy: keep it outside the export set (a ticket, an email), to check it at the
-  import.
+  left out. When the gate refuses, the step shows the gate's grid and **Leave blocked tables out**.
+  Once exported, the step shows the set digest with Copy: keep it outside the export set (a ticket,
+  an email), to check it at the import.
 - **Switch to target:** the set's data language, with a reminder to check 4D Preferences ▸ General
   (a new datafile takes its data language from there). The target's file name starts as
-  `<source name> target.4DD` in this datafile's folder, so the export sets stay in sight. A name
-  that already exists is refused. Create target… asks first, then calls `CREATE DATA FILE`: 4D
+  `<source name> target.4DD` in this datafile's folder, so the export sets stay in sight. The
+  pre-flight needs a complete export set in this folder, and a name that ends with `.4DD` and
+  doesn't exist yet. Create target… asks first, then calls `CREATE DATA FILE`: 4D
   closes this datafile, ends every process and reopens on the new one. **Then open the dialog
   again**, the same way as before.
 - **Import:** the set's summary (source, export time, component version, records, size and set
@@ -319,7 +336,7 @@ $import:=cs.ExportImport.ImportPass.new($export.export_set).run()
 | `workers` | all | 4, capped at the core count; at least 1. The export's self-check and the import's Compare use their parent's |
 | `tables` | health check, fixer, export | every table, empty ones included (a collection of table numbers) |
 | `field_ptrs_to_ignore` | health check, fixer | none (a collection of field pointers) |
-| `detail_limit` | health check, fixer, import, Compare | 1,000: the records listed per table (per table and check in the health check) |
+| `detail_limit` | health check, fixer, Compare, and the export and the import for their nested runs | 1,000: the records listed per table (per table and check in the health check) |
 | `segment_mb` | export | 100, from 1 to 1024 |
 | `set_digest` | import, Compare | none: not checked. When given, a set digest that differs refuses the run |
 
@@ -381,9 +398,9 @@ export again." One that is `inconclusive` gives "Some source records couldn't be
 source copy with the MSC (records and indexes), then run the export again." Either way, the set has
 no `manifest.json`, so import and Compare refuse it.
 
-The import succeeds only on `exact`. After `notExact`, or a failure from the truncate on, the target
-is **unusable**: create a new target and run the import again. After an import that failed during
-its Compare, the load finished: run Compare again. `inconclusive` means some records couldn't be
+The import succeeds only on `exact`. After `notExact`, or a failure from its truncate phase through
+its flush, the target is **unusable**: create a new target and run the import again. After an import
+that failed during its Compare, the load finished: run Compare again. `inconclusive` means some records couldn't be
 verified (a damaged segment, keys that the two datafiles order differently, or target records that
 can't be read): fix the cause, then run Compare again.
 
@@ -419,7 +436,8 @@ Every run writes these files with the same name, `<Pass> yyyy-mm-dd hh.mm.ss` (l
 | Compare | in the export set |
 
 The run report is written as soon as the run starts, rewritten at each phase, and written a last
-time at the end. UTF-8 with no BOM and LF line endings.
+time at the end. UTF-8 with no BOM and LF line endings. Each file's layout, with examples, is in
+[Export set and run file formats](docs/file-formats.md#run-reports).
 
 ## Blockers
 
@@ -481,28 +499,35 @@ path from the cache to the disk is beyond this component.
 ```4d
 // 1. On a copy of the source datafile
 var $check; $export; $import; $compare : Object
+var $path; $digest : Text
 $check:=cs.ExportImport.HealthCheckPass.new().run()     // review $check.report
 $export:=cs.ExportImport.ExportPass.new().run()         // $export.verdict = "exported"
-// keep $export.set_digest outside the export set
+// keep $export.export_set and $export.set_digest outside the export set
 
-// 2. Create the target: CREATE DATA FILE, or the dialog's Switch to target
+// 2. Create the target: CREATE DATA FILE, or the dialog's Switch to target.
+//    4D ends every process, so the variables above are gone.
 
-// 3. On the new, empty target datafile
-$import:=cs.ExportImport.ImportPass.new($export.export_set; {set_digest: $digest}).run()   // $import.verdict = "exact"
+// 3. On the new, empty target datafile, with the path and digest kept from step 1
+$import:=cs.ExportImport.ImportPass.new($path; {set_digest: $digest}).run()   // $import.verdict = "exact"
 
 // 4. Optional: reopen the target, then
-$compare:=Compare_ExportSet($export.export_set; {set_digest: $digest})
+$compare:=Compare_ExportSet($path; {set_digest: $digest})
 ```
 
 ## Repository layout
 
 | Path | Contents |
 |---|---|
-| `Project/Sources/Methods/` | the shared methods, the dialog's methods (`Dialog_*`), `WorkerPool_RunJob`, helpers, and the bench (`__Bench_*`) |
-| `Project/Sources/Classes/` | the pass classes, and the internal `_` classes: the pass base, jobs, worker pool, planner, codec, structure, manifest, run report, run log and dialog |
-| `Project/Sources/Forms/` | the `Main` dialog, and the table and field selectors |
+| `Project/Sources/Methods/` | the shared methods, the dialog's methods (`Dialog_*`), the worker pool's (`WorkerPool_*`), helpers, and development-only code (`__*`): the bench (`__Bench_*`) and probes |
+| `Project/Sources/Classes/` | the pass classes, and the internal `_` classes: the pass base, jobs, worker pool, planner, codec, structure, manifest, run report, run log and dialog. A `__` class is a development-only probe |
+| `Project/Sources/Forms/` | the `Main` dialog, the table and field selectors, and `ReleaseBuildNo_d`, the build number dialog of On Startup |
+| `Project/Sources/catalog.4DCatalog` | this project's own tables, used only in development (the bench) |
 | `Resources/` | the component manifest, the version, and the method syntax help |
+| `docs/` | the [overview](docs/overview.md), [how it works](docs/how-it-works.md) and the [file formats](docs/file-formats.md) |
 | `docs/adr/` | architecture decisions |
+| `docs/agents/` | the issue tracker's conventions, for agents |
+| `GLOSSARY.md` | the domain terms |
+| `.scratch/` | the planning and build tickets: open features, and finished ones under `.scratch/DONE/` |
 
 ---
 
